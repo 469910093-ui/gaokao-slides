@@ -100,6 +100,41 @@ def percentile_at(score: int, segs: list[dict[str, Any]]) -> float | None:
     return None
 
 
+def reach_idx_from_batches(score: int, batches: dict[str, Any], tier_order: list[str]) -> int:
+    idx = lambda name: tier_order.index(name) if name in tier_order else len(tier_order) - 1
+    special = batches.get("特招线")
+    undergrad = batches.get("本科线")
+    if special is not None:
+        if score >= special + 45:
+            return idx("C9")
+        if score >= special + 28:
+            return idx("985")
+        if score >= special + 8:
+            return idx("211")
+        if score >= special:
+            return idx("双一流")
+    if undergrad is not None:
+        if score >= undergrad + 35:
+            return idx("一本")
+        if score >= undergrad:
+            return idx("二本")
+    return idx("专科")
+
+
+def reach_idx_for_score(
+    score: int,
+    p: float | None,
+    batches: dict[str, Any],
+    tier_order: list[str],
+    tier_pct: dict[str, float],
+) -> tuple[str, int]:
+    from_batch = reach_idx_from_batches(score, batches, tier_order)
+    from_pct = tier_order.index(tier_for_percentile(p, tier_order, tier_pct)) if p is not None else -1
+    candidates = [i for i in (from_batch, from_pct) if i >= 0]
+    reach_idx = max(candidates) if candidates else from_batch
+    return tier_order[reach_idx], reach_idx
+
+
 def tier_for_percentile(p: float | None, tier_order: list[str], tier_pct: dict[str, float]) -> str:
     if p is None:
         return "二本"
@@ -379,8 +414,9 @@ def main() -> None:
             for score in sampled:
                 p = percentile_at(score, segs)
                 rank = cumulative_at(score, segs, total)
-                reach = tier_for_percentile(p, tier_order, tier_pct)
-                reach_idx = tier_order.index(reach)
+                reach, reach_idx = reach_idx_for_score(
+                    score, p, year_obj.get("batches") or {}, tier_order, tier_pct
+                )
                 sch = recommend_schools(score, p, reach, reach_idx, schools_global, tier_order, tier_pct)
                 maj = recommend_majors(score, p, reach, reach_idx, majors_all, track, tier_order, tier_pct, province)
                 case = CaseResult(

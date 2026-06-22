@@ -422,7 +422,7 @@
 
       <div class="stats">
         <div class="stat"><div class="k">当前分数</div><div class="v" id="statScore">--</div><div class="d" id="statScoreDesc">孩子本次模考/高考分数</div></div>
-        <div class="stat"><div class="k">参考院校层次</div><div class="v" id="statTier">--</div><div class="d" id="statTierDesc">按分数与省控批次线对照</div></div>
+        <div class="stat"><div class="k">全省位次</div><div class="v" id="statRank">--</div><div class="d" id="statRankDesc">按省考试院一分一段表累计人数估算</div></div>
         <div class="stat"><div class="k">同分段竞争</div><div class="v" id="statShare">--</div><div class="d" id="statShareDesc">这个分数附近有多少考生</div></div>
         <div class="stat"><div class="k">近3年批次线均值</div><div class="v small" id="statBatch">--</div><div class="d" id="statBatchDesc">省考试院公布批次线均值，非院校投档最低分</div></div>
       </div>
@@ -458,7 +458,7 @@
       <button class="close" id="closeModal" type="button" aria-label="关闭">×</button>
       <h3 id="modalTitle">分数推荐结果</h3>
       <p class="modal-summary" id="modalSummary"></p>
-      <div class="section-title">🏫 院校推荐（含一本/二本/专科，按分数与层次匹配）</div>
+      <div class="section-title">🏫 院校推荐（按分数与省批次线匹配）</div>
       <div class="school-list" id="schoolList"></div>
       <div class="section-title">🎯 专业推荐（<span id="majorTrackLabel">物理类</span>可报 · 产业趋势指数 + 就业涨幅交叉验证）</div>
       <div class="major-list" id="majorList"></div>
@@ -807,33 +807,26 @@
       return batch;
     }
 
-    function tierDescForScore(score, tier) {
-      const p = percentileAt(score);
+    function rankDescForScore(score) {
       const rank = rankAt(score);
+      const p = percentileAt(score);
       const batch = getBatchAverages();
       const ug = batch.undergradAvg;
-      if (p != null && rank != null) {
-        if (p >= 99.2) return `全省约前 ${rank} 名，可冲 C9/顶尖 985`;
-        if (p >= 97.5) return `全省约前 ${rank} 名，重点看 985/强 211`;
-        if (p >= 94) return `全省约前 ${rank} 名，211/双一流为主`;
-        if (p >= 86) return `全省约前 ${rank} 名，一本稳妥、强 211 可冲`;
-        if (p >= 75) return `全省约前 ${rank} 名，二本/普通一本区间`;
-        if (ug != null && score < ug - 15) return '低于本科线，可关注高职专科';
-        return `全省约前 ${rank} 名，对应 ${tier} 层次参考`;
-      }
       const sp = batch.specialAvg;
-      if (ug != null && score < ug - 15) return '低于本科线，可关注高职专科与应用型专业';
-      if (sp != null && score >= sp + 50) return '超过特招线较多，请结合位次判断院校层次';
-      if (sp != null && score >= sp) return '超过特招线，请结合一分一段位次选校';
-      if (ug != null && score >= ug) return '达本科线，在一本/二本批次内选校';
-      return `当前分数对应 ${tier} 层次院校参考区间`;
+      if (rank != null && p != null) {
+        return `约第 ${rank} 名 · 超越 ${p.toFixed(1)}% 考生`;
+      }
+      if (sp != null && score >= sp) return `高于特招线 ${score - sp} 分，请结合位次选校`;
+      if (ug != null && score >= ug) return `高于本科线 ${score - ug} 分，在本科批次内选校`;
+      if (ug != null && score < ug) return `低于本科线 ${ug - score} 分，可关注高职批次`;
+      return '请结合省考试院一分一段表核对位次';
     }
 
     function updateStatDescriptions(score, sharePct) {
       $('heroScore').textContent = score;
-      const tier = tierForScore(score);
-      $('statTier').textContent = tier;
-      $('statTierDesc').textContent = tierDescForScore(score, tier);
+      const rank = rankAt(score);
+      $('statRank').textContent = rank != null ? `约第 ${rank} 名` : '--';
+      $('statRankDesc').textContent = rankDescForScore(score);
       $('statShareDesc').textContent = sharePct >= 2
         ? `这个分数段人数较多，竞争偏激烈`
         : sharePct >= 0.8
@@ -885,7 +878,6 @@
           cumulative: denseCums[i],
           count,
           sharePct: total ? (count / total) * 100 : 0,
-          percentile: raw[0].percentile,
         });
       }
       return out.sort((a, b) => a.score - b.score);
@@ -946,7 +938,10 @@
         const sharePct = total ? (count / total) * 100 : 0;
         return { ...seg, count, sharePct };
       });
-      return smoothChartCounts(densifyChartSegments(normalized, 2), 5);
+      return smoothChartCounts(densifyChartSegments(normalized, 2), 5).map((seg) => ({
+        ...seg,
+        percentile: percentileFromCumulative(seg.cumulative, seg.count || 1),
+      }));
     }
 
     function refreshTrackData() {
@@ -983,20 +978,53 @@
     }
 
     function cumulativeAt(score) {
-      const segs = state.segments;
+      const segs = [...state.segments].sort((a, b) => a.score - b.score);
       if (!segs.length) return null;
-      const exact = segs.find((s) => s.score === score);
-      if (exact?.cumulative != null) return exact.cumulative;
-      if (score <= segs[0].score) return segs[0].cumulative ?? 0;
-      if (score >= segs[segs.length - 1].score) {
-        return segs[segs.length - 1].cumulative ?? state.totalCandidates;
-      }
+      const lo = segs[0].score;
+      const hi = segs[segs.length - 1].score;
+      if (score <= lo) return segs[0].cumulative ?? 0;
+      if (score >= hi) return segs[segs.length - 1].cumulative ?? state.totalCandidates;
       for (let i = 0; i < segs.length - 1; i++) {
-        const a = segs[i], b = segs[i + 1];
+        const a = segs[i];
+        const b = segs[i + 1];
         if (score >= a.score && score <= b.score) {
           const t = (score - a.score) / (b.score - a.score || 1);
-          const ca = a.cumulative ?? 0, cb = b.cumulative ?? ca;
-          return ca + (cb - ca) * t;
+          const ca = a.cumulative ?? 0;
+          const cb = b.cumulative ?? ca;
+          return Math.round(ca + (cb - ca) * t);
+        }
+      }
+      return null;
+    }
+
+    function percentileFromCumulative(cumulative, count = 1) {
+      const total = state.totalCandidates
+        || state.segments[state.segments.length - 1]?.cumulative
+        || 1;
+      const rankMid = Math.max(1, cumulative - count / 2);
+      return Math.round((1 - rankMid / total) * 10000) / 100;
+    }
+
+    function percentileAt(score) {
+      const segs = [...state.segments].sort((a, b) => a.score - b.score);
+      if (!segs.length) return null;
+      const lo = segs[0].score;
+      const hi = segs[segs.length - 1].score;
+      if (score <= lo) {
+        return segs[0].percentile ?? percentileFromCumulative(segs[0].cumulative ?? 0, segs[0].count ?? 1);
+      }
+      if (score >= hi) {
+        const top = segs[segs.length - 1];
+        return top.percentile ?? percentileFromCumulative(top.cumulative ?? 0, top.count ?? 1);
+      }
+      for (let i = 0; i < segs.length - 1; i++) {
+        const a = segs[i];
+        const b = segs[i + 1];
+        if (score >= a.score && score <= b.score) {
+          const t = (score - a.score) / (b.score - a.score || 1);
+          const pa = a.percentile ?? percentileFromCumulative(a.cumulative ?? 0, a.count ?? 1);
+          const pb = b.percentile ?? percentileFromCumulative(b.cumulative ?? 0, b.count ?? 1);
+          return Math.round((pa + (pb - pa) * t) * 100) / 100;
         }
       }
       return null;
@@ -1030,28 +1058,6 @@
         }
       }
       return { sharePct: 0 };
-    }
-
-    function percentileAt(score) {
-      const segs = state.segments;
-      if (!segs.length) return null;
-      const exact = segs.find((s) => s.score === score);
-      if (exact?.percentile != null) return exact.percentile;
-      if (score <= segs[0].score) return segs[0].percentile ?? null;
-      if (score >= segs[segs.length - 1].score) {
-        return segs[segs.length - 1].percentile ?? null;
-      }
-      for (let i = 0; i < segs.length - 1; i++) {
-        const a = segs[i];
-        const b = segs[i + 1];
-        if (score >= a.score && score <= b.score) {
-          const t = (score - a.score) / (b.score - a.score || 1);
-          const pa = a.percentile ?? 0;
-          const pb = b.percentile ?? pa;
-          return Math.round((pa + (pb - pa) * t) * 100) / 100;
-        }
-      }
-      return null;
     }
 
     function rankAt(score) {
@@ -1105,8 +1111,37 @@
       return thresholds[tier] ?? undergrad;
     }
 
+    function reachIdxFromBatches(score) {
+      const order = state.manifest.tierOrder || [];
+      const idx = (name) => order.indexOf(name);
+      const special = state.batches['特招线'];
+      const undergrad = state.batches['本科线'];
+      if (special != null) {
+        if (score >= special + 45) return idx('C9');
+        if (score >= special + 28) return idx('985');
+        if (score >= special + 8) return idx('211');
+        if (score >= special) return idx('双一流');
+      }
+      if (undergrad != null) {
+        if (score >= undergrad + 35) return idx('一本');
+        if (score >= undergrad) return idx('二本');
+      }
+      return idx('专科');
+    }
+
+    function reachIdxForScore(score) {
+      const order = state.manifest.tierOrder || [];
+      const fromBatch = reachIdxFromBatches(score);
+      const p = percentileAt(score);
+      const fromPct = p != null ? order.indexOf(tierForPercentile(p)) : -1;
+      const candidates = [fromBatch, fromPct].filter((i) => i >= 0);
+      // 取更保守（索引更大）的档次，避免仅按批次线高估
+      return candidates.length ? Math.max(...candidates) : fromBatch;
+    }
+
     function tierForScore(score) {
-      return tierForPercentile(percentileAt(score));
+      const order = state.manifest.tierOrder || [];
+      return order[reachIdxForScore(score)] || tierForPercentile(percentileAt(score));
     }
 
     function setScore(score, showModal = true) {
@@ -1212,10 +1247,9 @@
       const province = provinceEl.value;
       const order = state.manifest.tierOrder;
       const userP = percentileAt(score);
-      const reach = tierForScore(score);
-      const reachIdx = order.indexOf(reach);
-      const vocTierIdx = order.indexOf('专科');
+      const reachIdx = reachIdxForScore(score);
       const undergradLine = state.batches['本科线'] || 450;
+      const vocTierIdx = order.indexOf('专科');
 
       const undergrad = state.manifest.schools
         .filter((s) => s.tier !== '专科')
@@ -1235,7 +1269,7 @@
         .slice(0, 10);
 
       const provinceVoc = (state.vocationalSchools || []).filter((s) => s.province === province);
-      const showVoc = score < undergradLine + 25 || reachIdx >= vocTierIdx - 1;
+      const showVoc = score < undergradLine - 5 && reachIdx >= vocTierIdx - 1;
       const undergradNames = new Set(undergrad.map((s) => s.name));
       const vocational = showVoc
         ? provinceVoc
@@ -1266,8 +1300,7 @@
     function recommendMajors(score) {
       const order = state.manifest.tierOrder;
       const userP = percentileAt(score);
-      const reach = tierForScore(score);
-      const reachIdx = order.indexOf(reach);
+      const reachIdx = reachIdxForScore(score);
 
       const eligible = majorPool()
         .filter((m) => majorMatchesSubject(m))
@@ -1316,46 +1349,33 @@
     function renderSchoolList(result) {
       const { undergrad, vocational, vocationalTotal, province } = result;
       if (!undergrad.length && !vocational.length) {
-        return '<div class="hint">暂无匹配院校</div>';
+        return '<div class="hint">暂无匹配院校，请调整分数或切换省份/科类</div>';
       }
-      const order = state.manifest.tierOrder;
       let html = '';
 
       if (undergrad.length) {
-        const groups = {};
-        for (const s of undergrad) {
-          if (!groups[s.tier]) groups[s.tier] = [];
-          groups[s.tier].push(s);
-        }
-        const tiers = order.filter((t) => groups[t] && t !== '专科');
-        html += tiers.map((tier) => {
-          const label = tier === '二本' ? '二本 / 独立学院（原三本合并批次）' : tier;
-          const items = groups[tier].map((s) => `
+        html += undergrad.map((s) => `
         <div class="school-item">
           <div>
             <div class="name">${s.name}</div>
             <div class="tags">${(s.tags || []).join(' · ')}</div>
           </div>
-          <span class="tier">${s.tier}</span>
         </div>`).join('');
-          return `<div class="tier-group-title">${label}</div>${items}`;
-        }).join('');
       }
 
-      if (vocational.length || vocationalTotal > 0) {
+      if (vocational.length) {
         const nationalTotal = state.vocationalMeta?.total || state.vocationalSchools.length;
         const title = vocationalTotal > 0
-          ? `专科 / 高职（${province} 共 ${vocationalTotal} 所，全国 ${nationalTotal} 所；展示 ${vocational.length} 所推荐）`
-          : `专科 / 高职（全国 ${nationalTotal} 所）`;
+          ? `高职专科（${province} 展示 ${vocational.length} 所，仅供参考）`
+          : `高职专科（全国 ${nationalTotal} 所）`;
         const items = vocational.map((s) => `
         <div class="school-item">
           <div>
             <div class="name">${s.name}</div>
-            <div class="tags">${(s.tags || []).join(' · ')}${s.city ? ` · ${s.city}` : ''}</div>
+            <div class="tags">${(s.tags || []).join(' · ')}${s.city ? ` · ${s.city}` : ''}${s.doubleHigh ? ' · 双高计划' : ''}</div>
           </div>
-          <span class="tier">${s.doubleHigh ? '双高' : '专科'}</span>
         </div>`).join('');
-        html += `<div class="tier-group-title">${title}</div>${items || '<div class="hint">当前省份暂无专科院校数据</div>'}`;
+        html += `<div class="tier-group-title">${title}</div>${items}`;
       }
       return html;
     }
@@ -1387,7 +1407,7 @@
         <div class="major-item">
           <div>
             <div class="name">${i + 1}. ${m.name}</div>
-            <div class="meta">${discipline} · ${subjectTrackShort()}可报 · 建议层次 ${m.tier}</div>
+            <div class="meta">${discipline} · ${subjectTrackShort()}可报</div>
             ${outlook}
             ${growth}
             ${jobVol}
@@ -1412,7 +1432,7 @@
       const rankPart = p != null && rank != null
         ? `全省约前 ${rank} 名 · 超越 ${p.toFixed(1)}% 考生`
         : '';
-      $('modalSummary').textContent = `${provinceEl.value} · ${yearEl.value} · ${trackEl.value}${rankPart ? ` | ${rankPart}` : ''} | 稳妥层次 ${tierForScore(score)} | ${batchCompareText(score, batch)}`;
+      $('modalSummary').textContent = `${provinceEl.value} · ${yearEl.value} · ${trackEl.value}${rankPart ? ` | ${rankPart}` : ''} | ${batchCompareText(score, batch)}`;
 
       $('schoolList').innerHTML = renderSchoolList(schoolResult);
       $('majorList').innerHTML = renderMajorList(majors);
