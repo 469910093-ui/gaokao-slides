@@ -1073,7 +1073,7 @@ def render_index() -> str:
 <body>
   <div class="wrap">
     <section class="hero">
-      <span class="hero-badge">🔥 小红书爆款封面风</span>
+      <span class="hero-badge">🔥 祝愿心想事成！</span>
       <h1>高考出分选专业<br><span class="hl">爆帖轮播 + 分数选校工具</span></h1>
       <p class="intro">5 篇爆帖已统一换成高对比「封面海报」视觉：黄底高亮、贴纸标签、粗描边卡片。另附交互选校页，拖拽分数看院校与 10 年热门专业。</p>
     </section>
