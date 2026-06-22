@@ -10,6 +10,7 @@ from pathlib import Path
 ROOT = Path(__file__).resolve().parents[1]
 sys.path.insert(0, str(ROOT / "scripts"))
 
+from qs_rankings import qs_rank_for_school  # noqa: E402
 from scrape_gaokao_data import HOT_MAJORS, SCHOOLS, TIER_PERCENTILE  # noqa: E402
 
 MANIFEST = ROOT / "data" / "manifest.json"
@@ -17,7 +18,14 @@ MANIFEST = ROOT / "data" / "manifest.json"
 
 def main() -> None:
     manifest = json.loads(MANIFEST.read_text(encoding="utf-8"))
-    schools = [{**s, "minPercentile": TIER_PERCENTILE[s["tier"]]} for s in SCHOOLS]
+    schools = [
+        {
+            **s,
+            "minPercentile": TIER_PERCENTILE[s["tier"]],
+            "qsRank": qs_rank_for_school(s["name"], s["tier"]),
+        }
+        for s in SCHOOLS
+    ]
     manifest["schools"] = schools
     manifest["hotMajors"] = HOT_MAJORS
     MANIFEST.write_text(json.dumps(manifest, ensure_ascii=False, indent=2) + "\n", encoding="utf-8")

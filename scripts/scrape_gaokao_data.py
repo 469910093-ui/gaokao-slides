@@ -33,6 +33,7 @@ from gaokao_crawl_lib import (
     pick_best_scrape,
 )
 from province_tracks import tracks_for_province, TRACK_LABELS
+from qs_rankings import qs_rank_for_school
 
 ROOT = Path(__file__).resolve().parents[1]
 DATA_DIR = ROOT / "data"
@@ -520,7 +521,14 @@ def build_dataset() -> tuple[dict[str, Any], list[dict[str, Any]]]:
                     stats["model"] += 1
             provinces_data[prov]["years"][str(year)] = year_obj
 
-    schools = [{**s, "minPercentile": TIER_PERCENTILE[s["tier"]]} for s in SCHOOLS]
+    schools = [
+        {
+            **s,
+            "minPercentile": TIER_PERCENTILE[s["tier"]],
+            "qsRank": qs_rank_for_school(s["name"], s["tier"]),
+        }
+        for s in SCHOOLS
+    ]
     meta = {
         "generatedAt": time.strftime("%Y-%m-%d %H:%M:%S"),
         "yearRange": [2014, 2025],

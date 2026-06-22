@@ -311,6 +311,13 @@
       padding: 6px 10px; border-radius: 999px; font-size: 12px; font-weight: 800;
       background: var(--yellow); color: var(--ink); border: 2px solid var(--ink); white-space: nowrap;
     }
+    .school-tag {
+      padding: 6px 10px; border-radius: 999px; font-size: 12px; font-weight: 800;
+      border: 2px solid var(--ink); white-space: nowrap;
+    }
+    .school-tag.chong { background: #ffe0e0; color: #b42318; }
+    .school-tag.wen { background: #d8ffe8; color: #067647; }
+    .school-tag.bao { background: #e8f0ff; color: #175cd3; }
     .hot-score { color: var(--ok); font-weight: 800; font-size: 13px; }
     .opportunity-badge {
       display: inline-block; margin-top: 4px; padding: 4px 8px; border-radius: 999px;
@@ -458,7 +465,7 @@
       <button class="close" id="closeModal" type="button" aria-label="关闭">×</button>
       <h3 id="modalTitle">分数推荐结果</h3>
       <p class="modal-summary" id="modalSummary"></p>
-      <div class="section-title">🏫 院校推荐（按分数与省批次线匹配）</div>
+      <div class="section-title">🏫 院校推荐（按 QS 排名 · 冲稳保标注）</div>
       <div class="school-list" id="schoolList"></div>
       <div class="section-title">🎯 专业推荐（<span id="majorTrackLabel">物理类</span>可报 · 产业趋势指数 + 就业涨幅交叉验证）</div>
       <div class="major-list" id="majorList"></div>
@@ -1075,6 +1082,67 @@
       return tp[school.tier] ?? 50;
     }
 
+    function scoreAtPercentileFromRaw(segments, total, targetP) {
+      if (!segments?.length || !total) return null;
+      const targetRank = total * (1 - targetP / 100);
+      const ordered = segments
+        .map((seg) => ({
+          score: seg.s ?? seg.score,
+          cumulative: seg.c ?? seg.cumulative,
+        }))
+        .sort((a, b) => a.score - b.score);
+      for (const seg of ordered) {
+        if (seg.cumulative >= targetRank) return seg.score;
+      }
+      return ordered[ordered.length - 1]?.score ?? null;
+    }
+
+    function schoolAvgAdmissionScore(school) {
+      const currentYear = Number(yearEl.value);
+      const years = [currentYear - 2, currentYear - 1, currentYear];
+      const p = schoolMinPercentile(school);
+      const scores = [];
+      for (const y of years) {
+        const td = pickTrackPayload(String(y), trackEl.value);
+        if (!td?.segments?.length) continue;
+        const total = td.totalCandidates || td.segments[td.segments.length - 1]?.c || 0;
+        const s = scoreAtPercentileFromRaw(td.segments, total, p);
+        if (s != null) scores.push(s);
+      }
+      if (!scores.length) {
+        const td = getYearTrackData();
+        if (!td?.segments?.length) return null;
+        const total = state.totalCandidates || segmentTotal();
+        return scoreAtPercentileFromRaw(td.segments, total, p);
+      }
+      return Math.round(scores.reduce((a, b) => a + b, 0) / scores.length);
+    }
+
+    function schoolApplicationTag(currentScore, avgAdmission) {
+      if (avgAdmission == null) return null;
+      const diff = avgAdmission - currentScore;
+      if (diff >= 5 && diff <= 10) return { key: 'chong', label: '冲刺' };
+      if (diff >= -10 && diff <= -5) return { key: 'wen', label: '稳妥' };
+      if (diff >= -20 && diff <= -10) return { key: 'bao', label: '保底' };
+      if (diff > 10) return { key: 'chong', label: '冲刺' };
+      if (diff > -5 && diff < 5) return { key: 'wen', label: '稳妥' };
+      if (diff < -20) return { key: 'bao', label: '保底' };
+      return null;
+    }
+
+    function enrichSchool(school, score) {
+      const avgAdmission = schoolAvgAdmissionScore(school);
+      return {
+        ...school,
+        avgAdmission,
+        appTag: schoolApplicationTag(score, avgAdmission),
+      };
+    }
+
+    function qsRankOf(school) {
+      return school.qsRank ?? 99999;
+    }
+
     function tierForPercentile(p) {
       const order = state.manifest.tierOrder || [];
       const tp = state.manifest.tierPercentile || {};
@@ -1295,18 +1363,8 @@
       const undergrad = state.manifest.schools
         .filter((s) => s.tier !== '专科')
         .filter((s) => userP != null && schoolReachable(userP, s, reachIdx))
-        .sort((a, b) => {
-          const aIdx = order.indexOf(a.tier);
-          const bIdx = order.indexOf(b.tier);
-          const aChong = aIdx < reachIdx && reachIdx - aIdx <= 2;
-          const bChong = bIdx < reachIdx && reachIdx - bIdx <= 2;
-          if (aChong !== bChong) return aChong ? -1 : 1;
-          const da = Math.abs(schoolMinPercentile(a) - (userP ?? 0));
-          const db = Math.abs(schoolMinPercentile(b) - (userP ?? 0));
-          if (da !== db) return da - db;
-          return schoolMinPercentile(b) - schoolMinPercentile(a)
-            || a.name.localeCompare(b.name, 'zh');
-        })
+        .map((s) => enrichSchool(s, score))
+        .sort((a, b) => qsRankOf(a) - qsRankOf(b) || a.name.localeCompare(b.name, 'zh'))
         .slice(0, 10);
 
       const provinceVoc = (state.vocationalSchools || []).filter((s) => s.province === province);
@@ -1395,13 +1453,20 @@
       let html = '';
 
       if (undergrad.length) {
-        html += undergrad.map((s) => `
+        html += undergrad.map((s) => {
+          const avgLine = s.avgAdmission != null ? ` · 近三年均分约 ${s.avgAdmission}` : '';
+          const tagHtml = s.appTag
+            ? `<span class="school-tag ${s.appTag.key}">${s.appTag.label}</span>`
+            : '';
+          return `
         <div class="school-item">
           <div>
             <div class="name">${s.name}</div>
-            <div class="tags">${(s.tags || []).join(' · ')}</div>
+            <div class="tags">${(s.tags || []).join(' · ')}${avgLine}</div>
           </div>
-        </div>`).join('');
+          ${tagHtml}
+        </div>`;
+        }).join('');
       }
 
       if (vocational.length) {

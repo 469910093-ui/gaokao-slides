@@ -91,7 +91,8 @@
         "芯片",
         "工科"
       ],
-      "minPercentile": 99.5
+      "minPercentile": 99.5,
+      "qsRank": 20
     },
     {
       "name": "北京大学",
@@ -101,7 +102,8 @@
         "数学",
         "理科"
       ],
-      "minPercentile": 99.5
+      "minPercentile": 99.5,
+      "qsRank": 14
     },
     {
       "name": "复旦大学",
@@ -111,7 +113,8 @@
         "商科",
         "医学"
       ],
-      "minPercentile": 99.5
+      "minPercentile": 99.5,
+      "qsRank": 39
     },
     {
       "name": "上海交通大学",
@@ -121,7 +124,8 @@
         "芯片",
         "工科"
       ],
-      "minPercentile": 99.5
+      "minPercentile": 99.5,
+      "qsRank": 45
     },
     {
       "name": "浙江大学",
@@ -131,7 +135,8 @@
         "机器人",
         "工科"
       ],
-      "minPercentile": 99.5
+      "minPercentile": 99.5,
+      "qsRank": 47
     },
     {
       "name": "南京大学",
@@ -141,7 +146,8 @@
         "理科",
         "文科"
       ],
-      "minPercentile": 99.5
+      "minPercentile": 99.5,
+      "qsRank": 82
     },
     {
       "name": "中国科学技术大学",
@@ -151,7 +157,8 @@
         "芯片",
         "理科"
       ],
-      "minPercentile": 99.5
+      "minPercentile": 99.5,
+      "qsRank": 133
     },
     {
       "name": "哈尔滨工业大学",
@@ -161,7 +168,8 @@
         "航天",
         "工科"
       ],
-      "minPercentile": 98.5
+      "minPercentile": 98.5,
+      "qsRank": 256
     },
     {
       "name": "西安交通大学",
@@ -171,7 +179,8 @@
         "能源",
         "工科"
       ],
-      "minPercentile": 98.5
+      "minPercentile": 98.5,
+      "qsRank": 290
     },
     {
       "name": "北京航空航天大学",
@@ -181,7 +190,8 @@
         "航天",
         "工科"
       ],
-      "minPercentile": 98.5
+      "minPercentile": 98.5,
+      "qsRank": 452
     },
     {
       "name": "同济大学",
@@ -191,7 +201,8 @@
         "汽车",
         "工科"
       ],
-      "minPercentile": 98.5
+      "minPercentile": 98.5,
+      "qsRank": 192
     },
     {
       "name": "华中科技大学",
@@ -201,7 +212,8 @@
         "医学",
         "工科"
       ],
-      "minPercentile": 98.5
+      "minPercentile": 98.5,
+      "qsRank": 275
     },
     {
       "name": "武汉大学",
@@ -211,7 +223,8 @@
         "遥感",
         "综合"
       ],
-      "minPercentile": 98.5
+      "minPercentile": 98.5,
+      "qsRank": 194
     },
     {
       "name": "中山大学",
@@ -221,7 +234,8 @@
         "商科",
         "综合"
       ],
-      "minPercentile": 98.5
+      "minPercentile": 98.5,
+      "qsRank": 267
     },
     {
       "name": "电子科技大学",
@@ -231,7 +245,8 @@
         "AI",
         "工科"
       ],
-      "minPercentile": 98.5
+      "minPercentile": 98.5,
+      "qsRank": 486
     },
     {
       "name": "北京理工大学",
@@ -241,7 +256,8 @@
         "军工",
         "工科"
       ],
-      "minPercentile": 98.5
+      "minPercentile": 98.5,
+      "qsRank": 427
     },
     {
       "name": "东南大学",
@@ -251,7 +267,8 @@
         "建筑",
         "工科"
       ],
-      "minPercentile": 98.5
+      "minPercentile": 98.5,
+      "qsRank": 428
     },
     {
       "name": "天津大学",
@@ -261,7 +278,8 @@
         "建筑",
         "工科"
       ],
-      "minPercentile": 98.5
+      "minPercentile": 98.5,
+      "qsRank": 332
     },
     {
       "name": "大连理工大学",
@@ -271,7 +289,8 @@
         "船舶",
         "工科"
       ],
-      "minPercentile": 98.5
+      "minPercentile": 98.5,
+      "qsRank": 481
     },
     {
       "name": "华南理工大学",
@@ -281,7 +300,8 @@
         "建筑",
         "工科"
       ],
-      "minPercentile": 98.5
+      "minPercentile": 98.5,
+      "qsRank": 392
     },
     {
       "name": "湖南大学",
@@ -291,7 +311,8 @@
         "土木",
         "工科"
       ],
-      "minPercentile": 98.5
+      "minPercentile": 98.5,
+      "qsRank": 481
     },
     {
       "name": "重庆大学",
@@ -301,7 +322,8 @@
         "电气",
         "工科"
       ],
-      "minPercentile": 98.5
+      "minPercentile": 98.5,
+      "qsRank": 489
     },
     {
       "name": "吉林大学",
@@ -311,7 +333,8 @@
         "医学",
         "综合"
       ],
-      "minPercentile": 98.5
+      "minPercentile": 98.5,
+      "qsRank": 497
     },
     {
       "name": "山东大学",
@@ -321,7 +344,8 @@
         "数学",
         "综合"
       ],
-      "minPercentile": 98.5
+      "minPercentile": 98.5,
+      "qsRank": 403
     },
     {
       "name": "四川大学",
@@ -331,7 +355,8 @@
         "材料",
         "综合"
       ],
-      "minPercentile": 98.5
+      "minPercentile": 98.5,
+      "qsRank": 336
     },
     {
       "name": "西北工业大学",
@@ -341,7 +366,8 @@
         "材料",
         "工科"
       ],
-      "minPercentile": 98.5
+      "minPercentile": 98.5,
+      "qsRank": 436
     },
     {
       "name": "中南大学",
@@ -351,7 +377,8 @@
         "医学",
         "工科"
       ],
-      "minPercentile": 98.5
+      "minPercentile": 98.5,
+      "qsRank": 431
     },
     {
       "name": "兰州大学",
@@ -361,7 +388,8 @@
         "理科",
         "综合"
       ],
-      "minPercentile": 98.5
+      "minPercentile": 98.5,
+      "qsRank": 751
     },
     {
       "name": "东北大学",
@@ -371,7 +399,8 @@
         "冶金",
         "工科"
       ],
-      "minPercentile": 98.5
+      "minPercentile": 98.5,
+      "qsRank": 539
     },
     {
       "name": "中国海洋大学",
@@ -381,7 +410,8 @@
         "食品",
         "综合"
       ],
-      "minPercentile": 98.5
+      "minPercentile": 98.5,
+      "qsRank": 801
     },
     {
       "name": "中央民族大学",
@@ -391,7 +421,8 @@
         "文科",
         "综合"
       ],
-      "minPercentile": 98.5
+      "minPercentile": 98.5,
+      "qsRank": 1200
     },
     {
       "name": "华东师范大学",
@@ -401,7 +432,8 @@
         "软件",
         "综合"
       ],
-      "minPercentile": 98.5
+      "minPercentile": 98.5,
+      "qsRank": 544
     },
     {
       "name": "中国农业大学",
@@ -411,7 +443,8 @@
         "生物",
         "综合"
       ],
-      "minPercentile": 98.5
+      "minPercentile": 98.5,
+      "qsRank": 534
     },
     {
       "name": "西北农林科技大学",
@@ -421,7 +454,8 @@
         "食品",
         "综合"
       ],
-      "minPercentile": 98.5
+      "minPercentile": 98.5,
+      "qsRank": 1200
     },
     {
       "name": "北京邮电大学",
@@ -431,7 +465,8 @@
         "AI",
         "工科"
       ],
-      "minPercentile": 96.0
+      "minPercentile": 96.0,
+      "qsRank": 851
     },
     {
       "name": "南京航空航天大学",
@@ -441,7 +476,8 @@
         "机器人",
         "工科"
       ],
-      "minPercentile": 96.0
+      "minPercentile": 96.0,
+      "qsRank": 801
     },
     {
       "name": "南京理工大学",
@@ -451,7 +487,8 @@
         "自动化",
         "工科"
       ],
-      "minPercentile": 96.0
+      "minPercentile": 96.0,
+      "qsRank": 801
     },
     {
       "name": "西安电子科技大学",
@@ -461,7 +498,8 @@
         "通信",
         "工科"
       ],
-      "minPercentile": 96.0
+      "minPercentile": 96.0,
+      "qsRank": 801
     },
     {
       "name": "北京交通大学",
@@ -471,7 +509,8 @@
         "软件",
         "工科"
       ],
-      "minPercentile": 96.0
+      "minPercentile": 96.0,
+      "qsRank": 901
     },
     {
       "name": "合肥工业大学",
@@ -481,7 +520,8 @@
         "机械",
         "工科"
       ],
-      "minPercentile": 96.0
+      "minPercentile": 96.0,
+      "qsRank": 801
     },
     {
       "name": "苏州大学",
@@ -491,7 +531,8 @@
         "医学",
         "综合"
       ],
-      "minPercentile": 96.0
+      "minPercentile": 96.0,
+      "qsRank": 641
     },
     {
       "name": "郑州大学",
@@ -501,7 +542,8 @@
         "材料",
         "综合"
       ],
-      "minPercentile": 96.0
+      "minPercentile": 96.0,
+      "qsRank": 801
     },
     {
       "name": "云南大学",
@@ -511,7 +553,8 @@
         "生态",
         "综合"
       ],
-      "minPercentile": 96.0
+      "minPercentile": 96.0,
+      "qsRank": 851
     },
     {
       "name": "新疆大学",
@@ -521,7 +564,8 @@
         "综合",
         "区域"
       ],
-      "minPercentile": 96.0
+      "minPercentile": 96.0,
+      "qsRank": 1200
     },
     {
       "name": "上海财经大学",
@@ -531,7 +575,8 @@
         "商科",
         "财经"
       ],
-      "minPercentile": 96.0
+      "minPercentile": 96.0,
+      "qsRank": 1001
     },
     {
       "name": "对外经济贸易大学",
@@ -541,7 +586,8 @@
         "商科",
         "财经"
       ],
-      "minPercentile": 96.0
+      "minPercentile": 96.0,
+      "qsRank": 1001
     },
     {
       "name": "中国政法大学",
@@ -551,7 +597,8 @@
         "文科",
         "政法"
       ],
-      "minPercentile": 96.0
+      "minPercentile": 96.0,
+      "qsRank": 1001
     },
     {
       "name": "北京科技大学",
@@ -561,7 +608,8 @@
         "冶金",
         "工科"
       ],
-      "minPercentile": 96.0
+      "minPercentile": 96.0,
+      "qsRank": 801
     },
     {
       "name": "华北电力大学",
@@ -571,7 +619,8 @@
         "能源",
         "工科"
       ],
-      "minPercentile": 96.0
+      "minPercentile": 96.0,
+      "qsRank": 1001
     },
     {
       "name": "华东理工大学",
@@ -581,7 +630,8 @@
         "材料",
         "工科"
       ],
-      "minPercentile": 96.0
+      "minPercentile": 96.0,
+      "qsRank": 851
     },
     {
       "name": "北京化工大学",
@@ -591,7 +641,8 @@
         "材料",
         "工科"
       ],
-      "minPercentile": 96.0
+      "minPercentile": 96.0,
+      "qsRank": 1001
     },
     {
       "name": "北京林业大学",
@@ -601,7 +652,8 @@
         "生态",
         "农林"
       ],
-      "minPercentile": 96.0
+      "minPercentile": 96.0,
+      "qsRank": 1001
     },
     {
       "name": "中国传媒大学",
@@ -611,7 +663,8 @@
         "新闻",
         "艺术"
       ],
-      "minPercentile": 96.0
+      "minPercentile": 96.0,
+      "qsRank": 851
     },
     {
       "name": "上海外国语大学",
@@ -621,7 +674,8 @@
         "文科",
         "财经"
       ],
-      "minPercentile": 96.0
+      "minPercentile": 96.0,
+      "qsRank": 1001
     },
     {
       "name": "外交学院",
@@ -631,7 +685,8 @@
         "国际关系",
         "文科"
       ],
-      "minPercentile": 96.0
+      "minPercentile": 96.0,
+      "qsRank": 1200
     },
     {
       "name": "首都经济贸易大学",
@@ -641,7 +696,8 @@
         "商科",
         "北京"
       ],
-      "minPercentile": 85.0
+      "minPercentile": 85.0,
+      "qsRank": 1200
     },
     {
       "name": "河海大学",
@@ -651,7 +707,8 @@
         "土木",
         "工科"
       ],
-      "minPercentile": 96.0
+      "minPercentile": 96.0,
+      "qsRank": 801
     },
     {
       "name": "江南大学",
@@ -661,7 +718,8 @@
         "轻工",
         "综合"
       ],
-      "minPercentile": 96.0
+      "minPercentile": 96.0,
+      "qsRank": 851
     },
     {
       "name": "南京师范大学",
@@ -671,7 +729,8 @@
         "文科",
         "师范"
       ],
-      "minPercentile": 96.0
+      "minPercentile": 96.0,
+      "qsRank": 1200
     },
     {
       "name": "深圳大学",
@@ -681,7 +740,8 @@
         "商科",
         "综合"
       ],
-      "minPercentile": 93.0
+      "minPercentile": 93.0,
+      "qsRank": 595
     },
     {
       "name": "南方科技大学",
@@ -691,7 +751,8 @@
         "理科",
         "新兴"
       ],
-      "minPercentile": 93.0
+      "minPercentile": 93.0,
+      "qsRank": 162
     },
     {
       "name": "西湖大学",
@@ -701,7 +762,8 @@
         "理科",
         "新兴"
       ],
-      "minPercentile": 93.0
+      "minPercentile": 93.0,
+      "qsRank": 1200
     },
     {
       "name": "宁波大学",
@@ -711,7 +773,8 @@
         "综合",
         "区域"
       ],
-      "minPercentile": 93.0
+      "minPercentile": 93.0,
+      "qsRank": 1001
     },
     {
       "name": "首都师范大学",
@@ -721,7 +784,8 @@
         "文科",
         "师范"
       ],
-      "minPercentile": 93.0
+      "minPercentile": 93.0,
+      "qsRank": 1001
     },
     {
       "name": "浙江工业大学",
@@ -731,7 +795,8 @@
         "机械",
         "工科"
       ],
-      "minPercentile": 85.0
+      "minPercentile": 85.0,
+      "qsRank": 1001
     },
     {
       "name": "广东工业大学",
@@ -741,7 +806,8 @@
         "自动化",
         "工科"
       ],
-      "minPercentile": 85.0
+      "minPercentile": 85.0,
+      "qsRank": 1001
     },
     {
       "name": "杭州电子科技大学",
@@ -751,7 +817,8 @@
         "软件",
         "工科"
       ],
-      "minPercentile": 85.0
+      "minPercentile": 85.0,
+      "qsRank": 1001
     },
     {
       "name": "南京工业大学",
@@ -761,7 +828,8 @@
         "建筑",
         "工科"
       ],
-      "minPercentile": 85.0
+      "minPercentile": 85.0,
+      "qsRank": 1001
     },
     {
       "name": "燕山大学",
@@ -771,7 +839,8 @@
         "材料",
         "工科"
       ],
-      "minPercentile": 85.0
+      "minPercentile": 85.0,
+      "qsRank": 1001
     },
     {
       "name": "昆明理工大学",
@@ -781,7 +850,8 @@
         "机械",
         "区域"
       ],
-      "minPercentile": 85.0
+      "minPercentile": 85.0,
+      "qsRank": 1001
     },
     {
       "name": "长春理工大学",
@@ -791,7 +861,8 @@
         "机械",
         "工科"
       ],
-      "minPercentile": 85.0
+      "minPercentile": 85.0,
+      "qsRank": 1200
     },
     {
       "name": "重庆邮电大学",
@@ -801,7 +872,8 @@
         "软件",
         "工科"
       ],
-      "minPercentile": 85.0
+      "minPercentile": 85.0,
+      "qsRank": 1200
     },
     {
       "name": "上海理工大学",
@@ -811,7 +883,8 @@
         "光学",
         "工科"
       ],
-      "minPercentile": 85.0
+      "minPercentile": 85.0,
+      "qsRank": 1001
     },
     {
       "name": "天津工业大学",
@@ -821,7 +894,8 @@
         "材料",
         "工科"
       ],
-      "minPercentile": 85.0
+      "minPercentile": 85.0,
+      "qsRank": 1001
     },
     {
       "name": "山东师范大学",
@@ -831,7 +905,8 @@
         "文科",
         "师范"
       ],
-      "minPercentile": 85.0
+      "minPercentile": 85.0,
+      "qsRank": 1001
     },
     {
       "name": "福建师范大学",
@@ -841,7 +916,8 @@
         "文科",
         "师范"
       ],
-      "minPercentile": 85.0
+      "minPercentile": 85.0,
+      "qsRank": 1001
     },
     {
       "name": "北京信息科技大学",
@@ -851,7 +927,8 @@
         "工科",
         "应用"
       ],
-      "minPercentile": 65.0
+      "minPercentile": 65.0,
+      "qsRank": 1500
     },
     {
       "name": "上海第二工业大学",
@@ -861,7 +938,8 @@
         "工科",
         "应用"
       ],
-      "minPercentile": 65.0
+      "minPercentile": 65.0,
+      "qsRank": 1500
     },
     {
       "name": "重庆文理学院",
@@ -871,7 +949,8 @@
         "区域",
         "应用"
       ],
-      "minPercentile": 65.0
+      "minPercentile": 65.0,
+      "qsRank": 1500
     },
     {
       "name": "洛阳理工学院",
@@ -881,7 +960,8 @@
         "机械",
         "应用"
       ],
-      "minPercentile": 65.0
+      "minPercentile": 65.0,
+      "qsRank": 1500
     },
     {
       "name": "深圳职业技术大学",
@@ -891,7 +971,8 @@
         "应用",
         "就业"
       ],
-      "minPercentile": 40.0
+      "minPercentile": 40.0,
+      "qsRank": 2000
     },
     {
       "name": "金华职业技术大学",
@@ -901,7 +982,8 @@
         "应用",
         "就业"
       ],
-      "minPercentile": 40.0
+      "minPercentile": 40.0,
+      "qsRank": 2000
     },
     {
       "name": "北京电子科技职业学院",
@@ -911,7 +993,8 @@
         "职教",
         "就业"
       ],
-      "minPercentile": 40.0
+      "minPercentile": 40.0,
+      "qsRank": 2000
     },
     {
       "name": "安徽建筑大学",
@@ -921,7 +1004,8 @@
         "建筑",
         "应用"
       ],
-      "minPercentile": 65.0
+      "minPercentile": 65.0,
+      "qsRank": 1500
     },
     {
       "name": "浙江科技大学",
@@ -931,7 +1015,8 @@
         "制造",
         "应用"
       ],
-      "minPercentile": 65.0
+      "minPercentile": 65.0,
+      "qsRank": 1500
     },
     {
       "name": "西安邮电大学",
@@ -941,7 +1026,8 @@
         "电子",
         "就业"
       ],
-      "minPercentile": 65.0
+      "minPercentile": 65.0,
+      "qsRank": 1500
     },
     {
       "name": "山东理工大学",
@@ -951,7 +1037,8 @@
         "工科",
         "应用"
       ],
-      "minPercentile": 65.0
+      "minPercentile": 65.0,
+      "qsRank": 1500
     },
     {
       "name": "成都工业学院",
@@ -961,7 +1048,8 @@
         "工科",
         "应用"
       ],
-      "minPercentile": 65.0
+      "minPercentile": 65.0,
+      "qsRank": 1500
     },
     {
       "name": "湖北经济学院",
@@ -971,7 +1059,8 @@
         "商科",
         "区域"
       ],
-      "minPercentile": 65.0
+      "minPercentile": 65.0,
+      "qsRank": 1500
     },
     {
       "name": "河南工业大学",
@@ -981,7 +1070,8 @@
         "工科",
         "应用"
       ],
-      "minPercentile": 65.0
+      "minPercentile": 65.0,
+      "qsRank": 1500
     },
     {
       "name": "盐城工学院",
@@ -991,7 +1081,8 @@
         "工科",
         "应用"
       ],
-      "minPercentile": 65.0
+      "minPercentile": 65.0,
+      "qsRank": 1500
     },
     {
       "name": "无锡职业技术学院",
@@ -1001,7 +1092,8 @@
         "机械",
         "就业"
       ],
-      "minPercentile": 40.0
+      "minPercentile": 40.0,
+      "qsRank": 2000
     },
     {
       "name": "黄河水利职业技术学院",
@@ -1011,7 +1103,8 @@
         "工科",
         "就业"
       ],
-      "minPercentile": 40.0
+      "minPercentile": 40.0,
+      "qsRank": 2000
     },
     {
       "name": "浙江经济职业技术学院",
@@ -1021,7 +1114,8 @@
         "商贸",
         "就业"
       ],
-      "minPercentile": 40.0
+      "minPercentile": 40.0,
+      "qsRank": 2000
     },
     {
       "name": "广州番禺职业技术学院",
@@ -1031,7 +1125,8 @@
         "综合",
         "就业"
       ],
-      "minPercentile": 40.0
+      "minPercentile": 40.0,
+      "qsRank": 2000
     },
     {
       "name": "长沙民政职业技术学院",
@@ -1041,7 +1136,8 @@
         "服务",
         "就业"
       ],
-      "minPercentile": 40.0
+      "minPercentile": 40.0,
+      "qsRank": 2000
     },
     {
       "name": "南京铁道职业技术学院",
@@ -1051,7 +1147,8 @@
         "交通",
         "就业"
       ],
-      "minPercentile": 40.0
+      "minPercentile": 40.0,
+      "qsRank": 2000
     },
     {
       "name": "陕西工业职业技术学院",
@@ -1061,7 +1158,8 @@
         "工科",
         "就业"
       ],
-      "minPercentile": 40.0
+      "minPercentile": 40.0,
+      "qsRank": 2000
     },
     {
       "name": "重庆电力高等专科学校",
@@ -1071,7 +1169,8 @@
         "能源",
         "就业"
       ],
-      "minPercentile": 40.0
+      "minPercentile": 40.0,
+      "qsRank": 2000
     }
   ],
   "hotMajors": [
