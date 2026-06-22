@@ -1152,19 +1152,52 @@
       return order[reachIdxForScore(score)] || tierForPercentile(percentileAt(score));
     }
 
-    function setScore(score, showModal = true) {
-      if (!Number.isFinite(score)) return;
-      score = Math.round(Math.max(state.minScore, Math.min(state.maxScore, score)));
-      state.currentScore = score;
-      sliderEl.value = score;
-      scoreInputEl.value = score;
-      $('scoreDisplay').textContent = `${score} 分`;
-      const { sharePct } = scoreAt(score);
-      $('statScore').textContent = score;
+    function clampScore(score) {
+      if (!Number.isFinite(score)) return null;
+      return Math.round(Math.max(state.minScore, Math.min(state.maxScore, score)));
+    }
+
+    function parseScoreInput(raw) {
+      const v = String(raw ?? '').trim();
+      if (v === '' || v === '-') return null;
+      const n = Number(v);
+      return Number.isFinite(n) ? n : null;
+    }
+
+    function updateScoreUI(score, { syncInput = false, showModal = false } = {}) {
+      const clamped = clampScore(score);
+      if (clamped == null) return;
+      state.currentScore = clamped;
+      sliderEl.value = clamped;
+      if (syncInput) scoreInputEl.value = clamped;
+      $('scoreDisplay').textContent = `${clamped} 分`;
+      const { sharePct } = scoreAt(clamped);
+      $('statScore').textContent = clamped;
       $('statShare').textContent = `${sharePct.toFixed(2)}%`;
-      updateStatDescriptions(score, sharePct);
+      updateStatDescriptions(clamped, sharePct);
       drawChart();
       if (showModal) openModal();
+    }
+
+    function setScore(score, showModal = true) {
+      updateScoreUI(score, { syncInput: true, showModal });
+    }
+
+    function previewScoreFromInput() {
+      const n = parseScoreInput(scoreInputEl.value);
+      if (n == null) return;
+      if (n >= state.minScore && n <= state.maxScore) {
+        updateScoreUI(n, { syncInput: false, showModal: false });
+      }
+    }
+
+    function commitScoreFromInput(showModal = true) {
+      const n = parseScoreInput(scoreInputEl.value);
+      if (n == null) {
+        scoreInputEl.value = state.currentScore;
+        return;
+      }
+      setScore(n, showModal);
     }
 
     function drawChart() {
@@ -1491,19 +1524,16 @@
     });
     sliderEl.addEventListener('input', () => setScore(Number(sliderEl.value), false));
     sliderEl.addEventListener('change', () => setScore(Number(sliderEl.value), true));
-    scoreInputEl.addEventListener('input', () => {
-      if (scoreInputEl.value === '') return;
-      setScore(Number(scoreInputEl.value), false);
-    });
-    scoreInputEl.addEventListener('change', () => setScore(Number(scoreInputEl.value), true));
+    scoreInputEl.addEventListener('input', previewScoreFromInput);
+    scoreInputEl.addEventListener('blur', () => commitScoreFromInput(false));
     scoreInputEl.addEventListener('keydown', (e) => {
       if (e.key === 'Enter') {
         e.preventDefault();
-        setScore(Number(scoreInputEl.value), true);
+        commitScoreFromInput(true);
         scoreInputEl.blur();
       }
     });
-    $('applyScoreBtn').addEventListener('click', () => setScore(Number(scoreInputEl.value), true));
+    $('applyScoreBtn').addEventListener('click', () => commitScoreFromInput(true));
     $('openModalBtn').addEventListener('click', openModal);
     $('closeModal').addEventListener('click', closeModal);
     $('modalBackdrop').addEventListener('click', (e) => { if (e.target.id === 'modalBackdrop') closeModal(); });
