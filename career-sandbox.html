@@ -9,8 +9,10 @@
     :root {
       --bg: #fffdf5; --card: #fff; --ink: #141414; --text: #141414;
       --muted: #5a5a5a; --red: #ff2442; --yellow: #ffe566; --ok: #00b96b;
-      --blue: #1d4ed8; --shadow: 8px 8px 0 #141414;
+      --blue: #1d4ed8; --cta: #ff7a00; --shadow: 8px 8px 0 #141414;
     }
+    body.font-large { font-size: 17px; }
+    body.font-large table { font-size: 15px; }
     * { box-sizing: border-box; margin: 0; padding: 0; }
     body {
       font-family: 'Noto Sans SC', sans-serif;
@@ -33,6 +35,16 @@
       font-size: 12px; font-weight: 800;
     }
     .topbar { display: flex; justify-content: space-between; align-items: flex-start; gap: 16px; flex-wrap: wrap; }
+    .topbar-actions { display: flex; flex-wrap: wrap; gap: 8px; align-items: center; }
+    .font-toggle {
+      display: inline-flex; border: 2px solid var(--ink); border-radius: 12px; overflow: hidden;
+      box-shadow: 3px 3px 0 var(--ink); background: #fff;
+    }
+    .font-toggle button {
+      border: none; border-radius: 0; padding: 8px 12px; font-size: 12px; font-weight: 800;
+      cursor: pointer; background: #fff; color: var(--muted);
+    }
+    .font-toggle button.active { background: var(--yellow); color: var(--ink); }
     .topbar a {
       color: var(--ink); text-decoration: none; font-weight: 800;
       border: 2px solid var(--ink); padding: 10px 14px; border-radius: 12px;
@@ -50,8 +62,27 @@
       background: var(--card); border: 3px solid var(--ink); border-radius: 22px;
       padding: 24px; box-shadow: var(--shadow); margin-bottom: 18px;
     }
-    .controls { display: grid; grid-template-columns: 1fr 1fr auto; gap: 14px; align-items: end; }
-    @media (max-width: 700px) { .controls { grid-template-columns: 1fr; } }
+    .controls { display: grid; grid-template-columns: 1fr; gap: 14px; align-items: start; }
+    .major-search {
+      width: 100%; border: 2px solid var(--ink); border-radius: 14px; padding: 12px 14px;
+      font-size: 15px; font-weight: 700; background: #fff; box-shadow: 3px 3px 0 var(--ink);
+    }
+    .track-tabs { display: flex; flex-wrap: wrap; gap: 8px; margin-top: 10px; }
+    .track-tab {
+      border: 2px solid var(--ink); border-radius: 999px; padding: 8px 14px;
+      font-size: 13px; font-weight: 800; background: #fff; cursor: pointer;
+      box-shadow: 3px 3px 0 var(--ink);
+    }
+    .track-tab.active { background: var(--yellow); }
+    .major-chips { display: flex; flex-wrap: wrap; gap: 8px; margin-top: 10px; max-height: 200px; overflow: auto; }
+    .major-chip {
+      border: 2px solid var(--ink); border-radius: 12px; padding: 10px 12px;
+      font-size: 13px; font-weight: 800; background: #fff; cursor: pointer;
+      box-shadow: 3px 3px 0 var(--ink); text-align: left;
+    }
+    .major-chip.active { background: var(--yellow); }
+    .major-chip.hidden { display: none; }
+    .sr-only { position: absolute; width: 1px; height: 1px; overflow: hidden; clip: rect(0,0,0,0); }
     label { display: block; font-size: 13px; color: var(--muted); margin-bottom: 8px; font-weight: 800; }
     select {
       width: 100%; border: 2px solid var(--ink); border-radius: 14px; padding: 12px 14px;
@@ -64,7 +95,27 @@
     }
     table { width: 100%; border-collapse: collapse; margin-top: 8px; font-size: 14px; }
     th, td { padding: 12px 10px; text-align: left; border-bottom: 2px solid #eee; vertical-align: middle; }
-    th { font-size: 12px; color: var(--muted); font-weight: 800; text-transform: uppercase; letter-spacing: .04em; }
+    th { font-size: 12px; color: var(--muted); font-weight: 800; letter-spacing: .04em; }
+    @media (max-width: 720px) {
+      .job-table thead { display: none; }
+      .job-table tbody tr.job-row {
+        display: block; border: 2px solid var(--ink); border-radius: 16px;
+        margin-bottom: 12px; padding: 12px 14px; background: #fff;
+        box-shadow: 4px 4px 0 var(--ink);
+      }
+      .job-table tbody tr.job-row td {
+        display: flex; justify-content: space-between; align-items: center;
+        gap: 12px; border: none; padding: 8px 0;
+      }
+      .job-table tbody tr.job-row td::before {
+        content: attr(data-label); font-weight: 800; color: var(--muted); font-size: 12px; flex-shrink: 0;
+      }
+      .job-table tbody tr.job-row td:first-child::before { content: '排名'; }
+      .job-table tbody tr.detail-row { display: none; border: none; box-shadow: none; padding: 0; }
+      .job-table tbody tr.detail-row.open { display: block; margin: -8px 0 12px; padding: 0 4px 8px; }
+      .job-table tbody tr.detail-row td { display: block; padding: 0; }
+      .job-table .bar-wrap { min-width: 60px; }
+    }
     tr:hover td { background: #fffbe6; }
     .rank {
       display: inline-flex; align-items: center; justify-content: center;
@@ -101,11 +152,32 @@
     }
     .src-card strong { display: block; margin-bottom: 6px; font-size: 13px; }
     .expand-btn {
-      border: 2px solid var(--ink); background: var(--yellow); border-radius: 8px;
+      border: 2px solid var(--ink); background: #fff; border-radius: 8px;
       padding: 4px 8px; font-size: 11px; font-weight: 800; cursor: pointer;
     }
+    .quality-plain { font-size: 11px; color: var(--muted); font-weight: 700; display: block; margin-top: 2px; }
     .footer-note { font-size: 12px; color: var(--muted); line-height: 1.65; margin-top: 12px; }
     .empty { text-align: center; padding: 40px; color: var(--muted); font-weight: 600; }
+    .howto-panel h2 { font-size: 20px; font-weight: 800; margin-bottom: 12px; }
+    .howto-grid {
+      display: grid; grid-template-columns: repeat(3, 1fr); gap: 14px; margin-top: 8px;
+    }
+    @media (max-width: 800px) { .howto-grid { grid-template-columns: 1fr; } }
+    .howto-card {
+      border: 2px solid var(--ink); border-radius: 16px; padding: 16px;
+      background: #fffbe6; box-shadow: 4px 4px 0 var(--ink);
+    }
+    .howto-card strong { display: block; font-size: 15px; margin-bottom: 8px; color: var(--red); }
+    .howto-card p { font-size: 13px; line-height: 1.6; color: var(--muted); font-weight: 600; }
+    .qr-panel {
+      text-align: center; padding: 28px 24px 32px;
+      background: linear-gradient(180deg, #fff 0%, #fff8e8 100%);
+    }
+    .qr-panel img {
+      width: min(280px, 90vw); height: auto; border: none;
+      border-radius: 12px; box-shadow: none; background: transparent;
+    }
+    .qr-hint { margin-top: 8px; font-size: 13px; color: var(--muted); font-weight: 600; }
   </style>
 </head>
 <body>
@@ -115,30 +187,39 @@
         <div>
           <span style="display:inline-block;background:#ffe566;border:2px solid #141414;padding:6px 12px;border-radius:999px;font-size:12px;font-weight:800;">💼 四源交叉验证</span>
           <h1>毕业后能做什么？<br><span class="hl">薪资路径沙盘 TOP10</span></h1>
-          <p class="sub">按<strong>应届生月薪</strong>降序排列 Top10 岗位，对比 5 年经验薪资与涨幅空间。数据经猎聘、BOSS直聘、脉脉、OfferShow 交叉校验。</p>
+          <p class="sub">先选专业，看<strong>毕业后能做什么、拿多少钱</strong>。不用懂数据分析，看排行就行。</p>
         </div>
-        <a href="index.html">← 返回合集</a>
+        <div class="topbar-actions">
+          <div class="font-toggle" role="group" aria-label="字号切换">
+            <button type="button" id="fontNormal" class="active">标准</button>
+            <button type="button" id="fontLarge">大号</button>
+          </div>
+          <a href="index.html">← 返回合集</a>
+        </div>
       </div>
     </section>
 
     <div class="panel">
       <div class="controls">
         <div>
-          <label for="major">选择专业</label>
-          <select id="major"></select>
+          <label for="majorSearch">① 选专业（可搜索）</label>
+          <input id="majorSearch" class="major-search" type="search" placeholder="搜专业名，如：软件工程、临床医学…" autocomplete="off">
+          <div class="track-tabs" id="trackTabs"></div>
+          <div class="major-chips" id="majorChips"></div>
+          <select id="major" class="sr-only" aria-hidden="true" tabindex="-1"></select>
         </div>
         <div>
-          <label>数据交叉验证来源</label>
+          <label>数据怎么来的？</label>
           <div class="source-badges">
             <span class="src-badge">猎聘</span>
             <span class="src-badge">BOSS直聘</span>
             <span class="src-badge">脉脉</span>
             <span class="src-badge">OfferShow</span>
           </div>
+          <p class="footer-note" style="margin-top:8px;">四家平台薪资取中位数，差异小说明更可信。明细默认收起，需要时再展开。</p>
         </div>
         <div>
-          <label>&nbsp;</label>
-          <a href="selector.html" style="display:inline-block;text-decoration:none;color:#141414;font-weight:800;border:2px solid #141414;padding:12px 16px;border-radius:14px;background:#fff;box-shadow:4px 4px 0 #141414;">去分数选校 →</a>
+          <a href="selector.html" style="display:inline-block;text-decoration:none;color:#fff;font-weight:800;border:2px solid #141414;padding:14px 18px;border-radius:14px;background:var(--cta);box-shadow:4px 4px 0 #141414;">去查分数能报什么学校 →</a>
         </div>
       </div>
     </div>
@@ -149,19 +230,50 @@
       <div id="tableWrap"></div>
       <p class="footer-note" id="disclaimer"></p>
     </div>
+
+    <div class="panel howto-panel">
+      <h2>📋 3 步用好沙盘（今晚就能做）</h2>
+      <div class="howto-grid">
+        <div class="howto-card">
+          <strong>① 选专业 → 看 Top3 岗位</strong>
+          <p>下拉选你意向的专业，先看应届薪资最高的 3 个岗位，判断孩子愿不愿意做这类工作。</p>
+        </div>
+        <div class="howto-card">
+          <strong>② 看数据质量徽章</strong>
+          <p>显示「四源一致」说明四家平台数据基本吻合；需要细节再点「展开明细」。</p>
+        </div>
+        <div class="howto-card">
+          <strong>③ 对比 5 年涨幅 → 定方向</strong>
+          <p>涨幅 &gt;60% 说明成长空间大；若应届低但 5 年高，适合愿意深耕的路线。</p>
+        </div>
+      </div>
+    </div>
+
+    <div class="panel qr-panel">
+      <img src="assets/wechat-group-qr.png" alt="备注地区+高考分数，进入家长群交流信息">
+      <p class="qr-hint">扫码进群 · 与同分段家长交流院校专业 · 数据仅供参考请以官方为准</p>
+    </div>
   </div>
 
   <script src="data/career-embed.js"></script>
   <script>
     const $ = (id) => document.getElementById(id);
     let data = null;
+    let activeTrack = '全部';
 
     const CONF_LABEL = {
-      verified_multi_source: '四源一致',
-      verified: '交叉验证通过',
-      partially_verified: '部分验证',
+      verified_multi_source: '四源一致 ✓',
+      verified: '核对通过',
+      partially_verified: '部分一致',
       reference_only: '参考估算',
     };
+
+    function spreadPlain(pct, passed) {
+      if (pct < 15 && passed >= 4) return '四个平台数据基本吻合 ✓';
+      if (pct < 25 && passed >= 3) return '各平台数据大致接近';
+      if (passed >= 3) return '多数平台接近，可作参考';
+      return '各平台差异较大，建议多看看';
+    }
 
     function fmt(n) {
       return (n / 1000).toFixed(1) + 'k';
@@ -179,22 +291,23 @@
         return;
       }
       const maxSal = majorData.jobs[0].graduateSalary;
-      let html = `<table><thead><tr>
-        <th>#</th><th>岗位</th><th>应届生月薪</th><th>5年经验月薪</th><th>涨幅空间</th><th>验证</th><th></th>
+      let html = `<table class="job-table"><thead><tr>
+        <th>#</th><th>岗位</th><th>应届生月薪</th><th>5年经验月薪</th><th>涨幅空间</th><th>数据质量</th><th></th>
       </tr></thead><tbody>`;
 
       majorData.jobs.forEach((job, idx) => {
         const barW = Math.round(job.graduateSalary / maxSal * 100);
-        html += `<tr>
-          <td><span class="rank ${job.rank <= 3 ? 'top3' : ''}">${job.rank}</span></td>
-          <td><strong>${job.title}</strong>
+        const plain = spreadPlain(job.sourceSpreadPct, job.sourcesPassed);
+        html += `<tr class="job-row">
+          <td data-label="排名"><span class="rank ${job.rank <= 3 ? 'top3' : ''}">${job.rank}</span></td>
+          <td data-label="岗位"><strong>${job.title}</strong>
             <div class="bar-wrap"><div class="bar-fill" style="width:${barW}%"></div></div>
           </td>
-          <td><span class="salary grad">¥${job.graduateSalary.toLocaleString()}</span><br><small style="color:#888">${fmt(job.graduateSalary)}/月</small></td>
-          <td><span class="salary yr5">¥${job.salary5yr.toLocaleString()}</span><br><small style="color:#888">+¥${job.growthAbs.toLocaleString()}</small></td>
-          <td><span class="${growthClass(job.growthPct)}">+${job.growthPct}%</span></td>
-          <td><span class="conf ${job.confidence}">${CONF_LABEL[job.confidence] || job.confidence}</span></td>
-          <td><button class="expand-btn" data-idx="${idx}" type="button">四源明细</button></td>
+          <td data-label="应届月薪"><span class="salary grad">¥${job.graduateSalary.toLocaleString()}</span><br><small style="color:#888">${fmt(job.graduateSalary)}/月</small></td>
+          <td data-label="5年月薪"><span class="salary yr5">¥${job.salary5yr.toLocaleString()}</span><br><small style="color:#888">+¥${job.growthAbs.toLocaleString()}</small></td>
+          <td data-label="涨幅"><span class="${growthClass(job.growthPct)}">+${job.growthPct}%</span></td>
+          <td data-label="质量"><span class="conf ${job.confidence}">${CONF_LABEL[job.confidence] || job.confidence}</span><span class="quality-plain">${plain}</span></td>
+          <td data-label="明细"><button class="expand-btn" data-idx="${idx}" type="button">展开明细</button></td>
         </tr>
         <tr class="detail-row" id="detail-${idx}"><td colspan="7">
           <div class="src-grid">
@@ -206,7 +319,7 @@
                 涨幅 +${Math.round((s.yr5 - s.graduate) / s.graduate * 100)}%
               </div>`).join('')}
           </div>
-          <p style="margin-top:8px;font-size:12px;color:#888">离散度 ${job.sourceSpreadPct}% · ${job.sourcesPassed}/4 源在合理区间内</p>
+          <p style="margin-top:8px;font-size:12px;color:#888">${plain} · ${job.sourcesPassed}/4 家平台在合理范围内</p>
         </td></tr>`;
       });
       html += '</tbody></table>';
@@ -216,15 +329,59 @@
         btn.addEventListener('click', () => {
           const row = $('detail-' + btn.dataset.idx);
           row.classList.toggle('open');
-          btn.textContent = row.classList.contains('open') ? '收起' : '四源明细';
+          btn.textContent = row.classList.contains('open') ? '收起明细' : '展开明细';
         });
       });
+    }
+
+    function getTracks() {
+      const tracks = [...new Set(data.majors.map((m) => m.track))];
+      return ['全部', ...tracks];
+    }
+
+    function renderMajorPicker() {
+      const tracks = getTracks();
+      $('trackTabs').innerHTML = tracks.map((t) =>
+        `<button type="button" class="track-tab${t === activeTrack ? ' active' : ''}" data-track="${t}">${t}</button>`
+      ).join('');
+      document.querySelectorAll('.track-tab').forEach((btn) => {
+        btn.onclick = () => {
+          activeTrack = btn.dataset.track;
+          renderMajorPicker();
+          filterMajors($('majorSearch').value);
+        };
+      });
+      filterMajors($('majorSearch').value);
+    }
+
+    function filterMajors(query) {
+      const q = (query || '').trim();
+      const chips = data.majors.filter((m) => {
+        const trackOk = activeTrack === '全部' || m.track === activeTrack;
+        const nameOk = !q || m.major.includes(q);
+        return trackOk && nameOk;
+      });
+      $('majorChips').innerHTML = chips.map((m) =>
+        `<button type="button" class="major-chip${$('major').value === m.major ? ' active' : ''}" data-major="${m.major}">${m.major}<br><small style="color:#888;font-weight:600">${m.track}</small></button>`
+      ).join('') || '<span class="footer-note">没有匹配的专业</span>';
+      document.querySelectorAll('.major-chip').forEach((btn) => {
+        btn.onclick = () => selectMajor(btn.dataset.major);
+      });
+    }
+
+    function selectMajor(name) {
+      if ($('major').value === name) return;
+      $('major').value = name;
+      document.querySelectorAll('.major-chip').forEach((btn) => {
+        btn.classList.toggle('active', btn.dataset.major === name);
+      });
+      onMajorChange();
     }
 
     function onMajorChange() {
       const name = $('major').value;
       const majorData = data.majors.find((m) => m.major === name);
-      $('tableTitle').textContent = `${name}（${majorData?.track || ''}）· 毕业后岗位薪资 TOP10`;
+      $('tableTitle').textContent = `学「${name}」毕业后，哪些岗位最赚钱？`;
       renderTable(majorData);
     }
 
@@ -241,7 +398,18 @@
       $('major').innerHTML = data.majors.map((m) =>
         `<option value="${m.major}">${m.major}（${m.track}）</option>`
       ).join('');
-      $('major').addEventListener('change', onMajorChange);
+      $('majorSearch').addEventListener('input', (e) => filterMajors(e.target.value));
+      $('fontNormal').addEventListener('click', () => {
+        document.body.classList.remove('font-large');
+        $('fontNormal').classList.add('active');
+        $('fontLarge').classList.remove('active');
+      });
+      $('fontLarge').addEventListener('click', () => {
+        document.body.classList.add('font-large');
+        $('fontLarge').classList.add('active');
+        $('fontNormal').classList.remove('active');
+      });
+      renderMajorPicker();
       onMajorChange();
     }
 

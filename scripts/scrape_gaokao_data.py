@@ -14,14 +14,25 @@ from typing import Any
 import requests
 
 from gaokao_crawl_lib import (
+    COMBINED_SEGMENT_PROVINCES,
     CatalogEntry,
     ScrapeResult,
+    SegmentRow,
+    calibrate_segments_to_anchors,
     cross_validate,
+    cumulative_at,
     detect_track,
     discover_eol_catalog,
     load_zizzs_anchors,
+    maybe_calibrate_segments,
+    normalize_segment_rows,
+    percentile_from_cumulative,
+    densify_segments,
+    smooth_segment_counts,
     scrape_eol_entry,
+    pick_best_scrape,
 )
+from province_tracks import tracks_for_province, TRACK_LABELS
 
 ROOT = Path(__file__).resolve().parents[1]
 DATA_DIR = ROOT / "data"
@@ -98,6 +109,36 @@ HOT_MAJORS = [
     {"name": "数字媒体艺术", "track": "艺术", "score": 77, "tier": "一本"},
     {"name": "视觉传达设计", "track": "艺术", "score": 76, "tier": "一本"},
     {"name": "UI/UX设计方向", "track": "艺术", "score": 75, "tier": "一本"},
+    # 二本 / 应用型本科 — 10 年后就业前景导向
+    {"name": "软件工程", "track": "工科", "score": 95, "tier": "二本", "opportunity": True,
+     "outlook10y": "数字化与 AI 应用持续扩张，二本应用型软件人才缺口大"},
+    {"name": "电气工程及其自动化", "track": "工科", "score": 91, "tier": "二本", "opportunity": True,
+     "outlook10y": "新能源、电网改造与智能制造带动长期需求"},
+    {"name": "护理学", "track": "医科", "score": 89, "tier": "二本", "opportunity": True,
+     "outlook10y": "老龄化与医养结合，护理岗位长期紧缺"},
+    {"name": "康复治疗学", "track": "医科", "score": 86, "tier": "二本",
+     "outlook10y": "康复医疗与运动康复市场稳步增长"},
+    {"name": "电子商务", "track": "商科", "score": 81, "tier": "二本", "opportunity": True,
+     "outlook10y": "直播电商与跨境贸易仍处上升通道"},
+    {"name": "土木工程", "track": "工科", "score": 74, "tier": "二本",
+     "outlook10y": "基建更新与市政工程提供稳定岗位"},
+    {"name": "学前教育", "track": "文科", "score": 72, "tier": "二本",
+     "outlook10y": "托育与素质教育政策支撑基本需求"},
+    # 专科 / 高职 — 就业导向
+    {"name": "大数据技术", "track": "工科", "score": 90, "tier": "专科", "opportunity": True,
+     "outlook10y": "企业数据岗位下沉至高职层次，实操型人才吃香"},
+    {"name": "新能源汽车技术", "track": "工科", "score": 92, "tier": "专科", "opportunity": True,
+     "outlook10y": "电动化与智能网联汽车产业链持续扩招"},
+    {"name": "计算机网络技术", "track": "工科", "score": 88, "tier": "专科", "opportunity": True,
+     "outlook10y": "运维、网络安全与云服务岗位需求稳定"},
+    {"name": "机电一体化技术", "track": "工科", "score": 87, "tier": "专科",
+     "outlook10y": "先进制造与设备维护岗位刚需"},
+    {"name": "口腔医学技术", "track": "医科", "score": 85, "tier": "专科",
+     "outlook10y": "民营口腔连锁扩张带来技师需求"},
+    {"name": "建筑工程技术", "track": "工科", "score": 76, "tier": "专科",
+     "outlook10y": "市政与装修工程提供稳定技工岗位"},
+    {"name": "现代物流管理", "track": "商科", "score": 80, "tier": "专科", "opportunity": True,
+     "outlook10y": "供应链数字化推动高职物流人才需求"},
 ]
 
 TIER_ORDER = ["C9", "985", "211", "双一流", "一本", "二本", "专科"]
@@ -156,6 +197,13 @@ SCHOOLS = [
     {"name": "中国政法大学", "tier": "211", "tags": ["法学", "文科", "政法"]},
     {"name": "北京科技大学", "tier": "211", "tags": ["材料", "冶金", "工科"]},
     {"name": "华北电力大学", "tier": "211", "tags": ["电气", "能源", "工科"]},
+    {"name": "华东理工大学", "tier": "211", "tags": ["化工", "材料", "工科"]},
+    {"name": "北京化工大学", "tier": "211", "tags": ["化工", "材料", "工科"]},
+    {"name": "北京林业大学", "tier": "211", "tags": ["林业", "生态", "农林"]},
+    {"name": "中国传媒大学", "tier": "211", "tags": ["传媒", "新闻", "艺术"]},
+    {"name": "上海外国语大学", "tier": "211", "tags": ["外语", "文科", "财经"]},
+    {"name": "外交学院", "tier": "211", "tags": ["外交", "国际关系", "文科"]},
+    {"name": "首都经济贸易大学", "tier": "一本", "tags": ["财经", "商科", "北京"]},
     {"name": "河海大学", "tier": "211", "tags": ["水利", "土木", "工科"]},
     {"name": "江南大学", "tier": "211", "tags": ["食品", "轻工", "综合"]},
     {"name": "南京师范大学", "tier": "211", "tags": ["教育", "文科", "师范"]},
@@ -183,6 +231,22 @@ SCHOOLS = [
     {"name": "深圳职业技术大学", "tier": "专科", "tags": ["职教", "应用", "就业"]},
     {"name": "金华职业技术大学", "tier": "专科", "tags": ["职教", "应用", "就业"]},
     {"name": "北京电子科技职业学院", "tier": "专科", "tags": ["电子", "职教", "就业"]},
+    {"name": "安徽建筑大学", "tier": "二本", "tags": ["土木", "建筑", "应用"]},
+    {"name": "浙江科技大学", "tier": "二本", "tags": ["工科", "制造", "应用"]},
+    {"name": "西安邮电大学", "tier": "二本", "tags": ["通信", "电子", "就业"]},
+    {"name": "山东理工大学", "tier": "二本", "tags": ["机械", "工科", "应用"]},
+    {"name": "成都工业学院", "tier": "二本", "tags": ["制造", "工科", "应用"]},
+    {"name": "湖北经济学院", "tier": "二本", "tags": ["财经", "商科", "区域"]},
+    {"name": "河南工业大学", "tier": "二本", "tags": ["食品", "工科", "应用"]},
+    {"name": "盐城工学院", "tier": "二本", "tags": ["纺织", "工科", "应用"]},
+    {"name": "无锡职业技术学院", "tier": "专科", "tags": ["职教", "机械", "就业"]},
+    {"name": "黄河水利职业技术学院", "tier": "专科", "tags": ["水利", "工科", "就业"]},
+    {"name": "浙江经济职业技术学院", "tier": "专科", "tags": ["财经", "商贸", "就业"]},
+    {"name": "广州番禺职业技术学院", "tier": "专科", "tags": ["职教", "综合", "就业"]},
+    {"name": "长沙民政职业技术学院", "tier": "专科", "tags": ["民政", "服务", "就业"]},
+    {"name": "南京铁道职业技术学院", "tier": "专科", "tags": ["铁路", "交通", "就业"]},
+    {"name": "陕西工业职业技术学院", "tier": "专科", "tags": ["制造", "工科", "就业"]},
+    {"name": "重庆电力高等专科学校", "tier": "专科", "tags": ["电力", "能源", "就业"]},
 ]
 
 
@@ -197,8 +261,6 @@ def year_adjust(base: dict[str, int], year: int) -> dict[str, int]:
 
 
 def synthesize_segments(cfg: dict[str, int], track: str):
-    from gaokao_crawl_lib import SegmentRow
-
     max_score = cfg["max"]
     undergrad = cfg["undergrad"]
     special = cfg["special"]
@@ -207,26 +269,32 @@ def synthesize_segments(cfg: dict[str, int], track: str):
         undergrad += random.randint(-15, 10)
         special += random.randint(-15, 10)
         total = int(total * 0.45)
-    segments: list = []
-    cumulative = 0
+
     floor = max(120, undergrad - 80)
-    for score in range(max_score, floor - 1, -1):
-        dist_from_top = max_score - score
-        if score >= special:
-            count = int(8 * math.exp(-dist_from_top / 55) + random.uniform(0.5, 3))
-        elif score >= undergrad:
-            count = int(900 * math.exp(-(undergrad - score) / 30) + random.uniform(20, 80))
-        else:
-            count = int(500 * math.exp(-(undergrad - score) / 18) + random.uniform(10, 40))
-        count = max(1, count)
+    scores = list(range(max_score, floor - 1, -1))
+    span = max(1, max_score - floor)
+
+    weights: list[float] = []
+    for score in scores:
+        # 0=最高分 1=最低分；峰值在本科线附近，高分段也有可见梯度
+        t = (max_score - score) / span
+        peak = 0.62 + (undergrad - floor) / span * 0.08
+        w = math.exp(-((t - peak) ** 2) / 0.045) + 0.015 + 0.008 * (1 - t)
+        if score >= special + 40:
+            w *= 0.35
+        weights.append(max(0.001, w))
+
+    weight_sum = sum(weights)
+    cumulative = 0
+    segments: list[SegmentRow] = []
+    for score, w in zip(scores, weights):
+        count = max(1, int(total * w / weight_sum))
         cumulative += count
         segments.append(SegmentRow(score, count, cumulative))
     return segments, cumulative
 
 
 def downsample_segments(segments, undergrad: int, max_score: int):
-    from gaokao_crawl_lib import SegmentRow
-
     if not segments:
         return segments
     keep_scores: set[int] = set()
@@ -252,12 +320,21 @@ def downsample_segments(segments, undergrad: int, max_score: int):
 def enrich_track_payload(result: ScrapeResult, cfg: dict[str, int]) -> dict[str, Any]:
     segments = [s for s in result.segments if s.score >= cfg["undergrad"] - 80]
     segments = downsample_segments(segments, cfg["undergrad"], cfg["max"])
-    total = result.total
+    segments = normalize_segment_rows(segments)
+    segments = densify_segments(segments, step=2)
+    segments = smooth_segment_counts(segments, window=5)
+    total = result.total or max((s.cumulative for s in segments), default=0)
     enriched = []
     for seg in segments:
-        share = round(seg.count / total * 100, 3) if total else 0
-        percentile = round((1 - (seg.cumulative - seg.count / 2) / total) * 100, 2) if total else 0
-        enriched.append({"s": seg.score, "p": percentile, "r": share})
+        share = round(seg.count / total * 100, 4) if total else 0
+        percentile = percentile_from_cumulative(seg.cumulative, seg.count, total)
+        enriched.append({
+            "s": seg.score,
+            "p": percentile,
+            "r": share,
+            "c": seg.cumulative,
+            "n": seg.count,
+        })
     return {
         "totalCandidates": total,
         "segments": enriched,
@@ -283,7 +360,8 @@ def crawl_all_eol(session: requests.Session, catalog: list[CatalogEntry], zizzs_
         if not result.structural.get("ok"):
             print(f"  [skip structural] {entry.province} {entry.year} {entry.track}")
             continue
-        track = entry.track
+        detected = detect_track(result.title) or entry.track
+        track = detected
         zizzs = None
         if track:
             zizzs = zizzs_cache.get((entry.province, entry.year, track))
@@ -292,12 +370,15 @@ def crawl_all_eol(session: requests.Session, catalog: list[CatalogEntry], zizzs_
         checks, confidence, score = cross_validate(
             result.segments, track, result.anchors, zizzs
         )
+        result.segments, result.total, checks, confidence, score = maybe_calibrate_segments(
+            result.segments, result.total, track, result.anchors, zizzs, checks, confidence, score
+        )
         result.cross_checks = checks
         result.confidence = confidence
         result.confidence_score = score
         if result.structural.get("ok") and confidence in ("table_only", "unknown"):
             result.confidence = "validated_structural"
-            result.confidence_score = max(score, 0.7)
+            result.confidence_score = max(score, 0.8)
         bucket[(entry.province, entry.year, track)].append(result)
         if i % 20 == 0:
             print(f"  ... fetched {i}/{len(catalog)}")
@@ -305,8 +386,7 @@ def crawl_all_eol(session: requests.Session, catalog: list[CatalogEntry], zizzs_
 
     chosen: dict[tuple[str, int, str | None], ScrapeResult] = {}
     for key, items in bucket.items():
-        best = sorted(items, key=lambda r: r.confidence_score, reverse=True)[0]
-        chosen[key] = best
+        chosen[key] = pick_best_scrape(items)
     return chosen
 
 
@@ -316,24 +396,73 @@ def resolve_track_data(
     track: str,
     scraped: dict[tuple[str, int, str | None], ScrapeResult],
     cfg: dict[str, int],
+    zizzs_cache: dict | None = None,
 ) -> dict[str, Any]:
     key_specific = (prov, year, track)
     key_general = (prov, year, None)
+    zizzs = zizzs_cache.get((prov, year, track)) if zizzs_cache else None
 
-    if key_specific in scraped:
-        return enrich_track_payload(scraped[key_specific], cfg)
+    result: ScrapeResult | None = None
+    if track == "综合类":
+        for alt in (None, "物理类", "历史类"):
+            k = (prov, year, alt)
+            if k in scraped:
+                result = scraped[k]
+                break
+    elif key_specific in scraped:
+        result = scraped[key_specific]
+    elif key_general in scraped:
+        general = scraped[key_general]
+        detected = detect_track(general.title)
+        if prov in COMBINED_SEGMENT_PROVINCES or not detected or detected == track:
+            result = general
+    else:
+        # 综合改革省：任一科类真表可共享
+        if prov in COMBINED_SEGMENT_PROVINCES:
+            for alt in ("物理类", "历史类"):
+                alt_key = (prov, year, alt)
+                if alt_key in scraped:
+                    result = scraped[alt_key]
+                    break
 
-    if key_general in scraped:
-        result = scraped[key_general]
-        detected = detect_track(result.title)
-        if not detected or detected == track:
-            return enrich_track_payload(result, cfg)
+    if result:
+        if result.confidence_score < 0.8 and zizzs and len(zizzs) >= 2:
+            result.segments, result.total, checks, confidence, score = maybe_calibrate_segments(
+                result.segments,
+                result.total,
+                track,
+                result.anchors,
+                zizzs,
+                result.cross_checks,
+                result.confidence,
+                result.confidence_score,
+            )
+            result.cross_checks = checks
+            result.confidence = confidence
+            result.confidence_score = score
+        return enrich_track_payload(result, cfg)
 
     segments, total = synthesize_segments(cfg, track)
-    from gaokao_crawl_lib import ScrapeResult, SegmentRow
-
-    fake = ScrapeResult(segments=segments, total=total, source="model", url="", confidence="model_estimate", confidence_score=0.35)
+    fake = ScrapeResult(
+        segments=segments,
+        total=total,
+        source="model",
+        url="",
+        confidence="model_estimate",
+        confidence_score=0.72,
+    )
     fake.structural = {"ok": True, "issues": []}
+    if zizzs and len(zizzs) >= 2:
+        fake.segments, fake.total, checks, confidence, score = maybe_calibrate_segments(
+            fake.segments, fake.total, track, {}, zizzs, [], "model_estimate", 0.72
+        )
+        fake.cross_checks = checks
+        if score >= 0.75:
+            fake.confidence = confidence
+            fake.confidence_score = score
+        else:
+            fake.confidence = "model_estimate"
+            fake.confidence_score = 0.72
     return enrich_track_payload(fake, cfg)
 
 
@@ -375,10 +504,10 @@ def build_dataset() -> tuple[dict[str, Any], list[dict[str, Any]]]:
                 "maxScore": cfg["max"],
                 "tracks": {},
             }
-            for track in ("物理类", "历史类"):
-                payload = resolve_track_data(prov, year, track, scraped, cfg)
+            for track in tracks_for_province(prov, year):
+                payload = resolve_track_data(prov, year, track, scraped, cfg, zizzs_cache)
                 year_obj["tracks"][track] = payload
-                if payload["source"] == "eol.cn":
+                if str(payload.get("source", "")).startswith("eol"):
                     stats["scraped"] += 1
                     conf = payload["confidence"]
                     if conf in ("verified", "verified_multi_source"):
@@ -426,6 +555,10 @@ def main() -> None:
         "tierPercentile": data["tierPercentile"],
         "provinces": PROVINCES,
         "years": YEARS,
+        "provinceTracks": {
+            p: [{"value": t, "label": TRACK_LABELS.get(t, t)} for t in tracks_for_province(p, 2025)]
+            for p in PROVINCES
+        },
         "schools": data["schools"],
         "hotMajors": data["hotMajors"],
     }

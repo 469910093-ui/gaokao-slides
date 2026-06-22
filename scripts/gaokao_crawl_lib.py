@@ -22,8 +22,7 @@ HEADERS = {
 
 EOL_INDEX_PAGES = [
     "https://gaokao.eol.cn/e_html/gk/gkfsd/",
-    "https://gaokao.eol.cn/e_html/gk/gkfsd/2019.shtml",
-    "https://gaokao.eol.cn/e_html/gk/gkfsd/2020.shtml",
+    "https://www.eol.cn/html/gk/gkfsd/index.shtml",
     "https://gaokao.eol.cn/e_html/gk/gkfsd/2021.shtml",
     "https://gaokao.eol.cn/e_html/gk/gkfsd/2022.shtml",
     "https://gaokao.eol.cn/e_html/gk/gkfsd/2023.shtml",
@@ -45,8 +44,27 @@ SLUG_TO_PROVINCE = {v: k for k, v in PROVINCE_SLUG.items()}
 SLUG_TO_PROVINCE["nei_meng"] = "内蒙古"
 
 TRACK_KEYWORDS = {
-    "物理类": ["物理", "理科", "理工", "首选物理", "物理类", "物理等科目"],
-    "历史类": ["历史", "文科", "文史", "首选历史", "历史类", "历史等科目"],
+    "物理类": [
+        "物理", "理科", "理工", "首选物理", "物理类", "物理等科目",
+        "理科类", "理工类", "物理科目",
+    ],
+    "历史类": [
+        "历史", "文科", "文史", "首选历史", "历史类", "历史等科目",
+        "文科类", "文史类", "历史科目",
+    ],
+}
+
+# 新高考综合改革省份：一分一段常不分文理，或仅公布「普通类/综合」
+COMBINED_TRACK_HINTS = (
+    "综合改革", "3+3", "3+1+2", "不分文理", "不再区分文理科",
+    "普通类", "综合类", "统一划线",
+)
+
+# 2025 年起已实行「院校+专业」或综合分段的省份（两科类共用同一张表时取 general）
+COMBINED_SEGMENT_PROVINCES = {
+    "北京", "天津", "上海", "浙江", "山东", "海南",
+    "河北", "辽宁", "江苏", "福建", "湖北", "湖南", "广东", "重庆",
+    "安徽", "江西", "广西", "贵州", "吉林", "黑龙江", "甘肃",
 }
 
 # Extra high-confidence URLs not always listed on index pages (verified working)
@@ -56,6 +74,13 @@ EOL_EXTRA_URLS: list[tuple[str, int, str | None, str]] = [
     ("四川", 2024, "物理类", "https://gaokao.eol.cn/si_chuan/dongtai/202406/t20240624_2618669.shtml"),
     ("河北", 2024, "物理类", "https://gaokao.eol.cn/he_bei/dongtai/202406/t20240625_2619073.shtml"),
     ("广东", 2024, "物理类", "https://gaokao.eol.cn/guang_dong/dongtai/202406/t20240626_2619547.shtml"),
+    ("河南", 2025, "物理类", "https://gaokao.eol.cn/he_nan/dongtai/202506/t20250625_2676859.shtml"),
+    ("河南", 2025, "历史类", "https://gaokao.eol.cn/he_nan/dongtai/202506/t20250625_2676858.shtml"),
+    ("上海", 2025, None, "https://gaokao.eol.cn/shang_hai/dongtai/202506/t20250623_2676341.shtml"),
+    ("浙江", 2025, None, "https://gaokao.eol.cn/zhe_jiang/dongtai/202506/t20250625_2677143.shtml"),
+    ("广东", 2025, None, "https://gaokao.eol.cn/guang_dong/dongtai/202506/t20250626_2677410.shtml"),
+    ("湖北", 2025, None, "https://gaokao.eol.cn/hu_bei/dongtai/202506/t20250627_2677496.shtml"),
+    ("山东", 2025, None, "https://gaokao.eol.cn/shan_dong/dongtai/202506/t20250626_2677288.shtml"),
 ]
 
 # zizzs 对比分析页：提供关键分数段位次锚点（第二数据源）
@@ -76,6 +101,7 @@ ZIZZS_ANCHOR_PAGES: list[tuple[str, int, str, str]] = [
     ("山东", 2025, "物理类", "https://www.zizzs.com/gk/gaokao/203064.html"),
     ("辽宁", 2025, "物理类", "https://www.zizzs.com/gk/gaokao/204554.html"),
     ("陕西", 2025, "物理类", "https://www.zizzs.com/gk/gaokao/204956.html"),
+    ("河北", 2025, "物理类", "https://www.zizzs.com/gk/gaokao/203615.html"),
 ]
 
 
@@ -119,6 +145,21 @@ def normalize_url(url: str) -> str:
 
 
 def detect_track(title: str) -> str | None:
+    if not title:
+        return None
+    if any(h in title for h in COMBINED_TRACK_HINTS):
+        return None
+    phys_hits = sum(1 for k in TRACK_KEYWORDS["物理类"] if k in title)
+    hist_hits = sum(1 for k in TRACK_KEYWORDS["历史类"] if k in title)
+    if phys_hits and not hist_hits:
+        return "物理类"
+    if hist_hits and not phys_hits:
+        return "历史类"
+    if phys_hits and hist_hits:
+        # 标题同时含「理科」「文科」等对比表述时，取更具体的类名
+        for track, keys in TRACK_KEYWORDS.items():
+            if any(k in title for k in keys if len(k) >= 3):
+                return track
     for track, keys in TRACK_KEYWORDS.items():
         if any(k in title for k in keys):
             return track
@@ -177,7 +218,273 @@ def discover_eol_catalog(session: requests.Session) -> list[CatalogEntry]:
     for prov, year, track, url in EOL_EXTRA_URLS:
         add(url, "", prov, year, track)
 
-    return entries
+    return expand_sibling_entries(entries)
+
+
+def expand_sibling_entries(entries: list[CatalogEntry], delta: int = 2) -> list[CatalogEntry]:
+    """EOL 常将物理/历史类拆成相邻文章 ID，索引页易漏抓或标错科类。"""
+    seen = {e.url for e in entries}
+    out = list(entries)
+    pat = re.compile(r"gaokao\.eol\.cn/([a-z0-9_]+)(/dongtai/\d{6}/t\d{8}_)(\d+)(\.shtml)$")
+
+    for entry in entries:
+        m = pat.search(entry.url)
+        if not m:
+            continue
+        slug, mid, num_s, suffix = m.group(1), m.group(2), m.group(3), m.group(4)
+        base_id = int(num_s)
+        for off in range(-delta, delta + 1):
+            if off == 0:
+                continue
+            sibling_id = base_id + off
+            url = f"https://gaokao.eol.cn/{slug}{mid}{sibling_id}{suffix}"
+            if url in seen:
+                continue
+            seen.add(url)
+            out.append(CatalogEntry(entry.province, entry.year, None, "", url))
+    return out
+
+
+_ocr_engine: Any = None
+
+
+def get_ocr_engine() -> Any:
+    global _ocr_engine
+    if _ocr_engine is None:
+        from rapidocr_onnxruntime import RapidOCR
+
+        _ocr_engine = RapidOCR()
+    return _ocr_engine
+
+
+def parse_markdown_segment_table(html: str) -> tuple[list[SegmentRow], int]:
+    """部分页面以 Markdown 管道表形式嵌入。"""
+    segments: list[SegmentRow] = []
+    for score_raw, count_s, cum_s in re.findall(
+        r"\|\s*(\d{2,4}(?:\s*[-~至]\s*\d{2,4})?)\s*\|\s*(\d+)\s*\|\s*(\d+)\s*\|",
+        html,
+    ):
+        score_raw = str(score_raw).strip()
+        if "-" in score_raw or "~" in score_raw or "至" in score_raw:
+            parts = re.findall(r"\d+", score_raw)
+            if len(parts) < 2:
+                continue
+            score = max(int(parts[0]), int(parts[1]))
+        else:
+            score = int(score_raw)
+        segments.append(SegmentRow(score, int(count_s), int(cum_s)))
+    if len(segments) < 10:
+        return [], 0
+    by_score: dict[int, SegmentRow] = {}
+    for seg in segments:
+        cur = by_score.get(seg.score)
+        if cur is None or seg.cumulative > cur.cumulative:
+            by_score[seg.score] = seg
+    ordered = sorted(by_score.values(), key=lambda s: s.score, reverse=True)
+    total = max(s.cumulative for s in ordered)
+    return ordered, total
+
+
+def _cluster_ocr_rows(ocr_lines: list[Any], y_tol: float = 18.0) -> list[list[tuple[float, str]]]:
+    cells: list[tuple[float, float, str]] = []
+    for item in ocr_lines:
+        box, text, _conf = item[0], str(item[1]).strip(), item[2]
+        if not re.search(r"\d", text):
+            continue
+        y = (box[0][1] + box[2][1]) / 2
+        x = (box[0][0] + box[2][0]) / 2
+        cells.append((y, x, text))
+    cells.sort(key=lambda c: (c[0], c[1]))
+    rows: list[list[tuple[float, str]]] = []
+    for y, x, text in cells:
+        if not rows or abs(y - rows[-1][0][0]) > y_tol:
+            rows.append([(x, text)])
+        else:
+            rows[-1].append((x, text))
+    return rows
+
+
+def _ocr_triple_valid(score: int, count: int, cumulative: int) -> bool:
+    return (
+        40 <= score <= 900
+        and 0 < count < 500_000
+        and 0 < cumulative < 50_000_000
+    )
+
+
+def _parse_ocr_column_triples(ocr_lines: list[Any], y_tol: float = 14.0) -> list[tuple[int, int, int]]:
+    """按 x 坐标分三列（分数/人数/累计）再按 y 对齐行。"""
+    cells: list[tuple[float, float, int]] = []
+    for item in ocr_lines:
+        box, text, _conf = item[0], str(item[1]).strip().replace(",", ""), item[2]
+        nums = re.findall(r"\d+", text)
+        if not nums:
+            continue
+        y = (box[0][1] + box[2][1]) / 2
+        x = (box[0][0] + box[2][0]) / 2
+        if len(nums) == 1 and re.fullmatch(r"\d{1,7}", text):
+            cells.append((x, y, int(nums[0])))
+        elif len(nums) >= 3:
+            for idx, n in enumerate(nums[:3]):
+                cells.append((x + idx * 8.0, y, int(n)))
+
+    if len(cells) < 30:
+        return []
+
+    xs = sorted(c[0] for c in cells)
+    q1, q2 = xs[len(xs) // 3], xs[2 * len(xs) // 3]
+    cols: dict[int, list[tuple[float, int]]] = {0: [], 1: [], 2: []}
+    for x, y, val in cells:
+        col = 0 if x < q1 else (1 if x < q2 else 2)
+        cols[col].append((y, val))
+
+    if len(cols[0]) < 10:
+        return []
+
+    row_ys: list[float] = []
+    for y, _val in sorted(cols[0], key=lambda t: t[0]):
+        if not row_ys or abs(y - row_ys[-1]) > y_tol:
+            row_ys.append(y)
+        else:
+            row_ys[-1] = (row_ys[-1] + y) / 2
+
+    triples: list[tuple[int, int, int]] = []
+    for row_y in row_ys:
+        picked: list[int | None] = []
+        for col in (0, 1, 2):
+            near = [c for c in cols[col] if abs(c[0] - row_y) <= y_tol * 1.6]
+            if not near:
+                picked.append(None)
+            else:
+                picked.append(min(near, key=lambda c: abs(c[0] - row_y))[1])
+        if all(v is not None for v in picked):
+            score, count, cumulative = picked[0], picked[1], picked[2]  # type: ignore[misc]
+            if _ocr_triple_valid(score, count, cumulative):
+                triples.append((score, count, cumulative))
+    return triples
+
+
+def _parse_ocr_line_triples(ocr_lines: list[Any]) -> list[tuple[int, int, int]]:
+    """单列 OCR 文本按连续三数字成组（分数-人数-累计）。"""
+    nums: list[int] = []
+    for item in ocr_lines:
+        text = str(item[1]).strip().replace(",", "")
+        if re.fullmatch(r"\d{1,7}", text):
+            nums.append(int(text))
+    triples: list[tuple[int, int, int]] = []
+    i = 0
+    while i + 2 < len(nums):
+        score, count, cumulative = nums[i], nums[i + 1], nums[i + 2]
+        if _ocr_triple_valid(score, count, cumulative):
+            triples.append((score, count, cumulative))
+            i += 3
+        else:
+            i += 1
+    return triples
+
+
+def _parse_ocr_regex_triples(ocr_lines: list[Any]) -> list[tuple[int, int, int]]:
+    text = "\n".join(str(item[1]) for item in ocr_lines).replace(",", "")
+    triples: list[tuple[int, int, int]] = []
+    for m in re.finditer(r"(\d{2,4})\s+(\d{1,6})\s+(\d{1,7})", text):
+        score, count, cumulative = int(m.group(1)), int(m.group(2)), int(m.group(3))
+        if _ocr_triple_valid(score, count, cumulative):
+            triples.append((score, count, cumulative))
+    return triples
+
+
+def _filter_ocr_triples(triples: list[tuple[int, int, int]]) -> list[tuple[int, int, int]]:
+    if not triples:
+        return []
+
+    candidates = [
+        (s, c, cum)
+        for s, c, cum in triples
+        if 80 <= s <= 780 and 0 < c < 200_000 and 0 < cum < 10_000_000 and c <= cum + 500
+    ]
+    if len(candidates) < 10:
+        return []
+
+    scores = sorted(s for s, _, _ in candidates if 250 <= s <= 750)
+    if len(scores) >= 20:
+        peak = scores[min(len(scores) - 1, int(len(scores) * 0.995))]
+    elif scores:
+        peak = max(scores)
+    else:
+        peak = max(s for s, _, _ in candidates)
+
+    lo = max(80, peak - 650)
+    by_score: dict[int, tuple[int, int, int]] = {}
+    for score, count, cumulative in candidates:
+        if score < lo or score > peak + 20:
+            continue
+        cur = by_score.get(score)
+        if cur is None:
+            by_score[score] = (score, count, cumulative)
+        else:
+            # 同分取累计更大且人数更合理者
+            if cumulative > cur[2] and count <= cumulative:
+                by_score[score] = (score, count, cumulative)
+
+    ordered = sorted(by_score.values(), key=lambda t: t[0], reverse=True)
+    fixed: list[tuple[int, int, int]] = []
+    prev_cum = 0
+    for score, count, cumulative in ordered:
+        cum = max(cumulative, prev_cum)
+        if count > cum and prev_cum > 0:
+            count = max(1, cum - prev_cum)
+        fixed.append((score, count, cum))
+        prev_cum = cum
+    return fixed
+
+
+def parse_eol_image_table(
+    session: requests.Session,
+    html: str,
+    page_url: str,
+) -> tuple[list[SegmentRow], int]:
+    """TRS_Editor 内嵌 JPG/PNG 一分一段表 → OCR 解析。"""
+    rels = re.findall(
+        r'href="(\./W\d+\.(?:jpg|png|jpeg))"',
+        html,
+        flags=re.I,
+    )
+    if not rels:
+        rels = re.findall(
+            r'src="(\./W\d+\.(?:jpg|png|jpeg))"',
+            html,
+            flags=re.I,
+        )
+    if not rels:
+        return [], 0
+
+    base = page_url.rsplit("/", 1)[0] + "/"
+    ocr = get_ocr_engine()
+    triples: list[tuple[int, int, int]] = []
+
+    for rel in dict.fromkeys(rels):
+        img_url = base + rel.lstrip("./")
+        try:
+            img_bytes = session.get(img_url, headers=HEADERS, timeout=40).content
+            ocr_out, _ = ocr(img_bytes)
+        except Exception:  # noqa: BLE001
+            continue
+        if not ocr_out:
+            continue
+        col_triples = _parse_ocr_column_triples(ocr_out)
+        line_triples = _parse_ocr_line_triples(ocr_out)
+        regex_triples = _parse_ocr_regex_triples(ocr_out)
+        triples.extend(col_triples)
+        triples.extend(line_triples)
+        triples.extend(regex_triples)
+
+    triples = _filter_ocr_triples(triples)
+    if len(triples) < 15:
+        return [], 0
+
+    ordered = [SegmentRow(s, c, cum) for s, c, cum in sorted(triples, key=lambda t: t[0], reverse=True)]
+    total = max(s.cumulative for s in ordered)
+    return ordered, total
 
 
 def parse_eol_table(html: str) -> tuple[list[SegmentRow], int]:
@@ -187,7 +494,6 @@ def parse_eol_table(html: str) -> tuple[list[SegmentRow], int]:
         flags=re.I,
     )
     if len(rows) < 10:
-        # Excel-export style cells
         rows = []
         score_cells = re.findall(
             r'<td[^>]*x:num="(\d{2,4})"[^>]*>.*?(\d{2,4}).*?</td>\s*'
@@ -214,14 +520,8 @@ def parse_eol_table(html: str) -> tuple[list[SegmentRow], int]:
             if hi < lo:
                 hi, lo = lo, hi
             segments.append(SegmentRow(hi, count, cumulative))
-            if hi - lo > 1:
-                per = max(1, count // max(1, hi - lo))
-                for s in range(hi - 1, lo - 1, -1):
-                    segments.append(SegmentRow(s, per, cumulative))
         elif re.fullmatch(r"\d{2,4}", score_raw):
             segments.append(SegmentRow(int(score_raw), count, cumulative))
-        else:
-            continue
 
     by_score: dict[int, SegmentRow] = {}
     for seg in segments:
@@ -231,6 +531,23 @@ def parse_eol_table(html: str) -> tuple[list[SegmentRow], int]:
     if ordered:
         total = max(total, ordered[-1].cumulative)
     return ordered, total
+
+
+def parse_eol_segments_from_html(
+    session: requests.Session,
+    html: str,
+    page_url: str,
+) -> tuple[list[SegmentRow], int, str]:
+    segments, total = parse_eol_table(html)
+    if len(segments) >= 15:
+        return segments, total, "html_table"
+    segments, total = parse_markdown_segment_table(html)
+    if len(segments) >= 15:
+        return segments, total, "markdown_table"
+    segments, total = parse_eol_image_table(session, html, page_url)
+    if len(segments) >= 15:
+        return segments, total, "image_ocr"
+    return [], 0, "none"
 
 
 def parse_eol_anchors(html: str) -> dict[str, Any]:
@@ -371,6 +688,161 @@ def cumulative_at(segments: list[SegmentRow], score: int) -> int | None:
     return None
 
 
+def percentile_from_cumulative(cumulative: int, count: int, total: int) -> float:
+    """超越考生占比：累计位次为从高分向下累计的人数。"""
+    if total <= 0:
+        return 0.0
+    rank_mid = max(1, cumulative - count / 2)
+    return round((1 - rank_mid / total) * 100, 2)
+
+
+def normalize_segment_rows(segments: list[SegmentRow]) -> list[SegmentRow]:
+    """按累计人数重建本段人数，合并平台假分段，消除 745+ 尖峰。"""
+    if not segments:
+        return segments
+
+    by_score: dict[int, SegmentRow] = {}
+    for seg in segments:
+        cur = by_score.get(seg.score)
+        if cur is None or seg.cumulative > cur.cumulative:
+            by_score[seg.score] = seg
+
+    ordered = sorted(by_score.values(), key=lambda s: s.score, reverse=True)
+    mono: list[SegmentRow] = []
+    for seg in ordered:
+        if mono and seg.cumulative < mono[-1].cumulative:
+            continue
+        mono.append(seg)
+
+    if not mono:
+        return segments
+
+    changes = [mono[0]]
+    for seg in mono[1:]:
+        if seg.cumulative != changes[-1].cumulative:
+            changes.append(seg)
+
+    fixed: list[SegmentRow] = []
+    for i, seg in enumerate(changes):
+        if i + 1 < len(changes):
+            n = changes[i + 1].cumulative - seg.cumulative
+        elif i > 0:
+            n = seg.cumulative - changes[i - 1].cumulative
+        else:
+            n = seg.count
+        fixed.append(SegmentRow(seg.score, max(0, n), seg.cumulative))
+    return fixed
+
+
+def densify_segments(segments: list[SegmentRow], step: int = 2) -> list[SegmentRow]:
+    """在锚点之间插值累计人数，生成更密的分段曲线，消除图表断崖。"""
+    if len(segments) < 2:
+        return segments
+    ordered = sorted(segments, key=lambda s: s.score)
+    scores = [s.score for s in ordered]
+    cums = [s.cumulative for s in ordered]
+    min_s, max_s = scores[0], scores[-1]
+
+    def cum_at(score: int) -> int:
+        if score <= scores[0]:
+            return cums[0]
+        if score >= scores[-1]:
+            return cums[-1]
+        for i in range(len(scores) - 1):
+            lo, hi = scores[i], scores[i + 1]
+            if lo <= score <= hi:
+                if hi == lo:
+                    return cums[i]
+                t = (score - lo) / (hi - lo)
+                return int(round(cums[i] + (cums[i + 1] - cums[i]) * t))
+        return cums[-1]
+
+    dense_scores = list(range(max_s, min_s - 1, -step))
+    dense_cums = [cum_at(s) for s in dense_scores]
+    fixed: list[SegmentRow] = []
+    for i, s in enumerate(dense_scores):
+        if i + 1 < len(dense_scores):
+            n = dense_cums[i + 1] - dense_cums[i]
+        elif i > 0:
+            n = dense_cums[i] - dense_cums[i - 1]
+        else:
+            n = 0
+        fixed.append(SegmentRow(s, max(0, n), dense_cums[i]))
+    return fixed
+
+
+def smooth_segment_counts(segments: list[SegmentRow], window: int = 5, tail_keep: int = 24) -> list[SegmentRow]:
+    """对本段人数做轻度滑动平均；高分尾段保持插值结果，避免人为尖峰/断崖。"""
+    if len(segments) < window:
+        return segments
+    ordered = sorted(segments, key=lambda s: s.score, reverse=True)
+    if len(ordered) <= tail_keep + window:
+        return segments
+
+    head = ordered[:tail_keep]
+    body = ordered[tail_keep:]
+    raw = [max(0, s.count) for s in body]
+    half = window // 2
+    smoothed_body_counts: list[int] = []
+    for i in range(len(raw)):
+        lo = max(0, i - half)
+        hi = min(len(raw), i + half + 1)
+        smoothed_body_counts.append(max(1, int(round(sum(raw[lo:hi]) / (hi - lo)))))
+
+    target_total = ordered[-1].cumulative
+    rebuilt: list[SegmentRow] = []
+    cum = 0
+    for seg, n in zip(ordered, [s.count for s in head] + smoothed_body_counts):
+        cum += n
+        rebuilt.append(SegmentRow(seg.score, n, cum))
+
+    if rebuilt and rebuilt[-1].cumulative != target_total and rebuilt[-1].cumulative > 0:
+        scale = target_total / rebuilt[-1].cumulative
+        scaled: list[SegmentRow] = []
+        cum = 0
+        for seg in rebuilt:
+            n = max(0, int(round(seg.count * scale)))
+            cum += n
+            scaled.append(SegmentRow(seg.score, n, cum))
+        if scaled[-1].cumulative != target_total:
+            scaled[-1] = SegmentRow(
+                scaled[-1].score,
+                scaled[-1].count + (target_total - scaled[-1].cumulative),
+                target_total,
+            )
+        rebuilt = scaled
+    return rebuilt
+
+
+def calibrate_segments_to_anchors(
+    segments: list[SegmentRow],
+    total: int,
+    anchors: dict[int, int],
+) -> tuple[list[SegmentRow], int]:
+    """用 zizzs 等锚点位次校准累计人数，修正 eol 表与第三方偏差。"""
+    if not segments or not anchors:
+        return segments, total
+    ratios: list[float] = []
+    for score, expected_rank in anchors.items():
+        actual = cumulative_at(segments, score)
+        if actual and actual > 0 and expected_rank > 0:
+            ratios.append(expected_rank / actual)
+    if not ratios:
+        return segments, total
+    ratio = sum(ratios) / len(ratios)
+    if abs(ratio - 1) < 0.03:
+        return segments, total
+    calibrated: list[SegmentRow] = []
+    prev_cum = 0
+    for seg in sorted(segments, key=lambda s: s.score, reverse=True):
+        new_cum = max(prev_cum, int(round(seg.cumulative * ratio)))
+        new_count = max(1, new_cum - prev_cum) if new_cum > prev_cum else seg.count
+        calibrated.append(SegmentRow(seg.score, new_count, new_cum))
+        prev_cum = new_cum
+    new_total = max(prev_cum, int(round(total * ratio)))
+    return calibrated, new_total
+
+
 def validate_structural(segments: list[SegmentRow], total: int) -> dict[str, Any]:
     issues: list[str] = []
     if len(segments) < 15:
@@ -472,6 +944,28 @@ def cross_validate(
     return checks, "failed_validation", 0.2
 
 
+def maybe_calibrate_segments(
+    segments: list[SegmentRow],
+    total: int,
+    track: str | None,
+    anchors: dict[str, Any],
+    zizzs: dict[int, int] | None,
+    checks: list[dict[str, Any]],
+    confidence: str,
+    score: float,
+) -> tuple[list[SegmentRow], int, list[dict[str, Any]], str, float]:
+    """仅在 zizzs 校准能提升交叉验证得分时才改写分段表。"""
+    if score >= 0.8 or not zizzs or len(zizzs) < 2:
+        return segments, total, checks, confidence, score
+    cal_segs, cal_total = calibrate_segments_to_anchors(segments, total, zizzs)
+    if not cal_segs:
+        return segments, total, checks, confidence, score
+    new_checks, new_conf, new_score = cross_validate(cal_segs, track, anchors, zizzs)
+    if new_score > score:
+        return cal_segs, cal_total, new_checks, new_conf, new_score
+    return segments, total, checks, confidence, score
+
+
 def fetch_url(session: requests.Session, url: str) -> str | None:
     try:
         r = session.get(url, headers=HEADERS, timeout=30)
@@ -487,17 +981,23 @@ def scrape_eol_entry(session: requests.Session, entry: CatalogEntry) -> ScrapeRe
     html = fetch_url(session, entry.url)
     if not html:
         return None
-    segments, total = parse_eol_table(html)
+    segments, total, parse_kind = parse_eol_segments_from_html(session, html, entry.url)
     if len(segments) < 15:
         return None
     title_m = re.search(r"<title>([^<]+)</title>", html, re.I)
-    title = entry.title or (title_m.group(1).strip() if title_m else "")
+    html_title = title_m.group(1).strip() if title_m else ""
+    if not html_title:
+        h1 = re.search(r"<h1[^>]*>([^<]+)</h1>", html, re.I)
+        if h1:
+            html_title = h1.group(1).strip()
+    title = html_title or entry.title or ""
     anchors = parse_eol_anchors(html)
     structural = validate_structural(segments, total)
+    source = "eol.cn" if parse_kind != "image_ocr" else "eol.cn+ocr"
     return ScrapeResult(
         segments=segments,
         total=total,
-        source="eol.cn",
+        source=source,
         url=entry.url,
         title=title,
         anchors=anchors,
@@ -519,11 +1019,20 @@ def load_zizzs_anchors(session: requests.Session) -> dict[tuple[str, int, str], 
     return cache
 
 
+def pick_best_scrape(items: list[ScrapeResult]) -> ScrapeResult:
+    def quality(r: ScrapeResult) -> tuple[int, float, int]:
+        return (len(r.segments), r.confidence_score, r.total or 0)
+
+    return max(items, key=quality)
+
+
 def pick_best_entry(entries: list[CatalogEntry]) -> CatalogEntry | None:
     if not entries:
         return None
+
     def score(e: CatalogEntry) -> tuple[int, int]:
         track_bonus = 1 if e.track else 0
         title_bonus = 1 if e.title and "一分一段" in e.title else 0
         return (track_bonus + title_bonus, e.year)
+
     return sorted(entries, key=score, reverse=True)[0]

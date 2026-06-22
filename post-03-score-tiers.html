@@ -239,16 +239,120 @@ h2.slide-title::after {
 }
 .card ul { list-style: none; display: flex; flex-direction: column; gap: 10px; }
 .quote-box {
-    margin-top: auto;
-    padding: 34px 38px;
+    margin-top: 16px;
+    padding: 26px 32px;
     border: var(--stroke);
     background: linear-gradient(135deg, #fff 0%, #fff8d8 100%);
-    border-radius: 24px;
-    font: 400 42px/1.45 var(--font-display);
+    border-radius: 22px;
+    font: 400 34px/1.42 var(--font-display);
     color: var(--ink);
     box-shadow: var(--shadow-pop);
     position: relative;
     z-index: 3;
+}
+.action-steps {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 16px;
+    margin-top: 20px;
+    flex: 1;
+    position: relative;
+    z-index: 3;
+}
+.action-step {
+    display: flex;
+    gap: 14px;
+    align-items: flex-start;
+    background: var(--card);
+    border: var(--stroke);
+    border-radius: 18px;
+    padding: 18px 20px;
+    box-shadow: 5px 5px 0 rgba(20,20,20,0.9);
+}
+.action-step .step-tag {
+    flex: 0 0 auto;
+    background: var(--red);
+    color: #fff;
+    font: 800 18px/1 var(--font-body);
+    padding: 8px 12px;
+    border-radius: 10px;
+    border: 2px solid var(--ink);
+    white-space: nowrap;
+}
+.action-step strong {
+    display: block;
+    font: 800 24px/1.25 var(--font-body);
+    margin-bottom: 6px;
+}
+.action-step p {
+    font: 600 20px/1.45 var(--font-body);
+    color: var(--text-secondary);
+}
+.card-slide .card {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+}
+.card-slide .card ul {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+}
+.card-slide .card li {
+    font: 600 28px/1.45 var(--font-body);
+    padding-left: 8px;
+}
+.card-tips {
+    margin-top: 16px;
+    padding: 16px 20px;
+    border: 2px dashed var(--ink);
+    border-radius: 16px;
+    background: #fffbe6;
+    font: 700 22px/1.5 var(--font-body);
+    color: var(--ink);
+    position: relative;
+    z-index: 3;
+}
+.cta-slide .cta {
+    font: 400 52px/1.2 var(--font-display);
+    color: var(--ink);
+    max-width: 1500px;
+    position: relative;
+    z-index: 3;
+}
+.cta-checklist {
+    margin-top: 22px;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 12px;
+    position: relative;
+    z-index: 3;
+}
+.cta-checklist li {
+    list-style: none;
+    font: 700 22px/1.4 var(--font-body);
+    background: #fff;
+    border: 2px solid var(--ink);
+    border-radius: 14px;
+    padding: 14px 16px;
+    box-shadow: 4px 4px 0 rgba(20,20,20,0.85);
+}
+.cta-tools {
+    margin-top: 18px;
+    display: flex;
+    gap: 14px;
+    flex-wrap: wrap;
+    position: relative;
+    z-index: 3;
+}
+.cta-tools span {
+    padding: 12px 18px;
+    border: 2px solid var(--ink);
+    border-radius: 12px;
+    background: var(--yellow);
+    font: 800 20px/1 var(--font-body);
+    box-shadow: 4px 4px 0 var(--ink);
 }
 .quote-box::before {
     content: '“';
@@ -274,15 +378,8 @@ h2.slide-title::after {
     background: #f2fff8;
 }
 .compare .card h3 { color: var(--ink); font-size: 34px; }
-.cta-slide .cta {
-    font: 400 72px/1.18 var(--font-display);
-    color: var(--ink);
-    max-width: 1400px;
-    position: relative;
-    z-index: 3;
-}
 .cta-slide .actions {
-    margin-top: 36px;
+    margin-top: 20px;
     display: flex;
     gap: 18px;
     flex-wrap: wrap;
@@ -440,36 +537,39 @@ img, video, canvas, svg {
                 <div class="meta-row reveal"><span class="tag">#分数段选专业</span><span class="tag">#高考出分</span><span class="tag">#家长必读</span></div>
             </div>
         </section>
-        <section class="slide">
+        <section class="slide card-slide">
             <div class="slide-inner">
                 <span class="slide-no">2/6</span>
                 <h2 class="slide-title reveal">高分段 650+</h2>
                 <p class="lead reveal">关键词：平台 + 科研 + 深造机会</p>
                 <div class="card reveal"><ul><li>计算机 / 软件 / 人工智能 / 数据科学</li><li>电子信息、集成电路、智能科学</li><li>自动化、机器人、航空航天</li><li>临床医学（能接受长学制）</li><li>数学、物理（适合愿意深造）</li></ul></div>
+                <p class="card-tips reveal">📌 实操：分数选校工具输入650+，截图保存「冲稳保」院校清单各3所</p>
             </div>
         </section>
-        <section class="slide">
+        <section class="slide card-slide">
             <div class="slide-inner">
                 <span class="slide-no">3/6</span>
                 <h2 class="slide-title reveal">中分段 550-650</h2>
                 <p class="lead reveal">关键词：就业指向清晰，比名字好听更重要</p>
                 <div class="card reveal"><ul><li>电气、机械、自动化、物联网</li><li>能源、材料、化工（看区域产业）</li><li>会计、审计、金融、经济统计</li><li>医学技术、康复、药学</li><li>师范、法学、电子商务</li></ul></div>
+                <p class="card-tips reveal">📌 实操：优先选本省有产业园区的专业（如新能源、制造、电商）</p>
             </div>
         </section>
-        <section class="slide">
+        <section class="slide card-slide">
             <div class="slide-inner">
                 <span class="slide-no">4/6</span>
                 <h2 class="slide-title reveal">相对低分段 本科线-550</h2>
                 <p class="lead reveal">关键词：先就业，再升级</p>
                 <div class="card reveal"><ul><li>护理、康复</li><li>软件技术、数字媒体技术</li><li>电气、土木、机械（结合本地基建）</li><li>学前教育、社会工作、会计、电商运营</li><li>慎选：名字很新、就业路径模糊的交叉专业</li></ul></div>
+                <p class="card-tips reveal">📌 实操：就业沙盘搜专业名，看应届Top3岗位薪资再决定</p>
             </div>
         </section>
         <section class="slide">
             <div class="slide-inner">
                 <span class="slide-no">5/6</span>
-                <h2 class="slide-title reveal">家长请记住 3 句话</h2>
+                <h2 class="slide-title reveal">家长请记住 3 句话 + 实操动作</h2>
                 
-                <ul class="bullets"><li class="reveal"><span class="icon">1️⃣</span><span>热门 4 年后可能饱和，冷门也可能因产业变香</span></li><li class="reveal"><span class="icon">2️⃣</span><span>城市和产业，有时比学校名气更影响第一份工作</span></li><li class="reveal"><span class="icon">3️⃣</span><span>孩子学不下去的专业，再热门也没用</span></li></ul>
+                <ul class="bullets"><li class="reveal"><span class="icon">1️⃣</span><span>热门4年后可能饱和 → 今晚查目标专业近3年招生人数变化</span></li><li class="reveal"><span class="icon">2️⃣</span><span>城市产业比名气重要 → 列出孩子愿去的3个城市及优势产业</span></li><li class="reveal"><span class="icon">3️⃣</span><span>学不下去再热门也没用 → 问孩子：愿不愿意学这门课4年</span></li></ul>
             </div>
         </section>
         <section class="slide cta-slide">
@@ -478,7 +578,14 @@ img, video, canvas, svg {
                     <span class="sticker sticker-hot">⭐ 转发家长群</span>
                 </div>
                 <span class="slide-no">6/6</span>
-                <div class="cta reveal">不是选一定发财的专业，是选愿意学、学得会、能不断升级的方向。</div>
+                <div class="cta reveal">不是选一定发财的专业，是选愿意学、学得会、能升级的方向。</div>
+                <ul class="cta-checklist"><li class='reveal'>✅ 按分数段截图保存对应专业清单</li><li class='reveal'>✅ 分数选校：输入分数看可达院校层级</li><li class='reveal'>✅ 每个分数段备3个「学得下去」的专业</li><li class='reveal'>✅ 低分段优先选就业路径清晰的方向</li></ul>
+                
+                <div class="cta-tools reveal">
+                    <span>📊 分数选校工具</span>
+                    <span>💼 就业沙盘</span>
+                    <span>🔗 链接见主页简介</span>
+                </div>
                 <div class="actions reveal">
                     <span class="action">👉 收藏</span>
                     <span class="action">📤 转发给爸妈</span>

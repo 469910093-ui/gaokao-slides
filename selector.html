@@ -15,9 +15,14 @@
       --red: #ff2442;
       --yellow: #ffe566;
       --ok: #00b96b;
+      --cta: #ff7a00;
       --line: #141414;
       --shadow: 8px 8px 0 #141414;
     }
+    body.font-large { font-size: 17px; }
+    body.font-large .stat .v { font-size: 28px; }
+    body.font-large .score-big { font-size: 72px; }
+    body.font-large h1 { font-size: clamp(38px, 6vw, 56px); }
     * { box-sizing: border-box; margin: 0; padding: 0; }
     body {
       font-family: 'Noto Sans SC', sans-serif;
@@ -41,13 +46,23 @@
       overflow: hidden;
     }
     .hero::after {
-      content: '爆款工具';
+      content: '择校选专业';
       position: absolute; top: 16px; right: -30px;
       background: var(--red); color: #fff;
       padding: 8px 54px; transform: rotate(24deg);
       font-size: 12px; font-weight: 800; letter-spacing: .08em;
     }
     .topbar { display: flex; justify-content: space-between; align-items: flex-start; gap: 16px; flex-wrap: wrap; }
+    .topbar-actions { display: flex; flex-wrap: wrap; gap: 8px; align-items: center; }
+    .font-toggle {
+      display: inline-flex; border: 2px solid var(--ink); border-radius: 12px; overflow: hidden;
+      box-shadow: 3px 3px 0 var(--ink); background: #fff;
+    }
+    .font-toggle button {
+      width: auto; border: none; border-radius: 0; box-shadow: none; padding: 8px 12px;
+      font-size: 12px; font-weight: 800; cursor: pointer; background: #fff; color: var(--muted);
+    }
+    .font-toggle button.active { background: var(--yellow); color: var(--ink); }
     .topbar a {
       color: var(--ink); text-decoration: none; font-weight: 800;
       border: 2px solid var(--ink); padding: 10px 14px; border-radius: 12px;
@@ -63,6 +78,22 @@
       background: linear-gradient(180deg, transparent 62%, var(--yellow) 62%, var(--yellow) 90%, transparent 90%);
     }
     .sub { color: var(--muted); margin-top: 10px; line-height: 1.65; font-size: 15px; font-weight: 600; }
+    .guide-steps {
+      display: grid; grid-template-columns: repeat(3, 1fr); gap: 10px; margin-bottom: 18px;
+    }
+    @media (max-width: 700px) { .guide-steps { grid-template-columns: 1fr; } }
+    .guide-step {
+      border: 2px solid var(--ink); border-radius: 16px; padding: 14px 16px;
+      background: #fffbe6; box-shadow: 4px 4px 0 var(--ink);
+    }
+    .guide-step strong { display: block; font-size: 14px; margin-bottom: 4px; color: var(--red); }
+    .guide-step span { font-size: 13px; color: var(--muted); font-weight: 600; line-height: 1.5; }
+    .answer-banner {
+      margin: 0 0 16px; padding: 14px 16px; border-radius: 16px;
+      border: 2px solid var(--ink); background: linear-gradient(90deg, #fff8e8, #fff);
+      box-shadow: 4px 4px 0 var(--ink); font-weight: 800; font-size: 16px; line-height: 1.5;
+    }
+    .answer-banner em { font-style: normal; color: var(--cta); font-size: 18px; }
     .panel {
       background: var(--card);
       border: 3px solid var(--ink);
@@ -71,8 +102,39 @@
       box-shadow: var(--shadow);
       margin-bottom: 18px;
     }
-    .controls { display: grid; grid-template-columns: repeat(4, 1fr); gap: 14px; }
-    @media (max-width: 900px) { .controls { grid-template-columns: 1fr 1fr; } }
+    .controls { display: grid; grid-template-columns: repeat(3, 1fr); gap: 14px; }
+    @media (max-width: 900px) { .controls { grid-template-columns: 1fr; } }
+    .province-combo { position: relative; }
+    .province-trigger {
+      width: 100%; display: flex; align-items: center; justify-content: space-between;
+      gap: 8px; text-align: left; cursor: pointer;
+    }
+    .province-caret { color: var(--muted); font-size: 12px; flex-shrink: 0; }
+    .province-dropdown {
+      position: absolute; left: 0; right: 0; top: calc(100% + 6px); z-index: 50;
+      background: #fff; border: 2px solid var(--ink); border-radius: 14px;
+      box-shadow: 6px 6px 0 var(--ink); padding: 8px; max-height: min(280px, 50vh);
+      display: flex; flex-direction: column;
+    }
+    .province-dropdown.hidden { display: none; }
+    .province-dropdown input[type=search] {
+      width: 100%; border: 2px solid var(--ink); border-radius: 10px; padding: 10px 12px;
+      font: 700 14px/1.2 'Noto Sans SC', sans-serif; background: #fffdf5;
+      box-shadow: none; margin-bottom: 6px;
+    }
+    .province-list { overflow: auto; flex: 1; }
+    .province-option {
+      width: 100%; border: none; border-radius: 10px; padding: 10px 12px;
+      font: 700 14px/1.2 'Noto Sans SC', sans-serif; background: transparent;
+      text-align: left; cursor: pointer; box-shadow: none;
+    }
+    .province-option:hover, .province-option.active { background: var(--yellow); }
+    .province-option.hidden { display: none; }
+    .province-empty { padding: 12px; font-size: 13px; color: var(--muted); font-weight: 600; }
+    .sr-only {
+      position: absolute; width: 1px; height: 1px; padding: 0; margin: -1px;
+      overflow: hidden; clip: rect(0,0,0,0); border: 0;
+    }
     label { display: block; font-size: 13px; color: var(--muted); margin-bottom: 8px; font-weight: 800; }
     select, button {
       width: 100%;
@@ -92,6 +154,15 @@
       font-weight: 800;
       box-shadow: 5px 5px 0 var(--ink);
     }
+    button.cta-orange {
+      background: var(--cta); color: #fff; width: 100%; max-width: 360px;
+      display: block; margin: 14px auto 0; padding: 16px 20px; font-size: 17px;
+      animation: pulse-cta 2.2s ease-in-out infinite;
+    }
+    @keyframes pulse-cta {
+      0%, 100% { box-shadow: 5px 5px 0 var(--ink), 0 0 0 0 rgba(255,122,0,0.45); }
+      50% { box-shadow: 5px 5px 0 var(--ink), 0 0 0 12px rgba(255,122,0,0); }
+    }
     .stats {
       display: grid;
       grid-template-columns: repeat(4, 1fr);
@@ -108,7 +179,21 @@
     }
     .stat .k { font-size: 12px; color: var(--muted); font-weight: 700; }
     .stat .v { font-size: 24px; font-weight: 800; margin-top: 6px; color: var(--red); }
-    .chart-wrap { margin-top: 18px; }
+    .stat .v.small { font-size: 18px; line-height: 1.35; }
+    .stat .d { font-size: 11px; color: #888; margin-top: 6px; line-height: 1.45; font-weight: 600; }
+    .chart-wrap { margin-top: 20px; padding-top: 20px; border-top: 2px dashed rgba(20,20,20,0.12); position: relative; }
+    .chart-drag-hint {
+      position: absolute; left: 50%; top: 50%; transform: translate(-50%, -50%);
+      pointer-events: none; z-index: 2; padding: 6px 14px; border-radius: 999px;
+      background: rgba(20,20,20,0.72); color: #fff; font-size: 13px; font-weight: 800;
+      white-space: nowrap; animation: hint-fade 3s ease-in-out infinite;
+    }
+    @keyframes hint-fade {
+      0%, 100% { opacity: 0.85; }
+      50% { opacity: 0.45; }
+    }
+    .chart-wrap.dragging .chart-drag-hint { opacity: 0; }
+    .chart-canvas-wrap { position: relative; }
     .chart-head { display: flex; justify-content: space-between; align-items: center; margin-bottom: 10px; gap: 10px; flex-wrap: wrap; }
     .chart-head h2 { font-family: 'ZCOOL QingKe HuangYou', cursive; font-size: 24px; }
     canvas {
@@ -118,13 +203,58 @@
       box-shadow: 4px 4px 0 var(--ink);
       touch-action: none;
     }
-    .slider-row { margin-top: 18px; }
+    .slider-row { margin-top: 20px; padding-top: 20px; border-top: 2px dashed rgba(20,20,20,0.12); }
     .slider-row input[type=range] {
       width: 100%;
       accent-color: var(--red);
       height: 10px;
     }
     .slider-meta { display: flex; justify-content: space-between; color: var(--muted); font-size: 13px; margin-top: 8px; font-weight: 700; }
+    .score-manual {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 10px;
+      margin-top: 16px;
+      flex-wrap: wrap;
+    }
+    .score-manual label {
+      font-size: 14px;
+      font-weight: 800;
+      color: var(--muted);
+      margin: 0;
+    }
+    .score-manual input[type=number] {
+      width: 120px;
+      border: 2px solid var(--ink);
+      border-radius: 14px;
+      padding: 12px 14px;
+      font: 800 28px/1 'ZCOOL QingKe HuangYou', cursive;
+      color: var(--red);
+      text-align: center;
+      background: #fff;
+      box-shadow: 4px 4px 0 var(--ink);
+      -moz-appearance: textfield;
+    }
+    .score-manual input[type=number]::-webkit-outer-spin-button,
+    .score-manual input[type=number]::-webkit-inner-spin-button {
+      -webkit-appearance: none;
+      margin: 0;
+    }
+    .score-manual .score-unit {
+      font-size: 18px;
+      font-weight: 800;
+      color: var(--ink);
+    }
+    .score-manual .apply-btn {
+      border: 2px solid var(--ink);
+      border-radius: 12px;
+      padding: 10px 16px;
+      background: var(--yellow);
+      font: 800 14px/1 'Noto Sans SC', sans-serif;
+      cursor: pointer;
+      box-shadow: 3px 3px 0 var(--ink);
+    }
     .score-big {
       text-align: center;
       margin-top: 14px;
@@ -134,6 +264,7 @@
       font-family: 'ZCOOL QingKe HuangYou', cursive;
       text-shadow: 3px 3px 0 var(--yellow);
     }
+    .score-action { margin-top: 14px; max-width: 320px; }
     .hint { color: var(--muted); font-size: 13px; line-height: 1.6; margin-top: 10px; }
     .loading { color: var(--muted); padding: 20px 0; }
     .modal-backdrop {
@@ -181,7 +312,25 @@
       background: var(--yellow); color: var(--ink); border: 2px solid var(--ink); white-space: nowrap;
     }
     .hot-score { color: var(--ok); font-weight: 800; font-size: 13px; }
+    .opportunity-badge {
+      display: inline-block; margin-top: 4px; padding: 4px 8px; border-radius: 999px;
+      font-size: 11px; font-weight: 800; background: #fff4cc; color: #8a5b00;
+      border: 2px solid var(--ink);
+    }
+    .tier-group-title {
+      font-size: 12px; font-weight: 800; color: var(--muted); margin: 10px 0 6px;
+    }
     .footer-note { margin-top: 16px; font-size: 12px; color: var(--muted); line-height: 1.6; }
+    .qr-panel {
+      margin-top: 24px; text-align: center; padding: 28px 24px 32px;
+      background: linear-gradient(180deg, #fff 0%, #fff8e8 100%);
+      border: 3px solid var(--ink); border-radius: 16px; box-shadow: 6px 6px 0 var(--ink);
+    }
+    .qr-panel h2 { font-size: 18px; margin-bottom: 12px; }
+    .qr-panel img {
+      width: min(280px, 90vw); height: auto; border-radius: 12px; background: transparent;
+    }
+    .qr-hint { margin-top: 10px; font-size: 13px; color: var(--muted); font-weight: 600; line-height: 1.6; }
     .confidence-badge {
       display: inline-flex; align-items: center; gap: 6px;
       padding: 6px 12px; border-radius: 999px; font-size: 12px; font-weight: 800;
@@ -192,6 +341,12 @@
     .confidence-badge.structural { background: #e8f0ff; color: #1d4ed8; }
     .confidence-badge.model { background: #ffe8e8; color: #b42318; }
     .validation-detail { margin-top: 8px; font-size: 12px; color: var(--muted); line-height: 1.55; }
+    .validation-detail.collapsed { display: none; }
+    .toggle-detail-btn {
+      width: auto; margin-top: 8px; padding: 6px 12px; font-size: 12px;
+      background: #fff; cursor: pointer;
+    }
+    .data-quality { text-align: right; }
   </style>
 </head>
 <body>
@@ -200,66 +355,102 @@
       <div class="topbar">
         <div>
           <span style="display:inline-block;background:#ffe566;border:2px solid #141414;padding:6px 12px;border-radius:999px;font-size:12px;font-weight:800;box-shadow:3px 3px 0 #141414;">🔥 祝愿心想事成！</span>
-          <h1>拖拽分数 · <span class="hl">秒看院校专业</span></h1>
-          <p class="sub">选省份与年份，滑动分数条或拖拽图表红线，弹出按 10 年热门就业方向排序的院校与专业推荐。</p>
+          <h1>孩子 <span class="hl" id="heroScore">600</span> 分<br>能上什么学校？</h1>
+          <p class="sub">三步搞定：选省份 → 填分数 → 看推荐院校专业。不用懂一分一段表。</p>
         </div>
-        <a href="index.html">← 返回合集</a>
-        <a href="career-sandbox.html" style="margin-left:8px;">💼 就业沙盘</a>
+        <div class="topbar-actions">
+          <div class="font-toggle" role="group" aria-label="字号切换">
+            <button type="button" id="fontNormal" class="active">标准</button>
+            <button type="button" id="fontLarge">大号</button>
+          </div>
+          <a href="index.html">← 返回合集</a>
+          <a href="career-sandbox.html">💼 就业沙盘</a>
+        </div>
       </div>
     </section>
 
+    <div class="guide-steps">
+      <div class="guide-step"><strong>① 选省份和科类</strong><span>点省份框搜索或下拉选择</span></div>
+      <div class="guide-step"><strong>② 输入孩子分数</strong><span>直接打字最准，滑块和图表也能调</span></div>
+      <div class="guide-step"><strong>③ 看能报什么</strong><span>点橙色按钮，立刻出院校和专业推荐</span></div>
+    </div>
+
     <div class="panel">
+      <div class="answer-banner" id="answerBanner"><em>600 分</em> 对比近3年省控批次线，供填报参照</div>
       <div class="controls">
         <div>
-          <label for="province">省份</label>
-          <select id="province"></select>
+          <label for="provinceTrigger">① 省份</label>
+          <div class="province-combo" id="provinceCombo">
+            <button type="button" class="province-trigger" id="provinceTrigger" aria-haspopup="listbox" aria-expanded="false">
+              <span id="provinceDisplay">加载中…</span>
+              <span class="province-caret">▾</span>
+            </button>
+            <div class="province-dropdown hidden" id="provinceDropdown">
+              <input id="provinceSearch" type="search" placeholder="搜省份，如：江苏、广东…" autocomplete="off" aria-label="搜索省份">
+              <div class="province-list" id="provinceList" role="listbox"></div>
+            </div>
+            <select id="province" class="sr-only" aria-hidden="true" tabindex="-1"></select>
+          </div>
         </div>
         <div>
-          <label for="year">年份</label>
-          <select id="year"></select>
-        </div>
-        <div>
-          <label for="track">科类</label>
+          <label for="track">② 科类</label>
           <select id="track">
             <option value="物理类">物理类 / 理科</option>
             <option value="历史类">历史类 / 文科</option>
           </select>
         </div>
         <div>
-          <label>&nbsp;</label>
-          <button class="primary" id="openModalBtn" type="button">查看推荐院校专业</button>
+          <label for="year">年份</label>
+          <select id="year"></select>
         </div>
-      </div>
-
-      <div class="stats">
-        <div class="stat"><div class="k">当前分数</div><div class="v" id="statScore">--</div></div>
-        <div class="stat"><div class="k">超越考生占比</div><div class="v" id="statPercentile">--</div></div>
-        <div class="stat"><div class="k">该分段人数占比</div><div class="v" id="statShare">--</div></div>
-        <div class="stat"><div class="k">可达院校层级</div><div class="v" id="statTier">--</div></div>
-      </div>
-
-      <div class="chart-wrap">
-        <div class="chart-head">
-          <h2>分数段人数占比分布（可拖拽红线定位分数）</h2>
-          <div>
-            <span class="hint" id="dataSource">数据加载中…</span>
-            <div id="confidenceBadge"></div>
-            <div class="validation-detail" id="validationDetail"></div>
-          </div>
-        </div>
-        <canvas id="chart" width="1100" height="260"></canvas>
       </div>
 
       <div class="slider-row">
-        <label for="scoreSlider">分数滑块</label>
+        <label for="scoreInput">③ 孩子高考分数</label>
         <input id="scoreSlider" type="range" min="400" max="750" value="600" step="1">
         <div class="slider-meta"><span id="minLabel">400</span><span id="maxLabel">750</span></div>
+        <div class="score-manual">
+          <label for="scoreInput">手动输入</label>
+          <input id="scoreInput" type="number" inputmode="numeric" min="400" max="750" value="600" step="1" aria-label="高考分数">
+          <span class="score-unit">分</span>
+          <button class="apply-btn" id="applyScoreBtn" type="button">确认分数</button>
+        </div>
         <div class="score-big" id="scoreDisplay">600 分</div>
-        <p class="hint">提示：在图表上按住拖动，或拉动滑块，松手后会弹出该分数对应的院校与热门专业推荐。</p>
+        <button class="cta-orange" id="openModalBtn" type="button">👉 看能报什么学校和专业</button>
+        <p class="hint">输入分数后按回车或点「确认分数」；下方图表上的<strong>黑色竖线</strong>也可以左右拖。</p>
+      </div>
+
+      <div class="stats">
+        <div class="stat"><div class="k">当前分数</div><div class="v" id="statScore">--</div><div class="d" id="statScoreDesc">孩子本次模考/高考分数</div></div>
+        <div class="stat"><div class="k">参考院校层次</div><div class="v" id="statTier">--</div><div class="d" id="statTierDesc">按分数与省控批次线对照</div></div>
+        <div class="stat"><div class="k">同分段竞争</div><div class="v" id="statShare">--</div><div class="d" id="statShareDesc">这个分数附近有多少考生</div></div>
+        <div class="stat"><div class="k">近3年批次线均值</div><div class="v small" id="statBatch">--</div><div class="d" id="statBatchDesc">省考试院公布批次线均值，非院校投档最低分</div></div>
+      </div>
+
+      <div class="chart-wrap" id="chartWrap">
+        <div class="chart-head">
+          <h2>分数分布参考（可拖竖线调分）</h2>
+          <div class="data-quality">
+            <span class="hint" id="dataSource">数据加载中…</span>
+            <div id="confidenceBadge"></div>
+            <button class="toggle-detail-btn" id="toggleValidation" type="button">查看数据说明 ▾</button>
+            <div class="validation-detail collapsed" id="validationDetail"></div>
+          </div>
+        </div>
+        <div class="chart-canvas-wrap">
+          <div class="chart-drag-hint" id="chartDragHint">← 按住竖线左右拖 →</div>
+          <canvas id="chart" width="1100" height="260"></canvas>
+        </div>
       </div>
     </div>
 
     <p class="footer-note" id="globalNote"></p>
+
+    <section class="qr-panel" aria-label="扫码入群">
+      <h2>📱 扫码加入高考志愿交流群</h2>
+      <img src="assets/wechat-group-qr.png" alt="微信扫码入群，备注地区+高考分数获取更多院校专业资讯">
+      <p class="qr-hint">扫码进群 · 获取最新院校专业资讯与填报交流 · 备注「地区+分数」更快通过</p>
+    </section>
   </div>
 
   <div class="modal-backdrop" id="modalBackdrop" aria-hidden="true">
@@ -267,21 +458,28 @@
       <button class="close" id="closeModal" type="button" aria-label="关闭">×</button>
       <h3 id="modalTitle">分数推荐结果</h3>
       <p class="modal-summary" id="modalSummary"></p>
-      <div class="section-title">🏫 热门院校（按院校分级 + 就业方向匹配）</div>
+      <div class="section-title">🏫 院校推荐（含一本/二本/专科，按分数与层次匹配）</div>
       <div class="school-list" id="schoolList"></div>
-      <div class="section-title">🎯 热门专业（按 10 年后就业方向排序）</div>
+      <div class="section-title">🎯 专业推荐（<span id="majorTrackLabel">物理类</span>可报 · 产业趋势指数 + 就业涨幅交叉验证）</div>
       <div class="major-list" id="majorList"></div>
-      <p class="footer-note" id="modalDisclaimer">说明：数据可信度见页面顶部标识；模型估算仅供参考，请以省考试院官方数据为准。</p>
+      <p class="footer-note" id="modalDisclaimer">说明：专业按科类（物理类/历史类）分别推荐。产业趋势指数 = 人工产业研判与就业沙盘5年薪资涨幅交叉校准；无就业数据的专业仅含人工研判。院校招生以当年简章为准。</p>
     </div>
   </div>
 
-  <script src="data/gaokao-embed.js"></script>
+    <script src="data/gaokao-embed.js"></script>
+    <script src="data/schools-vocational-embed.js"></script>
+    <script src="data/major-catalog-embed.js"></script>
   <script>
     const state = {
       manifest: null,
       provinceData: null,
+      vocationalSchools: [],
+      vocationalMeta: null,
+      majorCatalog: [],
+      majorCatalogMeta: null,
       segments: [],
       batches: {},
+      totalCandidates: 0,
       maxScore: 750,
       minScore: 400,
       currentScore: 600,
@@ -293,11 +491,140 @@
     const yearEl = $('year');
     const trackEl = $('track');
     const sliderEl = $('scoreSlider');
+    const scoreInputEl = $('scoreInput');
     const chart = $('chart');
     const ctx = chart.getContext('2d');
 
+    const HOT_PROVINCES = ['广东', '江苏', '浙江', '北京', '上海', '山东', '河南', '四川', '湖北', '湖南', '安徽', '河北'];
+
+    function provinceMatch(query, name) {
+      const q = (query || '').trim().toLowerCase();
+      if (!q) return true;
+      const n = name.toLowerCase();
+      if (n.includes(q)) return true;
+      return [...q].every((ch) => n.includes(ch));
+    }
+
+    function updateProvinceDisplay(name) {
+      $('provinceDisplay').textContent = name || '请选择省份';
+    }
+
+    function renderProvinceList(query = '') {
+      const provinces = state.manifest?.provinces || [];
+      const current = provinceEl.value;
+      const listEl = $('provinceList');
+      const matched = provinces.filter((p) => provinceMatch(query, p));
+      const hot = matched.filter((p) => HOT_PROVINCES.includes(p));
+      const rest = matched.filter((p) => !HOT_PROVINCES.includes(p));
+      const ordered = [...hot, ...rest];
+      if (!ordered.length) {
+        listEl.innerHTML = '<div class="province-empty">没有匹配的省份</div>';
+        return;
+      }
+      listEl.innerHTML = ordered.map((p) =>
+        `<button type="button" class="province-option${p === current ? ' active' : ''}" data-province="${p}" role="option">${p}</button>`
+      ).join('');
+      listEl.querySelectorAll('.province-option').forEach((btn) => {
+        btn.onclick = () => selectProvince(btn.dataset.province);
+      });
+    }
+
+    function openProvinceDropdown() {
+      $('provinceDropdown').classList.remove('hidden');
+      $('provinceTrigger').setAttribute('aria-expanded', 'true');
+      $('provinceSearch').value = '';
+      renderProvinceList('');
+      setTimeout(() => $('provinceSearch').focus(), 0);
+    }
+
+    function closeProvinceDropdown() {
+      $('provinceDropdown').classList.add('hidden');
+      $('provinceTrigger').setAttribute('aria-expanded', 'false');
+      $('provinceSearch').value = '';
+    }
+
+    function initProvinceCombo() {
+      updateProvinceDisplay(provinceEl.value);
+      renderProvinceList('');
+      $('provinceTrigger').addEventListener('click', () => {
+        const open = !$('provinceDropdown').classList.contains('hidden');
+        if (open) closeProvinceDropdown();
+        else openProvinceDropdown();
+      });
+      $('provinceSearch').addEventListener('input', (e) => renderProvinceList(e.target.value));
+      $('provinceSearch').addEventListener('keydown', (e) => {
+        if (e.key === 'Escape') closeProvinceDropdown();
+        if (e.key === 'Enter') {
+          const first = $('provinceList').querySelector('.province-option:not(.hidden)');
+          if (first) selectProvince(first.dataset.province);
+        }
+      });
+      document.addEventListener('click', (e) => {
+        if (!$('provinceCombo').contains(e.target)) closeProvinceDropdown();
+      });
+    }
+
     function hasEmbed() {
       return window.GAOKAO_EMBED?.manifest && window.GAOKAO_EMBED?.provinces;
+    }
+
+    async function loadMajorCatalog() {
+      if (window.MAJOR_CATALOG?.majors) {
+        state.majorCatalog = window.MAJOR_CATALOG.majors;
+        state.majorCatalogMeta = window.MAJOR_CATALOG.meta || null;
+        return;
+      }
+      try {
+        const res = await fetch('data/major_catalog.json');
+        if (!res.ok) return;
+        const data = await res.json();
+        state.majorCatalog = data.majors || [];
+        state.majorCatalogMeta = data.meta || null;
+      } catch (_) { /* optional */ }
+    }
+
+    function currentSubjectTrack() {
+      return trackEl.value;
+    }
+
+    function majorPool() {
+      if (state.majorCatalog?.length) return state.majorCatalog;
+      return (state.manifest?.hotMajors || []).map((m) => ({
+        ...m,
+        trendIndex: m.trendIndex ?? m.score,
+        subjects: m.subjects || inferSubjectsFromDiscipline(m.track),
+      }));
+    }
+
+    function inferSubjectsFromDiscipline(discipline) {
+      if (discipline === '工科' || discipline === '理科') return ['物理类'];
+      if (discipline === '文科' || discipline === '艺术') return ['历史类'];
+      if (discipline === '医科') return ['物理类', '历史类'];
+      return ['物理类', '历史类'];
+    }
+
+    function majorMatchesSubject(major) {
+      const subjects = major.subjects || inferSubjectsFromDiscipline(major.discipline || major.track);
+      const track = currentSubjectTrack();
+      if (track === '综合类') return subjects.some((s) => ['物理类', '历史类', '综合类'].includes(s));
+      if (track === '理科') return subjects.some((s) => ['物理类', '理科'].includes(s));
+      if (track === '文科') return subjects.some((s) => ['历史类', '文科'].includes(s));
+      return subjects.includes(track);
+    }
+
+    async function loadVocationalSchools() {
+      if (window.SCHOOLS_VOCATIONAL?.schools) {
+        state.vocationalSchools = window.SCHOOLS_VOCATIONAL.schools;
+        state.vocationalMeta = window.SCHOOLS_VOCATIONAL.meta || null;
+        return;
+      }
+      try {
+        const res = await fetch('data/schools_vocational.json');
+        if (!res.ok) return;
+        const data = await res.json();
+        state.vocationalSchools = data.schools || [];
+        state.vocationalMeta = data.meta || null;
+      } catch (_) { /* optional */ }
     }
 
     async function loadManifest() {
@@ -308,11 +635,18 @@
         if (!res.ok) throw new Error(`无法加载 manifest.json（${res.status}）`);
         state.manifest = await res.json();
       }
+      await loadVocationalSchools();
+      await loadMajorCatalog();
       provinceEl.innerHTML = state.manifest.provinces.map((p) => `<option value="${p}">${p}</option>`).join('');
+      initProvinceCombo();
       yearEl.innerHTML = state.manifest.years.map((y) => `<option value="${y}">${y}</option>`).join('');
       yearEl.value = '2025';
-      $('globalNote').textContent = state.manifest.meta.notes || '';
+      const vocNote = state.vocationalMeta?.total
+        ? ` 专科院校库：全国 ${state.vocationalMeta.total} 所（eol.cn 完整名录）。`
+        : '';
+      $('globalNote').textContent = (state.manifest.meta.notes || '') + vocNote;
       await loadProvince(provinceEl.value);
+      renderTrackOptions(provinceEl.value);
     }
 
     async function loadProvince(name) {
@@ -327,43 +661,292 @@
       refreshTrackData();
     }
 
+    function renderTrackOptions(province) {
+      const cfg = state.manifest?.provinceTracks?.[province];
+      const items = cfg?.length ? cfg : [
+        { value: '物理类', label: '物理类 / 理科' },
+        { value: '历史类', label: '历史类 / 文科' },
+      ];
+      const prev = trackEl.value;
+      trackEl.innerHTML = items.map((t) => `<option value="${t.value}">${t.label}</option>`).join('');
+      if (items.some((t) => t.value === prev)) trackEl.value = prev;
+      else trackEl.value = items[0].value;
+    }
+
+    function pickTrackPayload(year, track) {
+      const tracks = state.provinceData?.years?.[year]?.tracks;
+      if (!tracks) return null;
+      if (tracks[track]) return tracks[track];
+      if (track === '综合类') return tracks['物理类'] || tracks['历史类'];
+      if (track === '物理类' || track === '历史类') return tracks['综合类'] || tracks[track];
+      if (track === '理科') return tracks['理科'] || tracks['物理类'];
+      if (track === '文科') return tracks['文科'] || tracks['历史类'];
+      return null;
+    }
+
     function getYearTrackData() {
       const year = yearEl.value;
       const track = trackEl.value;
-      return state.provinceData?.years?.[year]?.tracks?.[track];
+      return pickTrackPayload(year, track);
+    }
+
+    function selectProvince(name) {
+      if (!name) return;
+      provinceEl.value = name;
+      updateProvinceDisplay(name);
+      closeProvinceDropdown();
+      refreshTrackData();
+      renderTrackOptions(name);
+    }
+
+    function plainConfidence(conf, score) {
+      const pct = score != null ? Math.round(score * 100) : null;
+      const map = {
+        verified_multi_source: { cls: 'verified', label: '官方数据较可靠', hint: '多个来源核对过，可以放心参考' },
+        verified: { cls: 'verified', label: '数据核对通过', hint: '与公开信息基本一致' },
+        partially_verified: { cls: 'partial', label: '部分核对通过', hint: '大方向可用，细节建议对照省考试院' },
+        validated_structural: { cls: 'structural', label: '真实一分一段', hint: '来自官方表格，位次占比可直接参考' },
+        conflict: { cls: 'partial', label: '来源有出入', hint: '建议以省考试院公布为准' },
+        failed_validation: { cls: 'model', label: '仅供参考', hint: '数据未通过校验，请对照官方一分一段' },
+        model_estimate: { cls: 'model', label: '估算数据', hint: '按往年规律推算，位次为估算值，填报请以官方为准' },
+      };
+      const meta = map[conf] || map.model_estimate;
+      if (pct != null) meta.label += ` · ${pct}%`;
+      return meta;
     }
 
     function confidenceMeta(trackData) {
       const conf = trackData?.confidence || 'model_estimate';
       const score = trackData?.confidenceScore;
-      const map = {
-        verified_multi_source: { cls: 'verified', label: '多源交叉验证通过', hint: 'eol 表格 + 正文锚点 + 第三方位次锚点一致' },
-        verified: { cls: 'verified', label: '交叉验证通过', hint: 'eol 表格与正文/第三方锚点一致' },
-        partially_verified: { cls: 'partial', label: '部分验证通过', hint: '主表可用，部分锚点存在偏差' },
-        validated_structural: { cls: 'structural', label: '结构校验通过', hint: 'eol 真实一分一段，尚未找到足够锚点做交叉验证' },
-        conflict: { cls: 'partial', label: '数据源存在冲突', hint: '建议对照省考试院官方一分一段' },
-        failed_validation: { cls: 'model', label: '验证未通过', hint: '已降级展示，建议以官方数据为准' },
-        model_estimate: { cls: 'model', label: '模型估算', hint: '基于批次线与考生规模的统计估算' },
-      };
-      const meta = map[conf] || map.model_estimate;
-      return { ...meta, conf, score };
+      const plain = plainConfidence(conf, score);
+      return { ...plain, conf, score };
     }
 
     function renderConfidence(trackData) {
       const meta = confidenceMeta(trackData);
       const badge = $('confidenceBadge');
       const detail = $('validationDetail');
-      const scoreTxt = meta.score != null ? ` · 置信度 ${Math.round(meta.score * 100)}%` : '';
+      const scoreTxt = meta.score != null ? '' : '';
       badge.innerHTML = `<span class="confidence-badge ${meta.cls}">${meta.label}${scoreTxt}</span>`;
       const checks = trackData?.validation?.crossChecks || [];
       const passed = checks.filter((c) => c.ok).length;
       const checkTxt = checks.length
-        ? `交叉验证 ${passed}/${checks.length} 项通过。${meta.hint}`
+        ? `已核对 ${passed}/${checks.length} 项。${meta.hint}`
         : meta.hint;
       const srcUrl = trackData?.sourceUrl
         ? ` <a href="${trackData.sourceUrl}" target="_blank" rel="noopener">查看原始页面</a>`
         : '';
       detail.innerHTML = `${checkTxt}${srcUrl}`;
+      detail.classList.add('collapsed');
+      $('toggleValidation').textContent = '查看数据说明 ▾';
+    }
+
+    function getBatchAverages(endYear = null, n = 3) {
+      const cap = Number(endYear || yearEl.value);
+      const allYears = (state.manifest?.years || Object.keys(state.provinceData?.years || {}))
+        .map(Number)
+        .filter((y) => y <= cap)
+        .sort((a, b) => b - a)
+        .slice(0, n);
+      const undergrad = [];
+      const special = [];
+      for (const y of allYears) {
+        const batches = state.provinceData?.years?.[String(y)]?.batches || {};
+        if (batches['本科线'] != null) undergrad.push({ year: y, score: batches['本科线'] });
+        if (batches['特招线'] != null) special.push({ year: y, score: batches['特招线'] });
+      }
+      const avg = (arr) => (arr.length
+        ? Math.round(arr.reduce((s, x) => s + x.score, 0) / arr.length)
+        : null);
+      return {
+        years: allYears,
+        undergrad,
+        special,
+        undergradAvg: avg(undergrad),
+        specialAvg: avg(special),
+      };
+    }
+
+    function formatYearRange(years) {
+      if (!years.length) return '';
+      if (years.length === 1) return String(years[0]);
+      return `${years[years.length - 1]}–${years[0]}`;
+    }
+
+    function batchCompareText(score, batch) {
+      if (batch.undergradAvg == null) return '暂无批次线数据';
+      const ugDiff = score - batch.undergradAvg;
+      if (batch.specialAvg != null && score >= batch.specialAvg) {
+        return `高于特招线均值 ${score - batch.specialAvg} 分，可重点看本科批优质院校`;
+      }
+      if (ugDiff >= 0) {
+        return `高于本科线均值 ${ugDiff} 分，在本科批次参考区间内`;
+      }
+      return `低于本科线均值 ${Math.abs(ugDiff)} 分，请关注专科/高职批次`;
+    }
+
+    function renderBatchStat(score) {
+      const batch = getBatchAverages();
+      const range = formatYearRange(batch.years);
+      if (batch.undergradAvg == null && batch.specialAvg == null) {
+        $('statBatch').textContent = '--';
+        $('statBatchDesc').textContent = '暂无近3年批次线数据';
+        return batch;
+      }
+      const lines = [];
+      if (batch.undergradAvg != null) lines.push(`本科线 ${batch.undergradAvg}`);
+      if (batch.specialAvg != null) lines.push(`特招线 ${batch.specialAvg}`);
+      $('statBatch').textContent = `${lines.join(' · ')} 分`;
+      const detail = batch.undergrad.length
+        ? `各年本科线：${batch.undergrad.map((x) => `${x.year}年${x.score}`).join('、')}`
+        : '';
+      const spDetail = batch.special.length
+        ? `；特招线：${batch.special.map((x) => `${x.year}年${x.score}`).join('、')}`
+        : '';
+      $('statBatchDesc').textContent = `${range}年${provinceEl.value}省控批次线均值。${detail}${spDetail}。口径：省考试院公布批次线，非具体院校/专业投档最低分。`;
+      return batch;
+    }
+
+    function tierDescForScore(score, tier) {
+      const p = percentileAt(score);
+      const rank = rankAt(score);
+      const batch = getBatchAverages();
+      const ug = batch.undergradAvg;
+      if (p != null && rank != null) {
+        if (p >= 99.2) return `全省约前 ${rank} 名，可冲 C9/顶尖 985`;
+        if (p >= 97.5) return `全省约前 ${rank} 名，重点看 985/强 211`;
+        if (p >= 94) return `全省约前 ${rank} 名，211/双一流为主`;
+        if (p >= 86) return `全省约前 ${rank} 名，一本稳妥、强 211 可冲`;
+        if (p >= 75) return `全省约前 ${rank} 名，二本/普通一本区间`;
+        if (ug != null && score < ug - 15) return '低于本科线，可关注高职专科';
+        return `全省约前 ${rank} 名，对应 ${tier} 层次参考`;
+      }
+      const sp = batch.specialAvg;
+      if (ug != null && score < ug - 15) return '低于本科线，可关注高职专科与应用型专业';
+      if (sp != null && score >= sp + 50) return '超过特招线较多，请结合位次判断院校层次';
+      if (sp != null && score >= sp) return '超过特招线，请结合一分一段位次选校';
+      if (ug != null && score >= ug) return '达本科线，在一本/二本批次内选校';
+      return `当前分数对应 ${tier} 层次院校参考区间`;
+    }
+
+    function updateStatDescriptions(score, sharePct) {
+      $('heroScore').textContent = score;
+      const tier = tierForScore(score);
+      $('statTier').textContent = tier;
+      $('statTierDesc').textContent = tierDescForScore(score, tier);
+      $('statShareDesc').textContent = sharePct >= 2
+        ? `这个分数段人数较多，竞争偏激烈`
+        : sharePct >= 0.8
+          ? `这个分数段人数适中`
+          : `这个分数段人数较少，选择面可能更宽`;
+      const batch = renderBatchStat(score);
+      const compare = batchCompareText(score, batch);
+      $('answerBanner').innerHTML = `<em>${score} 分</em> · ${compare} · <a href="#" id="quickOpenModal" style="color:var(--cta);text-decoration:underline;">看推荐院校 →</a>`;
+      const quick = $('quickOpenModal');
+      if (quick) quick.onclick = (e) => { e.preventDefault(); openModal(); };
+    }
+
+    function densifyChartSegments(raw, step = 2) {
+      if (!raw || raw.length < 2) return raw;
+      const ordered = [...raw].sort((a, b) => a.score - b.score);
+      const scores = ordered.map((s) => s.score);
+      const cums = ordered.map((s) => s.cumulative);
+      const minS = scores[0];
+      const maxS = scores[scores.length - 1];
+
+      function cumAt(score) {
+        if (score <= scores[0]) return cums[0];
+        if (score >= scores[scores.length - 1]) return cums[cums.length - 1];
+        for (let i = 0; i < scores.length - 1; i++) {
+          const lo = scores[i];
+          const hi = scores[i + 1];
+          if (score >= lo && score <= hi) {
+            if (hi === lo) return cums[i];
+            const t = (score - lo) / (hi - lo);
+            return Math.round(cums[i] + (cums[i + 1] - cums[i]) * t);
+          }
+        }
+        return cums[cums.length - 1];
+      }
+
+      const denseScores = [];
+      for (let s = maxS; s >= minS; s -= step) denseScores.push(s);
+      const denseCums = denseScores.map(cumAt);
+      const total = state.totalCandidates || denseCums[denseCums.length - 1] || 1;
+      const out = [];
+      for (let i = 0; i < denseScores.length; i++) {
+        let count;
+        if (i + 1 < denseScores.length) count = denseCums[i + 1] - denseCums[i];
+        else if (i > 0) count = denseCums[i] - denseCums[i - 1];
+        else count = 0;
+        count = Math.max(0, count);
+        out.push({
+          score: denseScores[i],
+          cumulative: denseCums[i],
+          count,
+          sharePct: total ? (count / total) * 100 : 0,
+          percentile: raw[0].percentile,
+        });
+      }
+      return out.sort((a, b) => a.score - b.score);
+    }
+
+    function smoothChartCounts(segments, window = 5) {
+      if (!segments || segments.length < window) return segments;
+      const ordered = [...segments].sort((a, b) => b.score - a.score);
+      const half = Math.floor(window / 2);
+      const smoothed = ordered.map((seg, i) => {
+        const lo = Math.max(0, i - half);
+        const hi = Math.min(ordered.length, i + half + 1);
+        const slice = ordered.slice(lo, hi);
+        const avg = slice.reduce((sum, s) => sum + (s.count || 0), 0) / slice.length;
+        return Math.max(1, Math.round(avg));
+      });
+      const target = ordered[ordered.length - 1].cumulative;
+      let cum = 0;
+      const rebuilt = ordered.map((seg, i) => {
+        cum += smoothed[i];
+        return { ...seg, count: smoothed[i], cumulative: cum };
+      });
+      if (rebuilt.length && rebuilt[rebuilt.length - 1].cumulative !== target && rebuilt[rebuilt.length - 1].cumulative > 0) {
+        const scale = target / rebuilt[rebuilt.length - 1].cumulative;
+        let c = 0;
+        return ordered.map((seg, i) => {
+          const count = Math.max(0, Math.round(smoothed[i] * scale));
+          c += count;
+          const sharePct = target ? (count / target) * 100 : 0;
+          return { ...seg, count, cumulative: c, sharePct };
+        }).sort((a, b) => a.score - b.score);
+      }
+      const total = target || 1;
+      return rebuilt.map((seg) => ({
+        ...seg,
+        sharePct: total ? (seg.count / total) * 100 : 0,
+      })).sort((a, b) => a.score - b.score);
+    }
+
+    function normalizeChartSegments(raw) {
+      const sorted = [...raw].sort((a, b) => b.score - a.score);
+      const mono = [];
+      for (const seg of sorted) {
+        if (mono.length && seg.cumulative < mono[mono.length - 1].cumulative) continue;
+        mono.push(seg);
+      }
+      const changes = mono.length ? [mono[0]] : [];
+      for (let i = 1; i < mono.length; i++) {
+        if (mono[i].cumulative !== changes[changes.length - 1].cumulative) changes.push(mono[i]);
+      }
+      const total = state.totalCandidates || (changes.length ? changes[changes.length - 1].cumulative : 1);
+      const normalized = changes.map((seg, i) => {
+        let count;
+        if (i + 1 < changes.length) count = changes[i + 1].cumulative - seg.cumulative;
+        else if (i > 0) count = seg.cumulative - changes[i - 1].cumulative;
+        else count = seg.count || 0;
+        count = Math.max(0, count);
+        const sharePct = total ? (count / total) * 100 : 0;
+        return { ...seg, count, sharePct };
+      });
+      return smoothChartCounts(densifyChartSegments(normalized, 2), 5);
     }
 
     function refreshTrackData() {
@@ -373,68 +956,170 @@
 
       state.batches = yearObj.batches || {};
       state.maxScore = yearObj.maxScore || 750;
-      state.segments = (trackData.segments || []).map((seg) => ({
+      state.totalCandidates = trackData.totalCandidates || 0;
+      state.segments = normalizeChartSegments((trackData.segments || []).map((seg) => ({
         score: seg.s,
         percentile: seg.p,
         sharePct: seg.r,
-      })).sort((a, b) => a.score - b.score);
+        cumulative: seg.c,
+        count: seg.n,
+      })));
 
       const minSeg = state.segments[0]?.score ?? 400;
       state.minScore = Math.max(200, minSeg);
       sliderEl.min = state.minScore;
       sliderEl.max = state.maxScore;
+      scoreInputEl.min = state.minScore;
+      scoreInputEl.max = state.maxScore;
       $('minLabel').textContent = state.minScore;
       $('maxLabel').textContent = state.maxScore;
 
       const defaultScore = Math.min(state.maxScore, Math.max(state.minScore, state.batches['本科线'] || 500) + 60);
       setScore(defaultScore, false);
-      const srcLabel = trackData.source === 'eol.cn' ? 'eol.cn 真实爬取' : '模型估算';
+      const srcLabel = (trackData.source || '').startsWith('eol') ? 'eol.cn 真实爬取' : '模型估算';
       $('dataSource').textContent = `数据来源：${srcLabel} · ${provinceEl.value} ${yearEl.value} ${trackEl.value}`;
       renderConfidence(trackData);
       drawChart();
     }
 
-    function interpolate(score) {
+    function cumulativeAt(score) {
       const segs = state.segments;
-      if (!segs.length) return { percentile: 50, sharePct: 0 };
-      if (score <= segs[0].score) return { percentile: segs[0].percentile, sharePct: segs[0].sharePct };
+      if (!segs.length) return null;
+      const exact = segs.find((s) => s.score === score);
+      if (exact?.cumulative != null) return exact.cumulative;
+      if (score <= segs[0].score) return segs[0].cumulative ?? 0;
       if (score >= segs[segs.length - 1].score) {
-        const last = segs[segs.length - 1];
-        return { percentile: last.percentile, sharePct: last.sharePct };
+        return segs[segs.length - 1].cumulative ?? state.totalCandidates;
       }
       for (let i = 0; i < segs.length - 1; i++) {
         const a = segs[i], b = segs[i + 1];
         if (score >= a.score && score <= b.score) {
           const t = (score - a.score) / (b.score - a.score || 1);
-          return {
-            percentile: a.percentile + (b.percentile - a.percentile) * t,
-            sharePct: a.sharePct + (b.sharePct - a.sharePct) * t,
-          };
+          const ca = a.cumulative ?? 0, cb = b.cumulative ?? ca;
+          return ca + (cb - ca) * t;
         }
       }
-      return { percentile: 50, sharePct: 0 };
+      return null;
+    }
+
+    function countAt(score) {
+      const segs = state.segments;
+      const exact = segs.find((s) => s.score === score);
+      if (exact?.count != null) return exact.count;
+      let nearest = segs[0];
+      for (const s of segs) {
+        if (Math.abs(s.score - score) < Math.abs(nearest.score - score)) nearest = s;
+      }
+      return nearest?.count ?? 1;
+    }
+
+    function scoreAt(score) {
+      const segs = state.segments;
+      if (!segs.length) return { sharePct: 0 };
+      const exact = segs.find((s) => s.score === score);
+      if (exact) return { sharePct: exact.sharePct };
+      if (score <= segs[0].score) return { sharePct: segs[0].sharePct };
+      if (score >= segs[segs.length - 1].score) {
+        return { sharePct: segs[segs.length - 1].sharePct };
+      }
+      for (let i = 0; i < segs.length - 1; i++) {
+        const a = segs[i], b = segs[i + 1];
+        if (score >= a.score && score <= b.score) {
+          const t = (score - a.score) / (b.score - a.score || 1);
+          return { sharePct: a.sharePct + (b.sharePct - a.sharePct) * t };
+        }
+      }
+      return { sharePct: 0 };
+    }
+
+    function percentileAt(score) {
+      const segs = state.segments;
+      if (!segs.length) return null;
+      const exact = segs.find((s) => s.score === score);
+      if (exact?.percentile != null) return exact.percentile;
+      if (score <= segs[0].score) return segs[0].percentile ?? null;
+      if (score >= segs[segs.length - 1].score) {
+        return segs[segs.length - 1].percentile ?? null;
+      }
+      for (let i = 0; i < segs.length - 1; i++) {
+        const a = segs[i];
+        const b = segs[i + 1];
+        if (score >= a.score && score <= b.score) {
+          const t = (score - a.score) / (b.score - a.score || 1);
+          const pa = a.percentile ?? 0;
+          const pb = b.percentile ?? pa;
+          return Math.round((pa + (pb - pa) * t) * 100) / 100;
+        }
+      }
+      return null;
+    }
+
+    function rankAt(score) {
+      const cum = cumulativeAt(score);
+      return cum != null ? Math.round(cum) : null;
+    }
+
+    function schoolMinPercentile(school) {
+      if (school.minPercentile != null) return school.minPercentile;
+      const tp = state.manifest.tierPercentile || {};
+      return tp[school.tier] ?? 50;
     }
 
     function tierForPercentile(p) {
-      const order = state.manifest.tierOrder;
-      const map = state.manifest.tierPercentile;
-      let reached = order[order.length - 1];
+      const order = state.manifest.tierOrder || [];
+      const tp = state.manifest.tierPercentile || {};
+      if (p == null) return '二本';
       for (const tier of order) {
-        if (p >= map[tier]) reached = tier;
+        if (tp[tier] != null && p >= tp[tier]) return tier;
       }
-      return reached;
+      return '专科';
+    }
+
+    function schoolReachable(userP, school, reachIdx) {
+      const order = state.manifest.tierOrder || [];
+      const schoolP = schoolMinPercentile(school);
+      const schoolIdx = order.indexOf(school.tier);
+      if (schoolIdx < 0) return false;
+      // tierOrder 越靠前层次越高：稳/保 = 同层次或更低校；冲 = 高 1–2 档且百分位差距可控
+      if (schoolIdx >= reachIdx) return true;
+      const gap = schoolP - userP;
+      const delta = reachIdx - schoolIdx;
+      if (delta === 1) return gap <= 10;
+      if (delta === 2) return gap <= 9;
+      return false;
+    }
+
+    function scoreThresholdForTier(tier) {
+      // 保留供专业推荐等场景；院校匹配已改用位次百分位
+      const special = state.batches['特招线'] || 500;
+      const undergrad = state.batches['本科线'] || 450;
+      const thresholds = {
+        C9: special + 75,
+        985: special + 50,
+        211: special + 25,
+        双一流: special + 10,
+        一本: undergrad + 20,
+        二本: undergrad,
+        专科: Math.max(120, undergrad - 80),
+      };
+      return thresholds[tier] ?? undergrad;
+    }
+
+    function tierForScore(score) {
+      return tierForPercentile(percentileAt(score));
     }
 
     function setScore(score, showModal = true) {
+      if (!Number.isFinite(score)) return;
       score = Math.round(Math.max(state.minScore, Math.min(state.maxScore, score)));
       state.currentScore = score;
       sliderEl.value = score;
+      scoreInputEl.value = score;
       $('scoreDisplay').textContent = `${score} 分`;
-      const { percentile, sharePct } = interpolate(score);
+      const { sharePct } = scoreAt(score);
       $('statScore').textContent = score;
-      $('statPercentile').textContent = `${percentile.toFixed(1)}%`;
       $('statShare').textContent = `${sharePct.toFixed(2)}%`;
-      $('statTier').textContent = tierForPercentile(percentile);
+      updateStatDescriptions(score, sharePct);
       drawChart();
       if (showModal) openModal();
     }
@@ -446,10 +1131,11 @@
       const segs = state.segments;
       if (!segs.length) return;
 
-      const maxShare = Math.max(...segs.map((s) => s.sharePct), 0.2);
+      const displayShare = (share) => Math.sqrt(Math.max(0, share));
+      const maxShare = Math.max(...segs.map((s) => displayShare(s.sharePct)), Math.sqrt(0.2));
       const xMin = segs[0].score, xMax = segs[segs.length - 1].score;
       const x = (score) => pad.l + ((score - xMin) / (xMax - xMin || 1)) * (w - pad.l - pad.r);
-      const y = (share) => h - pad.b - (share / maxShare) * (h - pad.t - pad.b);
+      const y = (share) => h - pad.b - (displayShare(share) / maxShare) * (h - pad.t - pad.b);
 
       // batch lines
       Object.entries(state.batches).forEach(([name, score]) => {
@@ -500,7 +1186,7 @@
       ctx.strokeStyle = '#141414';
       ctx.lineWidth = 2;
       ctx.beginPath();
-      ctx.arc(cx, y(interpolate(state.currentScore).sharePct), 9, 0, Math.PI * 2);
+      ctx.arc(cx, y(scoreAt(state.currentScore).sharePct), 9, 0, Math.PI * 2);
       ctx.fill();
       ctx.stroke();
 
@@ -522,48 +1208,216 @@
       return Math.round(xMin + ratio * (xMax - xMin));
     }
 
-    function recommendSchools(percentile) {
-      return state.manifest.schools
-        .filter((s) => percentile >= s.minPercentile)
-        .sort((a, b) => b.minPercentile - a.minPercentile || a.name.localeCompare(b.name, 'zh'))
-        .slice(0, 8);
-    }
+    function recommendSchools(score) {
+      const province = provinceEl.value;
+      const order = state.manifest.tierOrder;
+      const userP = percentileAt(score);
+      const reach = tierForScore(score);
+      const reachIdx = order.indexOf(reach);
+      const vocTierIdx = order.indexOf('专科');
+      const undergradLine = state.batches['本科线'] || 450;
 
-    function recommendMajors(tier) {
-      const tierIdx = state.manifest.tierOrder.indexOf(tier);
-      return state.manifest.hotMajors
-        .filter((m) => state.manifest.tierOrder.indexOf(m.tier) <= tierIdx)
-        .sort((a, b) => b.score - a.score)
+      const undergrad = state.manifest.schools
+        .filter((s) => s.tier !== '专科')
+        .filter((s) => userP != null && schoolReachable(userP, s, reachIdx))
+        .sort((a, b) => {
+          const aIdx = order.indexOf(a.tier);
+          const bIdx = order.indexOf(b.tier);
+          const aChong = aIdx < reachIdx && reachIdx - aIdx <= 2;
+          const bChong = bIdx < reachIdx && reachIdx - bIdx <= 2;
+          if (aChong !== bChong) return aChong ? -1 : 1;
+          const da = Math.abs(schoolMinPercentile(a) - (userP ?? 0));
+          const db = Math.abs(schoolMinPercentile(b) - (userP ?? 0));
+          if (da !== db) return da - db;
+          return schoolMinPercentile(b) - schoolMinPercentile(a)
+            || a.name.localeCompare(b.name, 'zh');
+        })
         .slice(0, 10);
+
+      const provinceVoc = (state.vocationalSchools || []).filter((s) => s.province === province);
+      const showVoc = score < undergradLine + 25 || reachIdx >= vocTierIdx - 1;
+      const undergradNames = new Set(undergrad.map((s) => s.name));
+      const vocational = showVoc
+        ? provinceVoc
+            .filter((s) => !undergradNames.has(s.name))
+            .sort((a, b) => (b.doubleHigh ? 1 : 0) - (a.doubleHigh ? 1 : 0)
+              || (b.viewTotal || 0) - (a.viewTotal || 0)
+              || a.name.localeCompare(b.name, 'zh'))
+            .slice(0, 15)
+        : [];
+
+      return { undergrad, vocational, vocationalTotal: provinceVoc.length, province };
     }
 
-    function openModal() {
-      const score = state.currentScore;
-      const { percentile, sharePct } = interpolate(score);
-      const tier = tierForPercentile(percentile);
-      const schools = recommendSchools(percentile);
-      const majors = recommendMajors(tier);
+    function majorCatalogAllowed(major, reachIdx) {
+      const order = state.manifest.tierOrder || [];
+      const ct = major.catalogType || 'undergraduate';
+      const vocIdx = order.indexOf('专科');
+      const ugOnlyIdx = order.indexOf('二本');
+      if (ct === 'vocational' || ct === 'vocational_undergraduate') {
+        return reachIdx >= vocIdx;
+      }
+      if (ct !== 'undergraduate' && reachIdx < ugOnlyIdx) {
+        return false;
+      }
+      return true;
+    }
 
-      $('modalTitle').textContent = `${provinceEl.value} · ${yearEl.value} · ${score} 分推荐`;
-      $('modalSummary').textContent = `${trackEl.value} | 超越约 ${percentile.toFixed(1)}% 考生 | 该分段人数占比 ${sharePct.toFixed(2)}% | 预估可达 ${tier} 层次院校`;
+    function recommendMajors(score) {
+      const order = state.manifest.tierOrder;
+      const userP = percentileAt(score);
+      const reach = tierForScore(score);
+      const reachIdx = order.indexOf(reach);
 
-      $('schoolList').innerHTML = schools.map((s) => `
+      const eligible = majorPool()
+        .filter((m) => majorMatchesSubject(m))
+        .filter((m) => majorCatalogAllowed(m, reachIdx))
+        .filter((m) => {
+          if (userP == null) return order.indexOf(m.tier) <= reachIdx + 1;
+          const fakeSchool = { tier: m.tier, minPercentile: state.manifest.tierPercentile?.[m.tier] };
+          return schoolReachable(userP, fakeSchool, reachIdx);
+        });
+
+      const byName = new Map();
+      for (const m of eligible) {
+        const prev = byName.get(m.name);
+        const prefer = (a, b) => {
+          if (!a) return b;
+          if (!b) return a;
+          const aVoc = a.catalogType === 'vocational';
+          const bVoc = b.catalogType === 'vocational';
+          if (aVoc !== bVoc) return aVoc ? b : a;
+          const aDist = Math.abs(order.indexOf(a.tier) - reachIdx);
+          const bDist = Math.abs(order.indexOf(b.tier) - reachIdx);
+          return aDist < bDist ? a : b;
+        };
+        byName.set(m.name, prefer(prev, m));
+      }
+
+      return [...byName.values()]
+        .sort((a, b) => {
+          if (a.opportunity && !b.opportunity) return -1;
+          if (!a.opportunity && b.opportunity) return 1;
+          const ta = a.trendIndex ?? a.score ?? 0;
+          const tb = b.trendIndex ?? b.score ?? 0;
+          if (tb !== ta) return tb - ta;
+          const ja = a.jobVolumeYoY ?? 0;
+          const jb = b.jobVolumeYoY ?? 0;
+          if (jb !== ja) return jb - ja;
+          return (b.salaryGrowth5y || 0) - (a.salaryGrowth5y || 0);
+        })
+        .slice(0, 12);
+    }
+
+    function subjectTrackShort() {
+      return currentSubjectTrack() === '历史类' ? '历史类' : '物理类';
+    }
+
+    function renderSchoolList(result) {
+      const { undergrad, vocational, vocationalTotal, province } = result;
+      if (!undergrad.length && !vocational.length) {
+        return '<div class="hint">暂无匹配院校</div>';
+      }
+      const order = state.manifest.tierOrder;
+      let html = '';
+
+      if (undergrad.length) {
+        const groups = {};
+        for (const s of undergrad) {
+          if (!groups[s.tier]) groups[s.tier] = [];
+          groups[s.tier].push(s);
+        }
+        const tiers = order.filter((t) => groups[t] && t !== '专科');
+        html += tiers.map((tier) => {
+          const label = tier === '二本' ? '二本 / 独立学院（原三本合并批次）' : tier;
+          const items = groups[tier].map((s) => `
         <div class="school-item">
           <div>
             <div class="name">${s.name}</div>
             <div class="tags">${(s.tags || []).join(' · ')}</div>
           </div>
           <span class="tier">${s.tier}</span>
-        </div>`).join('') || '<div class="hint">暂无匹配院校</div>';
+        </div>`).join('');
+          return `<div class="tier-group-title">${label}</div>${items}`;
+        }).join('');
+      }
 
-      $('majorList').innerHTML = majors.map((m, i) => `
+      if (vocational.length || vocationalTotal > 0) {
+        const nationalTotal = state.vocationalMeta?.total || state.vocationalSchools.length;
+        const title = vocationalTotal > 0
+          ? `专科 / 高职（${province} 共 ${vocationalTotal} 所，全国 ${nationalTotal} 所；展示 ${vocational.length} 所推荐）`
+          : `专科 / 高职（全国 ${nationalTotal} 所）`;
+        const items = vocational.map((s) => `
+        <div class="school-item">
+          <div>
+            <div class="name">${s.name}</div>
+            <div class="tags">${(s.tags || []).join(' · ')}${s.city ? ` · ${s.city}` : ''}</div>
+          </div>
+          <span class="tier">${s.doubleHigh ? '双高' : '专科'}</span>
+        </div>`).join('');
+        html += `<div class="tier-group-title">${title}</div>${items || '<div class="hint">当前省份暂无专科院校数据</div>'}`;
+      }
+      return html;
+    }
+
+    function renderMajorList(majors) {
+      if (!majors.length) {
+        const label = currentSubjectTrack() === '历史类' ? '文科/历史类' : '理科/物理类';
+        return `<div class="hint">${label}暂无匹配专业，请调整分数或切换科类</div>`;
+      }
+      return majors.map((m, i) => {
+        const opp = m.opportunity
+          ? '<span class="opportunity-badge">机会点 · 当前录取分数较低</span>'
+          : '';
+        const rationale = m.trendRationale || m.outlook10y || '';
+        const outlook = rationale ? `<div class="meta">${rationale}</div>` : '';
+        const trend = m.trendIndex ?? m.score ?? '--';
+        const growth = m.salaryGrowth5y != null
+          ? `<div class="meta">就业沙盘：5年薪资涨幅约 ${m.salaryGrowth5y}%${m.validated ? ' · 四源校验' : ''}</div>`
+          : '';
+        const jobVol = m.jobVolumeYoY != null
+          ? `<div class="meta">岗位量趋势：${m.jobVolumeYoY > 0 ? '+' : ''}${m.jobVolumeYoY}%${m.jobVolumeSource ? ` · ${m.jobVolumeSource}` : ''}</div>`
+          : '';
+        const occ = (m.occupationCodes && m.occupationCodes.length)
+          ? `<div class="meta">人社部职业编码：${m.occupationCodes.join('、')}${m.occupations?.[0]?.name ? `（如 ${m.occupations[0].name}）` : ''}</div>`
+          : '';
+        const moeCode = m.moeCode ? `<div class="meta">教育部专业代码：${m.moeCode}</div>` : '';
+        const discipline = m.discipline || m.track || '';
+        return `
         <div class="major-item">
           <div>
             <div class="name">${i + 1}. ${m.name}</div>
-            <div class="meta">${m.track} · 建议院校层级 ${m.tier}</div>
+            <div class="meta">${discipline} · ${subjectTrackShort()}可报 · 建议层次 ${m.tier}</div>
+            ${outlook}
+            ${growth}
+            ${jobVol}
+            ${moeCode}
+            ${occ}
+            ${opp}
           </div>
-          <span class="hot-score">热度 ${m.score}</span>
-        </div>`).join('') || '<div class="hint">暂无匹配专业</div>';
+          <span class="hot-score">趋势指数 ${trend}</span>
+        </div>`;
+      }).join('');
+    }
+
+    function openModal() {
+      const score = state.currentScore;
+      const schoolResult = recommendSchools(score);
+      const majors = recommendMajors(score);
+
+      $('modalTitle').textContent = `${score} 分能上什么学校？`;
+      const batch = getBatchAverages();
+      const p = percentileAt(score);
+      const rank = rankAt(score);
+      const rankPart = p != null && rank != null
+        ? `全省约前 ${rank} 名 · 超越 ${p.toFixed(1)}% 考生`
+        : '';
+      $('modalSummary').textContent = `${provinceEl.value} · ${yearEl.value} · ${trackEl.value}${rankPart ? ` | ${rankPart}` : ''} | 稳妥层次 ${tierForScore(score)} | ${batchCompareText(score, batch)}`;
+
+      $('schoolList').innerHTML = renderSchoolList(schoolResult);
+      $('majorList').innerHTML = renderMajorList(majors);
+      const trackLabel = $('majorTrackLabel');
+      if (trackLabel) trackLabel.textContent = subjectTrackShort();
 
       $('modalBackdrop').classList.add('show');
       $('modalBackdrop').setAttribute('aria-hidden', 'false');
@@ -574,19 +1428,68 @@
       $('modalBackdrop').setAttribute('aria-hidden', 'true');
     }
 
-    provinceEl.addEventListener('change', () => loadProvince(provinceEl.value));
+    provinceEl.addEventListener('change', () => {
+      updateProvinceDisplay(provinceEl.value);
+      renderTrackOptions(provinceEl.value);
+      loadProvince(provinceEl.value);
+    });
+    $('toggleValidation').addEventListener('click', () => {
+      const detail = $('validationDetail');
+      const open = detail.classList.toggle('collapsed');
+      $('toggleValidation').textContent = open ? '查看数据说明 ▾' : '收起数据说明 ▴';
+    });
+    $('fontNormal').addEventListener('click', () => {
+      document.body.classList.remove('font-large');
+      $('fontNormal').classList.add('active');
+      $('fontLarge').classList.remove('active');
+    });
+    $('fontLarge').addEventListener('click', () => {
+      document.body.classList.add('font-large');
+      $('fontLarge').classList.add('active');
+      $('fontNormal').classList.remove('active');
+    });
     yearEl.addEventListener('change', refreshTrackData);
-    trackEl.addEventListener('change', refreshTrackData);
+    function refreshModalMajors() {
+      if (!$('modalBackdrop').classList.contains('show')) return;
+      const majors = recommendMajors(state.currentScore);
+      $('majorList').innerHTML = renderMajorList(majors);
+      const trackLabel = $('majorTrackLabel');
+      if (trackLabel) trackLabel.textContent = subjectTrackShort();
+    }
+
+    trackEl.addEventListener('change', () => {
+      refreshTrackData();
+      refreshModalMajors();
+    });
     sliderEl.addEventListener('input', () => setScore(Number(sliderEl.value), false));
     sliderEl.addEventListener('change', () => setScore(Number(sliderEl.value), true));
+    scoreInputEl.addEventListener('input', () => {
+      if (scoreInputEl.value === '') return;
+      setScore(Number(scoreInputEl.value), false);
+    });
+    scoreInputEl.addEventListener('change', () => setScore(Number(scoreInputEl.value), true));
+    scoreInputEl.addEventListener('keydown', (e) => {
+      if (e.key === 'Enter') {
+        e.preventDefault();
+        setScore(Number(scoreInputEl.value), true);
+        scoreInputEl.blur();
+      }
+    });
+    $('applyScoreBtn').addEventListener('click', () => setScore(Number(scoreInputEl.value), true));
     $('openModalBtn').addEventListener('click', openModal);
     $('closeModal').addEventListener('click', closeModal);
     $('modalBackdrop').addEventListener('click', (e) => { if (e.target.id === 'modalBackdrop') closeModal(); });
 
-    chart.addEventListener('pointerdown', (e) => { state.dragging = true; chart.setPointerCapture(e.pointerId); setScore(scoreFromChartEvent(e), false); });
+    chart.addEventListener('pointerdown', (e) => {
+      state.dragging = true;
+      $('chartWrap').classList.add('dragging');
+      $('chartDragHint').style.display = 'none';
+      chart.setPointerCapture(e.pointerId);
+      setScore(scoreFromChartEvent(e), false);
+    });
     chart.addEventListener('pointermove', (e) => { if (state.dragging) setScore(scoreFromChartEvent(e), false); });
-    chart.addEventListener('pointerup', (e) => { if (state.dragging) { state.dragging = false; setScore(scoreFromChartEvent(e), true); } });
-    chart.addEventListener('pointerleave', (e) => { if (state.dragging) { state.dragging = false; setScore(scoreFromChartEvent(e), true); } });
+    chart.addEventListener('pointerup', (e) => { if (state.dragging) { state.dragging = false; $('chartWrap').classList.remove('dragging'); setScore(scoreFromChartEvent(e), true); } });
+    chart.addEventListener('pointerleave', (e) => { if (state.dragging) { state.dragging = false; $('chartWrap').classList.remove('dragging'); setScore(scoreFromChartEvent(e), true); } });
 
     window.addEventListener('resize', drawChart);
     loadManifest().catch((err) => {

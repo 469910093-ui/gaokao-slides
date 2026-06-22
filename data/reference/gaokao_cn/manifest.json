@@ -1,0 +1,15 @@
+{
+  "source": "https://www.gaokao.cn/",
+  "api": "https://api.zjzw.cn/web/api/",
+  "years": [
+    2025
+  ],
+  "provinces": [
+    "河南"
+  ],
+  "tracks": [
+    "物理类"
+  ],
+  "note": "院校投档最低分与省控线参考；请以省教育考试院官方公布为准。",
+  "files": {}
+}

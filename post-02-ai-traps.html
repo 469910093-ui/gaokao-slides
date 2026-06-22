@@ -239,16 +239,120 @@ h2.slide-title::after {
 }
 .card ul { list-style: none; display: flex; flex-direction: column; gap: 10px; }
 .quote-box {
-    margin-top: auto;
-    padding: 34px 38px;
+    margin-top: 16px;
+    padding: 26px 32px;
     border: var(--stroke);
     background: linear-gradient(135deg, #fff 0%, #fff8d8 100%);
-    border-radius: 24px;
-    font: 400 42px/1.45 var(--font-display);
+    border-radius: 22px;
+    font: 400 34px/1.42 var(--font-display);
     color: var(--ink);
     box-shadow: var(--shadow-pop);
     position: relative;
     z-index: 3;
+}
+.action-steps {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 16px;
+    margin-top: 20px;
+    flex: 1;
+    position: relative;
+    z-index: 3;
+}
+.action-step {
+    display: flex;
+    gap: 14px;
+    align-items: flex-start;
+    background: var(--card);
+    border: var(--stroke);
+    border-radius: 18px;
+    padding: 18px 20px;
+    box-shadow: 5px 5px 0 rgba(20,20,20,0.9);
+}
+.action-step .step-tag {
+    flex: 0 0 auto;
+    background: var(--red);
+    color: #fff;
+    font: 800 18px/1 var(--font-body);
+    padding: 8px 12px;
+    border-radius: 10px;
+    border: 2px solid var(--ink);
+    white-space: nowrap;
+}
+.action-step strong {
+    display: block;
+    font: 800 24px/1.25 var(--font-body);
+    margin-bottom: 6px;
+}
+.action-step p {
+    font: 600 20px/1.45 var(--font-body);
+    color: var(--text-secondary);
+}
+.card-slide .card {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+}
+.card-slide .card ul {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+}
+.card-slide .card li {
+    font: 600 28px/1.45 var(--font-body);
+    padding-left: 8px;
+}
+.card-tips {
+    margin-top: 16px;
+    padding: 16px 20px;
+    border: 2px dashed var(--ink);
+    border-radius: 16px;
+    background: #fffbe6;
+    font: 700 22px/1.5 var(--font-body);
+    color: var(--ink);
+    position: relative;
+    z-index: 3;
+}
+.cta-slide .cta {
+    font: 400 52px/1.2 var(--font-display);
+    color: var(--ink);
+    max-width: 1500px;
+    position: relative;
+    z-index: 3;
+}
+.cta-checklist {
+    margin-top: 22px;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 12px;
+    position: relative;
+    z-index: 3;
+}
+.cta-checklist li {
+    list-style: none;
+    font: 700 22px/1.4 var(--font-body);
+    background: #fff;
+    border: 2px solid var(--ink);
+    border-radius: 14px;
+    padding: 14px 16px;
+    box-shadow: 4px 4px 0 rgba(20,20,20,0.85);
+}
+.cta-tools {
+    margin-top: 18px;
+    display: flex;
+    gap: 14px;
+    flex-wrap: wrap;
+    position: relative;
+    z-index: 3;
+}
+.cta-tools span {
+    padding: 12px 18px;
+    border: 2px solid var(--ink);
+    border-radius: 12px;
+    background: var(--yellow);
+    font: 800 20px/1 var(--font-body);
+    box-shadow: 4px 4px 0 var(--ink);
 }
 .quote-box::before {
     content: '“';
@@ -274,15 +378,8 @@ h2.slide-title::after {
     background: #f2fff8;
 }
 .compare .card h3 { color: var(--ink); font-size: 34px; }
-.cta-slide .cta {
-    font: 400 72px/1.18 var(--font-display);
-    color: var(--ink);
-    max-width: 1400px;
-    position: relative;
-    z-index: 3;
-}
 .cta-slide .actions {
-    margin-top: 36px;
+    margin-top: 20px;
     display: flex;
     gap: 18px;
     flex-wrap: wrap;
@@ -474,11 +571,12 @@ img, video, canvas, svg {
                 <ul class="bullets"><li class="reveal"><span class="icon">🎨</span><span>Midjourney 谁都会用</span></li><li class="reveal"><span class="icon">💎</span><span>值钱的是审美体系、品牌思维、作品集</span></li><li class="reveal"><span class="icon">🚀</span><span>UI/UX、品牌设计、游戏美术比低端美工稳太多</span></li></ul>
             </div>
         </section>
-        <section class="slide">
+        <section class="slide quote-slide">
             <div class="slide-inner">
                 <span class="slide-no">6/7</span>
-                <h2 class="slide-title reveal">选专业公式</h2>
+                <h2 class="slide-title reveal">选专业公式 + 今晚就能做</h2>
                 <div class="quote-box reveal">扎实底座 + 行业场景 + 会用 AI = 10 年后还能打。不是和 AI 比速度，是做 AI 替不了判断的那部分。</div>
+                <div class="action-steps"><div class="action-step reveal"><span class="step-tag">Step1</span><div><strong>拆专业名</strong><p>去目标院校官网看培养方案：有没有实验室、实习、竞赛</p></div></div><div class="action-step reveal"><span class="step-tag">Step2</span><div><strong>测适配度</strong><p>数学/物理/编程各打1-5分，有两项≤2就别硬冲顶尖AI</p></div></div><div class="action-step reveal"><span class="step-tag">Step3</span><div><strong>看就业出口</strong><p>沙盘搜专业名，看应届薪资Top3岗位是否愿意做</p></div></div><div class="action-step reveal"><span class="step-tag">Step4</span><div><strong>留备选</strong><p>每个意向专业至少备1个「学得下去」的相近专业</p></div></div></div>
             </div>
         </section>
         <section class="slide cta-slide">
@@ -487,7 +585,14 @@ img, video, canvas, svg {
                     <span class="sticker sticker-hot">⭐ 转发家长群</span>
                 </div>
                 <span class="slide-no">7/7</span>
-                <div class="cta reveal">建议收藏，填志愿前一晚全家一起读。</div>
+                <div class="cta reveal">建议收藏，填志愿前一晚全家按清单过一遍。</div>
+                <ul class="cta-checklist"><li class='reveal'>✅ 每个意向专业查官网培养方案</li><li class='reveal'>✅ 用沙盘对比2个专业的岗位薪资</li><li class='reveal'>✅ 分数选校工具拉出冲稳保院校</li><li class='reveal'>✅ 转发给「只想报热门」的家人</li></ul>
+                
+                <div class="cta-tools reveal">
+                    <span>📊 分数选校工具</span>
+                    <span>💼 就业沙盘</span>
+                    <span>🔗 链接见主页简介</span>
+                </div>
                 <div class="actions reveal">
                     <span class="action">👉 收藏</span>
                     <span class="action">📤 转发给爸妈</span>

@@ -1,0 +1,84 @@
+{
+  "covers": {
+    "01": "publish/feishu/covers/post-01-cover.png",
+    "02": "publish/feishu/covers/post-02-cover.png",
+    "03": "publish/feishu/covers/post-03-cover.png",
+    "04": "publish/feishu/covers/post-04-cover.png",
+    "05": "publish/feishu/covers/post-05-cover.png",
+    "06": "publish/feishu/covers/post-06-cover.png",
+    "07": "publish/feishu/covers/post-07-cover.png",
+    "08": "publish/feishu/covers/post-08-cover.png",
+    "09": "publish/feishu/covers/post-09-cover.png"
+  },
+  "slides": {
+    "01": [
+      "publish/feishu/slides/post-01-p2.png",
+      "publish/feishu/slides/post-01-p3.png",
+      "publish/feishu/slides/post-01-p4.png",
+      "publish/feishu/slides/post-01-p5.png",
+      "publish/feishu/slides/post-01-p6.png"
+    ],
+    "02": [
+      "publish/feishu/slides/post-02-p2.png",
+      "publish/feishu/slides/post-02-p3.png",
+      "publish/feishu/slides/post-02-p4.png",
+      "publish/feishu/slides/post-02-p5.png",
+      "publish/feishu/slides/post-02-p6.png",
+      "publish/feishu/slides/post-02-p7.png"
+    ],
+    "03": [
+      "publish/feishu/slides/post-03-p2.png",
+      "publish/feishu/slides/post-03-p3.png",
+      "publish/feishu/slides/post-03-p4.png",
+      "publish/feishu/slides/post-03-p5.png",
+      "publish/feishu/slides/post-03-p6.png"
+    ],
+    "04": [
+      "publish/feishu/slides/post-04-p2.png",
+      "publish/feishu/slides/post-04-p3.png",
+      "publish/feishu/slides/post-04-p4.png",
+      "publish/feishu/slides/post-04-p5.png",
+      "publish/feishu/slides/post-04-p6.png"
+    ],
+    "05": [
+      "publish/feishu/slides/post-05-p2.png",
+      "publish/feishu/slides/post-05-p3.png",
+      "publish/feishu/slides/post-05-p4.png",
+      "publish/feishu/slides/post-05-p5.png",
+      "publish/feishu/slides/post-05-p6.png"
+    ],
+    "06": [
+      "publish/feishu/slides/post-06-p2.png",
+      "publish/feishu/slides/post-06-p3.png",
+      "publish/feishu/slides/post-06-p4.png",
+      "publish/feishu/slides/post-06-p5.png",
+      "publish/feishu/slides/post-06-p6.png",
+      "publish/feishu/slides/post-06-p7.png"
+    ],
+    "07": [
+      "publish/feishu/slides/post-07-p2.png",
+      "publish/feishu/slides/post-07-p3.png",
+      "publish/feishu/slides/post-07-p4.png",
+      "publish/feishu/slides/post-07-p5.png",
+      "publish/feishu/slides/post-07-p6.png",
+      "publish/feishu/slides/post-07-p7.png",
+      "publish/feishu/slides/post-07-p8.png"
+    ],
+    "08": [
+      "publish/feishu/slides/post-08-p2.png",
+      "publish/feishu/slides/post-08-p3.png",
+      "publish/feishu/slides/post-08-p4.png",
+      "publish/feishu/slides/post-08-p5.png",
+      "publish/feishu/slides/post-08-p6.png"
+    ],
+    "09": [
+      "publish/feishu/slides/post-09-p2.png",
+      "publish/feishu/slides/post-09-p3.png",
+      "publish/feishu/slides/post-09-p4.png",
+      "publish/feishu/slides/post-09-p5.png",
+      "publish/feishu/slides/post-09-p6.png",
+      "publish/feishu/slides/post-09-p7.png"
+    ]
+  },
+  "xml": "publish/feishu/feishu_xhs_posts.xml"
+}

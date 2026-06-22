@@ -372,16 +372,120 @@ h2.slide-title::after {
 }
 .card ul { list-style: none; display: flex; flex-direction: column; gap: 10px; }
 .quote-box {
-    margin-top: auto;
-    padding: 34px 38px;
+    margin-top: 16px;
+    padding: 26px 32px;
     border: var(--stroke);
     background: linear-gradient(135deg, #fff 0%, #fff8d8 100%);
-    border-radius: 24px;
-    font: 400 42px/1.45 var(--font-display);
+    border-radius: 22px;
+    font: 400 34px/1.42 var(--font-display);
     color: var(--ink);
     box-shadow: var(--shadow-pop);
     position: relative;
     z-index: 3;
+}
+.action-steps {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 16px;
+    margin-top: 20px;
+    flex: 1;
+    position: relative;
+    z-index: 3;
+}
+.action-step {
+    display: flex;
+    gap: 14px;
+    align-items: flex-start;
+    background: var(--card);
+    border: var(--stroke);
+    border-radius: 18px;
+    padding: 18px 20px;
+    box-shadow: 5px 5px 0 rgba(20,20,20,0.9);
+}
+.action-step .step-tag {
+    flex: 0 0 auto;
+    background: var(--red);
+    color: #fff;
+    font: 800 18px/1 var(--font-body);
+    padding: 8px 12px;
+    border-radius: 10px;
+    border: 2px solid var(--ink);
+    white-space: nowrap;
+}
+.action-step strong {
+    display: block;
+    font: 800 24px/1.25 var(--font-body);
+    margin-bottom: 6px;
+}
+.action-step p {
+    font: 600 20px/1.45 var(--font-body);
+    color: var(--text-secondary);
+}
+.card-slide .card {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+}
+.card-slide .card ul {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+}
+.card-slide .card li {
+    font: 600 28px/1.45 var(--font-body);
+    padding-left: 8px;
+}
+.card-tips {
+    margin-top: 16px;
+    padding: 16px 20px;
+    border: 2px dashed var(--ink);
+    border-radius: 16px;
+    background: #fffbe6;
+    font: 700 22px/1.5 var(--font-body);
+    color: var(--ink);
+    position: relative;
+    z-index: 3;
+}
+.cta-slide .cta {
+    font: 400 52px/1.2 var(--font-display);
+    color: var(--ink);
+    max-width: 1500px;
+    position: relative;
+    z-index: 3;
+}
+.cta-checklist {
+    margin-top: 22px;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 12px;
+    position: relative;
+    z-index: 3;
+}
+.cta-checklist li {
+    list-style: none;
+    font: 700 22px/1.4 var(--font-body);
+    background: #fff;
+    border: 2px solid var(--ink);
+    border-radius: 14px;
+    padding: 14px 16px;
+    box-shadow: 4px 4px 0 rgba(20,20,20,0.85);
+}
+.cta-tools {
+    margin-top: 18px;
+    display: flex;
+    gap: 14px;
+    flex-wrap: wrap;
+    position: relative;
+    z-index: 3;
+}
+.cta-tools span {
+    padding: 12px 18px;
+    border: 2px solid var(--ink);
+    border-radius: 12px;
+    background: var(--yellow);
+    font: 800 20px/1 var(--font-body);
+    box-shadow: 4px 4px 0 var(--ink);
 }
 .quote-box::before {
     content: '“';
@@ -407,15 +511,8 @@ h2.slide-title::after {
     background: #f2fff8;
 }
 .compare .card h3 { color: var(--ink); font-size: 34px; }
-.cta-slide .cta {
-    font: 400 72px/1.18 var(--font-display);
-    color: var(--ink);
-    max-width: 1400px;
-    position: relative;
-    z-index: 3;
-}
 .cta-slide .actions {
-    margin-top: 36px;
+    margin-top: 20px;
     display: flex;
     gap: 18px;
     flex-wrap: wrap;
@@ -523,11 +620,23 @@ DECKS = [
             {
                 "type": "quote",
                 "title": "给家长的一句话",
-                "quote": "别帮孩子押一个「永远热门」的名字，帮他把底座打牢。大学四年只是起点，会学习的人，换赛道都来得及。",
+                "quote": "别帮孩子押一个「永远热门」的名字，帮他把底座打牢。会学习的人，换赛道都来得及。",
+                "steps": [
+                    ("今晚", "查一分一段表", "记录孩子分数对应位次，别只看学校往年录取线"),
+                    ("明天", "列冲稳保清单", "各写3所：冲高+5分、稳妥±3分、保底-10分"),
+                    ("填志愿前", "核对专业就业", "打开就业沙盘，看心仪专业Top岗位与5年薪资涨幅"),
+                    ("定稿前", "全家开15分钟会", "只讨论：擅长什么、愿不愿意学、学校这个专业强不强"),
+                ],
             },
             {
                 "type": "cta",
-                "cta": "收藏这篇，填志愿前对照一遍。转给那个「只想报热门」的家人。",
+                "cta": "收藏这篇，按下面清单一步步做，比空焦虑有用。",
+                "checklist": [
+                    "✅ 截图保存上方4步实操清单",
+                    "✅ 打开分数选校工具，输入省份+科类+分数",
+                    "✅ 进就业沙盘核对专业岗位方向",
+                    "✅ 备注「地区+分数」进家长群交流",
+                ],
                 "hashtags": "#高考出分 #志愿填报 #选专业 #家长必看 #AI时代 #升学规划",
             },
         ],
@@ -584,12 +693,24 @@ DECKS = [
             },
             {
                 "type": "quote",
-                "title": "选专业公式",
+                "title": "选专业公式 + 今晚就能做",
                 "quote": "扎实底座 + 行业场景 + 会用 AI = 10 年后还能打。不是和 AI 比速度，是做 AI 替不了判断的那部分。",
+                "steps": [
+                    ("Step1", "拆专业名", "去目标院校官网看培养方案：有没有实验室、实习、竞赛"),
+                    ("Step2", "测适配度", "数学/物理/编程各打1-5分，有两项≤2就别硬冲顶尖AI"),
+                    ("Step3", "看就业出口", "沙盘搜专业名，看应届薪资Top3岗位是否愿意做"),
+                    ("Step4", "留备选", "每个意向专业至少备1个「学得下去」的相近专业"),
+                ],
             },
             {
                 "type": "cta",
-                "cta": "建议收藏，填志愿前一晚全家一起读。",
+                "cta": "建议收藏，填志愿前一晚全家按清单过一遍。",
+                "checklist": [
+                    "✅ 每个意向专业查官网培养方案",
+                    "✅ 用沙盘对比2个专业的岗位薪资",
+                    "✅ 分数选校工具拉出冲稳保院校",
+                    "✅ 转发给「只想报热门」的家人",
+                ],
                 "hashtags": "#AI选专业 #高考志愿填报 #家长焦虑 #填志愿攻略 #避坑指南",
             },
         ],
@@ -616,6 +737,7 @@ DECKS = [
                     "临床医学（能接受长学制）",
                     "数学、物理（适合愿意深造）",
                 ],
+                "tips": "实操：分数选校工具输入650+，截图保存「冲稳保」院校清单各3所",
             },
             {
                 "type": "card",
@@ -628,6 +750,7 @@ DECKS = [
                     "医学技术、康复、药学",
                     "师范、法学、电子商务",
                 ],
+                "tips": "实操：优先选本省有产业园区的专业（如新能源、制造、电商）",
             },
             {
                 "type": "card",
@@ -640,19 +763,26 @@ DECKS = [
                     "学前教育、社会工作、会计、电商运营",
                     "慎选：名字很新、就业路径模糊的交叉专业",
                 ],
+                "tips": "实操：就业沙盘搜专业名，看应届Top3岗位薪资再决定",
             },
             {
                 "type": "content",
-                "title": "家长请记住 3 句话",
+                "title": "家长请记住 3 句话 + 实操动作",
                 "bullets": [
-                    ("1️⃣", "热门 4 年后可能饱和，冷门也可能因产业变香"),
-                    ("2️⃣", "城市和产业，有时比学校名气更影响第一份工作"),
-                    ("3️⃣", "孩子学不下去的专业，再热门也没用"),
+                    ("1️⃣", "热门4年后可能饱和 → 今晚查目标专业近3年招生人数变化"),
+                    ("2️⃣", "城市产业比名气重要 → 列出孩子愿去的3个城市及优势产业"),
+                    ("3️⃣", "学不下去再热门也没用 → 问孩子：愿不愿意学这门课4年"),
                 ],
             },
             {
                 "type": "cta",
-                "cta": "不是选一定发财的专业，是选愿意学、学得会、能不断升级的方向。",
+                "cta": "不是选一定发财的专业，是选愿意学、学得会、能升级的方向。",
+                "checklist": [
+                    "✅ 按分数段截图保存对应专业清单",
+                    "✅ 分数选校：输入分数看可达院校层级",
+                    "✅ 每个分数段备3个「学得下去」的专业",
+                    "✅ 低分段优先选就业路径清晰的方向",
+                ],
                 "hashtags": "#高考出分 #志愿填报 #分数段选专业 #升学规划 #填志愿干货",
             },
         ],
@@ -698,12 +828,24 @@ DECKS = [
             },
             {
                 "type": "quote",
-                "title": "给文科生的策略",
-                "quote": "「文科的脑子 + 数据的手 + AI 的工具」。别和 AI 比谁写得快，去做 AI 做不了的事：承担责任、处理模糊问题、建立信任。",
+                "title": "给文科生的策略 + 本周行动",
+                "quote": "「文科的脑子 + 数据的手 + AI 的工具」。别和 AI 比谁写得快，去做 AI 做不了的事。",
+                "steps": [
+                    ("本周", "补数据手", "学会用Excel做透视表，或跑通一个基础SQL查询"),
+                    ("本周", "补AI手", "用AI写调研提纲，但自己核对数据来源"),
+                    ("志愿前", "查实习率", "目标院校该专业有没有律所/媒体/企业实习合作"),
+                    ("定专业", "选有场景的方向", "法学/新传/教育优先选能对接真实业务的培养"),
+                ],
             },
             {
                 "type": "cta",
                 "cta": "文科不是不能就业，泛文科 + 无实习 + 无技能，才最难。",
+                "checklist": [
+                    "✅ 本周完成1个Excel或SQL小练习",
+                    "✅ 沙盘查看文科类专业的岗位薪资",
+                    "✅ 每个意向专业查实习/就业去向",
+                    "✅ 收藏本篇，填志愿前对照",
+                ],
                 "hashtags": "#文科生选专业 #高考出分 #法学 #新传 #升学建议",
             },
         ],
@@ -729,6 +871,7 @@ DECKS = [
                     "⚠️ 别只看「人工智能」四个字",
                     "⚠️ 传统工科也要会编程、仿真、AI 工具",
                 ],
+                "tips": "实操：去目标院校官网下载培养方案，看有没有实验室/竞赛/企业合作",
             },
             {
                 "type": "card",
@@ -740,6 +883,7 @@ DECKS = [
                     "✅ 电子商务、数字经济、国际贸易",
                     "❌ 只会做表、做 PPT 的空泛商科",
                 ],
+                "tips": "实操：选专业时确认课程含 Excel/SQL/Python 至少一门",
             },
             {
                 "type": "card",
@@ -751,25 +895,43 @@ DECKS = [
                     "✅ 数字媒体艺术、动画、游戏美术",
                     "✅ 影视编导、摄影（有作品才说话）",
                 ],
+                "tips": "实操：让孩子用同一命题做2版作品（纯手绘 vs AI辅助），看差异",
             },
             {
                 "type": "content",
                 "title": "填志愿前，全家只讨论 4 件事",
                 "bullets": [
-                    ("1", "孩子擅长什么"),
-                    ("2", "孩子愿不愿意学"),
-                    ("3", "学校这个专业强不强"),
-                    ("4", "4 年后想就业还是深造"),
+                    ("1", "孩子擅长什么 → 列3门学得最轻松的高中科目"),
+                    ("2", "愿不愿意学 → 找一门大学课视频试看30分钟"),
+                    ("3", "学校强不强 → 查该专业有没有硕博点、重点实验室"),
+                    ("4", "就业还是深造 → 沙盘看岗位，决定要不要选考研友好专业"),
                 ],
             },
             {
                 "type": "cta",
                 "cta": "比「热不热」重要的，永远是「适不适配」。收藏，填志愿前一晚全家开会用。",
+                "checklist": [
+                    "✅ 工科/商科/艺术各截图保存对应清单",
+                    "✅ 分数选校工具拉出可达院校",
+                    "✅ 就业沙盘核对专业Top岗位",
+                    "✅ 全家按4件事逐项打分讨论",
+                ],
                 "hashtags": "#高考志愿填报 #选专业 #工科 #商科 #艺术生 #填志愿干货",
             },
         ],
     },
 ]
+
+
+def render_action_steps(steps: list) -> str:
+    if not steps:
+        return ""
+    items = "".join(
+        f'<div class="action-step reveal"><span class="step-tag">{tag}</span>'
+        f"<div><strong>{title}</strong><p>{detail}</p></div></div>"
+        for tag, title, detail in steps
+    )
+    return f'<div class="action-steps">{items}</div>'
 
 
 def render_slide(slide: dict, index: int, total: int) -> str:
@@ -850,27 +1012,46 @@ def render_slide(slide: dict, index: int, total: int) -> str:
 
     if t == "card":
         items = "".join(f"<li>{x}</li>" for x in slide["bullets"])
+        tips = (
+            f'<p class="card-tips reveal">📌 {slide["tips"]}</p>'
+            if slide.get("tips")
+            else ""
+        )
         return f"""
-        <section class="slide{active}">
+        <section class="slide card-slide{active}">
             <div class="slide-inner">
                 {page_no}
                 <h2 class="slide-title reveal">{slide['title']}</h2>
                 <p class="lead reveal">{slide['subtitle']}</p>
                 <div class="card reveal"><ul>{items}</ul></div>
+                {tips}
             </div>
         </section>"""
 
     if t == "quote":
+        steps = render_action_steps(slide.get("steps", []))
         return f"""
-        <section class="slide{active}">
+        <section class="slide quote-slide{active}">
             <div class="slide-inner">
                 {page_no}
                 <h2 class="slide-title reveal">{slide['title']}</h2>
                 <div class="quote-box reveal">{slide['quote']}</div>
+                {steps}
             </div>
         </section>"""
 
     if t == "cta":
+        checklist = slide.get("checklist", [])
+        checklist_html = ""
+        if checklist:
+            items = "".join(f"<li class='reveal'>{x}</li>" for x in checklist)
+            checklist_html = f'<ul class="cta-checklist">{items}</ul>'
+        tools_html = """
+                <div class="cta-tools reveal">
+                    <span>📊 分数选校工具</span>
+                    <span>💼 就业沙盘</span>
+                    <span>🔗 链接见主页简介</span>
+                </div>"""
         return f"""
         <section class="slide cta-slide{active}">
             <div class="slide-inner">
@@ -879,6 +1060,8 @@ def render_slide(slide: dict, index: int, total: int) -> str:
                 </div>
                 {page_no}
                 <div class="cta reveal">{slide['cta']}</div>
+                {checklist_html}
+                {tools_html}
                 <div class="actions reveal">
                     <span class="action">👉 收藏</span>
                     <span class="action">📤 转发给爸妈</span>

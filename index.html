@@ -125,6 +125,14 @@
       white-space: nowrap;
     }
     footer { margin-top: 34px; color: var(--muted); font-size: 13px; line-height: 1.7; }
+    .qr-panel {
+      margin-top: 28px; text-align: center; padding: 28px 24px 32px;
+      background: linear-gradient(180deg, #fff 0%, #fff8e8 100%);
+      border: 3px solid var(--ink); border-radius: 16px; box-shadow: 6px 6px 0 var(--ink);
+    }
+    .qr-panel h2 { font-size: 18px; margin-bottom: 12px; color: var(--ink); }
+    .qr-panel img { width: min(280px, 90vw); height: auto; border-radius: 12px; }
+    .qr-hint { margin-top: 10px; font-size: 13px; color: var(--muted); font-weight: 600; }
   </style>
 </head>
 <body>
@@ -133,7 +141,6 @@
       <span class="hero-badge">🔥 祝愿心想事成！</span>
       <h1>高考出分选专业<br><span class="hl">爆帖轮播 + 分数选校工具</span></h1>
       <p class="intro">5 篇爆帖已统一换成高对比「封面海报」视觉：黄底高亮、贴纸标签、粗描边卡片。另附交互选校页，拖拽分数看院校与 10 年热门专业。</p>
-      <p class="intro" style="margin-top:8px;font-size:13px;color:#8a5b00;">💡 本地：双击 html 即可；分享发小红书请先部署 GitHub Pages，步骤见 <code style="background:#ffe566;padding:2px 6px;border-radius:4px;">publish/小红书发布指南.txt</code></p>
     </section>
     <div class="grid">
       <a class="deck-card featured" href="selector.html">
@@ -143,14 +150,6 @@
           <p>31 省 · 2014-2025 · 院校分级 + 热门专业排序</p>
         </div>
         <span class="featured-cta">立即体验 →</span>
-      </a>
-      <a class="deck-card featured" href="career-sandbox.html" style="background:linear-gradient(135deg,#fff,#e8f4ff);">
-        <div>
-          <div class="card-top"><span class="num">💼</span><span class="pill">就业沙盘</span></div>
-          <h2>毕业后能做什么 · 薪资 TOP10</h2>
-          <p>猎聘/BOSS/脉脉/OfferShow 四源交叉验证 · 5年涨幅</p>
-        </div>
-        <span class="featured-cta">查看沙盘 →</span>
       </a>
       
         <a class="deck-card" href="post-01-no-never-unemploy.html">
@@ -195,6 +194,12 @@
         </a>
     </div>
     <footer>技术说明：幻灯片为 16:9 固定画布（1920×1080），方向键/空格翻页后截图即可发小红书。选校工具需本地服务器打开。</footer>
+
+    <section class="qr-panel" aria-label="扫码入群">
+      <h2>📱 扫码加入高考志愿交流群</h2>
+      <img src="assets/wechat-group-qr.png" alt="微信扫码入群，备注地区+高考分数获取更多院校专业资讯">
+      <p class="qr-hint">扫码进群 · 获取最新院校专业资讯与填报交流 · 备注「地区+分数」更快通过</p>
+    </section>
   </div>
 </body>
 </html>
