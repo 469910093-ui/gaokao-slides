@@ -1,0 +1,14 @@
+__pycache__/
+*.pyc
+.Python
+.env
+.DS_Store
+Thumbs.db
+
+# 爬虫调试缓存（不必上传）
+data/zizzs.html
+data/js.html
+data/zizzs_probe.json
+data/jiangsu_anchors.json
+data/eol_all_urls.json
+data/gaokao-data.json

@@ -1,0 +1,558 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>没有「永不失业」的专业</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+SC:wght@400;500;600;700;800&family=ZCOOL+QingKe+HuangYou&family=ZCOOL+XiaoWei&display=swap" rel="stylesheet">
+  <style>
+    
+:root {
+    --stage-bg: #0d0d0d;
+    --slide-bg: #fffdf5;
+    --yellow: #ffe566;
+    --yellow-deep: #ffd400;
+    --red: #ff2442;
+    --red-deep: #e01030;
+    --ink: #141414;
+    --text-primary: #141414;
+    --text-secondary: #4a4a4a;
+    --ok: #00b96b;
+    --warn: #ff8a00;
+    --card: #ffffff;
+    --font-display: 'ZCOOL QingKe HuangYou', 'ZCOOL XiaoWei', cursive;
+    --font-body: 'Noto Sans SC', sans-serif;
+    --ease: cubic-bezier(0.16, 1, 0.3, 1);
+    --stroke: 3px solid #141414;
+    --shadow-pop: 8px 8px 0 #141414;
+}
+* { margin: 0; padding: 0; box-sizing: border-box; }
+.slide-inner {
+    width: 1920px;
+    height: 1080px;
+    padding: 64px 88px;
+    display: flex;
+    flex-direction: column;
+    position: relative;
+    overflow: hidden;
+}
+.slide-inner::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background:
+        radial-gradient(circle at 12% 18%, rgba(255,228,102,0.55), transparent 22%),
+        radial-gradient(circle at 88% 12%, rgba(255,36,66,0.18), transparent 20%),
+        repeating-linear-gradient(-12deg, rgba(20,20,20,0.03) 0 8px, transparent 8px 16px);
+    pointer-events: none;
+}
+.slide-inner::after {
+    content: '干货';
+    position: absolute;
+    right: -20px;
+    bottom: 120px;
+    font: 700 180px/1 var(--font-display);
+    color: rgba(255,36,66,0.05);
+    transform: rotate(-18deg);
+    pointer-events: none;
+}
+.cover-deco {
+    position: absolute;
+    inset: 0;
+    pointer-events: none;
+    z-index: 2;
+}
+.sticker {
+    position: absolute;
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    padding: 14px 24px;
+    border: var(--stroke);
+    border-radius: 999px;
+    box-shadow: var(--shadow-pop);
+    font: 700 26px/1 var(--font-body);
+    transform: rotate(-8deg);
+}
+.sticker-hot {
+    top: 48px; right: 72px;
+    background: var(--yellow);
+    color: var(--ink);
+}
+.sticker-save {
+    top: 130px; right: 96px;
+    background: var(--red);
+    color: #fff;
+    transform: rotate(6deg);
+    box-shadow: 6px 6px 0 #141414;
+}
+.badge {
+    display: inline-flex;
+    align-items: center;
+    gap: 10px;
+    padding: 14px 28px;
+    border-radius: 12px;
+    border: var(--stroke);
+    background: var(--yellow);
+    color: var(--ink);
+    font: 800 28px/1 var(--font-body);
+    letter-spacing: 0.06em;
+    width: fit-content;
+    box-shadow: var(--shadow-pop);
+    transform: rotate(-2deg);
+    position: relative;
+    z-index: 3;
+}
+.title-slide .headline {
+    font: 400 108px/1.05 var(--font-display);
+    color: var(--ink);
+    max-width: 1480px;
+    margin-top: 40px;
+    position: relative;
+    z-index: 3;
+    text-shadow: 4px 4px 0 #fff, 6px 6px 0 rgba(255,36,66,0.25);
+}
+.title-slide .headline .hl {
+    display: inline;
+    background: linear-gradient(180deg, transparent 58%, var(--yellow) 58%, var(--yellow) 92%, transparent 92%);
+    box-decoration-break: clone;
+}
+.subtitle {
+    font: 600 34px/1.55 var(--font-body);
+    color: var(--text-secondary);
+    max-width: 1180px;
+    margin-top: 32px;
+    padding: 22px 26px;
+    background: rgba(255,255,255,0.88);
+    border: 2px dashed rgba(20,20,20,0.18);
+    border-radius: 18px;
+    position: relative;
+    z-index: 3;
+}
+.meta-row {
+    display: flex;
+    gap: 14px;
+    margin-top: auto;
+    flex-wrap: wrap;
+    position: relative;
+    z-index: 3;
+}
+.tag {
+    padding: 12px 18px;
+    border-radius: 999px;
+    background: #fff;
+    border: 2px solid var(--ink);
+    font: 700 22px/1 var(--font-body);
+    color: var(--red);
+    box-shadow: 4px 4px 0 rgba(20,20,20,0.85);
+}
+.slide-no {
+    position: absolute;
+    top: 42px; right: 88px;
+    font: 700 22px/1 var(--font-body);
+    color: #fff;
+    background: var(--ink);
+    padding: 10px 16px;
+    border-radius: 10px;
+    z-index: 4;
+}
+h2.slide-title {
+    font: 400 78px/1.08 var(--font-display);
+    color: var(--ink);
+    margin-bottom: 24px;
+    position: relative;
+    z-index: 3;
+    display: inline-block;
+    max-width: 92%;
+}
+h2.slide-title::after {
+    content: '';
+    position: absolute;
+    left: 0; right: 0; bottom: 6px;
+    height: 18px;
+    background: var(--yellow);
+    z-index: -1;
+    transform: skewX(-8deg);
+}
+.lead {
+    font: 600 32px/1.55 var(--font-body);
+    color: var(--text-secondary);
+    margin-bottom: 24px;
+    position: relative;
+    z-index: 3;
+}
+.bullets {
+    list-style: none;
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+    position: relative;
+    z-index: 3;
+}
+.bullets li {
+    display: flex;
+    gap: 16px;
+    align-items: flex-start;
+    font: 600 30px/1.42 var(--font-body);
+    color: var(--text-primary);
+    background: var(--card);
+    border: var(--stroke);
+    border-radius: 18px;
+    padding: 22px 24px;
+    box-shadow: 5px 5px 0 rgba(20,20,20,0.9);
+}
+.bullets li .icon {
+    flex: 0 0 auto;
+    font-size: 30px;
+    line-height: 1.1;
+    width: 48px; height: 48px;
+    display: grid; place-items: center;
+    background: var(--yellow);
+    border: 2px solid var(--ink);
+    border-radius: 12px;
+}
+.grid-2 {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 22px;
+    flex: 1;
+    position: relative;
+    z-index: 3;
+}
+.card {
+    background: var(--card);
+    border: var(--stroke);
+    border-radius: 22px;
+    padding: 28px 30px;
+    box-shadow: var(--shadow-pop);
+}
+.card h3 {
+    font: 400 40px/1.1 var(--font-display);
+    color: var(--red);
+    margin-bottom: 14px;
+}
+.card p, .card li {
+    font: 600 26px/1.5 var(--font-body);
+    color: var(--text-primary);
+}
+.card ul { list-style: none; display: flex; flex-direction: column; gap: 10px; }
+.quote-box {
+    margin-top: auto;
+    padding: 34px 38px;
+    border: var(--stroke);
+    background: linear-gradient(135deg, #fff 0%, #fff8d8 100%);
+    border-radius: 24px;
+    font: 400 42px/1.45 var(--font-display);
+    color: var(--ink);
+    box-shadow: var(--shadow-pop);
+    position: relative;
+    z-index: 3;
+}
+.quote-box::before {
+    content: '“';
+    position: absolute;
+    top: -10px; left: 24px;
+    font-size: 88px;
+    color: var(--red);
+    line-height: 1;
+}
+.compare {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 22px;
+    position: relative;
+    z-index: 3;
+}
+.compare .bad {
+    border-top: 10px solid var(--warn);
+    background: #fff9f0;
+}
+.compare .good {
+    border-top: 10px solid var(--ok);
+    background: #f2fff8;
+}
+.compare .card h3 { color: var(--ink); font-size: 34px; }
+.cta-slide .cta {
+    font: 400 72px/1.18 var(--font-display);
+    color: var(--ink);
+    max-width: 1400px;
+    position: relative;
+    z-index: 3;
+}
+.cta-slide .actions {
+    margin-top: 36px;
+    display: flex;
+    gap: 18px;
+    flex-wrap: wrap;
+    position: relative;
+    z-index: 3;
+}
+.cta-slide .action {
+    padding: 20px 32px;
+    border-radius: 16px;
+    border: var(--stroke);
+    background: var(--red);
+    color: #fff;
+    font: 800 30px/1 var(--font-body);
+    box-shadow: var(--shadow-pop);
+}
+.cta-slide .hashtags {
+    margin-top: auto;
+    font: 600 24px/1.7 var(--font-body);
+    color: var(--text-secondary);
+    position: relative;
+    z-index: 3;
+}
+.reveal {
+    opacity: 0;
+    transform: translateY(28px) scale(0.98);
+    transition: opacity 0.55s var(--ease), transform 0.55s var(--ease);
+}
+.slide.visible .reveal {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+}
+.reveal:nth-child(2) { transition-delay: 0.08s; }
+.reveal:nth-child(3) { transition-delay: 0.16s; }
+.reveal:nth-child(4) { transition-delay: 0.24s; }
+.reveal:nth-child(5) { transition-delay: 0.32s; }
+.deck-controls {
+    display: flex;
+    align-items: center;
+    gap: 16px;
+    padding: 12px 20px;
+    border-radius: 999px;
+    border: 2px solid #fff;
+    background: rgba(20,20,20,0.88);
+    backdrop-filter: blur(8px);
+    color: #fff;
+    font: 600 16px/1 var(--font-body);
+    box-shadow: 0 8px 24px rgba(0,0,0,0.28);
+}
+.deck-controls button {
+    border: 2px solid #fff;
+    background: var(--red);
+    color: #fff;
+    width: 42px;
+    height: 42px;
+    border-radius: 999px;
+    cursor: pointer;
+    font-size: 18px;
+    font-weight: 800;
+}
+
+    /* ===========================================
+   FIXED 16:9 STAGE: MANDATORY BASE STYLES
+   =========================================== */
+html, body {
+    width: 100%;
+    height: 100%;
+    margin: 0;
+    overflow: hidden;
+    background: var(--stage-bg, #000);
+}
+.deck-viewport {
+    position: fixed;
+    inset: 0;
+    overflow: hidden;
+    background: var(--stage-bg, #1a1210);
+}
+.deck-stage {
+    position: absolute;
+    left: 0;
+    top: 0;
+    width: 1920px;
+    height: 1080px;
+    overflow: hidden;
+    transform-origin: 0 0;
+    background: var(--slide-bg, #fff8f4);
+}
+.slide {
+    position: absolute;
+    inset: 0;
+    width: 1920px;
+    height: 1080px;
+    overflow: hidden;
+    display: block;
+    visibility: hidden;
+    opacity: 0;
+    pointer-events: none;
+    background: var(--slide-bg, #fff8f4);
+}
+.slide.active, .slide.visible {
+    visibility: visible;
+    opacity: 1;
+    pointer-events: auto;
+    z-index: 1;
+}
+img, video, canvas, svg {
+    max-width: 100%;
+    max-height: 100%;
+}
+.deck-controls {
+    position: fixed;
+    left: 50%;
+    bottom: 22px;
+    transform: translateX(-50%);
+    z-index: 1000;
+}
+@media print {
+    html, body { width: 1920px; height: auto; overflow: visible; background: #fff; }
+    .deck-viewport { position: static; overflow: visible; background: #fff; }
+    .deck-stage { position: static; width: auto; height: auto; transform: none !important; background: none; }
+    .slide {
+        position: relative;
+        display: block !important;
+        visibility: visible !important;
+        opacity: 1 !important;
+        pointer-events: auto !important;
+        width: 1920px;
+        height: 1080px;
+        break-after: page;
+        page-break-after: always;
+    }
+    .slide:last-child { break-after: auto; page-break-after: auto; }
+    .deck-controls { display: none !important; }
+}
+@media (prefers-reduced-motion: reduce) {
+    *, *::before, *::after {
+        animation-duration: 0.01ms !important;
+        transition-duration: 0.2s !important;
+    }
+}
+  </style>
+</head>
+<body>
+  <div class="deck-viewport">
+    <main class="deck-stage" id="deckStage">
+      
+        <section class="slide title-slide active">
+            <div class="slide-inner">
+                <div class="cover-deco">
+                    <span class="sticker sticker-hot">🔥 爆款干货</span>
+                    <span class="sticker sticker-save">📌 建议收藏</span>
+                </div>
+                <div class="badge reveal">高考出分 · 家长必读</div>
+                <h1 class="headline reveal"><span class="hl">出分了先别慌！</span>我把「10年不失业」这句话拆穿了</h1>
+                <p class="subtitle reveal">AI 不是来抢专业的，是来抢岗位里重复的那部分活。</p>
+                <div class="meta-row reveal"><span class="tag">#高考出分</span><span class="tag">#志愿填报</span><span class="tag">#AI时代</span></div>
+            </div>
+        </section>
+        <section class="slide">
+            <div class="slide-inner">
+                <span class="slide-no">2/6</span>
+                <h2 class="slide-title reveal">家长最吓人的一句话</h2>
+                <p class="lead reveal">每年出分这几天，群里最常问：这个专业以后会不会被 AI 干掉？</p>
+                <ul class="bullets"><li class="reveal"><span class="icon">😰</span><span>翻遍 AI 新闻、就业报告、亲戚建议，越看越乱</span></li><li class="reveal"><span class="icon">💡</span><span>真正该问的不是「热不热」，而是能不能练到硬本事</span></li><li class="reveal"><span class="icon">🎯</span><span>没有永远热门的专业，只有会不会持续升级的人</span></li></ul>
+            </div>
+        </section>
+        <section class="slide">
+            <div class="slide-inner">
+                <span class="slide-no">3/6</span>
+                <h2 class="slide-title reveal">别问错问题</h2>
+                <div class="compare">
+                    <div class="card bad reveal"><h3>❌ 别这样问</h3><ul><li>❌ 这个专业热不热？</li><li>❌ 4年后还好不好找工作？</li></ul></div>
+                    <div class="card good reveal"><h3>✅ 应该这样问</h3><ul><li>✅ 能不能练到硬本事？</li><li>✅ 孩子愿不愿意学10年？</li><li>✅ 学校有没有真师资、真实习？</li></ul></div>
+                </div>
+            </div>
+        </section>
+        <section class="slide">
+            <div class="slide-inner">
+                <span class="slide-no">4/6</span>
+                <h2 class="slide-title reveal">更稳的方向参考</h2>
+                <div class="grid-2"><div class="card reveal"><h3>工科</h3><p>芯片、机器人、新能源、软件</p></div><div class="card reveal"><h3>理科</h3><p>数学、统计、材料、生物（多数要读研）</p></div><div class="card reveal"><h3>商科</h3><p>会计、金融、电商，别选空泛管理</p></div><div class="card reveal"><h3>文科</h3><p>法学、教育、传播 + 会用 AI 提效</p></div><div class="card reveal"><h3>艺术</h3><p>UI、品牌、数媒，别只会套模板</p></div></div>
+            </div>
+        </section>
+        <section class="slide">
+            <div class="slide-inner">
+                <span class="slide-no">5/6</span>
+                <h2 class="slide-title reveal">给家长的一句话</h2>
+                <div class="quote-box reveal">别帮孩子押一个「永远热门」的名字，帮他把底座打牢。大学四年只是起点，会学习的人，换赛道都来得及。</div>
+            </div>
+        </section>
+        <section class="slide cta-slide">
+            <div class="slide-inner">
+                <div class="cover-deco">
+                    <span class="sticker sticker-hot">⭐ 转发家长群</span>
+                </div>
+                <span class="slide-no">6/6</span>
+                <div class="cta reveal">收藏这篇，填志愿前对照一遍。转给那个「只想报热门」的家人。</div>
+                <div class="actions reveal">
+                    <span class="action">👉 收藏</span>
+                    <span class="action">📤 转发给爸妈</span>
+                </div>
+                <div class="hashtags reveal">#高考出分 #志愿填报 #选专业 #家长必看 #AI时代 #升学规划</div>
+            </div>
+        </section>
+    </main>
+  </div>
+  <div class="deck-controls">
+    <button type="button" onclick="window.__deck && window.__deck.prev()">←</button>
+    <span id="slideCounter">1 / 6</span>
+    <button type="button" onclick="window.__deck && window.__deck.next()">→</button>
+    <span>空格/方向键翻页</span>
+  </div>
+  <script>
+    window.__deck = null;
+    
+class SlidePresentation {
+    constructor() {
+        this.slides = [...document.querySelectorAll('.slide')];
+        this.current = 0;
+        this.stage = document.getElementById('deckStage');
+        this.counter = document.getElementById('slideCounter');
+        this.setupStageScale();
+        this.setupKeyboardNav();
+        this.setupTouchNav();
+        this.showSlide(0);
+    }
+    setupStageScale() {
+        const scale = () => {
+            const f = Math.min(window.innerWidth / 1920, window.innerHeight / 1080);
+            const x = (window.innerWidth - 1920 * f) / 2;
+            const y = (window.innerHeight - 1080 * f) / 2;
+            this.stage.style.transform = `translate(${x}px, ${y}px) scale(${f})`;
+        };
+        scale();
+        window.addEventListener('resize', scale);
+    }
+    setupKeyboardNav() {
+        window.addEventListener('keydown', (e) => {
+            if (['ArrowRight', 'ArrowDown', ' ', 'PageDown'].includes(e.key)) {
+                e.preventDefault();
+                this.showSlide(this.current + 1);
+            }
+            if (['ArrowLeft', 'ArrowUp', 'PageUp'].includes(e.key)) {
+                e.preventDefault();
+                this.showSlide(this.current - 1);
+            }
+            if (e.key === 'Home') this.showSlide(0);
+            if (e.key === 'End') this.showSlide(this.slides.length - 1);
+        });
+    }
+    setupTouchNav() {
+        let startX = 0;
+        this.stage.addEventListener('touchstart', (e) => { startX = e.changedTouches[0].screenX; }, { passive: true });
+        this.stage.addEventListener('touchend', (e) => {
+            const dx = e.changedTouches[0].screenX - startX;
+            if (Math.abs(dx) > 50) this.showSlide(this.current + (dx < 0 ? 1 : -1));
+        }, { passive: true });
+    }
+    showSlide(index) {
+        this.current = Math.max(0, Math.min(index, this.slides.length - 1));
+        this.slides.forEach((s, i) => {
+            s.classList.toggle('active', i === this.current);
+            s.classList.toggle('visible', i === this.current);
+        });
+        if (this.counter) this.counter.textContent = `${this.current + 1} / ${this.slides.length}`;
+    }
+    next() { this.showSlide(this.current + 1); }
+    prev() { this.showSlide(this.current - 1); }
+}
+window.__deck = new SlidePresentation();
+
+  </script>
+</body>
+</html>

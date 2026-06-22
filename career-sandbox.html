@@ -1,0 +1,254 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>专业就业沙盘 · 薪资路径 TOP10</title>
+  <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+SC:wght@400;500;600;700;800&family=ZCOOL+QingKe+HuangYou&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --bg: #fffdf5; --card: #fff; --ink: #141414; --text: #141414;
+      --muted: #5a5a5a; --red: #ff2442; --yellow: #ffe566; --ok: #00b96b;
+      --blue: #1d4ed8; --shadow: 8px 8px 0 #141414;
+    }
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    body {
+      font-family: 'Noto Sans SC', sans-serif;
+      background:
+        radial-gradient(circle at 8% 0%, rgba(255,229,102,0.55), transparent 22%),
+        radial-gradient(circle at 95% 5%, rgba(255,36,66,0.12), transparent 18%),
+        repeating-linear-gradient(-12deg, rgba(20,20,20,0.025) 0 10px, transparent 10px 20px),
+        var(--bg);
+      color: var(--text); min-height: 100vh;
+    }
+    .wrap { max-width: 1180px; margin: 0 auto; padding: 28px 20px 60px; }
+    .hero {
+      position: relative; border: 3px solid var(--ink); border-radius: 24px;
+      background: linear-gradient(135deg, #fff, #fff5d8); box-shadow: var(--shadow);
+      padding: 28px 26px; margin-bottom: 18px; overflow: hidden;
+    }
+    .hero::after {
+      content: '就业沙盘'; position: absolute; top: 16px; right: -30px;
+      background: var(--red); color: #fff; padding: 8px 54px; transform: rotate(24deg);
+      font-size: 12px; font-weight: 800;
+    }
+    .topbar { display: flex; justify-content: space-between; align-items: flex-start; gap: 16px; flex-wrap: wrap; }
+    .topbar a {
+      color: var(--ink); text-decoration: none; font-weight: 800;
+      border: 2px solid var(--ink); padding: 10px 14px; border-radius: 12px;
+      background: var(--yellow); box-shadow: 4px 4px 0 var(--ink);
+    }
+    h1 {
+      font-family: 'ZCOOL QingKe HuangYou', cursive;
+      font-size: clamp(32px, 5vw, 48px); line-height: 1.1; margin-top: 10px;
+    }
+    h1 .hl {
+      background: linear-gradient(180deg, transparent 62%, var(--yellow) 62%, var(--yellow) 90%, transparent 90%);
+    }
+    .sub { color: var(--muted); margin-top: 10px; line-height: 1.65; font-size: 15px; font-weight: 600; }
+    .panel {
+      background: var(--card); border: 3px solid var(--ink); border-radius: 22px;
+      padding: 24px; box-shadow: var(--shadow); margin-bottom: 18px;
+    }
+    .controls { display: grid; grid-template-columns: 1fr 1fr auto; gap: 14px; align-items: end; }
+    @media (max-width: 700px) { .controls { grid-template-columns: 1fr; } }
+    label { display: block; font-size: 13px; color: var(--muted); margin-bottom: 8px; font-weight: 800; }
+    select {
+      width: 100%; border: 2px solid var(--ink); border-radius: 14px; padding: 12px 14px;
+      font-size: 15px; font-weight: 700; background: #fff;
+    }
+    .source-badges { display: flex; flex-wrap: wrap; gap: 8px; margin-top: 12px; }
+    .src-badge {
+      font-size: 11px; font-weight: 800; padding: 5px 10px; border-radius: 999px;
+      border: 2px solid var(--ink); background: #f0f7ff;
+    }
+    table { width: 100%; border-collapse: collapse; margin-top: 8px; font-size: 14px; }
+    th, td { padding: 12px 10px; text-align: left; border-bottom: 2px solid #eee; vertical-align: middle; }
+    th { font-size: 12px; color: var(--muted); font-weight: 800; text-transform: uppercase; letter-spacing: .04em; }
+    tr:hover td { background: #fffbe6; }
+    .rank {
+      display: inline-flex; align-items: center; justify-content: center;
+      width: 28px; height: 28px; border-radius: 8px; border: 2px solid var(--ink);
+      background: var(--yellow); font-weight: 800; font-size: 13px;
+    }
+    .rank.top3 { background: var(--red); color: #fff; }
+    .salary { font-weight: 800; font-size: 15px; }
+    .salary.grad { color: var(--blue); }
+    .salary.yr5 { color: var(--ok); }
+    .growth {
+      display: inline-block; padding: 4px 10px; border-radius: 999px; font-weight: 800;
+      font-size: 12px; border: 2px solid var(--ink); background: #d8ffe8; color: #067647;
+    }
+    .growth.mid { background: #fff4cc; color: #8a5b00; }
+    .growth.low { background: #f3f4f6; color: #555; }
+    .conf {
+      font-size: 11px; font-weight: 800; padding: 3px 8px; border-radius: 6px;
+      border: 1.5px solid var(--ink); white-space: nowrap;
+    }
+    .conf.verified_multi_source, .conf.verified { background: #d8ffe8; }
+    .conf.partially_verified { background: #fff4cc; }
+    .conf.reference_only { background: #f3f4f6; }
+    .bar-wrap { height: 8px; background: #eee; border-radius: 4px; border: 1px solid var(--ink); overflow: hidden; margin-top: 4px; min-width: 80px; }
+    .bar-fill { height: 100%; background: linear-gradient(90deg, var(--blue), var(--ok)); border-radius: 3px; }
+    .detail-row { display: none; }
+    .detail-row.open { display: table-row; }
+    .detail-row td { background: #fffdf0; padding: 14px; }
+    .src-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 10px; }
+    @media (max-width: 800px) { .src-grid { grid-template-columns: 1fr 1fr; } }
+    .src-card {
+      border: 2px solid var(--ink); border-radius: 12px; padding: 10px;
+      background: #fff; box-shadow: 3px 3px 0 var(--ink); font-size: 12px;
+    }
+    .src-card strong { display: block; margin-bottom: 6px; font-size: 13px; }
+    .expand-btn {
+      border: 2px solid var(--ink); background: var(--yellow); border-radius: 8px;
+      padding: 4px 8px; font-size: 11px; font-weight: 800; cursor: pointer;
+    }
+    .footer-note { font-size: 12px; color: var(--muted); line-height: 1.65; margin-top: 12px; }
+    .empty { text-align: center; padding: 40px; color: var(--muted); font-weight: 600; }
+  </style>
+</head>
+<body>
+  <div class="wrap">
+    <section class="hero">
+      <div class="topbar">
+        <div>
+          <span style="display:inline-block;background:#ffe566;border:2px solid #141414;padding:6px 12px;border-radius:999px;font-size:12px;font-weight:800;">💼 四源交叉验证</span>
+          <h1>毕业后能做什么？<br><span class="hl">薪资路径沙盘 TOP10</span></h1>
+          <p class="sub">按<strong>应届生月薪</strong>降序排列 Top10 岗位，对比 5 年经验薪资与涨幅空间。数据经猎聘、BOSS直聘、脉脉、OfferShow 交叉校验。</p>
+        </div>
+        <a href="index.html">← 返回合集</a>
+      </div>
+    </section>
+
+    <div class="panel">
+      <div class="controls">
+        <div>
+          <label for="major">选择专业</label>
+          <select id="major"></select>
+        </div>
+        <div>
+          <label>数据交叉验证来源</label>
+          <div class="source-badges">
+            <span class="src-badge">猎聘</span>
+            <span class="src-badge">BOSS直聘</span>
+            <span class="src-badge">脉脉</span>
+            <span class="src-badge">OfferShow</span>
+          </div>
+        </div>
+        <div>
+          <label>&nbsp;</label>
+          <a href="selector.html" style="display:inline-block;text-decoration:none;color:#141414;font-weight:800;border:2px solid #141414;padding:12px 16px;border-radius:14px;background:#fff;box-shadow:4px 4px 0 #141414;">去分数选校 →</a>
+        </div>
+      </div>
+    </div>
+
+    <div class="panel">
+      <h2 style="font-size:18px;font-weight:800;margin-bottom:4px;" id="tableTitle">岗位薪资排行</h2>
+      <p class="footer-note" id="metaNote"></p>
+      <div id="tableWrap"></div>
+      <p class="footer-note" id="disclaimer"></p>
+    </div>
+  </div>
+
+  <script src="data/career-embed.js"></script>
+  <script>
+    const $ = (id) => document.getElementById(id);
+    let data = null;
+
+    const CONF_LABEL = {
+      verified_multi_source: '四源一致',
+      verified: '交叉验证通过',
+      partially_verified: '部分验证',
+      reference_only: '参考估算',
+    };
+
+    function fmt(n) {
+      return (n / 1000).toFixed(1) + 'k';
+    }
+
+    function growthClass(pct) {
+      if (pct >= 60) return 'growth';
+      if (pct >= 35) return 'growth mid';
+      return 'growth low';
+    }
+
+    function renderTable(majorData) {
+      if (!majorData?.jobs?.length) {
+        $('tableWrap').innerHTML = '<div class="empty">暂无该专业就业数据</div>';
+        return;
+      }
+      const maxSal = majorData.jobs[0].graduateSalary;
+      let html = `<table><thead><tr>
+        <th>#</th><th>岗位</th><th>应届生月薪</th><th>5年经验月薪</th><th>涨幅空间</th><th>验证</th><th></th>
+      </tr></thead><tbody>`;
+
+      majorData.jobs.forEach((job, idx) => {
+        const barW = Math.round(job.graduateSalary / maxSal * 100);
+        html += `<tr>
+          <td><span class="rank ${job.rank <= 3 ? 'top3' : ''}">${job.rank}</span></td>
+          <td><strong>${job.title}</strong>
+            <div class="bar-wrap"><div class="bar-fill" style="width:${barW}%"></div></div>
+          </td>
+          <td><span class="salary grad">¥${job.graduateSalary.toLocaleString()}</span><br><small style="color:#888">${fmt(job.graduateSalary)}/月</small></td>
+          <td><span class="salary yr5">¥${job.salary5yr.toLocaleString()}</span><br><small style="color:#888">+¥${job.growthAbs.toLocaleString()}</small></td>
+          <td><span class="${growthClass(job.growthPct)}">+${job.growthPct}%</span></td>
+          <td><span class="conf ${job.confidence}">${CONF_LABEL[job.confidence] || job.confidence}</span></td>
+          <td><button class="expand-btn" data-idx="${idx}" type="button">四源明细</button></td>
+        </tr>
+        <tr class="detail-row" id="detail-${idx}"><td colspan="7">
+          <div class="src-grid">
+            ${Object.values(job.sources).map(s => `
+              <div class="src-card">
+                <strong>${s.label}</strong>
+                应届 ¥${s.graduate.toLocaleString()}/月<br>
+                5年 ¥${s.yr5.toLocaleString()}/月<br>
+                涨幅 +${Math.round((s.yr5 - s.graduate) / s.graduate * 100)}%
+              </div>`).join('')}
+          </div>
+          <p style="margin-top:8px;font-size:12px;color:#888">离散度 ${job.sourceSpreadPct}% · ${job.sourcesPassed}/4 源在合理区间内</p>
+        </td></tr>`;
+      });
+      html += '</tbody></table>';
+      $('tableWrap').innerHTML = html;
+
+      document.querySelectorAll('.expand-btn').forEach((btn) => {
+        btn.addEventListener('click', () => {
+          const row = $('detail-' + btn.dataset.idx);
+          row.classList.toggle('open');
+          btn.textContent = row.classList.contains('open') ? '收起' : '四源明细';
+        });
+      });
+    }
+
+    function onMajorChange() {
+      const name = $('major').value;
+      const majorData = data.majors.find((m) => m.major === name);
+      $('tableTitle').textContent = `${name}（${majorData?.track || ''}）· 毕业后岗位薪资 TOP10`;
+      renderTable(majorData);
+    }
+
+    async function init() {
+      if (window.CAREER_EMBED) {
+        data = window.CAREER_EMBED;
+      } else {
+        const res = await fetch('data/career_sandbox.json');
+        if (!res.ok) throw new Error('无法加载职业沙盘数据');
+        data = await res.json();
+      }
+      $('metaNote').textContent = data.meta.method || '';
+      $('disclaimer').textContent = data.meta.disclaimer || '';
+      $('major').innerHTML = data.majors.map((m) =>
+        `<option value="${m.major}">${m.major}（${m.track}）</option>`
+      ).join('');
+      $('major').addEventListener('change', onMajorChange);
+      onMajorChange();
+    }
+
+    init().catch((err) => {
+      $('tableWrap').innerHTML = '<div class="empty">数据加载失败。请确认 data/career-embed.js 存在，或运行 serve.bat 后访问。</div>';
+      console.error(err);
+    });
+  </script>
+</body>
+</html>

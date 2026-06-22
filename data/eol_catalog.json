@@ -1,0 +1,2235 @@
+[
+  {
+    "province": "北京",
+    "year": 2024,
+    "track": null,
+    "title": "",
+    "url": "https://gaokao.eol.cn/bei_jing/dongtai/202406/t20240625_2619192.shtml"
+  },
+  {
+    "province": "北京",
+    "year": 2023,
+    "track": null,
+    "title": "",
+    "url": "https://gaokao.eol.cn/bei_jing/dongtai/202306/t20230625_2446909.shtml"
+  },
+  {
+    "province": "北京",
+    "year": 2020,
+    "track": null,
+    "title": "",
+    "url": "https://gaokao.eol.cn/bei_jing/dongtai/202007/t20200725_1740260.shtml"
+  },
+  {
+    "province": "北京",
+    "year": 2025,
+    "track": null,
+    "title": "北京2025年高考一分一段表公布",
+    "url": "https://gaokao.eol.cn/bei_jing/dongtai/202506/t20250625_2676934.shtml"
+  },
+  {
+    "province": "天津",
+    "year": 2024,
+    "track": null,
+    "title": "",
+    "url": "https://gaokao.eol.cn/tian_jin/dongtai/202406/t20240624_2618950.shtml"
+  },
+  {
+    "province": "天津",
+    "year": 2023,
+    "track": null,
+    "title": "",
+    "url": "https://gaokao.eol.cn/tian_jin/dongtai/202306/t20230624_2446639.shtml"
+  },
+  {
+    "province": "天津",
+    "year": 2020,
+    "track": null,
+    "title": "",
+    "url": "https://gaokao.eol.cn/tian_jin/dongtai/202007/t20200725_1740282.shtml"
+  },
+  {
+    "province": "天津",
+    "year": 2025,
+    "track": null,
+    "title": "天津2025年高考一分一段表",
+    "url": "https://gaokao.eol.cn/tian_jin/dongtai/202506/t20250623_2676444.shtml"
+  },
+  {
+    "province": "上海",
+    "year": 2024,
+    "track": null,
+    "title": "",
+    "url": "https://gaokao.eol.cn/shang_hai/dongtai/202406/t20240623_2618508.shtml"
+  },
+  {
+    "province": "上海",
+    "year": 2020,
+    "track": null,
+    "title": "",
+    "url": "https://gaokao.eol.cn/shang_hai/dongtai/202007/t20200723_1739920.shtml"
+  },
+  {
+    "province": "上海",
+    "year": 2025,
+    "track": null,
+    "title": "",
+    "url": "https://gaokao.eol.cn/shang_hai/dongtai/202506/t20250623_2676341.shtml"
+  },
+  {
+    "province": "上海",
+    "year": 2025,
+    "track": null,
+    "title": "上海2025年高考一分一段表",
+    "url": "https://gaokao.eol.cn/shang_hai/dongtai/202506/t20250623_2676338.shtml"
+  },
+  {
+    "province": "重庆",
+    "year": 2021,
+    "track": null,
+    "title": "",
+    "url": "https://gaokao.eol.cn/chong_qing/dongtai/202106/t20210621_2125118.shtml"
+  },
+  {
+    "province": "重庆",
+    "year": 2025,
+    "track": null,
+    "title": "",
+    "url": "https://gaokao.eol.cn/chong_qing/dongtai/202506/t20250624_2676749.shtml"
+  },
+  {
+    "province": "重庆",
+    "year": 2025,
+    "track": "历史类",
+    "title": "重庆2025年高考一分一段表公布（历史类）",
+    "url": "https://gaokao.eol.cn/chong_qing/dongtai/202506/t20250624_2676788.shtml"
+  },
+  {
+    "province": "重庆",
+    "year": 2025,
+    "track": "物理类",
+    "title": "重庆2025年高考一分一段表公布（物理类）",
+    "url": "https://gaokao.eol.cn/chong_qing/dongtai/202506/t20250624_2676752.shtml"
+  },
+  {
+    "province": "河北",
+    "year": 2020,
+    "track": null,
+    "title": "",
+    "url": "https://gaokao.eol.cn/he_bei/dongtai/202007/t20200723_1739734.shtml"
+  },
+  {
+    "province": "河北",
+    "year": 2025,
+    "track": null,
+    "title": "",
+    "url": "https://gaokao.eol.cn/he_bei/dongtai/202506/t20250624_2676842.shtml"
+  },
+  {
+    "province": "山东",
+    "year": 2023,
+    "track": null,
+    "title": "",
+    "url": "https://gaokao.eol.cn/shan_dong/dongtai/202306/t20230625_2447198.shtml"
+  },
+  {
+    "province": "山东",
+    "year": 2020,
+    "track": null,
+    "title": "",
+    "url": "https://gaokao.eol.cn/shan_dong/dongtai/202007/t20200726_1740382.shtml"
+  },
+  {
+    "province": "山东",
+    "year": 2025,
+    "track": null,
+    "title": "",
+    "url": "https://gaokao.eol.cn/shan_dong/dongtai/202506/t20250625_2677092.shtml"
+  },
+  {
+    "province": "四川",
+    "year": 2021,
+    "track": null,
+    "title": "",
+    "url": "https://gaokao.eol.cn/si_chuan/dongtai/202106/t20210621_2125125.shtml"
+  },
+  {
+    "province": "四川",
+    "year": 2025,
+    "track": null,
+    "title": "",
+    "url": "https://gaokao.eol.cn/si_chuan/dongtai/202507/t20250702_2678480.shtml"
+  },
+  {
+    "province": "四川",
+    "year": 2025,
+    "track": "物理类",
+    "title": "四川2025年高考一分一段表公布（物理类）",
+    "url": "https://gaokao.eol.cn/si_chuan/dongtai/202507/t20250702_2678481.shtml"
+  },
+  {
+    "province": "江苏",
+    "year": 2020,
+    "track": null,
+    "title": "",
+    "url": "https://gaokao.eol.cn/jiang_su/dongtai/202007/t20200724_1740210.shtml"
+  },
+  {
+    "province": "江苏",
+    "year": 2025,
+    "track": null,
+    "title": "",
+    "url": "https://gaokao.eol.cn/jiang_su/dongtai/202506/t20250625_2676969.shtml"
+  },
+  {
+    "province": "江苏",
+    "year": 2025,
+    "track": "物理类",
+    "title": "江苏2025年高考考生成绩分段表公布（物理类）",
+    "url": "https://gaokao.eol.cn/jiang_su/dongtai/202506/t20250625_2676968.shtml"
+  },
+  {
+    "province": "安徽",
+    "year": 2020,
+    "track": null,
+    "title": "",
+    "url": "https://gaokao.eol.cn/an_hui/dongtai/202007/t20200723_1739818.shtml"
+  },
+  {
+    "province": "安徽",
+    "year": 2025,
+    "track": null,
+    "title": "",
+    "url": "https://gaokao.eol.cn/an_hui/dongtai/202506/t20250625_2676962.shtml"
+  },
+  {
+    "province": "安徽",
+    "year": 2025,
+    "track": "物理类",
+    "title": "安徽2025年高考一分一段表公布（物理类）",
+    "url": "https://gaokao.eol.cn/an_hui/dongtai/202506/t20250625_2676963.shtml"
+  },
+  {
+    "province": "浙江",
+    "year": 2020,
+    "track": null,
+    "title": "",
+    "url": "https://gaokao.eol.cn/zhe_jiang/dongtai/202007/t20200726_1740325.shtml"
+  },
+  {
+    "province": "浙江",
+    "year": 2025,
+    "track": null,
+    "title": "",
+    "url": "https://gaokao.eol.cn/zhe_jiang/dongtai/202506/t20250625_2677143.shtml"
+  },
+  {
+    "province": "江西",
+    "year": 2021,
+    "track": null,
+    "title": "",
+    "url": "https://gaokao.eol.cn/jiang_xi/dongtai/202106/t20210621_2125127.shtml"
+  },
+  {
+    "province": "江西",
+    "year": 2025,
+    "track": null,
+    "title": "",
+    "url": "https://gaokao.eol.cn/jiang_xi/dongtai/202506/t20250626_2677291.shtml"
+  },
+  {
+    "province": "福建",
+    "year": 2021,
+    "track": null,
+    "title": "",
+    "url": "https://gaokao.eol.cn/fu_jian/dongtai/202106/t20210621_2125130.shtml"
+  },
+  {
+    "province": "福建",
+    "year": 2025,
+    "track": null,
+    "title": "",
+    "url": "https://gaokao.eol.cn/fu_jian/dongtai/202507/t20250702_2678456.shtml"
+  },
+  {
+    "province": "福建",
+    "year": 2025,
+    "track": "物理类",
+    "title": "福建2025年高考一分一段表公布（物理类）",
+    "url": "https://gaokao.eol.cn/fu_jian/dongtai/202507/t20250702_2678457.shtml"
+  },
+  {
+    "province": "河南",
+    "year": 2021,
+    "track": null,
+    "title": "",
+    "url": "https://gaokao.eol.cn/he_nan/dongtai/202106/t20210621_2125132.shtml"
+  },
+  {
+    "province": "河南",
+    "year": 2025,
+    "track": null,
+    "title": "",
+    "url": "https://gaokao.eol.cn/he_nan/dongtai/202506/t20250625_2676858.shtml"
+  },
+  {
+    "province": "河南",
+    "year": 2025,
+    "track": "历史类",
+    "title": "河南2025年高考一分一段表公布（历史类）",
+    "url": "https://gaokao.eol.cn/he_nan/dongtai/202506/t20250625_2676859.shtml"
+  },
+  {
+    "province": "湖北",
+    "year": 2021,
+    "track": null,
+    "title": "",
+    "url": "https://gaokao.eol.cn/hu_bei/dongtai/202106/t20210621_2125133.shtml"
+  },
+  {
+    "province": "湖北",
+    "year": 2025,
+    "track": null,
+    "title": "",
+    "url": "https://gaokao.eol.cn/hu_bei/dongtai/202506/t20250625_2677129.shtml"
+  },
+  {
+    "province": "湖北",
+    "year": 2025,
+    "track": "物理类",
+    "title": "2025年湖北省普通高考一分一段统计表（物理类）",
+    "url": "https://gaokao.eol.cn/hu_bei/dongtai/202506/t20250625_2677137.shtml"
+  },
+  {
+    "province": "湖北",
+    "year": 2025,
+    "track": "历史类",
+    "title": "2025年湖北省普通高考一分一段统计表（历史类）",
+    "url": "https://gaokao.eol.cn/hu_bei/dongtai/202506/t20250627_2677496.shtml"
+  },
+  {
+    "province": "湖南",
+    "year": 2021,
+    "track": null,
+    "title": "",
+    "url": "https://gaokao.eol.cn/hu_nan/dongtai/202106/t20210621_2125134.shtml"
+  },
+  {
+    "province": "湖南",
+    "year": 2025,
+    "track": null,
+    "title": "",
+    "url": "https://gaokao.eol.cn/hu_nan/dongtai/202506/t20250625_2676955.shtml"
+  },
+  {
+    "province": "湖南",
+    "year": 2025,
+    "track": "历史类",
+    "title": "湖南2025年高考一分一段表公布（历史类）",
+    "url": "https://gaokao.eol.cn/hu_nan/dongtai/202506/t20250625_2676956.shtml"
+  },
+  {
+    "province": "广东",
+    "year": 2021,
+    "track": null,
+    "title": "",
+    "url": "https://gaokao.eol.cn/guang_dong/dongtai/202106/t20210621_2125136.shtml"
+  },
+  {
+    "province": "广东",
+    "year": 2025,
+    "track": null,
+    "title": "",
+    "url": "https://gaokao.eol.cn/guang_dong/dongtai/202506/t20250626_2677410.shtml"
+  },
+  {
+    "province": "广西",
+    "year": 2020,
+    "track": null,
+    "title": "",
+    "url": "https://gaokao.eol.cn/guang_xi/dongtai/202007/t20200723_1739810.shtml"
+  },
+  {
+    "province": "广西",
+    "year": 2025,
+    "track": null,
+    "title": "",
+    "url": "https://gaokao.eol.cn/guang_xi/dongtai/202506/t20250625_2677014.shtml"
+  },
+  {
+    "province": "广西",
+    "year": 2025,
+    "track": "物理类",
+    "title": "广西2025年高考物理类考生成绩分段表",
+    "url": "https://gaokao.eol.cn/guang_xi/dongtai/202506/t20250625_2677013.shtml"
+  },
+  {
+    "province": "陕西",
+    "year": 2021,
+    "track": null,
+    "title": "",
+    "url": "https://gaokao.eol.cn/shan_xi_sheng/dongtai/202106/t20210621_2125137.shtml"
+  },
+  {
+    "province": "陕西",
+    "year": 2025,
+    "track": null,
+    "title": "",
+    "url": "https://gaokao.eol.cn/shan_xi_sheng/dongtai/202506/t20250625_2677115.shtml"
+  },
+  {
+    "province": "陕西",
+    "year": 2025,
+    "track": "物理类",
+    "title": "2025年陕西省普通高考一分段统计表（物理类）",
+    "url": "https://gaokao.eol.cn/shan_xi_sheng/dongtai/202506/t20250625_2677119.shtml"
+  },
+  {
+    "province": "山西",
+    "year": 2021,
+    "track": null,
+    "title": "",
+    "url": "https://gaokao.eol.cn/shan_xi/dongtai/202106/t20210621_2125139.shtml"
+  },
+  {
+    "province": "山西",
+    "year": 2025,
+    "track": null,
+    "title": "",
+    "url": "https://gaokao.eol.cn/shan_xi/dongtai/202506/t20250626_2677293.shtml"
+  },
+  {
+    "province": "山西",
+    "year": 2025,
+    "track": "物理类",
+    "title": "山西省2025年普通高考成绩（物理类）一分一段统计表",
+    "url": "https://gaokao.eol.cn/shan_xi/dongtai/202506/t20250626_2677335.shtml"
+  },
+  {
+    "province": "内蒙古",
+    "year": 2022,
+    "track": null,
+    "title": "",
+    "url": "https://gaokao.eol.cn/nei_meng/dongtai/202206/t20220624_2233788.shtml"
+  },
+  {
+    "province": "内蒙古",
+    "year": 2021,
+    "track": null,
+    "title": "",
+    "url": "https://gaokao.eol.cn/nei_meng/dongtai/202106/t20210621_2125142.shtml"
+  },
+  {
+    "province": "内蒙古",
+    "year": 2025,
+    "track": null,
+    "title": "",
+    "url": "https://gaokao.eol.cn/nei_meng/dongtai/202506/t20250625_2676868.shtml"
+  },
+  {
+    "province": "内蒙古",
+    "year": 2025,
+    "track": "历史类",
+    "title": "内蒙古2025年高考一分一段表公布（历史类）",
+    "url": "https://gaokao.eol.cn/nei_meng/dongtai/202506/t20250625_2676869.shtml"
+  },
+  {
+    "province": "黑龙江",
+    "year": 2021,
+    "track": null,
+    "title": "",
+    "url": "https://gaokao.eol.cn/hei_long_jiang/dongtai/202106/t20210624_2127178.shtml"
+  },
+  {
+    "province": "黑龙江",
+    "year": 2021,
+    "track": null,
+    "title": "",
+    "url": "https://gaokao.eol.cn/hei_long_jiang/dongtai/202106/t20210621_2125145.shtml"
+  },
+  {
+    "province": "黑龙江",
+    "year": 2025,
+    "track": null,
+    "title": "",
+    "url": "https://gaokao.eol.cn/hei_long_jiang/dongtai/202506/t20250624_2676681.shtml"
+  },
+  {
+    "province": "黑龙江",
+    "year": 2025,
+    "track": "物理类",
+    "title": "黑龙江2025年高考一分一段表公布（物理类）",
+    "url": "https://gaokao.eol.cn/hei_long_jiang/dongtai/202506/t20250624_2676679.shtml"
+  },
+  {
+    "province": "黑龙江",
+    "year": 2025,
+    "track": "历史类",
+    "title": "黑龙江2025年高考一分一段表公布（历史类）",
+    "url": "https://gaokao.eol.cn/hei_long_jiang/dongtai/202506/t20250624_2676686.shtml"
+  },
+  {
+    "province": "吉林",
+    "year": 2021,
+    "track": null,
+    "title": "2021年",
+    "url": "https://gaokao.eol.cn/ji_lin/dongtai/202106/t20210623_2126500.shtml"
+  },
+  {
+    "province": "吉林",
+    "year": 2021,
+    "track": null,
+    "title": "2021年",
+    "url": "https://gaokao.eol.cn/ji_lin/dongtai/202106/t20210621_2125146.shtml"
+  },
+  {
+    "province": "吉林",
+    "year": 2025,
+    "track": null,
+    "title": "",
+    "url": "https://gaokao.eol.cn/ji_lin/dongtai/202506/t20250625_2677007.shtml"
+  },
+  {
+    "province": "吉林",
+    "year": 2025,
+    "track": "历史类",
+    "title": "吉林2025年高考历史类考生成绩分段表",
+    "url": "https://gaokao.eol.cn/ji_lin/dongtai/202506/t20250625_2677006.shtml"
+  },
+  {
+    "province": "辽宁",
+    "year": 2021,
+    "track": null,
+    "title": "2021年",
+    "url": "https://gaokao.eol.cn/liao_ning/dongtai/202106/t20210623_2126537.shtml"
+  },
+  {
+    "province": "辽宁",
+    "year": 2021,
+    "track": null,
+    "title": "2021年",
+    "url": "https://gaokao.eol.cn/liao_ning/dongtai/202106/t20210621_2125148.shtml"
+  },
+  {
+    "province": "辽宁",
+    "year": 2025,
+    "track": null,
+    "title": "",
+    "url": "https://gaokao.eol.cn/liao_ning/dongtai/202506/t20250624_2676792.shtml"
+  },
+  {
+    "province": "辽宁",
+    "year": 2025,
+    "track": "物理类",
+    "title": "2025辽宁高考成绩分段表公布（物理类）",
+    "url": "https://gaokao.eol.cn/liao_ning/dongtai/202506/t20250624_2676782.shtml"
+  },
+  {
+    "province": "辽宁",
+    "year": 2025,
+    "track": "历史类",
+    "title": "辽宁2025年高考一分一段表出炉（历史类）",
+    "url": "https://gaokao.eol.cn/liao_ning/dongtai/202506/t20250624_2676779.shtml"
+  },
+  {
+    "province": "宁夏",
+    "year": 2021,
+    "track": null,
+    "title": "",
+    "url": "https://gaokao.eol.cn/ning_xia/dongtai/202106/t20210623_2126389.shtml"
+  },
+  {
+    "province": "宁夏",
+    "year": 2021,
+    "track": null,
+    "title": "",
+    "url": "https://gaokao.eol.cn/ning_xia/dongtai/202106/t20210621_2125149.shtml"
+  },
+  {
+    "province": "宁夏",
+    "year": 2025,
+    "track": null,
+    "title": "",
+    "url": "https://gaokao.eol.cn/ning_xia/dongtai/202506/t20250625_2677009.shtml"
+  },
+  {
+    "province": "宁夏",
+    "year": 2025,
+    "track": "物理类",
+    "title": "宁夏2025年高考物理类考生成绩分段表",
+    "url": "https://gaokao.eol.cn/ning_xia/dongtai/202506/t20250625_2677008.shtml"
+  },
+  {
+    "province": "甘肃",
+    "year": 2021,
+    "track": null,
+    "title": "",
+    "url": "https://gaokao.eol.cn/gan_su/dongtai/202106/t20210621_2125151.shtml"
+  },
+  {
+    "province": "甘肃",
+    "year": 2025,
+    "track": null,
+    "title": "",
+    "url": "https://gaokao.eol.cn/gan_su/dongtai/202507/t20250702_2678473.shtml"
+  },
+  {
+    "province": "甘肃",
+    "year": 2025,
+    "track": "历史类",
+    "title": "甘肃2025年高考一分一段表公布（历史类）",
+    "url": "https://gaokao.eol.cn/gan_su/dongtai/202507/t20250702_2678474.shtml"
+  },
+  {
+    "province": "青海",
+    "year": 2020,
+    "track": null,
+    "title": "",
+    "url": "https://gaokao.eol.cn/qing_hai/dongtai/202007/t20200725_1740271.shtml"
+  },
+  {
+    "province": "青海",
+    "year": 2025,
+    "track": null,
+    "title": "",
+    "url": "https://gaokao.eol.cn/qing_hai/dongtai/202506/t20250625_2677002.shtml"
+  },
+  {
+    "province": "青海",
+    "year": 2025,
+    "track": "历史类",
+    "title": "青海2025年高考考生成绩分段表公布（历史类）",
+    "url": "https://gaokao.eol.cn/qing_hai/dongtai/202506/t20250625_2677001.shtml"
+  },
+  {
+    "province": "海南",
+    "year": 2023,
+    "track": null,
+    "title": "",
+    "url": "https://gaokao.eol.cn/hai_nan/dongtai/202306/t20230625_2446964.shtml"
+  },
+  {
+    "province": "海南",
+    "year": 2020,
+    "track": null,
+    "title": "",
+    "url": "https://gaokao.eol.cn/hai_nan/dongtai/202007/t20200725_1740270.shtml"
+  },
+  {
+    "province": "海南",
+    "year": 2025,
+    "track": null,
+    "title": "",
+    "url": "https://gaokao.eol.cn/hai_nan/dongtai/202507/t20250702_2678468.shtml"
+  },
+  {
+    "province": "贵州",
+    "year": 2021,
+    "track": null,
+    "title": "",
+    "url": "https://gaokao.eol.cn/gui_zhou/dongtai/202106/t20210621_2125154.shtml"
+  },
+  {
+    "province": "云南",
+    "year": 2021,
+    "track": null,
+    "title": "",
+    "url": "https://gaokao.eol.cn/yun_nan/dongtai/202106/t20210623_2126404.shtml"
+  },
+  {
+    "province": "云南",
+    "year": 2020,
+    "track": null,
+    "title": "",
+    "url": "https://gaokao.eol.cn/yun_nan/dongtai/202007/t20200723_1739814.shtml"
+  },
+  {
+    "province": "云南",
+    "year": 2025,
+    "track": null,
+    "title": "",
+    "url": "https://gaokao.eol.cn/yun_nan/dongtai/202507/t20250701_2678266.shtml"
+  },
+  {
+    "province": "北京",
+    "year": 2019,
+    "track": null,
+    "title": "",
+    "url": "https://gaokao.eol.cn/bei_jing/dongtai/201906/t20190623_1665678.shtml"
+  },
+  {
+    "province": "北京",
+    "year": 2018,
+    "track": null,
+    "title": "",
+    "url": "https://gaokao.eol.cn/bei_jing/dongtai/201806/t20180623_1611866.shtml"
+  },
+  {
+    "province": "北京",
+    "year": 2017,
+    "track": null,
+    "title": "",
+    "url": "https://gaokao.eol.cn/bei_jing/dongtai/201706/t20170623_1532816.shtml"
+  },
+  {
+    "province": "北京",
+    "year": 2021,
+    "track": null,
+    "title": "",
+    "url": "https://gaokao.eol.cn/bei_jing/dongtai/202106/t20210625_2127798.shtml"
+  },
+  {
+    "province": "天津",
+    "year": 2019,
+    "track": null,
+    "title": "",
+    "url": "https://gaokao.eol.cn/tian_jin/dongtai/201906/t20190623_1665805.shtml"
+  },
+  {
+    "province": "天津",
+    "year": 2018,
+    "track": null,
+    "title": "",
+    "url": "https://gaokao.eol.cn/tian_jin/dongtai/201806/t20180623_1611980.shtml"
+  },
+  {
+    "province": "天津",
+    "year": 2017,
+    "track": null,
+    "title": "",
+    "url": "https://gaokao.eol.cn/tian_jin/dongtai/201706/t20170623_1533045.shtml"
+  },
+  {
+    "province": "天津",
+    "year": 2021,
+    "track": null,
+    "title": "",
+    "url": "https://gaokao.eol.cn/tian_jin/dongtai/202106/t20210624_2127204.shtml"
+  },
+  {
+    "province": "上海",
+    "year": 2019,
+    "track": null,
+    "title": "",
+    "url": "https://gaokao.eol.cn/shang_hai/dongtai/201906/t20190623_1665807.shtml"
+  },
+  {
+    "province": "上海",
+    "year": 2018,
+    "track": null,
+    "title": "",
+    "url": "https://gaokao.eol.cn/shang_hai/dongtai/201806/t20180623_1611992.shtml"
+  },
+  {
+    "province": "上海",
+    "year": 2017,
+    "track": null,
+    "title": "",
+    "url": "https://gaokao.eol.cn/shang_hai/dongtai/201706/t20170623_1533366.shtml"
+  },
+  {
+    "province": "上海",
+    "year": 2021,
+    "track": null,
+    "title": "",
+    "url": "https://gaokao.eol.cn/shang_hai/dongtai/202106/t20210623_2126514.shtml"
+  },
+  {
+    "province": "重庆",
+    "year": 2019,
+    "track": null,
+    "title": "",
+    "url": "https://gaokao.eol.cn/chong_qing/dongtai/201906/t20190623_1665787.shtml"
+  },
+  {
+    "province": "重庆",
+    "year": 2018,
+    "track": null,
+    "title": "",
+    "url": "https://gaokao.eol.cn/chong_qing/dongtai/201806/t20180623_1611974.shtml"
+  },
+  {
+    "province": "重庆",
+    "year": 2021,
+    "track": null,
+    "title": "",
+    "url": "https://gaokao.eol.cn/chong_qing/dongtai/202106/t20210624_2127248.shtml"
+  },
+  {
+    "province": "重庆",
+    "year": 2021,
+    "track": "历史类",
+    "title": "重庆市2021高考一分段表（历史类）",
+    "url": "https://gaokao.eol.cn/chong_qing/dongtai/202106/t20210624_2127250.shtml"
+  },
+  {
+    "province": "河北",
+    "year": 2019,
+    "track": null,
+    "title": "",
+    "url": "https://gaokao.eol.cn/he_bei/dongtai/201906/t20190623_1665644.shtml"
+  },
+  {
+    "province": "河北",
+    "year": 2018,
+    "track": null,
+    "title": "",
+    "url": "https://gaokao.eol.cn/he_bei/dongtai/201806/t20180623_1611842.shtml"
+  },
+  {
+    "province": "河北",
+    "year": 2017,
+    "track": null,
+    "title": "",
+    "url": "https://gaokao.eol.cn/he_bei/dongtai/201706/t20170623_1533324.shtml"
+  },
+  {
+    "province": "河北",
+    "year": 2021,
+    "track": null,
+    "title": "",
+    "url": "https://gaokao.eol.cn/he_bei/dongtai/202106/t20210625_2127415.shtml"
+  },
+  {
+    "province": "山东",
+    "year": 2019,
+    "track": null,
+    "title": "",
+    "url": "https://gaokao.eol.cn/shan_dong/dongtai/201906/t20190624_1665982.shtml"
+  },
+  {
+    "province": "山东",
+    "year": 2018,
+    "track": null,
+    "title": "",
+    "url": "https://gaokao.eol.cn/shan_dong/dongtai/201806/t20180624_1612220.shtml"
+  },
+  {
+    "province": "山东",
+    "year": 2017,
+    "track": null,
+    "title": "",
+    "url": "https://gaokao.eol.cn/shan_dong/dongtai/201706/t20170624_1533747.shtml"
+  },
+  {
+    "province": "山东",
+    "year": 2021,
+    "track": null,
+    "title": "",
+    "url": "https://gaokao.eol.cn/shan_dong/dongtai/202106/t20210625_2127897.shtml"
+  },
+  {
+    "province": "四川",
+    "year": 2019,
+    "track": null,
+    "title": "",
+    "url": "https://gaokao.eol.cn/si_chuan/dongtai/201906/t20190623_1665643.shtml"
+  },
+  {
+    "province": "四川",
+    "year": 2018,
+    "track": null,
+    "title": "",
+    "url": "https://gaokao.eol.cn/si_chuan/dongtai/201806/t20180622_1611731.shtml"
+  },
+  {
+    "province": "四川",
+    "year": 2017,
+    "track": null,
+    "title": "",
+    "url": "https://gaokao.eol.cn/si_chuan/dongtai/201706/t20170622_1532513.shtml"
+  },
+  {
+    "province": "四川",
+    "year": 2021,
+    "track": null,
+    "title": "",
+    "url": "https://gaokao.eol.cn/si_chuan/dongtai/202106/t20210623_2126567.shtml"
+  },
+  {
+    "province": "四川",
+    "year": 2021,
+    "track": "物理类",
+    "title": "四川省2021年普通高考理科成绩分段统计表",
+    "url": "https://gaokao.eol.cn/si_chuan/dongtai/202106/t20210623_2126569.shtml"
+  },
+  {
+    "province": "江苏",
+    "year": 2019,
+    "track": null,
+    "title": "",
+    "url": "https://gaokao.eol.cn/jiang_su/dongtai/201906/t20190624_1666000.shtml"
+  },
+  {
+    "province": "江苏",
+    "year": 2018,
+    "track": null,
+    "title": "",
+    "url": "https://gaokao.eol.cn/jiang_su/dongtai/201806/t20180624_1612268.shtml"
+  },
+  {
+    "province": "江苏",
+    "year": 2021,
+    "track": null,
+    "title": "",
+    "url": "https://gaokao.eol.cn/jiang_su/dongtai/202106/t20210624_2127296.shtml"
+  },
+  {
+    "province": "江苏",
+    "year": 2021,
+    "track": "物理类",
+    "title": "江苏省2021年普通高考逐分段统计表（物理类）",
+    "url": "https://gaokao.eol.cn/jiang_su/dongtai/202106/t20210624_2127294.shtml"
+  },
+  {
+    "province": "安徽",
+    "year": 2019,
+    "track": null,
+    "title": "",
+    "url": "https://gaokao.eol.cn/an_hui/dongtai/201906/t20190623_1665782.shtml"
+  },
+  {
+    "province": "安徽",
+    "year": 2018,
+    "track": null,
+    "title": "",
+    "url": "https://gaokao.eol.cn/an_hui/dongtai/201806/t20180624_1612133.shtml"
+  },
+  {
+    "province": "安徽",
+    "year": 2021,
+    "track": null,
+    "title": "",
+    "url": "https://gaokao.eol.cn/an_hui/dongtai/202106/t20210623_2126483.shtml"
+  },
+  {
+    "province": "安徽",
+    "year": 2021,
+    "track": "历史类",
+    "title": "安徽省2021高考文史类一分一段表",
+    "url": "https://gaokao.eol.cn/an_hui/dongtai/202106/t20210623_2126485.shtml"
+  },
+  {
+    "province": "浙江",
+    "year": 2019,
+    "track": null,
+    "title": "",
+    "url": "https://gaokao.eol.cn/zhe_jiang/dongtai/201906/t20190623_1665698.shtml"
+  },
+  {
+    "province": "浙江",
+    "year": 2018,
+    "track": null,
+    "title": "",
+    "url": "https://gaokao.eol.cn/zhe_jiang/dongtai/201806/t20180623_1611797.shtml"
+  },
+  {
+    "province": "浙江",
+    "year": 2017,
+    "track": null,
+    "title": "",
+    "url": "https://gaokao.eol.cn/zhe_jiang/dongtai/201706/t20170623_1533250.shtml"
+  },
+  {
+    "province": "江西",
+    "year": 2019,
+    "track": null,
+    "title": "",
+    "url": "https://gaokao.eol.cn/jiang_xi/dongtai/201906/t20190623_1665688.shtml"
+  },
+  {
+    "province": "江西",
+    "year": 2021,
+    "track": null,
+    "title": "",
+    "url": "https://gaokao.eol.cn/jiang_xi/dongtai/202106/t20210625_2127899.shtml"
+  },
+  {
+    "province": "福建",
+    "year": 2019,
+    "track": null,
+    "title": "",
+    "url": "https://gaokao.eol.cn/fu_jian/dongtai/201906/t20190625_1666084.shtml"
+  },
+  {
+    "province": "福建",
+    "year": 2018,
+    "track": null,
+    "title": "",
+    "url": "https://gaokao.eol.cn/fu_jian/dongtai/201806/t20180625_1612352.shtml"
+  },
+  {
+    "province": "福建",
+    "year": 2021,
+    "track": null,
+    "title": "",
+    "url": "https://gaokao.eol.cn/fu_jian/dongtai/202106/t20210628_2128594.shtml"
+  },
+  {
+    "province": "福建",
+    "year": 2021,
+    "track": "历史类",
+    "title": "2021年福建高考考生成绩分布（历史科目组）",
+    "url": "https://gaokao.eol.cn/fu_jian/dongtai/202106/t20210628_2128592.shtml"
+  },
+  {
+    "province": "河南",
+    "year": 2019,
+    "track": null,
+    "title": "",
+    "url": "https://gaokao.eol.cn/he_nan/dongtai/201906/t20190625_1666020.shtml"
+  },
+  {
+    "province": "河南",
+    "year": 2018,
+    "track": null,
+    "title": "",
+    "url": "https://gaokao.eol.cn/he_nan/dongtai/201806/t20180625_1612340.shtml"
+  },
+  {
+    "province": "河南",
+    "year": 2021,
+    "track": null,
+    "title": "",
+    "url": "https://gaokao.eol.cn/he_nan/dongtai/202106/t20210625_2127435.shtml"
+  },
+  {
+    "province": "湖北",
+    "year": 2019,
+    "track": null,
+    "title": "",
+    "url": "https://gaokao.eol.cn/hu_bei/dongtai/201906/t20190623_1665779.shtml"
+  },
+  {
+    "province": "湖北",
+    "year": 2018,
+    "track": null,
+    "title": "",
+    "url": "https://gaokao.eol.cn/hu_bei/dongtai/201806/t20180623_1611918.shtml"
+  },
+  {
+    "province": "湖北",
+    "year": 2021,
+    "track": null,
+    "title": "",
+    "url": "https://gaokao.eol.cn/hu_bei/dongtai/202106/t20210625_2127841.shtml"
+  },
+  {
+    "province": "湖南",
+    "year": 2019,
+    "track": null,
+    "title": "",
+    "url": "https://gaokao.eol.cn/hu_nan/dongtai/201906/t20190625_1666222.shtml"
+  },
+  {
+    "province": "湖南",
+    "year": 2019,
+    "track": null,
+    "title": "",
+    "url": "https://gaokao.eol.cn/hu_nan/dongtai/201905/t20190529_1660885.shtml"
+  },
+  {
+    "province": "湖南",
+    "year": 2021,
+    "track": "历史类",
+    "title": "湖南省2021年普通高考档分1分段统计表（历史科目组合）",
+    "url": "https://gaokao.eol.cn/hu_nan/dongtai/202106/t20210625_2127422.shtml"
+  },
+  {
+    "province": "广东",
+    "year": 2019,
+    "track": null,
+    "title": "",
+    "url": "https://gaokao.eol.cn/guang_dong/dongtai/201906/t20190624_1665873.shtml"
+  },
+  {
+    "province": "广东",
+    "year": 2018,
+    "track": null,
+    "title": "",
+    "url": "https://gaokao.eol.cn/guang_dong/dongtai/201806/t20180626_1612855.shtml"
+  },
+  {
+    "province": "广东",
+    "year": 2021,
+    "track": null,
+    "title": "",
+    "url": "https://gaokao.eol.cn/guang_dong/dongtai/202106/t20210626_2127959.shtml"
+  },
+  {
+    "province": "广东",
+    "year": 2021,
+    "track": "历史类",
+    "title": "广东2021年高考成绩分段表（历史类）",
+    "url": "https://gaokao.eol.cn/guang_dong/dongtai/202106/t20210626_2127958.shtml"
+  },
+  {
+    "province": "广西",
+    "year": 2019,
+    "track": null,
+    "title": "",
+    "url": "https://gaokao.eol.cn/guang_xi/dongtai/201906/t20190623_1665709.shtml"
+  },
+  {
+    "province": "广西",
+    "year": 2018,
+    "track": null,
+    "title": "",
+    "url": "https://gaokao.eol.cn/guang_xi/dongtai/201806/t20180623_1611902.shtml"
+  },
+  {
+    "province": "广西",
+    "year": 2021,
+    "track": null,
+    "title": "",
+    "url": "https://gaokao.eol.cn/guang_xi/dongtai/202106/t20210623_2126425.shtml"
+  },
+  {
+    "province": "广西",
+    "year": 2021,
+    "track": "历史类",
+    "title": "广西2021年高考文史类一分一档表（含全国及地方加分）",
+    "url": "https://gaokao.eol.cn/guang_xi/dongtai/202106/t20210623_2126424.shtml"
+  },
+  {
+    "province": "陕西",
+    "year": 2019,
+    "track": null,
+    "title": "",
+    "url": "https://gaokao.eol.cn/shan_xi_sheng/dongtai/201906/t20190625_1666191.shtml"
+  },
+  {
+    "province": "陕西",
+    "year": 2019,
+    "track": null,
+    "title": "",
+    "url": "https://gaokao.eol.cn/shan_xi_sheng/dongtai/201905/t20190529_1660888.shtml"
+  },
+  {
+    "province": "陕西",
+    "year": 2021,
+    "track": null,
+    "title": "",
+    "url": "https://gaokao.eol.cn/shan_xi_sheng/dongtai/202106/t20210624_2127189.shtml"
+  },
+  {
+    "province": "陕西",
+    "year": 2021,
+    "track": "历史类",
+    "title": "2021年陕西高考一分段统计（文史类）",
+    "url": "https://gaokao.eol.cn/shan_xi_sheng/dongtai/202106/t20210624_2127187.shtml"
+  },
+  {
+    "province": "山西",
+    "year": 2019,
+    "track": null,
+    "title": "",
+    "url": "https://gaokao.eol.cn/shan_xi/dongtai/201906/t20190624_1665924.shtml"
+  },
+  {
+    "province": "山西",
+    "year": 2018,
+    "track": null,
+    "title": "",
+    "url": "https://gaokao.eol.cn/shan_xi/dongtai/201806/t20180624_1612136.shtml"
+  },
+  {
+    "province": "山西",
+    "year": 2021,
+    "track": null,
+    "title": "",
+    "url": "https://gaokao.eol.cn/shan_xi/dongtai/202106/t20210624_2127213.shtml"
+  },
+  {
+    "province": "山西",
+    "year": 2021,
+    "track": "历史类",
+    "title": "山西省2021普通高考成绩一分一段统计表—文科",
+    "url": "https://gaokao.eol.cn/shan_xi/dongtai/202106/t20210624_2127214.shtml"
+  },
+  {
+    "province": "内蒙古",
+    "year": 2019,
+    "track": null,
+    "title": "",
+    "url": "https://gaokao.eol.cn/nei_meng/dongtai/201906/t20190623_1665656.shtml"
+  },
+  {
+    "province": "内蒙古",
+    "year": 2018,
+    "track": null,
+    "title": "",
+    "url": "https://gaokao.eol.cn/nei_meng/dongtai/201806/t20180623_1611754.shtml"
+  },
+  {
+    "province": "黑龙江",
+    "year": 2019,
+    "track": null,
+    "title": "",
+    "url": "https://gaokao.eol.cn/hei_long_jiang/dongtai/201906/t20190624_1665981.shtml"
+  },
+  {
+    "province": "黑龙江",
+    "year": 2018,
+    "track": null,
+    "title": "",
+    "url": "https://gaokao.eol.cn/hei_long_jiang/dongtai/201806/t20180624_1612227.shtml"
+  },
+  {
+    "province": "吉林",
+    "year": 2021,
+    "track": null,
+    "title": "2021年",
+    "url": "https://gaokao.eol.cn/ji_lin/dongtai/201906/t20190623_1665795.shtml"
+  },
+  {
+    "province": "吉林",
+    "year": 2018,
+    "track": null,
+    "title": "",
+    "url": "https://gaokao.eol.cn/ji_lin/dongtai/201806/t20180623_1611964.shtml"
+  },
+  {
+    "province": "辽宁",
+    "year": 2021,
+    "track": null,
+    "title": "2021年",
+    "url": "https://gaokao.eol.cn/liao_ning/dongtai/201906/t20190623_1665778.shtml"
+  },
+  {
+    "province": "辽宁",
+    "year": 2018,
+    "track": null,
+    "title": "",
+    "url": "https://gaokao.eol.cn/liao_ning/dongtai/201806/t20180623_1611967.shtml"
+  },
+  {
+    "province": "宁夏",
+    "year": 2019,
+    "track": null,
+    "title": "",
+    "url": "https://gaokao.eol.cn/ning_xia/dongtai/201906/t20190623_1665708.shtml"
+  },
+  {
+    "province": "宁夏",
+    "year": 2018,
+    "track": null,
+    "title": "",
+    "url": "https://gaokao.eol.cn/ning_xia/dongtai/201806/t20180623_1611922.shtml"
+  },
+  {
+    "province": "宁夏",
+    "year": 2022,
+    "track": null,
+    "title": "",
+    "url": "https://gaokao.eol.cn/ning_xia/dongtai/202206/t20220623_2233494.shtml"
+  },
+  {
+    "province": "甘肃",
+    "year": 2021,
+    "track": null,
+    "title": "2021年",
+    "url": "https://gaokao.eol.cn/gan_su/dongtai/202106/t20210623_2126513.shtml"
+  },
+  {
+    "province": "甘肃",
+    "year": 2021,
+    "track": null,
+    "title": "2021年",
+    "url": "https://gaokao.eol.cn/gan_su/dongtai/201906/t20190623_1665771.shtml"
+  },
+  {
+    "province": "青海",
+    "year": 2019,
+    "track": null,
+    "title": "",
+    "url": "https://gaokao.eol.cn/qing_hai/dongtai/201906/t20190625_1666206.shtml"
+  },
+  {
+    "province": "青海",
+    "year": 2018,
+    "track": null,
+    "title": "",
+    "url": "https://gaokao.eol.cn/qing_hai/dongtai/201806/t20180625_1612613.shtml"
+  },
+  {
+    "province": "青海",
+    "year": 2021,
+    "track": null,
+    "title": "",
+    "url": "https://gaokao.eol.cn/qing_hai/dongtai/202106/t20210625_2127419.shtml"
+  },
+  {
+    "province": "海南",
+    "year": 2019,
+    "track": null,
+    "title": "",
+    "url": "https://gaokao.eol.cn/hai_nan/dongtai/201906/t20190625_1666228.shtml"
+  },
+  {
+    "province": "海南",
+    "year": 2018,
+    "track": null,
+    "title": "",
+    "url": "https://gaokao.eol.cn/hai_nan/dongtai/201806/t20180625_1612574.shtml"
+  },
+  {
+    "province": "海南",
+    "year": 2021,
+    "track": null,
+    "title": "",
+    "url": "https://gaokao.eol.cn/hai_nan/dongtai/202106/t20210625_2127813.shtml"
+  },
+  {
+    "province": "贵州",
+    "year": 2019,
+    "track": null,
+    "title": "",
+    "url": "https://gaokao.eol.cn/gui_zhou/dongtai/201906/t20190628_1666895.shtml"
+  },
+  {
+    "province": "贵州",
+    "year": 2018,
+    "track": null,
+    "title": "",
+    "url": "https://gaokao.eol.cn/gui_zhou/dongtai/201806/t20180625_1612630.shtml"
+  },
+  {
+    "province": "云南",
+    "year": 2019,
+    "track": null,
+    "title": "",
+    "url": "https://gaokao.eol.cn/yun_nan/dongtai/201906/t20190624_1665860.shtml"
+  },
+  {
+    "province": "云南",
+    "year": 2018,
+    "track": null,
+    "title": "",
+    "url": "https://gaokao.eol.cn/yun_nan/dongtai/201806/t20180626_1613099.shtml"
+  },
+  {
+    "province": "北京",
+    "year": 2022,
+    "track": null,
+    "title": "",
+    "url": "https://gaokao.eol.cn/bei_jing/dongtai/202206/t20220625_2234010.shtml"
+  },
+  {
+    "province": "天津",
+    "year": 2022,
+    "track": null,
+    "title": "",
+    "url": "https://gaokao.eol.cn/tian_jin/dongtai/202206/t20220624_2233827.shtml"
+  },
+  {
+    "province": "上海",
+    "year": 2022,
+    "track": null,
+    "title": "",
+    "url": "https://gaokao.eol.cn/shang_hai/dongtai/202207/t20220723_2239172.shtml"
+  },
+  {
+    "province": "重庆",
+    "year": 2022,
+    "track": null,
+    "title": "",
+    "url": "https://gaokao.eol.cn/chong_qing/dongtai/202206/t20220624_2233915.shtml"
+  },
+  {
+    "province": "重庆",
+    "year": 2022,
+    "track": "历史类",
+    "title": "重庆市2022高考一分段表（历史类）",
+    "url": "https://gaokao.eol.cn/chong_qing/dongtai/202206/t20220624_2233917.shtml"
+  },
+  {
+    "province": "河北",
+    "year": 2022,
+    "track": null,
+    "title": "",
+    "url": "https://gaokao.eol.cn/he_bei/dongtai/202206/t20220625_2233997.shtml"
+  },
+  {
+    "province": "山东",
+    "year": 2022,
+    "track": null,
+    "title": "",
+    "url": "https://gaokao.eol.cn/shan_dong/dongtai/202206/t20220626_2234173.shtml"
+  },
+  {
+    "province": "四川",
+    "year": 2022,
+    "track": null,
+    "title": "",
+    "url": "https://gaokao.eol.cn/si_chuan/dongtai/202206/t20220623_2233603.shtml"
+  },
+  {
+    "province": "四川",
+    "year": 2022,
+    "track": "物理类",
+    "title": "四川省2022年普通高考理科成绩分段统计表",
+    "url": "https://gaokao.eol.cn/si_chuan/dongtai/202206/t20220623_2233600.shtml"
+  },
+  {
+    "province": "江苏",
+    "year": 2022,
+    "track": null,
+    "title": "",
+    "url": "https://gaokao.eol.cn/jiang_su/dongtai/202206/t20220624_2233978.shtml"
+  },
+  {
+    "province": "江苏",
+    "year": 2022,
+    "track": "物理类",
+    "title": "江苏省2022年普通高考逐分段统计表（物理类）",
+    "url": "https://gaokao.eol.cn/jiang_su/dongtai/202206/t20220624_2233979.shtml"
+  },
+  {
+    "province": "安徽",
+    "year": 2022,
+    "track": null,
+    "title": "",
+    "url": "https://gaokao.eol.cn/an_hui/dongtai/202206/t20220624_2233778.shtml"
+  },
+  {
+    "province": "安徽",
+    "year": 2022,
+    "track": "历史类",
+    "title": "安徽省2022高考文史类一分一段表",
+    "url": "https://gaokao.eol.cn/an_hui/dongtai/202206/t20220624_2233780.shtml"
+  },
+  {
+    "province": "江西",
+    "year": 2022,
+    "track": null,
+    "title": "",
+    "url": "https://gaokao.eol.cn/jiang_xi/dongtai/202206/t20220623_2233469.shtml"
+  },
+  {
+    "province": "福建",
+    "year": 2022,
+    "track": null,
+    "title": "",
+    "url": "https://gaokao.eol.cn/fu_jian/dongtai/202206/t20220625_2234032.shtml"
+  },
+  {
+    "province": "福建",
+    "year": 2022,
+    "track": "历史类",
+    "title": "2022年福建高考考生成绩分布（历史科目组）",
+    "url": "https://gaokao.eol.cn/fu_jian/dongtai/202206/t20220625_2234030.shtml"
+  },
+  {
+    "province": "河南",
+    "year": 2022,
+    "track": null,
+    "title": "",
+    "url": "https://gaokao.eol.cn/he_nan/dongtai/202206/t20220625_2234033.shtml"
+  },
+  {
+    "province": "河南",
+    "year": 2022,
+    "track": "物理类",
+    "title": "河南省2022高考成绩一分段表（理科）",
+    "url": "https://gaokao.eol.cn/he_nan/dongtai/202206/t20220625_2234034.shtml"
+  },
+  {
+    "province": "湖北",
+    "year": 2022,
+    "track": null,
+    "title": "",
+    "url": "https://gaokao.eol.cn/hu_bei/dongtai/202206/t20220625_2234090.shtml"
+  },
+  {
+    "province": "湖北",
+    "year": 2022,
+    "track": "历史类",
+    "title": "湖北省2022年普通高校招生排序成绩一分一段统计表-历史",
+    "url": "https://gaokao.eol.cn/hu_bei/dongtai/202206/t20220625_2234089.shtml"
+  },
+  {
+    "province": "湖南",
+    "year": 2022,
+    "track": null,
+    "title": "",
+    "url": "https://gaokao.eol.cn/hu_nan/dongtai/202206/t20220624_2233846.shtml"
+  },
+  {
+    "province": "湖南",
+    "year": 2022,
+    "track": "历史类",
+    "title": "湖南省2022年普通高考档分1分段统计表（历史科目组合）",
+    "url": "https://gaokao.eol.cn/hu_nan/dongtai/202206/t20220624_2233850.shtml"
+  },
+  {
+    "province": "广东",
+    "year": 2022,
+    "track": null,
+    "title": "",
+    "url": "https://gaokao.eol.cn/guang_dong/dongtai/202206/t20220626_2234200.shtml"
+  },
+  {
+    "province": "广东",
+    "year": 2022,
+    "track": "历史类",
+    "title": "广东2022年高考成绩分段表（历史类）",
+    "url": "https://gaokao.eol.cn/guang_dong/dongtai/202206/t20220626_2234201.shtml"
+  },
+  {
+    "province": "广西",
+    "year": 2022,
+    "track": null,
+    "title": "",
+    "url": "https://gaokao.eol.cn/guang_xi/dongtai/202206/t20220624_2233829.shtml"
+  },
+  {
+    "province": "广西",
+    "year": 2022,
+    "track": "历史类",
+    "title": "广西2022年高考文史类一分一档表（总成绩+全国加分）",
+    "url": "https://gaokao.eol.cn/guang_xi/dongtai/202206/t20220624_2233828.shtml"
+  },
+  {
+    "province": "陕西",
+    "year": 2022,
+    "track": null,
+    "title": "",
+    "url": "https://gaokao.eol.cn/shan_xi_sheng/dongtai/202206/t20220624_2233921.shtml"
+  },
+  {
+    "province": "陕西",
+    "year": 2022,
+    "track": "历史类",
+    "title": "2022年陕西高考一分段统计（文史、艺文）",
+    "url": "https://gaokao.eol.cn/shan_xi_sheng/dongtai/202206/t20220624_2233920.shtml"
+  },
+  {
+    "province": "山西",
+    "year": 2022,
+    "track": "历史类",
+    "title": "山西省2022普通高考成绩一分一段统计表—文科",
+    "url": "https://gaokao.eol.cn/shan_xi/dongtai/202206/t20220624_2233923_1.shtml"
+  },
+  {
+    "province": "内蒙古",
+    "year": 2022,
+    "track": null,
+    "title": "",
+    "url": "https://gaokao.eol.cn/nei_meng/dongtai/202206/t20220623_2233470.shtml"
+  },
+  {
+    "province": "黑龙江",
+    "year": 2022,
+    "track": null,
+    "title": "",
+    "url": "https://gaokao.eol.cn/hei_long_jiang/dongtai/202206/t20220624_2233783.shtml"
+  },
+  {
+    "province": "吉林",
+    "year": 2022,
+    "track": null,
+    "title": "",
+    "url": "https://gaokao.eol.cn/ji_lin/dongtai/202206/t20220623_2233515.shtml"
+  },
+  {
+    "province": "吉林",
+    "year": 2022,
+    "track": "历史类",
+    "title": "2022年吉林高考文史类一分一段表（含照顾分）",
+    "url": "https://gaokao.eol.cn/ji_lin/dongtai/202206/t20220623_2233522.shtml"
+  },
+  {
+    "province": "辽宁",
+    "year": 2022,
+    "track": null,
+    "title": "",
+    "url": "https://gaokao.eol.cn/liao_ning/dongtai/202206/t20220623_2233555.shtml"
+  },
+  {
+    "province": "辽宁",
+    "year": 2022,
+    "track": "历史类",
+    "title": "2022年辽宁高考成绩分段统计表（历史学科类）",
+    "url": "https://gaokao.eol.cn/liao_ning/dongtai/202206/t20220623_2233556.shtml"
+  },
+  {
+    "province": "青海",
+    "year": 2022,
+    "track": null,
+    "title": "",
+    "url": "https://gaokao.eol.cn/qing_hai/dongtai/202206/t20220625_2234025.shtml"
+  },
+  {
+    "province": "海南",
+    "year": 2022,
+    "track": null,
+    "title": "",
+    "url": "https://gaokao.eol.cn/hai_nan/dongtai/202206/t20220625_2234024.shtml"
+  },
+  {
+    "province": "贵州",
+    "year": 2022,
+    "track": null,
+    "title": "",
+    "url": "https://gaokao.eol.cn/gui_zhou/dongtai/202206/t20220624_2233929.shtml"
+  },
+  {
+    "province": "贵州",
+    "year": 2022,
+    "track": "历史类",
+    "title": "贵州2022年高考文史类分数段统计表",
+    "url": "https://gaokao.eol.cn/gui_zhou/dongtai/202206/t20220624_2233926.shtml"
+  },
+  {
+    "province": "云南",
+    "year": 2022,
+    "track": null,
+    "title": "",
+    "url": "https://gaokao.eol.cn/yun_nan/dongtai/202206/t20220623_2233428.shtml"
+  },
+  {
+    "province": "重庆",
+    "year": 2023,
+    "track": null,
+    "title": "",
+    "url": "https://gaokao.eol.cn/chong_qing/dongtai/202306/t20230624_2446726.shtml"
+  },
+  {
+    "province": "重庆",
+    "year": 2023,
+    "track": "历史类",
+    "title": "2023年重庆高考一分一段表（历史类）",
+    "url": "https://gaokao.eol.cn/chong_qing/dongtai/202306/t20230624_2446724.shtml"
+  },
+  {
+    "province": "河北",
+    "year": 2023,
+    "track": null,
+    "title": "",
+    "url": "https://gaokao.eol.cn/he_bei/dongtai/202306/t20230625_2446944.shtml"
+  },
+  {
+    "province": "河北",
+    "year": 2023,
+    "track": "历史类",
+    "title": "2023年河北高考分段表公布（历史类）",
+    "url": "https://gaokao.eol.cn/he_bei/dongtai/202306/t20230625_2446858.shtml"
+  },
+  {
+    "province": "四川",
+    "year": 2023,
+    "track": null,
+    "title": "",
+    "url": "https://gaokao.eol.cn/si_chuan/dongtai/202306/t20230623_2446484.shtml"
+  },
+  {
+    "province": "安徽",
+    "year": 2023,
+    "track": null,
+    "title": "",
+    "url": "https://gaokao.eol.cn/an_hui/dongtai/202306/t20230624_2446601.shtml"
+  },
+  {
+    "province": "安徽",
+    "year": 2023,
+    "track": "物理类",
+    "title": "安徽省2023年高考一分一段表公布（理工类）",
+    "url": "https://gaokao.eol.cn/an_hui/dongtai/202306/t20230624_2446600.shtml"
+  },
+  {
+    "province": "江西",
+    "year": 2023,
+    "track": null,
+    "title": "",
+    "url": "https://gaokao.eol.cn/jiang_xi/dongtai/202306/t20230624_2446566.shtml"
+  },
+  {
+    "province": "江西",
+    "year": 2023,
+    "track": "历史类",
+    "title": "2023年江西文史类一分一段表",
+    "url": "https://gaokao.eol.cn/jiang_xi/dongtai/202306/t20230624_2446561.shtml"
+  },
+  {
+    "province": "江西",
+    "year": 2023,
+    "track": "物理类",
+    "title": "2023年江西高考理工类一分一段表",
+    "url": "https://gaokao.eol.cn/jiang_xi/dongtai/202306/t20230624_2446570.shtml"
+  },
+  {
+    "province": "福建",
+    "year": 2023,
+    "track": null,
+    "title": "",
+    "url": "https://gaokao.eol.cn/fu_jian/dongtai/202306/t20230625_2446957.shtml"
+  },
+  {
+    "province": "福建",
+    "year": 2023,
+    "track": "物理类",
+    "title": "2023年福建高考考生成绩分布（物理科目组）",
+    "url": "https://gaokao.eol.cn/fu_jian/dongtai/202306/t20230625_2446959.shtml"
+  },
+  {
+    "province": "河南",
+    "year": 2023,
+    "track": null,
+    "title": "",
+    "url": "https://gaokao.eol.cn/he_nan/dongtai/202306/t20230625_2446821.shtml"
+  },
+  {
+    "province": "河南",
+    "year": 2023,
+    "track": "历史类",
+    "title": "河南2023年高考分段表文科生成绩分布",
+    "url": "https://gaokao.eol.cn/he_nan/dongtai/202306/t20230625_2446820.shtml"
+  },
+  {
+    "province": "湖北",
+    "year": 2023,
+    "track": null,
+    "title": "",
+    "url": "https://gaokao.eol.cn/hu_bei/dongtai/202306/t20230625_2447085.shtml"
+  },
+  {
+    "province": "湖北",
+    "year": 2023,
+    "track": "物理类",
+    "title": "湖北2023年高考一分一段表公布（物理类）",
+    "url": "https://gaokao.eol.cn/hu_bei/dongtai/202306/t20230625_2447090.shtml"
+  },
+  {
+    "province": "湖南",
+    "year": 2023,
+    "track": null,
+    "title": "",
+    "url": "https://gaokao.eol.cn/hu_nan/dongtai/202306/t20230625_2447181.shtml"
+  },
+  {
+    "province": "湖南",
+    "year": 2023,
+    "track": "物理类",
+    "title": "湖南2023年高考一分一段表公布（物理类）",
+    "url": "https://gaokao.eol.cn/hu_nan/dongtai/202306/t20230625_2447179.shtml"
+  },
+  {
+    "province": "广东",
+    "year": 2023,
+    "track": null,
+    "title": "",
+    "url": "https://gaokao.eol.cn/guang_dong/dongtai/202306/t20230627_2447641.shtml"
+  },
+  {
+    "province": "广东",
+    "year": 2023,
+    "track": "物理类",
+    "title": "广东2023年高考一分一段表公布（物理类）",
+    "url": "https://gaokao.eol.cn/guang_dong/dongtai/202306/t20230627_2447639.shtml"
+  },
+  {
+    "province": "广西",
+    "year": 2023,
+    "track": null,
+    "title": "",
+    "url": "https://gaokao.eol.cn/guang_xi/dongtai/202306/t20230624_2446643.shtml"
+  },
+  {
+    "province": "广西",
+    "year": 2023,
+    "track": "物理类",
+    "title": "广西2023年高考分数段公布（理工类）",
+    "url": "https://gaokao.eol.cn/guang_xi/dongtai/202306/t20230624_2446590.shtml"
+  },
+  {
+    "province": "陕西",
+    "year": 2023,
+    "track": null,
+    "title": "",
+    "url": "https://gaokao.eol.cn/shan_xi_sheng/dongtai/202306/t20230624_2446622.shtml"
+  },
+  {
+    "province": "陕西",
+    "year": 2023,
+    "track": "物理类",
+    "title": "陕西省2023年高考成绩分段统计表（理工、艺理、体育）",
+    "url": "https://gaokao.eol.cn/shan_xi_sheng/dongtai/202306/t20230624_2446619.shtml"
+  },
+  {
+    "province": "山西",
+    "year": 2023,
+    "track": null,
+    "title": "",
+    "url": "https://gaokao.eol.cn/shan_xi/dongtai/202306/t20230624_2446685.shtml"
+  },
+  {
+    "province": "山西",
+    "year": 2023,
+    "track": "历史类",
+    "title": "山西2023年高考一分一段表公布（文科）",
+    "url": "https://gaokao.eol.cn/shan_xi/dongtai/202306/t20230624_2446684.shtml"
+  },
+  {
+    "province": "内蒙古",
+    "year": 2023,
+    "track": null,
+    "title": "",
+    "url": "https://gaokao.eol.cn/nei_meng/dongtai/202306/t20230623_2446450.shtml"
+  },
+  {
+    "province": "内蒙古",
+    "year": 2023,
+    "track": "物理类",
+    "title": "2023年内蒙古高考理科考生成绩排名分布",
+    "url": "https://gaokao.eol.cn/nei_meng/dongtai/202306/t20230623_2446449.shtml"
+  },
+  {
+    "province": "吉林",
+    "year": 2023,
+    "track": null,
+    "title": "",
+    "url": "https://gaokao.eol.cn/ji_lin/dongtai/202306/t20230623_2446361.shtml"
+  },
+  {
+    "province": "吉林",
+    "year": 2023,
+    "track": "历史类",
+    "title": "吉林2023高考文史类1分段表（含照顾加分）",
+    "url": "https://gaokao.eol.cn/ji_lin/dongtai/202306/t20230623_2446360.shtml"
+  },
+  {
+    "province": "辽宁",
+    "year": 2023,
+    "track": null,
+    "title": "",
+    "url": "https://gaokao.eol.cn/liao_ning/dongtai/202306/t20230624_2446770.shtml"
+  },
+  {
+    "province": "辽宁",
+    "year": 2023,
+    "track": "历史类",
+    "title": "2023年辽宁高考历史类一分一段表",
+    "url": "https://gaokao.eol.cn/liao_ning/dongtai/202306/t20230624_2446768.shtml"
+  },
+  {
+    "province": "宁夏",
+    "year": 2023,
+    "track": null,
+    "title": "",
+    "url": "https://gaokao.eol.cn/ning_xia/dongtai/202306/t20230623_2446462.shtml"
+  },
+  {
+    "province": "宁夏",
+    "year": 2023,
+    "track": "物理类",
+    "title": "2023年宁夏高考一分一段表（理科）",
+    "url": "https://gaokao.eol.cn/ning_xia/dongtai/202306/t20230623_2446461.shtml"
+  },
+  {
+    "province": "甘肃",
+    "year": 2023,
+    "track": null,
+    "title": "",
+    "url": "https://gaokao.eol.cn/gan_su/dongtai/202306/t20230625_2447000.shtml"
+  },
+  {
+    "province": "甘肃",
+    "year": 2023,
+    "track": "历史类",
+    "title": "甘肃2023年高考一分一段表公布（文史类）",
+    "url": "https://gaokao.eol.cn/gan_su/dongtai/202306/t20230625_2447001.shtml"
+  },
+  {
+    "province": "青海",
+    "year": 2023,
+    "track": null,
+    "title": "",
+    "url": "https://gaokao.eol.cn/qing_hai/dongtai/202306/t20230625_2446951.shtml"
+  },
+  {
+    "province": "青海",
+    "year": 2023,
+    "track": "物理类",
+    "title": "青海2023年高考理科一分一段表公布（普通班）",
+    "url": "https://gaokao.eol.cn/qing_hai/dongtai/202306/t20230625_2446949.shtml"
+  },
+  {
+    "province": "贵州",
+    "year": 2023,
+    "track": null,
+    "title": "",
+    "url": "https://gaokao.eol.cn/gui_zhou/dongtai/202306/t20230624_2446817.shtml"
+  },
+  {
+    "province": "贵州",
+    "year": 2023,
+    "track": "历史类",
+    "title": "贵州省2023年高考文史类分数段统计表",
+    "url": "https://gaokao.eol.cn/gui_zhou/dongtai/202306/t20230624_2446816.shtml"
+  },
+  {
+    "province": "云南",
+    "year": 2023,
+    "track": null,
+    "title": "",
+    "url": "https://gaokao.eol.cn/yun_nan/dongtai/202306/t20230623_2446437.shtml"
+  },
+  {
+    "province": "云南",
+    "year": 2023,
+    "track": "物理类",
+    "title": "2023年云南高考考生成绩分段表（理科）",
+    "url": "https://gaokao.eol.cn/yun_nan/dongtai/202306/t20230623_2446437_1.shtml"
+  },
+  {
+    "province": "重庆",
+    "year": 2024,
+    "track": null,
+    "title": "",
+    "url": "https://gaokao.eol.cn/chong_qing/dongtai/202406/t20240624_2618999.shtml"
+  },
+  {
+    "province": "重庆",
+    "year": 2024,
+    "track": "物理类",
+    "title": "2024年重庆高考一分一段表（物理类）",
+    "url": "https://gaokao.eol.cn/chong_qing/dongtai/202406/t20240624_2618998.shtml"
+  },
+  {
+    "province": "河北",
+    "year": 2024,
+    "track": null,
+    "title": "",
+    "url": "https://gaokao.eol.cn/he_bei/dongtai/202406/t20240625_2619074.shtml"
+  },
+  {
+    "province": "河北",
+    "year": 2024,
+    "track": "物理类",
+    "title": "河北2024年高考物理类一分一段线公布",
+    "url": "https://gaokao.eol.cn/he_bei/dongtai/202406/t20240625_2619073.shtml"
+  },
+  {
+    "province": "四川",
+    "year": 2024,
+    "track": null,
+    "title": "",
+    "url": "https://gaokao.eol.cn/si_chuan/dongtai/202406/t20240623_2618657.shtml"
+  },
+  {
+    "province": "四川",
+    "year": 2024,
+    "track": "物理类",
+    "title": "2024年四川高考一分一段表（理科）",
+    "url": "https://gaokao.eol.cn/si_chuan/dongtai/202406/t20240623_2618656.shtml"
+  },
+  {
+    "province": "江苏",
+    "year": 2024,
+    "track": null,
+    "title": "",
+    "url": "https://gaokao.eol.cn/jiang_su/dongtai/202406/t20240624_2619055.shtml"
+  },
+  {
+    "province": "江苏",
+    "year": 2024,
+    "track": "物理类",
+    "title": "2024年江苏高考物理类一分一段表",
+    "url": "https://gaokao.eol.cn/jiang_su/dongtai/202406/t20240624_2619054.shtml"
+  },
+  {
+    "province": "安徽",
+    "year": 2024,
+    "track": null,
+    "title": "",
+    "url": "https://gaokao.eol.cn/an_hui/dongtai/202406/t20240625_2619348.shtml"
+  },
+  {
+    "province": "安徽",
+    "year": 2024,
+    "track": "物理类",
+    "title": "安徽省2024年高考一分一段表（物理类）",
+    "url": "https://gaokao.eol.cn/an_hui/dongtai/202406/t20240625_2619346.shtml"
+  },
+  {
+    "province": "浙江",
+    "year": 2024,
+    "track": null,
+    "title": "",
+    "url": "https://gaokao.eol.cn/zhe_jiang/dongtai/202406/t20240626_2619511.shtml"
+  },
+  {
+    "province": "江西",
+    "year": 2024,
+    "track": null,
+    "title": "",
+    "url": "https://gaokao.eol.cn/jiang_xi/dongtai/202406/t20240626_2619468.shtml"
+  },
+  {
+    "province": "江西",
+    "year": 2024,
+    "track": "物理类",
+    "title": "江西2024年高考一分一段表公布（物理类）",
+    "url": "https://gaokao.eol.cn/jiang_xi/dongtai/202406/t20240626_2619467.shtml"
+  },
+  {
+    "province": "福建",
+    "year": 2024,
+    "track": null,
+    "title": "",
+    "url": "https://gaokao.eol.cn/fu_jian/dongtai/202406/t20240625_2619344.shtml"
+  },
+  {
+    "province": "福建",
+    "year": 2024,
+    "track": "物理类",
+    "title": "福建2024年高考一分一段表公布（物理类）",
+    "url": "https://gaokao.eol.cn/fu_jian/dongtai/202406/t20240625_2619342.shtml"
+  },
+  {
+    "province": "河南",
+    "year": 2024,
+    "track": null,
+    "title": "",
+    "url": "https://gaokao.eol.cn/he_nan/dongtai/202406/t20240625_2619065.shtml"
+  },
+  {
+    "province": "河南",
+    "year": 2024,
+    "track": "历史类",
+    "title": "2024年河南高考一分一段表(文科)",
+    "url": "https://gaokao.eol.cn/he_nan/dongtai/202406/t20240625_2619064.shtml"
+  },
+  {
+    "province": "湖北",
+    "year": 2024,
+    "track": null,
+    "title": "",
+    "url": "https://gaokao.eol.cn/hu_bei/dongtai/202406/t20240625_2619340.shtml"
+  },
+  {
+    "province": "湖北",
+    "year": 2024,
+    "track": "物理类",
+    "title": "湖北省2024年高考一分一段表（物理类）",
+    "url": "https://gaokao.eol.cn/hu_bei/dongtai/202406/t20240625_2619345.shtml"
+  },
+  {
+    "province": "湖南",
+    "year": 2024,
+    "track": null,
+    "title": "",
+    "url": "https://gaokao.eol.cn/hu_nan/dongtai/202406/t20240625_2619159.shtml"
+  },
+  {
+    "province": "湖南",
+    "year": 2024,
+    "track": "物理类",
+    "title": "湖南2024年高考一分一段表（物理类）",
+    "url": "https://gaokao.eol.cn/hu_nan/dongtai/202406/t20240625_2619109.shtml"
+  },
+  {
+    "province": "广东",
+    "year": 2024,
+    "track": null,
+    "title": "",
+    "url": "https://gaokao.eol.cn/guang_dong/dongtai/202406/t20240626_2619547.shtml"
+  },
+  {
+    "province": "广东",
+    "year": 2024,
+    "track": "物理类",
+    "title": "广东2024年高考一分一段表公布（物理类）",
+    "url": "https://gaokao.eol.cn/guang_dong/dongtai/202406/t20240626_2619545.shtml"
+  },
+  {
+    "province": "广西",
+    "year": 2024,
+    "track": null,
+    "title": "",
+    "url": "https://gaokao.eol.cn/guang_xi/dongtai/202406/t20240625_2619246.shtml"
+  },
+  {
+    "province": "广西",
+    "year": 2024,
+    "track": "物理类",
+    "title": "广西2024年高考一分一段表公布（物理类）",
+    "url": "https://gaokao.eol.cn/guang_xi/dongtai/202406/t20240625_2619249.shtml"
+  },
+  {
+    "province": "陕西",
+    "year": 2024,
+    "track": null,
+    "title": "",
+    "url": "https://gaokao.eol.cn/shan_xi_sheng/dongtai/202406/t20240624_2618960.shtml"
+  },
+  {
+    "province": "陕西",
+    "year": 2024,
+    "track": "物理类",
+    "title": "2024年陕西高考一分段统计表（理工）",
+    "url": "https://gaokao.eol.cn/shan_xi_sheng/dongtai/202406/t20240624_2618959.shtml"
+  },
+  {
+    "province": "山西",
+    "year": 2024,
+    "track": null,
+    "title": "",
+    "url": "https://gaokao.eol.cn/shan_xi/dongtai/202406/t20240624_2619042.shtml"
+  },
+  {
+    "province": "山西",
+    "year": 2024,
+    "track": "物理类",
+    "title": "2024年山西高考理工类一分一段表",
+    "url": "https://gaokao.eol.cn/shan_xi/dongtai/202406/t20240624_2619041.shtml"
+  },
+  {
+    "province": "内蒙古",
+    "year": 2024,
+    "track": null,
+    "title": "",
+    "url": "https://gaokao.eol.cn/nei_meng/dongtai/202406/t20240623_2618558.shtml"
+  },
+  {
+    "province": "内蒙古",
+    "year": 2024,
+    "track": "历史类",
+    "title": "内蒙古2024年高考文科一分一段表",
+    "url": "https://gaokao.eol.cn/nei_meng/dongtai/202406/t20240623_2618559.shtml"
+  },
+  {
+    "province": "黑龙江",
+    "year": 2024,
+    "track": null,
+    "title": "",
+    "url": "https://gaokao.eol.cn/hei_long_jiang/dongtai/202406/t20240625_2619390.shtml"
+  },
+  {
+    "province": "黑龙江",
+    "year": 2024,
+    "track": "物理类",
+    "title": "黑龙江2024年高考一分一段表（物理类）",
+    "url": "https://gaokao.eol.cn/hei_long_jiang/dongtai/202406/t20240625_2619389.shtml"
+  },
+  {
+    "province": "吉林",
+    "year": 2024,
+    "track": null,
+    "title": "",
+    "url": "https://gaokao.eol.cn/ji_lin/dongtai/202406/t20240625_2619214.shtml"
+  },
+  {
+    "province": "吉林",
+    "year": 2024,
+    "track": "物理类",
+    "title": "吉林2024年高考一分一段表公布（物理类）",
+    "url": "https://gaokao.eol.cn/ji_lin/dongtai/202406/t20240625_2619241.shtml"
+  },
+  {
+    "province": "吉林",
+    "year": 2024,
+    "track": "历史类",
+    "title": "吉林2024年高考一分一段表公布（历史类）",
+    "url": "https://gaokao.eol.cn/ji_lin/dongtai/202407/t20240701_2620634.shtml"
+  },
+  {
+    "province": "辽宁",
+    "year": 2024,
+    "track": null,
+    "title": "",
+    "url": "https://gaokao.eol.cn/liao_ning/dongtai/202406/t20240624_2619033.shtml"
+  },
+  {
+    "province": "辽宁",
+    "year": 2024,
+    "track": "历史类",
+    "title": "2024年辽宁高考一分一段表（历史类）",
+    "url": "https://gaokao.eol.cn/liao_ning/dongtai/202406/t20240624_2619032.shtml"
+  },
+  {
+    "province": "宁夏",
+    "year": 2024,
+    "track": null,
+    "title": "",
+    "url": "https://gaokao.eol.cn/ning_xia/dongtai/202406/t20240623_2618562.shtml"
+  },
+  {
+    "province": "宁夏",
+    "year": 2024,
+    "track": "历史类",
+    "title": "宁夏2024年高考文科一分一段表",
+    "url": "https://gaokao.eol.cn/ning_xia/dongtai/202406/t20240623_2618564.shtml"
+  },
+  {
+    "province": "甘肃",
+    "year": 2024,
+    "track": null,
+    "title": "",
+    "url": "https://gaokao.eol.cn/gan_su/dongtai/202406/t20240625_2619263.shtml"
+  },
+  {
+    "province": "青海",
+    "year": 2024,
+    "track": null,
+    "title": "",
+    "url": "https://gaokao.eol.cn/qing_hai/dongtai/202406/t20240624_2619034.shtml"
+  },
+  {
+    "province": "青海",
+    "year": 2024,
+    "track": "历史类",
+    "title": "青海2024年高考一分一段表（文科）",
+    "url": "https://gaokao.eol.cn/qing_hai/dongtai/202406/t20240624_2619035.shtml"
+  },
+  {
+    "province": "海南",
+    "year": 2024,
+    "track": null,
+    "title": "",
+    "url": "https://gaokao.eol.cn/hai_nan/dongtai/202406/t20240625_2619207.shtml"
+  },
+  {
+    "province": "贵州",
+    "year": 2024,
+    "track": null,
+    "title": "",
+    "url": "https://gaokao.eol.cn/gui_zhou/dongtai/202406/t20240625_2619419.shtml"
+  },
+  {
+    "province": "贵州",
+    "year": 2024,
+    "track": "物理类",
+    "title": "2024年贵州高考分数段统计表（物理类）",
+    "url": "https://gaokao.eol.cn/gui_zhou/dongtai/202406/t20240625_2619422.shtml"
+  },
+  {
+    "province": "云南",
+    "year": 2024,
+    "track": null,
+    "title": "",
+    "url": "https://gaokao.eol.cn/yun_nan/dongtai/202406/t20240623_2618540.shtml"
+  },
+  {
+    "province": "江苏",
+    "year": 2024,
+    "track": "物理类",
+    "title": "",
+    "url": "https://gaokao.eol.cn/jiang_su/dongtai/202406/t20240625_2619080.shtml"
+  },
+  {
+    "province": "江苏",
+    "year": 2024,
+    "track": "历史类",
+    "title": "",
+    "url": "https://gaokao.eol.cn/jiang_su/dongtai/202406/t20240625_2619079.shtml"
+  },
+  {
+    "province": "四川",
+    "year": 2024,
+    "track": "物理类",
+    "title": "",
+    "url": "https://gaokao.eol.cn/si_chuan/dongtai/202406/t20240624_2618669.shtml"
+  }
+]

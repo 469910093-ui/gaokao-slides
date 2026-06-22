@@ -1,0 +1,604 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>高考分数选校选专业 · 智能推荐</title>
+  <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+SC:wght@400;500;600;700;800&family=ZCOOL+QingKe+HuangYou&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --bg: #fffdf5;
+      --card: #ffffff;
+      --ink: #141414;
+      --text: #141414;
+      --muted: #5a5a5a;
+      --red: #ff2442;
+      --yellow: #ffe566;
+      --ok: #00b96b;
+      --line: #141414;
+      --shadow: 8px 8px 0 #141414;
+    }
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    body {
+      font-family: 'Noto Sans SC', sans-serif;
+      background:
+        radial-gradient(circle at 8% 0%, rgba(255,229,102,0.55), transparent 22%),
+        radial-gradient(circle at 95% 5%, rgba(255,36,66,0.12), transparent 18%),
+        repeating-linear-gradient(-12deg, rgba(20,20,20,0.025) 0 10px, transparent 10px 20px),
+        var(--bg);
+      color: var(--text);
+      min-height: 100vh;
+    }
+    .wrap { max-width: 1180px; margin: 0 auto; padding: 28px 20px 60px; }
+    .hero {
+      position: relative;
+      border: 3px solid var(--ink);
+      border-radius: 24px;
+      background: linear-gradient(135deg, #fff, #fff5d8);
+      box-shadow: var(--shadow);
+      padding: 28px 26px;
+      margin-bottom: 18px;
+      overflow: hidden;
+    }
+    .hero::after {
+      content: '爆款工具';
+      position: absolute; top: 16px; right: -30px;
+      background: var(--red); color: #fff;
+      padding: 8px 54px; transform: rotate(24deg);
+      font-size: 12px; font-weight: 800; letter-spacing: .08em;
+    }
+    .topbar { display: flex; justify-content: space-between; align-items: flex-start; gap: 16px; flex-wrap: wrap; }
+    .topbar a {
+      color: var(--ink); text-decoration: none; font-weight: 800;
+      border: 2px solid var(--ink); padding: 10px 14px; border-radius: 12px;
+      background: var(--yellow); box-shadow: 4px 4px 0 var(--ink);
+    }
+    h1 {
+      font-family: 'ZCOOL QingKe HuangYou', cursive;
+      font-size: clamp(34px, 5vw, 52px);
+      line-height: 1.08;
+      margin-top: 10px;
+    }
+    h1 .hl {
+      background: linear-gradient(180deg, transparent 62%, var(--yellow) 62%, var(--yellow) 90%, transparent 90%);
+    }
+    .sub { color: var(--muted); margin-top: 10px; line-height: 1.65; font-size: 15px; font-weight: 600; }
+    .panel {
+      background: var(--card);
+      border: 3px solid var(--ink);
+      border-radius: 22px;
+      padding: 24px;
+      box-shadow: var(--shadow);
+      margin-bottom: 18px;
+    }
+    .controls { display: grid; grid-template-columns: repeat(4, 1fr); gap: 14px; }
+    @media (max-width: 900px) { .controls { grid-template-columns: 1fr 1fr; } }
+    label { display: block; font-size: 13px; color: var(--muted); margin-bottom: 8px; font-weight: 800; }
+    select, button {
+      width: 100%;
+      border: 2px solid var(--ink);
+      border-radius: 14px;
+      padding: 12px 14px;
+      font: 700 15px/1.2 'Noto Sans SC', sans-serif;
+      background: #fff;
+      color: var(--text);
+      box-shadow: 3px 3px 0 var(--ink);
+    }
+    button.primary {
+      background: var(--red);
+      color: #fff;
+      border: 2px solid var(--ink);
+      cursor: pointer;
+      font-weight: 800;
+      box-shadow: 5px 5px 0 var(--ink);
+    }
+    .stats {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 12px;
+      margin-top: 18px;
+    }
+    @media (max-width: 800px) { .stats { grid-template-columns: 1fr 1fr; } }
+    .stat {
+      background: var(--yellow);
+      border: 2px solid var(--ink);
+      border-radius: 16px;
+      padding: 14px 16px;
+      box-shadow: 4px 4px 0 var(--ink);
+    }
+    .stat .k { font-size: 12px; color: var(--muted); font-weight: 700; }
+    .stat .v { font-size: 24px; font-weight: 800; margin-top: 6px; color: var(--red); }
+    .chart-wrap { margin-top: 18px; }
+    .chart-head { display: flex; justify-content: space-between; align-items: center; margin-bottom: 10px; gap: 10px; flex-wrap: wrap; }
+    .chart-head h2 { font-family: 'ZCOOL QingKe HuangYou', cursive; font-size: 24px; }
+    canvas {
+      width: 100%; height: 260px; border-radius: 16px;
+      background: linear-gradient(180deg, #fff, #fff8e8);
+      border: 3px solid var(--ink);
+      box-shadow: 4px 4px 0 var(--ink);
+      touch-action: none;
+    }
+    .slider-row { margin-top: 18px; }
+    .slider-row input[type=range] {
+      width: 100%;
+      accent-color: var(--red);
+      height: 10px;
+    }
+    .slider-meta { display: flex; justify-content: space-between; color: var(--muted); font-size: 13px; margin-top: 8px; font-weight: 700; }
+    .score-big {
+      text-align: center;
+      margin-top: 14px;
+      font-size: 64px;
+      font-weight: 400;
+      color: var(--red);
+      font-family: 'ZCOOL QingKe HuangYou', cursive;
+      text-shadow: 3px 3px 0 var(--yellow);
+    }
+    .hint { color: var(--muted); font-size: 13px; line-height: 1.6; margin-top: 10px; }
+    .loading { color: var(--muted); padding: 20px 0; }
+    .modal-backdrop {
+      position: fixed; inset: 0; background: rgba(20,20,20,0.55);
+      display: none; align-items: center; justify-content: center;
+      padding: 20px; z-index: 1000;
+    }
+    .modal-backdrop.show { display: flex; }
+    .modal {
+      width: min(920px, 100%);
+      max-height: 88vh;
+      overflow: auto;
+      background: #fffdf5;
+      border: 3px solid var(--ink);
+      border-radius: 24px;
+      padding: 24px;
+      box-shadow: 12px 12px 0 var(--ink);
+      animation: pop .25s ease;
+    }
+    @keyframes pop { from { transform: translateY(12px); opacity: 0; } to { transform: none; opacity: 1; } }
+    .modal h3 { font-family: 'ZCOOL QingKe HuangYou', cursive; font-size: 34px; }
+    .modal .close {
+      float: right; border: 2px solid var(--ink); background: var(--yellow); color: var(--ink);
+      width: 38px; height: 38px; border-radius: 999px; cursor: pointer; font-size: 18px; font-weight: 800;
+      box-shadow: 3px 3px 0 var(--ink);
+    }
+    .modal-summary { color: var(--muted); margin: 10px 0 18px; line-height: 1.6; font-weight: 600; }
+    .section-title { font-size: 18px; font-weight: 800; margin: 18px 0 10px; display: flex; align-items: center; gap: 8px; }
+    .school-list, .major-list { display: grid; gap: 10px; }
+    .school-item, .major-item {
+      border: 2px solid var(--ink);
+      border-radius: 16px;
+      padding: 14px 16px;
+      display: grid;
+      grid-template-columns: 1fr auto;
+      gap: 8px;
+      align-items: center;
+      background: #fff;
+      box-shadow: 4px 4px 0 var(--ink);
+    }
+    .school-item .name, .major-item .name { font-weight: 800; }
+    .school-item .tags, .major-item .meta { color: var(--muted); font-size: 13px; font-weight: 600; }
+    .tier {
+      padding: 6px 10px; border-radius: 999px; font-size: 12px; font-weight: 800;
+      background: var(--yellow); color: var(--ink); border: 2px solid var(--ink); white-space: nowrap;
+    }
+    .hot-score { color: var(--ok); font-weight: 800; font-size: 13px; }
+    .footer-note { margin-top: 16px; font-size: 12px; color: var(--muted); line-height: 1.6; }
+    .confidence-badge {
+      display: inline-flex; align-items: center; gap: 6px;
+      padding: 6px 12px; border-radius: 999px; font-size: 12px; font-weight: 800;
+      border: 2px solid var(--ink); box-shadow: 3px 3px 0 var(--ink);
+    }
+    .confidence-badge.verified { background: #d8ffe8; color: #067647; }
+    .confidence-badge.partial { background: #fff4cc; color: #8a5b00; }
+    .confidence-badge.structural { background: #e8f0ff; color: #1d4ed8; }
+    .confidence-badge.model { background: #ffe8e8; color: #b42318; }
+    .validation-detail { margin-top: 8px; font-size: 12px; color: var(--muted); line-height: 1.55; }
+  </style>
+</head>
+<body>
+  <div class="wrap">
+    <section class="hero">
+      <div class="topbar">
+        <div>
+          <span style="display:inline-block;background:#ffe566;border:2px solid #141414;padding:6px 12px;border-radius:999px;font-size:12px;font-weight:800;box-shadow:3px 3px 0 #141414;">🔥 爆款封面风</span>
+          <h1>拖拽分数 · <span class="hl">秒看院校专业</span></h1>
+          <p class="sub">选省份与年份，滑动分数条或拖拽图表红线，弹出按 10 年热门就业方向排序的院校与专业推荐。</p>
+        </div>
+        <a href="index.html">← 返回合集</a>
+        <a href="career-sandbox.html" style="margin-left:8px;">💼 就业沙盘</a>
+      </div>
+    </section>
+
+    <div class="panel">
+      <div class="controls">
+        <div>
+          <label for="province">省份</label>
+          <select id="province"></select>
+        </div>
+        <div>
+          <label for="year">年份</label>
+          <select id="year"></select>
+        </div>
+        <div>
+          <label for="track">科类</label>
+          <select id="track">
+            <option value="物理类">物理类 / 理科</option>
+            <option value="历史类">历史类 / 文科</option>
+          </select>
+        </div>
+        <div>
+          <label>&nbsp;</label>
+          <button class="primary" id="openModalBtn" type="button">查看推荐院校专业</button>
+        </div>
+      </div>
+
+      <div class="stats">
+        <div class="stat"><div class="k">当前分数</div><div class="v" id="statScore">--</div></div>
+        <div class="stat"><div class="k">超越考生占比</div><div class="v" id="statPercentile">--</div></div>
+        <div class="stat"><div class="k">该分段人数占比</div><div class="v" id="statShare">--</div></div>
+        <div class="stat"><div class="k">可达院校层级</div><div class="v" id="statTier">--</div></div>
+      </div>
+
+      <div class="chart-wrap">
+        <div class="chart-head">
+          <h2>分数段人数占比分布（可拖拽红线定位分数）</h2>
+          <div>
+            <span class="hint" id="dataSource">数据加载中…</span>
+            <div id="confidenceBadge"></div>
+            <div class="validation-detail" id="validationDetail"></div>
+          </div>
+        </div>
+        <canvas id="chart" width="1100" height="260"></canvas>
+      </div>
+
+      <div class="slider-row">
+        <label for="scoreSlider">分数滑块</label>
+        <input id="scoreSlider" type="range" min="400" max="750" value="600" step="1">
+        <div class="slider-meta"><span id="minLabel">400</span><span id="maxLabel">750</span></div>
+        <div class="score-big" id="scoreDisplay">600 分</div>
+        <p class="hint">提示：在图表上按住拖动，或拉动滑块，松手后会弹出该分数对应的院校与热门专业推荐。</p>
+      </div>
+    </div>
+
+    <p class="footer-note" id="globalNote"></p>
+  </div>
+
+  <div class="modal-backdrop" id="modalBackdrop" aria-hidden="true">
+    <div class="modal" role="dialog" aria-modal="true" aria-labelledby="modalTitle">
+      <button class="close" id="closeModal" type="button" aria-label="关闭">×</button>
+      <h3 id="modalTitle">分数推荐结果</h3>
+      <p class="modal-summary" id="modalSummary"></p>
+      <div class="section-title">🏫 热门院校（按院校分级 + 就业方向匹配）</div>
+      <div class="school-list" id="schoolList"></div>
+      <div class="section-title">🎯 热门专业（按 10 年后就业方向排序）</div>
+      <div class="major-list" id="majorList"></div>
+      <p class="footer-note" id="modalDisclaimer">说明：数据可信度见页面顶部标识；模型估算仅供参考，请以省考试院官方数据为准。</p>
+    </div>
+  </div>
+
+  <script src="data/gaokao-embed.js"></script>
+  <script>
+    const state = {
+      manifest: null,
+      provinceData: null,
+      segments: [],
+      batches: {},
+      maxScore: 750,
+      minScore: 400,
+      currentScore: 600,
+      dragging: false,
+    };
+
+    const $ = (id) => document.getElementById(id);
+    const provinceEl = $('province');
+    const yearEl = $('year');
+    const trackEl = $('track');
+    const sliderEl = $('scoreSlider');
+    const chart = $('chart');
+    const ctx = chart.getContext('2d');
+
+    function hasEmbed() {
+      return window.GAOKAO_EMBED?.manifest && window.GAOKAO_EMBED?.provinces;
+    }
+
+    async function loadManifest() {
+      if (hasEmbed()) {
+        state.manifest = window.GAOKAO_EMBED.manifest;
+      } else {
+        const res = await fetch('data/manifest.json');
+        if (!res.ok) throw new Error(`无法加载 manifest.json（${res.status}）`);
+        state.manifest = await res.json();
+      }
+      provinceEl.innerHTML = state.manifest.provinces.map((p) => `<option value="${p}">${p}</option>`).join('');
+      yearEl.innerHTML = state.manifest.years.map((y) => `<option value="${y}">${y}</option>`).join('');
+      yearEl.value = '2025';
+      $('globalNote').textContent = state.manifest.meta.notes || '';
+      await loadProvince(provinceEl.value);
+    }
+
+    async function loadProvince(name) {
+      $('dataSource').textContent = '正在加载省份数据…';
+      if (hasEmbed() && window.GAOKAO_EMBED.provinces[name]) {
+        state.provinceData = window.GAOKAO_EMBED.provinces[name];
+      } else {
+        const res = await fetch(`data/provinces/${encodeURIComponent(name)}.json`);
+        if (!res.ok) throw new Error(`无法加载 ${name} 数据（${res.status}）`);
+        state.provinceData = await res.json();
+      }
+      refreshTrackData();
+    }
+
+    function getYearTrackData() {
+      const year = yearEl.value;
+      const track = trackEl.value;
+      return state.provinceData?.years?.[year]?.tracks?.[track];
+    }
+
+    function confidenceMeta(trackData) {
+      const conf = trackData?.confidence || 'model_estimate';
+      const score = trackData?.confidenceScore;
+      const map = {
+        verified_multi_source: { cls: 'verified', label: '多源交叉验证通过', hint: 'eol 表格 + 正文锚点 + 第三方位次锚点一致' },
+        verified: { cls: 'verified', label: '交叉验证通过', hint: 'eol 表格与正文/第三方锚点一致' },
+        partially_verified: { cls: 'partial', label: '部分验证通过', hint: '主表可用，部分锚点存在偏差' },
+        validated_structural: { cls: 'structural', label: '结构校验通过', hint: 'eol 真实一分一段，尚未找到足够锚点做交叉验证' },
+        conflict: { cls: 'partial', label: '数据源存在冲突', hint: '建议对照省考试院官方一分一段' },
+        failed_validation: { cls: 'model', label: '验证未通过', hint: '已降级展示，建议以官方数据为准' },
+        model_estimate: { cls: 'model', label: '模型估算', hint: '基于批次线与考生规模的统计估算' },
+      };
+      const meta = map[conf] || map.model_estimate;
+      return { ...meta, conf, score };
+    }
+
+    function renderConfidence(trackData) {
+      const meta = confidenceMeta(trackData);
+      const badge = $('confidenceBadge');
+      const detail = $('validationDetail');
+      const scoreTxt = meta.score != null ? ` · 置信度 ${Math.round(meta.score * 100)}%` : '';
+      badge.innerHTML = `<span class="confidence-badge ${meta.cls}">${meta.label}${scoreTxt}</span>`;
+      const checks = trackData?.validation?.crossChecks || [];
+      const passed = checks.filter((c) => c.ok).length;
+      const checkTxt = checks.length
+        ? `交叉验证 ${passed}/${checks.length} 项通过。${meta.hint}`
+        : meta.hint;
+      const srcUrl = trackData?.sourceUrl
+        ? ` <a href="${trackData.sourceUrl}" target="_blank" rel="noopener">查看原始页面</a>`
+        : '';
+      detail.innerHTML = `${checkTxt}${srcUrl}`;
+    }
+
+    function refreshTrackData() {
+      const yearObj = state.provinceData.years[yearEl.value];
+      const trackData = getYearTrackData();
+      if (!trackData) return;
+
+      state.batches = yearObj.batches || {};
+      state.maxScore = yearObj.maxScore || 750;
+      state.segments = (trackData.segments || []).map((seg) => ({
+        score: seg.s,
+        percentile: seg.p,
+        sharePct: seg.r,
+      })).sort((a, b) => a.score - b.score);
+
+      const minSeg = state.segments[0]?.score ?? 400;
+      state.minScore = Math.max(200, minSeg);
+      sliderEl.min = state.minScore;
+      sliderEl.max = state.maxScore;
+      $('minLabel').textContent = state.minScore;
+      $('maxLabel').textContent = state.maxScore;
+
+      const defaultScore = Math.min(state.maxScore, Math.max(state.minScore, state.batches['本科线'] || 500) + 60);
+      setScore(defaultScore, false);
+      const srcLabel = trackData.source === 'eol.cn' ? 'eol.cn 真实爬取' : '模型估算';
+      $('dataSource').textContent = `数据来源：${srcLabel} · ${provinceEl.value} ${yearEl.value} ${trackEl.value}`;
+      renderConfidence(trackData);
+      drawChart();
+    }
+
+    function interpolate(score) {
+      const segs = state.segments;
+      if (!segs.length) return { percentile: 50, sharePct: 0 };
+      if (score <= segs[0].score) return { percentile: segs[0].percentile, sharePct: segs[0].sharePct };
+      if (score >= segs[segs.length - 1].score) {
+        const last = segs[segs.length - 1];
+        return { percentile: last.percentile, sharePct: last.sharePct };
+      }
+      for (let i = 0; i < segs.length - 1; i++) {
+        const a = segs[i], b = segs[i + 1];
+        if (score >= a.score && score <= b.score) {
+          const t = (score - a.score) / (b.score - a.score || 1);
+          return {
+            percentile: a.percentile + (b.percentile - a.percentile) * t,
+            sharePct: a.sharePct + (b.sharePct - a.sharePct) * t,
+          };
+        }
+      }
+      return { percentile: 50, sharePct: 0 };
+    }
+
+    function tierForPercentile(p) {
+      const order = state.manifest.tierOrder;
+      const map = state.manifest.tierPercentile;
+      let reached = order[order.length - 1];
+      for (const tier of order) {
+        if (p >= map[tier]) reached = tier;
+      }
+      return reached;
+    }
+
+    function setScore(score, showModal = true) {
+      score = Math.round(Math.max(state.minScore, Math.min(state.maxScore, score)));
+      state.currentScore = score;
+      sliderEl.value = score;
+      $('scoreDisplay').textContent = `${score} 分`;
+      const { percentile, sharePct } = interpolate(score);
+      $('statScore').textContent = score;
+      $('statPercentile').textContent = `${percentile.toFixed(1)}%`;
+      $('statShare').textContent = `${sharePct.toFixed(2)}%`;
+      $('statTier').textContent = tierForPercentile(percentile);
+      drawChart();
+      if (showModal) openModal();
+    }
+
+    function drawChart() {
+      const w = chart.width, h = chart.height;
+      ctx.clearRect(0, 0, w, h);
+      const pad = { l: 42, r: 16, t: 16, b: 34 };
+      const segs = state.segments;
+      if (!segs.length) return;
+
+      const maxShare = Math.max(...segs.map((s) => s.sharePct), 0.2);
+      const xMin = segs[0].score, xMax = segs[segs.length - 1].score;
+      const x = (score) => pad.l + ((score - xMin) / (xMax - xMin || 1)) * (w - pad.l - pad.r);
+      const y = (share) => h - pad.b - (share / maxShare) * (h - pad.t - pad.b);
+
+      // batch lines
+      Object.entries(state.batches).forEach(([name, score]) => {
+        if (score < xMin || score > xMax) return;
+        ctx.strokeStyle = 'rgba(31,157,99,0.55)';
+        ctx.setLineDash([6, 6]);
+        ctx.beginPath();
+        ctx.moveTo(x(score), pad.t);
+        ctx.lineTo(x(score), h - pad.b);
+        ctx.stroke();
+        ctx.setLineDash([]);
+        ctx.fillStyle = '#1f9d63';
+        ctx.font = '12px Noto Sans SC';
+        ctx.fillText(name, x(score) + 4, pad.t + 12);
+      });
+
+      // area
+      ctx.beginPath();
+      segs.forEach((seg, i) => {
+        const px = x(seg.score), py = y(seg.sharePct);
+        if (i === 0) ctx.moveTo(px, py); else ctx.lineTo(px, py);
+      });
+      ctx.lineTo(x(segs[segs.length - 1].score), h - pad.b);
+      ctx.lineTo(x(segs[0].score), h - pad.b);
+      ctx.closePath();
+      ctx.fillStyle = 'rgba(255,36,66,0.15)';
+      ctx.fill();
+
+      // line
+      ctx.beginPath();
+      segs.forEach((seg, i) => {
+        const px = x(seg.score), py = y(seg.sharePct);
+        if (i === 0) ctx.moveTo(px, py); else ctx.lineTo(px, py);
+      });
+      ctx.strokeStyle = '#ff2442';
+      ctx.lineWidth = 3;
+      ctx.stroke();
+
+      // current score marker
+      const cx = x(state.currentScore);
+      ctx.strokeStyle = '#141414';
+      ctx.lineWidth = 4;
+      ctx.beginPath();
+      ctx.moveTo(cx, pad.t);
+      ctx.lineTo(cx, h - pad.b);
+      ctx.stroke();
+      ctx.fillStyle = '#ffe566';
+      ctx.strokeStyle = '#141414';
+      ctx.lineWidth = 2;
+      ctx.beginPath();
+      ctx.arc(cx, y(interpolate(state.currentScore).sharePct), 9, 0, Math.PI * 2);
+      ctx.fill();
+      ctx.stroke();
+
+      // axes labels
+      ctx.fillStyle = '#6b534d';
+      ctx.font = '12px Noto Sans SC';
+      for (let s = Math.ceil(xMin / 50) * 50; s <= xMax; s += 50) {
+        ctx.fillText(String(s), x(s) - 10, h - 10);
+      }
+    }
+
+    function scoreFromChartEvent(evt) {
+      const rect = chart.getBoundingClientRect();
+      const px = (evt.clientX - rect.left) * (chart.width / rect.width);
+      const pad = { l: 42, r: 16 };
+      const segs = state.segments;
+      const xMin = segs[0].score, xMax = segs[segs.length - 1].score;
+      const ratio = (px - pad.l) / (chart.width - pad.l - pad.r);
+      return Math.round(xMin + ratio * (xMax - xMin));
+    }
+
+    function recommendSchools(percentile) {
+      return state.manifest.schools
+        .filter((s) => percentile >= s.minPercentile)
+        .sort((a, b) => b.minPercentile - a.minPercentile || a.name.localeCompare(b.name, 'zh'))
+        .slice(0, 8);
+    }
+
+    function recommendMajors(tier) {
+      const tierIdx = state.manifest.tierOrder.indexOf(tier);
+      return state.manifest.hotMajors
+        .filter((m) => state.manifest.tierOrder.indexOf(m.tier) <= tierIdx)
+        .sort((a, b) => b.score - a.score)
+        .slice(0, 10);
+    }
+
+    function openModal() {
+      const score = state.currentScore;
+      const { percentile, sharePct } = interpolate(score);
+      const tier = tierForPercentile(percentile);
+      const schools = recommendSchools(percentile);
+      const majors = recommendMajors(tier);
+
+      $('modalTitle').textContent = `${provinceEl.value} · ${yearEl.value} · ${score} 分推荐`;
+      $('modalSummary').textContent = `${trackEl.value} | 超越约 ${percentile.toFixed(1)}% 考生 | 该分段人数占比 ${sharePct.toFixed(2)}% | 预估可达 ${tier} 层次院校`;
+
+      $('schoolList').innerHTML = schools.map((s) => `
+        <div class="school-item">
+          <div>
+            <div class="name">${s.name}</div>
+            <div class="tags">${(s.tags || []).join(' · ')}</div>
+          </div>
+          <span class="tier">${s.tier}</span>
+        </div>`).join('') || '<div class="hint">暂无匹配院校</div>';
+
+      $('majorList').innerHTML = majors.map((m, i) => `
+        <div class="major-item">
+          <div>
+            <div class="name">${i + 1}. ${m.name}</div>
+            <div class="meta">${m.track} · 建议院校层级 ${m.tier}</div>
+          </div>
+          <span class="hot-score">热度 ${m.score}</span>
+        </div>`).join('') || '<div class="hint">暂无匹配专业</div>';
+
+      $('modalBackdrop').classList.add('show');
+      $('modalBackdrop').setAttribute('aria-hidden', 'false');
+    }
+
+    function closeModal() {
+      $('modalBackdrop').classList.remove('show');
+      $('modalBackdrop').setAttribute('aria-hidden', 'true');
+    }
+
+    provinceEl.addEventListener('change', () => loadProvince(provinceEl.value));
+    yearEl.addEventListener('change', refreshTrackData);
+    trackEl.addEventListener('change', refreshTrackData);
+    sliderEl.addEventListener('input', () => setScore(Number(sliderEl.value), false));
+    sliderEl.addEventListener('change', () => setScore(Number(sliderEl.value), true));
+    $('openModalBtn').addEventListener('click', openModal);
+    $('closeModal').addEventListener('click', closeModal);
+    $('modalBackdrop').addEventListener('click', (e) => { if (e.target.id === 'modalBackdrop') closeModal(); });
+
+    chart.addEventListener('pointerdown', (e) => { state.dragging = true; chart.setPointerCapture(e.pointerId); setScore(scoreFromChartEvent(e), false); });
+    chart.addEventListener('pointermove', (e) => { if (state.dragging) setScore(scoreFromChartEvent(e), false); });
+    chart.addEventListener('pointerup', (e) => { if (state.dragging) { state.dragging = false; setScore(scoreFromChartEvent(e), true); } });
+    chart.addEventListener('pointerleave', (e) => { if (state.dragging) { state.dragging = false; setScore(scoreFromChartEvent(e), true); } });
+
+    window.addEventListener('resize', drawChart);
+    loadManifest().catch((err) => {
+      const isFile = location.protocol === 'file:';
+      $('dataSource').textContent = isFile
+        ? '本地文件模式加载失败：请确认 data/gaokao-embed.js 存在，或双击 serve.bat 启动本地服务'
+        : '数据加载失败，请刷新页面或重新运行爬虫生成数据。';
+      $('validationDetail').textContent = isFile
+        ? '原因：浏览器禁止 file:// 页面用 fetch 读取 JSON。已内置 embed 方案；若仍失败，请运行项目根目录的 serve.bat。'
+        : String(err.message || err);
+      console.error(err);
+    });
+  </script>
+</body>
+</html>

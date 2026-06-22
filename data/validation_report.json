@@ -1,0 +1,1533 @@
+[
+  {
+    "province": "北京",
+    "year": 2024,
+    "track": null,
+    "confidence": "validated_structural",
+    "confidenceScore": 0.7,
+    "url": "https://gaokao.eol.cn/bei_jing/dongtai/202406/t20240625_2619192.shtml",
+    "crossChecks": [],
+    "structural": {
+      "ok": true,
+      "issues": []
+    }
+  },
+  {
+    "province": "北京",
+    "year": 2023,
+    "track": null,
+    "confidence": "validated_structural",
+    "confidenceScore": 0.7,
+    "url": "https://gaokao.eol.cn/bei_jing/dongtai/202306/t20230625_2446909.shtml",
+    "crossChecks": [],
+    "structural": {
+      "ok": true,
+      "issues": []
+    }
+  },
+  {
+    "province": "北京",
+    "year": 2025,
+    "track": null,
+    "confidence": "verified",
+    "confidenceScore": 0.9,
+    "url": "https://gaokao.eol.cn/bei_jing/dongtai/202506/t20250625_2676934.shtml",
+    "crossChecks": [
+      {
+        "name": "eol_text_undergrad_cumulative",
+        "ok": true,
+        "expected": 53994,
+        "actual": 54180,
+        "diff_pct": 0.34
+      }
+    ],
+    "structural": {
+      "ok": true,
+      "issues": []
+    }
+  },
+  {
+    "province": "上海",
+    "year": 2024,
+    "track": null,
+    "confidence": "validated_structural",
+    "confidenceScore": 0.7,
+    "url": "https://gaokao.eol.cn/shang_hai/dongtai/202406/t20240623_2618508.shtml",
+    "crossChecks": [],
+    "structural": {
+      "ok": true,
+      "issues": []
+    }
+  },
+  {
+    "province": "重庆",
+    "year": 2025,
+    "track": null,
+    "confidence": "verified",
+    "confidenceScore": 0.9,
+    "url": "https://gaokao.eol.cn/chong_qing/dongtai/202506/t20250624_2676749.shtml",
+    "crossChecks": [
+      {
+        "name": "eol_text_undergrad_cumulative",
+        "ok": true,
+        "expected": 35253,
+        "actual": 35576,
+        "diff_pct": 0.92
+      }
+    ],
+    "structural": {
+      "ok": true,
+      "issues": []
+    }
+  },
+  {
+    "province": "重庆",
+    "year": 2025,
+    "track": "历史类",
+    "confidence": "failed_validation",
+    "confidenceScore": 0.2,
+    "url": "https://gaokao.eol.cn/chong_qing/dongtai/202506/t20250624_2676788.shtml",
+    "crossChecks": [
+      {
+        "name": "eol_text_undergrad_cumulative",
+        "ok": false,
+        "expected": 103219,
+        "actual": 97269,
+        "diff_pct": 5.76
+      }
+    ],
+    "structural": {
+      "ok": true,
+      "issues": []
+    }
+  },
+  {
+    "province": "山东",
+    "year": 2023,
+    "track": null,
+    "confidence": "validated_structural",
+    "confidenceScore": 0.7,
+    "url": "https://gaokao.eol.cn/shan_dong/dongtai/202306/t20230625_2447198.shtml",
+    "crossChecks": [],
+    "structural": {
+      "ok": true,
+      "issues": []
+    }
+  },
+  {
+    "province": "山东",
+    "year": 2025,
+    "track": null,
+    "confidence": "validated_structural",
+    "confidenceScore": 0.7,
+    "url": "https://gaokao.eol.cn/shan_dong/dongtai/202506/t20250625_2677092.shtml",
+    "crossChecks": [],
+    "structural": {
+      "ok": true,
+      "issues": []
+    }
+  },
+  {
+    "province": "四川",
+    "year": 2025,
+    "track": null,
+    "confidence": "conflict",
+    "confidenceScore": 0.45,
+    "url": "https://gaokao.eol.cn/si_chuan/dongtai/202507/t20250702_2678480.shtml",
+    "crossChecks": [
+      {
+        "name": "zizzs_rank_at_675",
+        "ok": false,
+        "expected": 966,
+        "actual": 489,
+        "diff_pct": 49.38
+      },
+      {
+        "name": "zizzs_rank_at_600",
+        "ok": true,
+        "expected": 23461,
+        "actual": 23461,
+        "diff_pct": 0.0
+      },
+      {
+        "name": "zizzs_rank_at_500",
+        "ok": false,
+        "expected": 1385,
+        "actual": 127322,
+        "diff_pct": 9092.92
+      }
+    ],
+    "structural": {
+      "ok": true,
+      "issues": []
+    }
+  },
+  {
+    "province": "四川",
+    "year": 2025,
+    "track": "物理类",
+    "confidence": "failed_validation",
+    "confidenceScore": 0.2,
+    "url": "https://gaokao.eol.cn/si_chuan/dongtai/202507/t20250702_2678481.shtml",
+    "crossChecks": [
+      {
+        "name": "zizzs_rank_at_675",
+        "ok": false,
+        "expected": 966,
+        "actual": 30,
+        "diff_pct": 96.89
+      },
+      {
+        "name": "zizzs_rank_at_600",
+        "ok": false,
+        "expected": 23461,
+        "actual": 4584,
+        "diff_pct": 80.46
+      },
+      {
+        "name": "zizzs_rank_at_500",
+        "ok": false,
+        "expected": 1385,
+        "actual": 47906,
+        "diff_pct": 3358.92
+      }
+    ],
+    "structural": {
+      "ok": true,
+      "issues": []
+    }
+  },
+  {
+    "province": "江苏",
+    "year": 2025,
+    "track": null,
+    "confidence": "partially_verified",
+    "confidenceScore": 0.7,
+    "url": "https://gaokao.eol.cn/jiang_su/dongtai/202506/t20250625_2676969.shtml",
+    "crossChecks": [
+      {
+        "name": "zizzs_rank_at_600",
+        "ok": false,
+        "expected": 30768,
+        "actual": 34888,
+        "diff_pct": 13.39
+      },
+      {
+        "name": "zizzs_rank_at_550",
+        "ok": true,
+        "expected": 92971,
+        "actual": 92971,
+        "diff_pct": 0.0
+      }
+    ],
+    "structural": {
+      "ok": true,
+      "issues": []
+    }
+  },
+  {
+    "province": "安徽",
+    "year": 2025,
+    "track": null,
+    "confidence": "validated_structural",
+    "confidenceScore": 0.7,
+    "url": "https://gaokao.eol.cn/an_hui/dongtai/202506/t20250625_2676962.shtml",
+    "crossChecks": [],
+    "structural": {
+      "ok": true,
+      "issues": []
+    }
+  },
+  {
+    "province": "安徽",
+    "year": 2025,
+    "track": "物理类",
+    "confidence": "validated_structural",
+    "confidenceScore": 0.7,
+    "url": "https://gaokao.eol.cn/an_hui/dongtai/202506/t20250625_2676963.shtml",
+    "crossChecks": [],
+    "structural": {
+      "ok": true,
+      "issues": []
+    }
+  },
+  {
+    "province": "福建",
+    "year": 2025,
+    "track": null,
+    "confidence": "validated_structural",
+    "confidenceScore": 0.7,
+    "url": "https://gaokao.eol.cn/fu_jian/dongtai/202507/t20250702_2678456.shtml",
+    "crossChecks": [],
+    "structural": {
+      "ok": true,
+      "issues": []
+    }
+  },
+  {
+    "province": "福建",
+    "year": 2025,
+    "track": "物理类",
+    "confidence": "validated_structural",
+    "confidenceScore": 0.7,
+    "url": "https://gaokao.eol.cn/fu_jian/dongtai/202507/t20250702_2678457.shtml",
+    "crossChecks": [],
+    "structural": {
+      "ok": true,
+      "issues": []
+    }
+  },
+  {
+    "province": "河南",
+    "year": 2025,
+    "track": null,
+    "confidence": "validated_structural",
+    "confidenceScore": 0.7,
+    "url": "https://gaokao.eol.cn/he_nan/dongtai/202506/t20250625_2676858.shtml",
+    "crossChecks": [],
+    "structural": {
+      "ok": true,
+      "issues": []
+    }
+  },
+  {
+    "province": "河南",
+    "year": 2025,
+    "track": "历史类",
+    "confidence": "validated_structural",
+    "confidenceScore": 0.7,
+    "url": "https://gaokao.eol.cn/he_nan/dongtai/202506/t20250625_2676859.shtml",
+    "crossChecks": [],
+    "structural": {
+      "ok": true,
+      "issues": []
+    }
+  },
+  {
+    "province": "湖南",
+    "year": 2025,
+    "track": null,
+    "confidence": "validated_structural",
+    "confidenceScore": 0.7,
+    "url": "https://gaokao.eol.cn/hu_nan/dongtai/202506/t20250625_2676955.shtml",
+    "crossChecks": [],
+    "structural": {
+      "ok": true,
+      "issues": []
+    }
+  },
+  {
+    "province": "湖南",
+    "year": 2025,
+    "track": "历史类",
+    "confidence": "validated_structural",
+    "confidenceScore": 0.7,
+    "url": "https://gaokao.eol.cn/hu_nan/dongtai/202506/t20250625_2676956.shtml",
+    "crossChecks": [],
+    "structural": {
+      "ok": true,
+      "issues": []
+    }
+  },
+  {
+    "province": "广西",
+    "year": 2025,
+    "track": null,
+    "confidence": "validated_structural",
+    "confidenceScore": 0.7,
+    "url": "https://gaokao.eol.cn/guang_xi/dongtai/202506/t20250625_2677014.shtml",
+    "crossChecks": [],
+    "structural": {
+      "ok": true,
+      "issues": []
+    }
+  },
+  {
+    "province": "广西",
+    "year": 2025,
+    "track": "物理类",
+    "confidence": "validated_structural",
+    "confidenceScore": 0.7,
+    "url": "https://gaokao.eol.cn/guang_xi/dongtai/202506/t20250625_2677013.shtml",
+    "crossChecks": [],
+    "structural": {
+      "ok": true,
+      "issues": []
+    }
+  },
+  {
+    "province": "陕西",
+    "year": 2025,
+    "track": null,
+    "confidence": "conflict",
+    "confidenceScore": 0.45,
+    "url": "https://gaokao.eol.cn/shan_xi_sheng/dongtai/202506/t20250625_2677115.shtml",
+    "crossChecks": [
+      {
+        "name": "eol_text_total_candidates",
+        "ok": false,
+        "expected": 11374,
+        "actual": 169196,
+        "diff_pct": 1387.57
+      },
+      {
+        "name": "zizzs_rank_at_650",
+        "ok": true,
+        "expected": 2629,
+        "actual": 2629,
+        "diff_pct": 0.0
+      },
+      {
+        "name": "zizzs_rank_at_600",
+        "ok": false,
+        "expected": 9032,
+        "actual": 11374,
+        "diff_pct": 25.93
+      },
+      {
+        "name": "zizzs_rank_at_500",
+        "ok": false,
+        "expected": 46014,
+        "actual": 55138,
+        "diff_pct": 19.83
+      },
+      {
+        "name": "zizzs_rank_at_450",
+        "ok": false,
+        "expected": 78965,
+        "actual": 90744,
+        "diff_pct": 14.92
+      }
+    ],
+    "structural": {
+      "ok": true,
+      "issues": []
+    }
+  },
+  {
+    "province": "陕西",
+    "year": 2025,
+    "track": "物理类",
+    "confidence": "failed_validation",
+    "confidenceScore": 0.2,
+    "url": "https://gaokao.eol.cn/shan_xi_sheng/dongtai/202506/t20250625_2677119.shtml",
+    "crossChecks": [
+      {
+        "name": "eol_text_total_candidates",
+        "ok": false,
+        "expected": 2134,
+        "actual": 73043,
+        "diff_pct": 3322.82
+      },
+      {
+        "name": "zizzs_rank_at_650",
+        "ok": false,
+        "expected": 2629,
+        "actual": 225,
+        "diff_pct": 91.44
+      },
+      {
+        "name": "zizzs_rank_at_600",
+        "ok": false,
+        "expected": 9032,
+        "actual": 2134,
+        "diff_pct": 76.37
+      },
+      {
+        "name": "zizzs_rank_at_500",
+        "ok": false,
+        "expected": 46014,
+        "actual": 17255,
+        "diff_pct": 62.5
+      },
+      {
+        "name": "zizzs_rank_at_450",
+        "ok": false,
+        "expected": 78965,
+        "actual": 31353,
+        "diff_pct": 60.3
+      }
+    ],
+    "structural": {
+      "ok": true,
+      "issues": []
+    }
+  },
+  {
+    "province": "内蒙古",
+    "year": 2025,
+    "track": null,
+    "confidence": "validated_structural",
+    "confidenceScore": 0.7,
+    "url": "https://gaokao.eol.cn/nei_meng/dongtai/202506/t20250625_2676868.shtml",
+    "crossChecks": [],
+    "structural": {
+      "ok": true,
+      "issues": []
+    }
+  },
+  {
+    "province": "内蒙古",
+    "year": 2025,
+    "track": "历史类",
+    "confidence": "validated_structural",
+    "confidenceScore": 0.7,
+    "url": "https://gaokao.eol.cn/nei_meng/dongtai/202506/t20250625_2676869.shtml",
+    "crossChecks": [],
+    "structural": {
+      "ok": true,
+      "issues": []
+    }
+  },
+  {
+    "province": "黑龙江",
+    "year": 2025,
+    "track": null,
+    "confidence": "validated_structural",
+    "confidenceScore": 0.7,
+    "url": "https://gaokao.eol.cn/hei_long_jiang/dongtai/202506/t20250624_2676681.shtml",
+    "crossChecks": [],
+    "structural": {
+      "ok": true,
+      "issues": []
+    }
+  },
+  {
+    "province": "黑龙江",
+    "year": 2025,
+    "track": "物理类",
+    "confidence": "validated_structural",
+    "confidenceScore": 0.7,
+    "url": "https://gaokao.eol.cn/hei_long_jiang/dongtai/202506/t20250624_2676679.shtml",
+    "crossChecks": [],
+    "structural": {
+      "ok": true,
+      "issues": []
+    }
+  },
+  {
+    "province": "吉林",
+    "year": 2025,
+    "track": null,
+    "confidence": "validated_structural",
+    "confidenceScore": 0.7,
+    "url": "https://gaokao.eol.cn/ji_lin/dongtai/202506/t20250625_2677007.shtml",
+    "crossChecks": [],
+    "structural": {
+      "ok": true,
+      "issues": []
+    }
+  },
+  {
+    "province": "吉林",
+    "year": 2025,
+    "track": "历史类",
+    "confidence": "validated_structural",
+    "confidenceScore": 0.7,
+    "url": "https://gaokao.eol.cn/ji_lin/dongtai/202506/t20250625_2677006.shtml",
+    "crossChecks": [],
+    "structural": {
+      "ok": true,
+      "issues": []
+    }
+  },
+  {
+    "province": "辽宁",
+    "year": 2025,
+    "track": "物理类",
+    "confidence": "failed_validation",
+    "confidenceScore": 0.2,
+    "url": "https://gaokao.eol.cn/liao_ning/dongtai/202506/t20250624_2676782.shtml",
+    "crossChecks": [
+      {
+        "name": "zizzs_rank_at_500",
+        "ok": false,
+        "expected": 491,
+        "actual": 14867,
+        "diff_pct": 2927.9
+      }
+    ],
+    "structural": {
+      "ok": true,
+      "issues": []
+    }
+  },
+  {
+    "province": "宁夏",
+    "year": 2025,
+    "track": null,
+    "confidence": "validated_structural",
+    "confidenceScore": 0.7,
+    "url": "https://gaokao.eol.cn/ning_xia/dongtai/202506/t20250625_2677009.shtml",
+    "crossChecks": [],
+    "structural": {
+      "ok": true,
+      "issues": []
+    }
+  },
+  {
+    "province": "宁夏",
+    "year": 2025,
+    "track": "物理类",
+    "confidence": "validated_structural",
+    "confidenceScore": 0.7,
+    "url": "https://gaokao.eol.cn/ning_xia/dongtai/202506/t20250625_2677008.shtml",
+    "crossChecks": [],
+    "structural": {
+      "ok": true,
+      "issues": []
+    }
+  },
+  {
+    "province": "甘肃",
+    "year": 2025,
+    "track": null,
+    "confidence": "validated_structural",
+    "confidenceScore": 0.7,
+    "url": "https://gaokao.eol.cn/gan_su/dongtai/202507/t20250702_2678473.shtml",
+    "crossChecks": [],
+    "structural": {
+      "ok": true,
+      "issues": []
+    }
+  },
+  {
+    "province": "甘肃",
+    "year": 2025,
+    "track": "历史类",
+    "confidence": "validated_structural",
+    "confidenceScore": 0.7,
+    "url": "https://gaokao.eol.cn/gan_su/dongtai/202507/t20250702_2678474.shtml",
+    "crossChecks": [],
+    "structural": {
+      "ok": true,
+      "issues": []
+    }
+  },
+  {
+    "province": "青海",
+    "year": 2025,
+    "track": null,
+    "confidence": "validated_structural",
+    "confidenceScore": 0.7,
+    "url": "https://gaokao.eol.cn/qing_hai/dongtai/202506/t20250625_2677002.shtml",
+    "crossChecks": [],
+    "structural": {
+      "ok": true,
+      "issues": []
+    }
+  },
+  {
+    "province": "青海",
+    "year": 2025,
+    "track": "历史类",
+    "confidence": "validated_structural",
+    "confidenceScore": 0.7,
+    "url": "https://gaokao.eol.cn/qing_hai/dongtai/202506/t20250625_2677001.shtml",
+    "crossChecks": [],
+    "structural": {
+      "ok": true,
+      "issues": []
+    }
+  },
+  {
+    "province": "海南",
+    "year": 2023,
+    "track": null,
+    "confidence": "validated_structural",
+    "confidenceScore": 0.7,
+    "url": "https://gaokao.eol.cn/hai_nan/dongtai/202306/t20230625_2446964.shtml",
+    "crossChecks": [],
+    "structural": {
+      "ok": true,
+      "issues": []
+    }
+  },
+  {
+    "province": "海南",
+    "year": 2025,
+    "track": null,
+    "confidence": "validated_structural",
+    "confidenceScore": 0.7,
+    "url": "https://gaokao.eol.cn/hai_nan/dongtai/202507/t20250702_2678468.shtml",
+    "crossChecks": [],
+    "structural": {
+      "ok": true,
+      "issues": []
+    }
+  },
+  {
+    "province": "山东",
+    "year": 2019,
+    "track": null,
+    "confidence": "validated_structural",
+    "confidenceScore": 0.7,
+    "url": "https://gaokao.eol.cn/shan_dong/dongtai/201906/t20190624_1665982.shtml",
+    "crossChecks": [],
+    "structural": {
+      "ok": true,
+      "issues": []
+    }
+  },
+  {
+    "province": "江苏",
+    "year": 2019,
+    "track": null,
+    "confidence": "validated_structural",
+    "confidenceScore": 0.7,
+    "url": "https://gaokao.eol.cn/jiang_su/dongtai/201906/t20190624_1666000.shtml",
+    "crossChecks": [],
+    "structural": {
+      "ok": true,
+      "issues": []
+    }
+  },
+  {
+    "province": "重庆",
+    "year": 2022,
+    "track": null,
+    "confidence": "validated_structural",
+    "confidenceScore": 0.7,
+    "url": "https://gaokao.eol.cn/chong_qing/dongtai/202206/t20220624_2233915.shtml",
+    "crossChecks": [],
+    "structural": {
+      "ok": true,
+      "issues": []
+    }
+  },
+  {
+    "province": "重庆",
+    "year": 2022,
+    "track": "历史类",
+    "confidence": "validated_structural",
+    "confidenceScore": 0.7,
+    "url": "https://gaokao.eol.cn/chong_qing/dongtai/202206/t20220624_2233917.shtml",
+    "crossChecks": [],
+    "structural": {
+      "ok": true,
+      "issues": []
+    }
+  },
+  {
+    "province": "山东",
+    "year": 2022,
+    "track": null,
+    "confidence": "validated_structural",
+    "confidenceScore": 0.7,
+    "url": "https://gaokao.eol.cn/shan_dong/dongtai/202206/t20220626_2234173.shtml",
+    "crossChecks": [],
+    "structural": {
+      "ok": true,
+      "issues": []
+    }
+  },
+  {
+    "province": "湖南",
+    "year": 2022,
+    "track": null,
+    "confidence": "validated_structural",
+    "confidenceScore": 0.7,
+    "url": "https://gaokao.eol.cn/hu_nan/dongtai/202206/t20220624_2233846.shtml",
+    "crossChecks": [],
+    "structural": {
+      "ok": true,
+      "issues": []
+    }
+  },
+  {
+    "province": "湖南",
+    "year": 2022,
+    "track": "历史类",
+    "confidence": "validated_structural",
+    "confidenceScore": 0.7,
+    "url": "https://gaokao.eol.cn/hu_nan/dongtai/202206/t20220624_2233850.shtml",
+    "crossChecks": [],
+    "structural": {
+      "ok": true,
+      "issues": []
+    }
+  },
+  {
+    "province": "广东",
+    "year": 2022,
+    "track": null,
+    "confidence": "validated_structural",
+    "confidenceScore": 0.7,
+    "url": "https://gaokao.eol.cn/guang_dong/dongtai/202206/t20220626_2234200.shtml",
+    "crossChecks": [],
+    "structural": {
+      "ok": true,
+      "issues": []
+    }
+  },
+  {
+    "province": "广东",
+    "year": 2022,
+    "track": "历史类",
+    "confidence": "validated_structural",
+    "confidenceScore": 0.7,
+    "url": "https://gaokao.eol.cn/guang_dong/dongtai/202206/t20220626_2234201.shtml",
+    "crossChecks": [],
+    "structural": {
+      "ok": true,
+      "issues": []
+    }
+  },
+  {
+    "province": "重庆",
+    "year": 2023,
+    "track": null,
+    "confidence": "validated_structural",
+    "confidenceScore": 0.7,
+    "url": "https://gaokao.eol.cn/chong_qing/dongtai/202306/t20230624_2446726.shtml",
+    "crossChecks": [],
+    "structural": {
+      "ok": true,
+      "issues": []
+    }
+  },
+  {
+    "province": "重庆",
+    "year": 2023,
+    "track": "历史类",
+    "confidence": "validated_structural",
+    "confidenceScore": 0.7,
+    "url": "https://gaokao.eol.cn/chong_qing/dongtai/202306/t20230624_2446724.shtml",
+    "crossChecks": [],
+    "structural": {
+      "ok": true,
+      "issues": []
+    }
+  },
+  {
+    "province": "河北",
+    "year": 2023,
+    "track": null,
+    "confidence": "validated_structural",
+    "confidenceScore": 0.7,
+    "url": "https://gaokao.eol.cn/he_bei/dongtai/202306/t20230625_2446944.shtml",
+    "crossChecks": [],
+    "structural": {
+      "ok": true,
+      "issues": []
+    }
+  },
+  {
+    "province": "安徽",
+    "year": 2023,
+    "track": null,
+    "confidence": "validated_structural",
+    "confidenceScore": 0.7,
+    "url": "https://gaokao.eol.cn/an_hui/dongtai/202306/t20230624_2446601.shtml",
+    "crossChecks": [],
+    "structural": {
+      "ok": true,
+      "issues": []
+    }
+  },
+  {
+    "province": "湖北",
+    "year": 2023,
+    "track": null,
+    "confidence": "validated_structural",
+    "confidenceScore": 0.7,
+    "url": "https://gaokao.eol.cn/hu_bei/dongtai/202306/t20230625_2447085.shtml",
+    "crossChecks": [],
+    "structural": {
+      "ok": true,
+      "issues": []
+    }
+  },
+  {
+    "province": "湖北",
+    "year": 2023,
+    "track": "物理类",
+    "confidence": "validated_structural",
+    "confidenceScore": 0.7,
+    "url": "https://gaokao.eol.cn/hu_bei/dongtai/202306/t20230625_2447090.shtml",
+    "crossChecks": [],
+    "structural": {
+      "ok": true,
+      "issues": []
+    }
+  },
+  {
+    "province": "湖南",
+    "year": 2023,
+    "track": null,
+    "confidence": "validated_structural",
+    "confidenceScore": 0.7,
+    "url": "https://gaokao.eol.cn/hu_nan/dongtai/202306/t20230625_2447181.shtml",
+    "crossChecks": [],
+    "structural": {
+      "ok": true,
+      "issues": []
+    }
+  },
+  {
+    "province": "湖南",
+    "year": 2023,
+    "track": "物理类",
+    "confidence": "validated_structural",
+    "confidenceScore": 0.7,
+    "url": "https://gaokao.eol.cn/hu_nan/dongtai/202306/t20230625_2447179.shtml",
+    "crossChecks": [],
+    "structural": {
+      "ok": true,
+      "issues": []
+    }
+  },
+  {
+    "province": "广东",
+    "year": 2023,
+    "track": null,
+    "confidence": "validated_structural",
+    "confidenceScore": 0.7,
+    "url": "https://gaokao.eol.cn/guang_dong/dongtai/202306/t20230627_2447641.shtml",
+    "crossChecks": [],
+    "structural": {
+      "ok": true,
+      "issues": []
+    }
+  },
+  {
+    "province": "广东",
+    "year": 2023,
+    "track": "物理类",
+    "confidence": "validated_structural",
+    "confidenceScore": 0.7,
+    "url": "https://gaokao.eol.cn/guang_dong/dongtai/202306/t20230627_2447639.shtml",
+    "crossChecks": [],
+    "structural": {
+      "ok": true,
+      "issues": []
+    }
+  },
+  {
+    "province": "陕西",
+    "year": 2023,
+    "track": "物理类",
+    "confidence": "validated_structural",
+    "confidenceScore": 0.7,
+    "url": "https://gaokao.eol.cn/shan_xi_sheng/dongtai/202306/t20230624_2446619.shtml",
+    "crossChecks": [],
+    "structural": {
+      "ok": true,
+      "issues": []
+    }
+  },
+  {
+    "province": "山西",
+    "year": 2023,
+    "track": "历史类",
+    "confidence": "validated_structural",
+    "confidenceScore": 0.7,
+    "url": "https://gaokao.eol.cn/shan_xi/dongtai/202306/t20230624_2446684.shtml",
+    "crossChecks": [],
+    "structural": {
+      "ok": true,
+      "issues": []
+    }
+  },
+  {
+    "province": "吉林",
+    "year": 2023,
+    "track": null,
+    "confidence": "validated_structural",
+    "confidenceScore": 0.7,
+    "url": "https://gaokao.eol.cn/ji_lin/dongtai/202306/t20230623_2446361.shtml",
+    "crossChecks": [],
+    "structural": {
+      "ok": true,
+      "issues": []
+    }
+  },
+  {
+    "province": "吉林",
+    "year": 2023,
+    "track": "历史类",
+    "confidence": "validated_structural",
+    "confidenceScore": 0.7,
+    "url": "https://gaokao.eol.cn/ji_lin/dongtai/202306/t20230623_2446360.shtml",
+    "crossChecks": [],
+    "structural": {
+      "ok": true,
+      "issues": []
+    }
+  },
+  {
+    "province": "宁夏",
+    "year": 2023,
+    "track": null,
+    "confidence": "validated_structural",
+    "confidenceScore": 0.7,
+    "url": "https://gaokao.eol.cn/ning_xia/dongtai/202306/t20230623_2446462.shtml",
+    "crossChecks": [],
+    "structural": {
+      "ok": true,
+      "issues": []
+    }
+  },
+  {
+    "province": "宁夏",
+    "year": 2023,
+    "track": "物理类",
+    "confidence": "validated_structural",
+    "confidenceScore": 0.7,
+    "url": "https://gaokao.eol.cn/ning_xia/dongtai/202306/t20230623_2446461.shtml",
+    "crossChecks": [],
+    "structural": {
+      "ok": true,
+      "issues": []
+    }
+  },
+  {
+    "province": "甘肃",
+    "year": 2023,
+    "track": null,
+    "confidence": "validated_structural",
+    "confidenceScore": 0.7,
+    "url": "https://gaokao.eol.cn/gan_su/dongtai/202306/t20230625_2447000.shtml",
+    "crossChecks": [],
+    "structural": {
+      "ok": true,
+      "issues": []
+    }
+  },
+  {
+    "province": "甘肃",
+    "year": 2023,
+    "track": "历史类",
+    "confidence": "validated_structural",
+    "confidenceScore": 0.7,
+    "url": "https://gaokao.eol.cn/gan_su/dongtai/202306/t20230625_2447001.shtml",
+    "crossChecks": [],
+    "structural": {
+      "ok": true,
+      "issues": []
+    }
+  },
+  {
+    "province": "青海",
+    "year": 2023,
+    "track": null,
+    "confidence": "validated_structural",
+    "confidenceScore": 0.7,
+    "url": "https://gaokao.eol.cn/qing_hai/dongtai/202306/t20230625_2446951.shtml",
+    "crossChecks": [],
+    "structural": {
+      "ok": true,
+      "issues": []
+    }
+  },
+  {
+    "province": "青海",
+    "year": 2023,
+    "track": "物理类",
+    "confidence": "validated_structural",
+    "confidenceScore": 0.7,
+    "url": "https://gaokao.eol.cn/qing_hai/dongtai/202306/t20230625_2446949.shtml",
+    "crossChecks": [],
+    "structural": {
+      "ok": true,
+      "issues": []
+    }
+  },
+  {
+    "province": "贵州",
+    "year": 2023,
+    "track": null,
+    "confidence": "validated_structural",
+    "confidenceScore": 0.7,
+    "url": "https://gaokao.eol.cn/gui_zhou/dongtai/202306/t20230624_2446817.shtml",
+    "crossChecks": [],
+    "structural": {
+      "ok": true,
+      "issues": []
+    }
+  },
+  {
+    "province": "贵州",
+    "year": 2023,
+    "track": "历史类",
+    "confidence": "validated_structural",
+    "confidenceScore": 0.7,
+    "url": "https://gaokao.eol.cn/gui_zhou/dongtai/202306/t20230624_2446816.shtml",
+    "crossChecks": [],
+    "structural": {
+      "ok": true,
+      "issues": []
+    }
+  },
+  {
+    "province": "云南",
+    "year": 2023,
+    "track": null,
+    "confidence": "validated_structural",
+    "confidenceScore": 0.7,
+    "url": "https://gaokao.eol.cn/yun_nan/dongtai/202306/t20230623_2446437.shtml",
+    "crossChecks": [],
+    "structural": {
+      "ok": true,
+      "issues": []
+    }
+  },
+  {
+    "province": "云南",
+    "year": 2023,
+    "track": "物理类",
+    "confidence": "validated_structural",
+    "confidenceScore": 0.7,
+    "url": "https://gaokao.eol.cn/yun_nan/dongtai/202306/t20230623_2446437_1.shtml",
+    "crossChecks": [],
+    "structural": {
+      "ok": true,
+      "issues": []
+    }
+  },
+  {
+    "province": "重庆",
+    "year": 2024,
+    "track": null,
+    "confidence": "validated_structural",
+    "confidenceScore": 0.7,
+    "url": "https://gaokao.eol.cn/chong_qing/dongtai/202406/t20240624_2618999.shtml",
+    "crossChecks": [],
+    "structural": {
+      "ok": true,
+      "issues": []
+    }
+  },
+  {
+    "province": "重庆",
+    "year": 2024,
+    "track": "物理类",
+    "confidence": "validated_structural",
+    "confidenceScore": 0.7,
+    "url": "https://gaokao.eol.cn/chong_qing/dongtai/202406/t20240624_2618998.shtml",
+    "crossChecks": [],
+    "structural": {
+      "ok": true,
+      "issues": []
+    }
+  },
+  {
+    "province": "河北",
+    "year": 2024,
+    "track": null,
+    "confidence": "validated_structural",
+    "confidenceScore": 0.7,
+    "url": "https://gaokao.eol.cn/he_bei/dongtai/202406/t20240625_2619074.shtml",
+    "crossChecks": [],
+    "structural": {
+      "ok": true,
+      "issues": []
+    }
+  },
+  {
+    "province": "河北",
+    "year": 2024,
+    "track": "物理类",
+    "confidence": "validated_structural",
+    "confidenceScore": 0.7,
+    "url": "https://gaokao.eol.cn/he_bei/dongtai/202406/t20240625_2619073.shtml",
+    "crossChecks": [],
+    "structural": {
+      "ok": true,
+      "issues": []
+    }
+  },
+  {
+    "province": "安徽",
+    "year": 2024,
+    "track": null,
+    "confidence": "validated_structural",
+    "confidenceScore": 0.7,
+    "url": "https://gaokao.eol.cn/an_hui/dongtai/202406/t20240625_2619348.shtml",
+    "crossChecks": [],
+    "structural": {
+      "ok": true,
+      "issues": []
+    }
+  },
+  {
+    "province": "浙江",
+    "year": 2024,
+    "track": null,
+    "confidence": "validated_structural",
+    "confidenceScore": 0.7,
+    "url": "https://gaokao.eol.cn/zhe_jiang/dongtai/202406/t20240626_2619511.shtml",
+    "crossChecks": [],
+    "structural": {
+      "ok": true,
+      "issues": []
+    }
+  },
+  {
+    "province": "福建",
+    "year": 2024,
+    "track": null,
+    "confidence": "validated_structural",
+    "confidenceScore": 0.7,
+    "url": "https://gaokao.eol.cn/fu_jian/dongtai/202406/t20240625_2619344.shtml",
+    "crossChecks": [],
+    "structural": {
+      "ok": true,
+      "issues": []
+    }
+  },
+  {
+    "province": "福建",
+    "year": 2024,
+    "track": "物理类",
+    "confidence": "validated_structural",
+    "confidenceScore": 0.7,
+    "url": "https://gaokao.eol.cn/fu_jian/dongtai/202406/t20240625_2619342.shtml",
+    "crossChecks": [],
+    "structural": {
+      "ok": true,
+      "issues": []
+    }
+  },
+  {
+    "province": "湖北",
+    "year": 2024,
+    "track": null,
+    "confidence": "validated_structural",
+    "confidenceScore": 0.7,
+    "url": "https://gaokao.eol.cn/hu_bei/dongtai/202406/t20240625_2619340.shtml",
+    "crossChecks": [],
+    "structural": {
+      "ok": true,
+      "issues": []
+    }
+  },
+  {
+    "province": "湖北",
+    "year": 2024,
+    "track": "物理类",
+    "confidence": "validated_structural",
+    "confidenceScore": 0.7,
+    "url": "https://gaokao.eol.cn/hu_bei/dongtai/202406/t20240625_2619345.shtml",
+    "crossChecks": [],
+    "structural": {
+      "ok": true,
+      "issues": []
+    }
+  },
+  {
+    "province": "湖南",
+    "year": 2024,
+    "track": null,
+    "confidence": "validated_structural",
+    "confidenceScore": 0.7,
+    "url": "https://gaokao.eol.cn/hu_nan/dongtai/202406/t20240625_2619159.shtml",
+    "crossChecks": [],
+    "structural": {
+      "ok": true,
+      "issues": []
+    }
+  },
+  {
+    "province": "湖南",
+    "year": 2024,
+    "track": "物理类",
+    "confidence": "validated_structural",
+    "confidenceScore": 0.7,
+    "url": "https://gaokao.eol.cn/hu_nan/dongtai/202406/t20240625_2619109.shtml",
+    "crossChecks": [],
+    "structural": {
+      "ok": true,
+      "issues": []
+    }
+  },
+  {
+    "province": "广东",
+    "year": 2024,
+    "track": null,
+    "confidence": "verified_multi_source",
+    "confidenceScore": 0.95,
+    "url": "https://gaokao.eol.cn/guang_dong/dongtai/202406/t20240626_2619547.shtml",
+    "crossChecks": [
+      {
+        "name": "zizzs_rank_at_690",
+        "ok": true,
+        "expected": 73,
+        "actual": 73,
+        "diff_pct": 0.0
+      },
+      {
+        "name": "zizzs_rank_at_600",
+        "ok": true,
+        "expected": 22216,
+        "actual": 22216,
+        "diff_pct": 0.0
+      },
+      {
+        "name": "zizzs_rank_at_584",
+        "ok": true,
+        "expected": 34305,
+        "actual": 34306,
+        "diff_pct": 0.0
+      }
+    ],
+    "structural": {
+      "ok": true,
+      "issues": []
+    }
+  },
+  {
+    "province": "陕西",
+    "year": 2024,
+    "track": null,
+    "confidence": "partially_verified",
+    "confidenceScore": 0.7,
+    "url": "https://gaokao.eol.cn/shan_xi_sheng/dongtai/202406/t20240624_2618960.shtml",
+    "crossChecks": [
+      {
+        "name": "zizzs_rank_at_650",
+        "ok": true,
+        "expected": 1973,
+        "actual": 1973,
+        "diff_pct": 0.0
+      },
+      {
+        "name": "zizzs_rank_at_500",
+        "ok": false,
+        "expected": 25000,
+        "actual": 45763,
+        "diff_pct": 83.05
+      },
+      {
+        "name": "zizzs_rank_at_450",
+        "ok": true,
+        "expected": 78965,
+        "actual": 78829,
+        "diff_pct": 0.17
+      }
+    ],
+    "structural": {
+      "ok": true,
+      "issues": []
+    }
+  },
+  {
+    "province": "陕西",
+    "year": 2024,
+    "track": "物理类",
+    "confidence": "failed_validation",
+    "confidenceScore": 0.2,
+    "url": "https://gaokao.eol.cn/shan_xi_sheng/dongtai/202406/t20240624_2618959.shtml",
+    "crossChecks": [
+      {
+        "name": "zizzs_rank_at_650",
+        "ok": false,
+        "expected": 1973,
+        "actual": 15,
+        "diff_pct": 99.24
+      },
+      {
+        "name": "zizzs_rank_at_500",
+        "ok": false,
+        "expected": 25000,
+        "actual": 11230,
+        "diff_pct": 55.08
+      },
+      {
+        "name": "zizzs_rank_at_450",
+        "ok": false,
+        "expected": 78965,
+        "actual": 26926,
+        "diff_pct": 65.9
+      }
+    ],
+    "structural": {
+      "ok": true,
+      "issues": []
+    }
+  },
+  {
+    "province": "内蒙古",
+    "year": 2024,
+    "track": null,
+    "confidence": "validated_structural",
+    "confidenceScore": 0.7,
+    "url": "https://gaokao.eol.cn/nei_meng/dongtai/202406/t20240623_2618558.shtml",
+    "crossChecks": [],
+    "structural": {
+      "ok": true,
+      "issues": []
+    }
+  },
+  {
+    "province": "内蒙古",
+    "year": 2024,
+    "track": "历史类",
+    "confidence": "validated_structural",
+    "confidenceScore": 0.7,
+    "url": "https://gaokao.eol.cn/nei_meng/dongtai/202406/t20240623_2618559.shtml",
+    "crossChecks": [],
+    "structural": {
+      "ok": true,
+      "issues": []
+    }
+  },
+  {
+    "province": "黑龙江",
+    "year": 2024,
+    "track": null,
+    "confidence": "failed_validation",
+    "confidenceScore": 0.2,
+    "url": "https://gaokao.eol.cn/hei_long_jiang/dongtai/202406/t20240625_2619390.shtml",
+    "crossChecks": [
+      {
+        "name": "eol_text_total_candidates",
+        "ok": false,
+        "expected": 45,
+        "actual": 122383,
+        "diff_pct": 271862.22
+      }
+    ],
+    "structural": {
+      "ok": true,
+      "issues": []
+    }
+  },
+  {
+    "province": "黑龙江",
+    "year": 2024,
+    "track": "物理类",
+    "confidence": "validated_structural",
+    "confidenceScore": 0.7,
+    "url": "https://gaokao.eol.cn/hei_long_jiang/dongtai/202406/t20240625_2619389.shtml",
+    "crossChecks": [],
+    "structural": {
+      "ok": true,
+      "issues": []
+    }
+  },
+  {
+    "province": "吉林",
+    "year": 2024,
+    "track": null,
+    "confidence": "validated_structural",
+    "confidenceScore": 0.7,
+    "url": "https://gaokao.eol.cn/ji_lin/dongtai/202406/t20240625_2619214.shtml",
+    "crossChecks": [],
+    "structural": {
+      "ok": true,
+      "issues": []
+    }
+  },
+  {
+    "province": "吉林",
+    "year": 2024,
+    "track": "物理类",
+    "confidence": "validated_structural",
+    "confidenceScore": 0.7,
+    "url": "https://gaokao.eol.cn/ji_lin/dongtai/202406/t20240625_2619241.shtml",
+    "crossChecks": [],
+    "structural": {
+      "ok": true,
+      "issues": []
+    }
+  },
+  {
+    "province": "江苏",
+    "year": 2024,
+    "track": "物理类",
+    "confidence": "partially_verified",
+    "confidenceScore": 0.7,
+    "url": "https://gaokao.eol.cn/jiang_su/dongtai/202406/t20240625_2619080.shtml",
+    "crossChecks": [
+      {
+        "name": "eol_text_undergrad_cumulative",
+        "ok": true,
+        "expected": 187958,
+        "actual": 187950,
+        "diff_pct": 0.0
+      },
+      {
+        "name": "zizzs_rank_at_600",
+        "ok": true,
+        "expected": 30768,
+        "actual": 30768,
+        "diff_pct": 0.0
+      },
+      {
+        "name": "zizzs_rank_at_550",
+        "ok": false,
+        "expected": 92971,
+        "actual": 81093,
+        "diff_pct": 12.78
+      }
+    ],
+    "structural": {
+      "ok": true,
+      "issues": []
+    }
+  },
+  {
+    "province": "江苏",
+    "year": 2024,
+    "track": "历史类",
+    "confidence": "conflict",
+    "confidenceScore": 0.45,
+    "url": "https://gaokao.eol.cn/jiang_su/dongtai/202406/t20240625_2619079.shtml",
+    "crossChecks": [
+      {
+        "name": "eol_text_undergrad_cumulative",
+        "ok": true,
+        "expected": 50966,
+        "actual": 51009,
+        "diff_pct": 0.08
+      },
+      {
+        "name": "zizzs_rank_at_600",
+        "ok": false,
+        "expected": 30768,
+        "actual": 4190,
+        "diff_pct": 86.38
+      },
+      {
+        "name": "zizzs_rank_at_550",
+        "ok": false,
+        "expected": 92971,
+        "actual": 18357,
+        "diff_pct": 80.26
+      }
+    ],
+    "structural": {
+      "ok": true,
+      "issues": []
+    }
+  },
+  {
+    "province": "四川",
+    "year": 2024,
+    "track": "物理类",
+    "confidence": "failed_validation",
+    "confidenceScore": 0.2,
+    "url": "https://gaokao.eol.cn/si_chuan/dongtai/202406/t20240624_2618669.shtml",
+    "crossChecks": [
+      {
+        "name": "zizzs_rank_at_600",
+        "ok": false,
+        "expected": 23461,
+        "actual": 26240,
+        "diff_pct": 11.85
+      },
+      {
+        "name": "zizzs_rank_at_500",
+        "ok": false,
+        "expected": 127322,
+        "actual": 135858,
+        "diff_pct": 6.7
+      }
+    ],
+    "structural": {
+      "ok": true,
+      "issues": []
+    }
+  }
+]
