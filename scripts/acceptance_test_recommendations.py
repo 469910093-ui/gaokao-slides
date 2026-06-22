@@ -18,6 +18,7 @@ DATA = ROOT / "data"
 OUT_DIR = DATA / "acceptance"
 from province_tracks import COMBINED_33_PROVINCES, major_match_tracks, tracks_for_province
 
+NO_SEGMENT_EOL_PROVINCES = frozenset({"新疆", "西藏"})
 YEAR = "2025"
 
 C9_NAMES = {"清华大学", "北京大学", "复旦大学", "上海交通大学", "浙江大学", "南京大学", "中国科学技术大学"}
@@ -325,7 +326,7 @@ def audit_case(
                     "message": f"稳妥层次 {case.reach_tier} 但 Top 推荐含 {sch['tier']}「{name}」",
                 })
 
-    if case.track in ("物理类", "综合类"):
+    if case.track in ("物理类",):
         wrong = [m for m in case.majors[:8] if m in history_only_majors]
         if len(wrong) >= 3:
             case.issues.append({
@@ -343,10 +344,15 @@ def audit_case(
             })
 
     if case.segment_source in ("model_estimate", "model") and p is not None and p > 90:
+        sev = "WARN" if case.province in NO_SEGMENT_EOL_PROVINCES else "ERROR"
         case.issues.append({
-            "severity": "ERROR",
-            "code": "MODEL_SEGMENT_HIGH",
-            "message": "高分段使用模型估算一分一段，位次不可用于填报",
+            "severity": sev,
+            "code": "MODEL_SEGMENT_HIGH" if sev == "ERROR" else "MODEL_SEGMENT_GAP",
+            "message": (
+                "高分段使用模型估算一分一段，位次不可用于填报"
+                if sev == "ERROR"
+                else f"{case.province}暂无公开一分一段源，高分段为模型估算"
+            ),
         })
 
     if reach_idx < tier_order.index("专科") and any(m in voc_only_major_names for m in case.majors[:8]):

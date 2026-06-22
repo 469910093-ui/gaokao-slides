@@ -445,13 +445,13 @@ def parse_eol_image_table(
 ) -> tuple[list[SegmentRow], int]:
     """TRS_Editor 内嵌 JPG/PNG 一分一段表 → OCR 解析。"""
     rels = re.findall(
-        r'href="(\./W\d+\.(?:jpg|png|jpeg))"',
+        r'(?:href|src|oldsrc)="(\./W\d+\.(?:jpg|png|jpeg))"',
         html,
         flags=re.I,
     )
     if not rels:
         rels = re.findall(
-            r'src="(\./W\d+\.(?:jpg|png|jpeg))"',
+            r'(?:href|src|oldsrc)="(W\d+\.(?:jpg|png|jpeg))"',
             html,
             flags=re.I,
         )

@@ -12,6 +12,7 @@ ROOT = Path(__file__).resolve().parents[1]
 DATA = ROOT / "data" / "acceptance"
 sys.path.insert(0, str(ROOT / "scripts"))
 
+from province_tracks import pick_track_payload
 from acceptance_test_recommendations import (  # noqa: E402
     build_segments,
     cumulative_at,
@@ -26,7 +27,7 @@ BENCHMARKS = [
     {
         "id": "BJ619",
         "province": "北京",
-        "track": "历史类",
+        "track": "综合类",
         "score": 619,
         "official_rank": 7983,
         "rank_tolerance": 800,
@@ -51,7 +52,7 @@ BENCHMARKS = [
     {
         "id": "BJ697",
         "province": "北京",
-        "track": "物理类",
+        "track": "综合类",
         "score": 697,
         "official_rank": 136,
         "rank_tolerance": 50,
@@ -69,7 +70,9 @@ def run_at_score(province: str, track: str, score: int, year: str = "2025") -> d
     year_obj = pdata.get("years", {}).get(year)
     if not year_obj:
         return None
-    track_data = year_obj.get("tracks", {}).get(track)
+    track_data = pick_track_payload(year_obj.get("tracks", {}), province, int(year), track)
+    if not track_data and track in ("物理类", "历史类"):
+        track_data = year_obj.get("tracks", {}).get(track)
     if not track_data:
         return None
     segs = build_segments(track_data.get("segments") or [])
