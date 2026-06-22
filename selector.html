@@ -997,10 +997,14 @@
       return null;
     }
 
+    function segmentTotal() {
+      if (state.totalCandidates > 0) return state.totalCandidates;
+      if (!state.segments.length) return 1;
+      return Math.max(...state.segments.map((s) => s.cumulative || 0), 1);
+    }
+
     function percentileFromCumulative(cumulative, count = 1) {
-      const total = state.totalCandidates
-        || state.segments[state.segments.length - 1]?.cumulative
-        || 1;
+      const total = segmentTotal();
       const rankMid = Math.max(1, cumulative - count / 2);
       return Math.round((1 - rankMid / total) * 10000) / 100;
     }
@@ -1085,14 +1089,18 @@
       const order = state.manifest.tierOrder || [];
       const schoolP = schoolMinPercentile(school);
       const schoolIdx = order.indexOf(school.tier);
-      if (schoolIdx < 0) return false;
-      // tierOrder 越靠前层次越高：稳/保 = 同层次或更低校；冲 = 高 1–2 档且百分位差距可控
-      if (schoolIdx >= reachIdx) return true;
+      if (schoolIdx < 0 || userP == null) return false;
+
       const gap = schoolP - userP;
-      const delta = reachIdx - schoolIdx;
-      if (delta === 1) return gap <= 10;
-      if (delta === 2) return gap <= 9;
-      return false;
+      // 学校档次更高（C9=0）：仅允许冲 1–2 档且位次差距可控
+      if (schoolIdx < reachIdx) {
+        const delta = reachIdx - schoolIdx;
+        if (delta === 1) return gap <= 8;
+        if (delta === 2) return gap <= 6;
+        return false;
+      }
+      // 同档或更低档：用户百分位须达到该校参考线（保底略放宽）
+      return gap <= 5;
     }
 
     function scoreThresholdForTier(tier) {

@@ -153,15 +153,17 @@ def school_min_percentile(school: dict[str, Any], tier_pct: dict[str, float]) ->
 def school_reachable(user_p: float, school: dict[str, Any], reach_idx: int, tier_order: list[str], tier_pct: dict[str, float]) -> bool:
     school_p = school_min_percentile(school, tier_pct)
     school_idx = tier_order.index(school["tier"])
-    if school_idx >= reach_idx:
-        return True
+    if school_idx < 0:
+        return False
     gap = school_p - user_p
-    delta = reach_idx - school_idx
-    if delta == 1:
-        return gap <= 10
-    if delta == 2:
-        return gap <= 9
-    return False
+    if school_idx < reach_idx:
+        delta = reach_idx - school_idx
+        if delta == 1:
+            return gap <= 8
+        if delta == 2:
+            return gap <= 6
+        return False
+    return gap <= 5
 
 
 def major_matches_subject(major: dict[str, Any], track: str, province: str = "") -> bool:
