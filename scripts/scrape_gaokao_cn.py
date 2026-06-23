@@ -212,7 +212,7 @@ def main() -> None:
                 continue
             crawl_tracks = tracks_for_admission_crawl(province, tracks)
             for track in crawl_tracks:
-                track_label = track or "综合类"
+                track_label = track or "综合"
                 fname = f"admissions_{province}_{year}_{track_label}.json"
                 path = OUT_DIR / fname
                 if args.skip_existing and path.exists():

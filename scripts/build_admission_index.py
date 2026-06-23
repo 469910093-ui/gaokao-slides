@@ -20,6 +20,7 @@ from admission_filter_lib import (  # noqa: E402
     filter_admission_row,
     normalize_track,
     parse_min_score,
+    select_admission_archive_files,
     track_key_from_filename,
 )
 
@@ -36,7 +37,8 @@ SOURCE_META = {
         "仅收录本省普通本科主批次（如北京本科批、浙江平行录取一段）投档行；"
         "剔除外省批次与 min>合理上限的异常分；"
         "每校每年取各专业组投档最低分中的最小值（floor）；"
-        "近三年有数据的年份取 floor 算术平均，记为 avgMin3y。"
+        "近三年有数据的年份取 floor 算术平均，记为 avgMin3y；"
+        "同省同年同科类多份归档时仅保留 `_综合.json`（弃用旧版 `_综合类.json`）。"
     ),
     "disclaimer": OFFICIAL_REFERENCES["note"],
     "examPortals": PROVINCE_EXAM_PORTALS,
@@ -55,7 +57,8 @@ def build_index() -> dict[str, Any]:
     row_count = 0
     skipped = 0
 
-    for path in sorted(REF_DIR.glob("admissions_*.json")):
+    archive_files = select_admission_archive_files(REF_DIR)
+    for path in archive_files:
         file_count += 1
         rows = json.loads(path.read_text(encoding="utf-8"))
         file_track = track_key_from_filename(path.name)

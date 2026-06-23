@@ -140,3 +140,37 @@ def filter_admission_row(province: str, row: dict[str, Any]) -> bool:
     if score is None or not is_plausible_score(score, province):
         return False
     return True
+
+
+def parse_admission_file_key(fname: str) -> tuple[str, int, str] | None:
+    """(省, 年, 归一化科类) — 用于同键多文件去重。"""
+    m = re.match(r"admissions_(.+)_(\d{4})_(.+)\.json$", fname)
+    if not m:
+        return None
+    province, year_s, _raw_track = m.group(1), m.group(2), m.group(3)
+    return province, int(year_s), track_key_from_filename(fname)
+
+
+def admission_file_priority(fname: str) -> tuple[int, int]:
+    """同省同年同科类时优先 `_综合.json`（新爬虫），弃用旧版 `_综合类.json`。"""
+    if fname.endswith("_综合.json"):
+        return (0, 0)
+    if fname.endswith("_综合类.json"):
+        return (1, 0)
+    return (2, 0)
+
+
+def select_admission_archive_files(ref_dir) -> list:
+    """每个 (省, 年, 科类) 只保留一份归档，避免旧文件拉低 floor。"""
+    from pathlib import Path
+
+    ref = Path(ref_dir)
+    chosen: dict[tuple[str, int, str], object] = {}
+    for path in sorted(ref.glob("admissions_*.json")):
+        key = parse_admission_file_key(path.name)
+        if key is None:
+            continue
+        prev = chosen.get(key)
+        if prev is None or admission_file_priority(path.name) < admission_file_priority(prev.name):
+            chosen[key] = path
+    return sorted(chosen.values(), key=lambda p: p.name)
