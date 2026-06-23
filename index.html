@@ -125,6 +125,16 @@
       white-space: nowrap;
     }
     footer { margin-top: 34px; color: var(--muted); font-size: 13px; line-height: 1.7; }
+    @media (max-width: 480px) {
+      body { padding: 24px 14px 56px; }
+      .deck-card.featured { grid-template-columns: 1fr; }
+      .featured-cta { justify-self: start; }
+    }
+    @media (orientation: landscape) and (max-height: 520px) {
+      body { padding: 16px 20px 40px; }
+      .hero { padding: 20px 22px; }
+      .grid { grid-template-columns: repeat(2, 1fr); }
+    }
     .qr-panel {
       margin-top: 28px; text-align: center; padding: 28px 24px 32px;
       background: linear-gradient(180deg, #fff 0%, #fff8e8 100%);
@@ -140,14 +150,14 @@
     <section class="hero">
       <span class="hero-badge">🔥 祝愿心想事成！</span>
       <h1>高考出分选专业<br><span class="hl">爆帖轮播 + 分数选校工具</span></h1>
-      <p class="intro">5 篇爆帖已统一换成高对比「封面海报」视觉：黄底高亮、贴纸标签、粗描边卡片。另附交互选校页，拖拽分数看院校与 10 年热门专业。</p>
+      <p class="intro">一站式选校流程：先避坑 → 填分数对标院校 → 看推荐 → 查就业沙盘 → 爆帖延伸阅读。5 篇小红书轮播可截图直发。</p>
     </section>
     <div class="grid">
       <a class="deck-card featured" href="selector.html">
         <div>
           <div class="card-top"><span class="num">★</span><span class="pill">交互工具</span></div>
-          <h2>分数选校选专业 · 拖拽看推荐</h2>
-          <p>31 省 · 2014-2025 · 院校分级 + 热门专业排序</p>
+          <h2>分数选校选专业 · 完整流程</h2>
+          <p>避坑 → 填分 → 对标院校 → 推荐 → 就业沙盘 → 爆帖</p>
         </div>
         <span class="featured-cta">立即体验 →</span>
       </a>

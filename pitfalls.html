@@ -1,0 +1,162 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+  <title>志愿填报 · 六项常见误区</title>
+  <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+SC:wght@400;600;700;800&family=ZCOOL+QingKe+HuangYou&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --bg: #fffdf5; --ink: #141414; --red: #ff2442; --yellow: #ffe566;
+      --muted: #5a5a5a; --ok: #00b96b; --cta: #ff7a00; --shadow: 8px 8px 0 #141414;
+    }
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    html { -webkit-text-size-adjust: 100%; }
+    body {
+      font-family: 'Noto Sans SC', sans-serif;
+      background:
+        radial-gradient(circle at 8% 0%, rgba(255,229,102,0.55), transparent 22%),
+        radial-gradient(circle at 95% 5%, rgba(255,36,66,0.12), transparent 18%),
+        var(--bg);
+      color: var(--ink);
+      min-height: 100dvh;
+      padding: max(16px, env(safe-area-inset-top)) max(16px, env(safe-area-inset-right)) max(40px, env(safe-area-inset-bottom)) max(16px, env(safe-area-inset-left));
+    }
+    .wrap { max-width: 720px; margin: 0 auto; }
+    .back {
+      display: inline-flex; align-items: center; gap: 6px;
+      text-decoration: none; color: var(--ink); font-weight: 800; font-size: 14px;
+      border: 2px solid var(--ink); padding: 8px 14px; border-radius: 12px;
+      background: var(--yellow); box-shadow: 3px 3px 0 var(--ink); margin-bottom: 16px;
+    }
+    .hero {
+      border: 3px solid var(--ink); border-radius: 22px; padding: 24px 22px;
+      background: linear-gradient(135deg, #fff, #fff5d8); box-shadow: var(--shadow);
+      margin-bottom: 18px;
+    }
+    .badge {
+      display: inline-block; background: var(--red); color: #fff;
+      padding: 6px 12px; border-radius: 999px; font-size: 12px; font-weight: 800;
+    }
+    h1 {
+      font-family: 'ZCOOL QingKe HuangYou', cursive;
+      font-size: clamp(30px, 8vw, 44px); line-height: 1.12; margin-top: 10px;
+    }
+    h1 .hl {
+      background: linear-gradient(180deg, transparent 62%, var(--yellow) 62%, var(--yellow) 90%, transparent 90%);
+    }
+    .intro { color: var(--muted); margin-top: 10px; line-height: 1.7; font-size: 15px; font-weight: 600; }
+    .pitfall {
+      border: 3px solid var(--ink); border-radius: 18px; padding: 18px 18px 16px;
+      background: #fff; box-shadow: 5px 5px 0 var(--ink); margin-bottom: 14px;
+    }
+    .pitfall-num {
+      display: inline-flex; width: 32px; height: 32px; align-items: center; justify-content: center;
+      background: var(--yellow); border: 2px solid var(--ink); border-radius: 10px;
+      font-weight: 800; font-size: 15px; margin-bottom: 8px;
+    }
+    .pitfall h2 { font-size: 17px; font-weight: 800; line-height: 1.35; margin-bottom: 8px; }
+    .pitfall p, .pitfall li { font-size: 14px; color: var(--muted); line-height: 1.65; font-weight: 600; }
+    .pitfall ul { margin: 8px 0 0 18px; }
+    .pitfall .fix {
+      margin-top: 10px; padding: 10px 12px; border-radius: 12px;
+      background: #f0fff4; border: 2px solid var(--ok); font-size: 13px; color: #067647; font-weight: 700;
+    }
+    .action-panel {
+      border: 3px solid var(--ink); border-radius: 18px; padding: 20px;
+      background: linear-gradient(160deg, #fff8e8, #fff); box-shadow: var(--shadow);
+      margin-top: 8px;
+    }
+    .action-panel h2 { font-size: 18px; font-weight: 800; margin-bottom: 10px; }
+    .action-panel ol { margin-left: 20px; }
+    .action-panel li { font-size: 14px; line-height: 1.7; font-weight: 600; color: var(--muted); margin-bottom: 6px; }
+    .cta-row { display: flex; flex-wrap: wrap; gap: 10px; margin-top: 18px; }
+    .cta {
+      flex: 1; min-width: 140px; text-align: center; text-decoration: none;
+      padding: 14px 16px; border-radius: 14px; font-weight: 800; font-size: 14px;
+      border: 2px solid var(--ink); box-shadow: 4px 4px 0 var(--ink);
+    }
+    .cta.primary { background: var(--cta); color: #fff; }
+    .cta.secondary { background: var(--yellow); color: var(--ink); }
+    @media (orientation: landscape) and (max-height: 520px) {
+      .hero { padding: 16px; }
+      h1 { font-size: 26px; }
+      .pitfall { padding: 14px; }
+    }
+  </style>
+</head>
+<body>
+  <div class="wrap">
+    <a class="back" href="selector.html#step-pitfalls">← 返回选校流程</a>
+    <section class="hero">
+      <span class="badge">填报前先看</span>
+      <h1>志愿填报<br><span class="hl">六项常见误区</span></h1>
+      <p class="intro">不同平台说法打架，往往不是因为分数不够，而是<strong>参考依据和核对方法</strong>没理顺。下面六项先自查一遍，再动手填志愿更稳。</p>
+    </section>
+
+    <article class="pitfall">
+      <div class="pitfall-num">①</div>
+      <h2>把非官方信息当成最终依据</h2>
+      <p>商业机构页面、自媒体解读可以作参考，但批次线、招生计划、投档规则应以主管部门和院校正式发布为准。</p>
+      <ul>
+        <li>优先：省级招生考试机构官网</li>
+        <li>优先：教育部阳光高考信息平台</li>
+        <li>优先：目标高校本科招生网</li>
+      </ul>
+      <div class="fix">建议：把上述三个入口加入书签；其他渠道的信息用来「找线索」，用来「下结论」前务必回官方核对。</div>
+    </article>
+
+    <article class="pitfall">
+      <div class="pitfall-num">②</div>
+      <h2>只看专业名称，不看培养内容</h2>
+      <p>名称相近的专业，课程方向和就业出口可能差很远。例如部分「××科学」「××工程」类名称，实际主干课可能是数学、材料或管理，而非你想象的方向。</p>
+      <div class="fix">建议：打开招生简章里的培养方案，核对核心课程、实习要求和近年就业去向，再决定是否填报。</div>
+    </article>
+
+    <article class="pitfall">
+      <div class="pitfall-num">③</div>
+      <h2>用校名印象代替学校实力</h2>
+      <p>有的院校名称不够「响亮」，但学科建设和录取分数并不低；反之，也要避免只追名气、忽视专业实力和地域资源。</p>
+      <div class="fix">建议：结合学科评估、硕博点布局、优势学科和所在城市产业，综合判断，而不是凭第一印象排先后。</div>
+    </article>
+
+    <article class="pitfall">
+      <div class="pitfall-num">④</div>
+      <h2>完全沿用多年前的选校经验</h2>
+      <p>行业前景、就业结构和招生政策都在变，先看看自己性格适合什么样的工作环境，当前这个环境有哪些大厂，他们招聘的要求、专业、薪资水平如何，5 年后的薪资水平如何。再去选择专业。</p>
+      <div class="fix">建议：用一分一段表、院校投档线、专业就业数据和家人沟通，把「经验」和「事实」分开讨论。</div>
+    </article>
+
+    <article class="pitfall">
+      <div class="pitfall-num">⑤</div>
+      <h2>指望入学后再转专业兜底</h2>
+      <p>多数高校对转专业有名额、绩点和考核限制，热门方向竞争更激烈。若对第一志愿专业缺乏基本学习意愿，转专业未必能如愿。</p>
+      <div class="fix">建议：第一志愿应选「愿意学、学得下去」的专业；转专业可作为补充选项，不宜当作主方案。</div>
+    </article>
+
+    <article class="pitfall">
+      <div class="pitfall-num">⑥</div>
+      <h2>忽略批次规则与填报细节</h2>
+      <ul>
+        <li>部分提前批、专项计划未录取时，通常仍可参与后续本科批次，需提前了解本省政策</li>
+        <li>同一院校不同专业组，学制、学费和培养模式可能差异很大</li>
+        <li>个别专业本科阶段就业面较窄，需结合是否计划深造一并考虑</li>
+      </ul>
+      <div class="fix">建议：逐条阅读本省填报说明；专业组内每个志愿都看清学费、学制和调剂规则。</div>
+    </article>
+
+    <section class="action-panel">
+      <h2>接下来可以这样做</h2>
+      <ol>
+        <li>通过学校论坛、新生群等渠道，联系 1–2 名在读学生了解真实课程与就业情况，最核心的技能课是什么（重中之重）</li>
+        <li>重点问：平时学什么、学校环境如何（生活体验也很重要）、毕业大多去哪类单位</li>
+        <li>回到本工具，录入分数并对标意向院校的近年投档参考线</li>
+      </ol>
+      <div class="cta-row">
+        <a class="cta primary" href="selector.html#step-score">去填分数对标 →</a>
+        <a class="cta secondary" href="fill-guide.html">看录取与填报要点 →</a>
+      </div>
+    </section>
+  </div>
+</body>
+</html>

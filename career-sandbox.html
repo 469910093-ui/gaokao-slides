@@ -10,12 +10,14 @@
       --bg: #fffdf5; --card: #fff; --ink: #141414; --text: #141414;
       --muted: #5a5a5a; --red: #ff2442; --yellow: #ffe566; --ok: #00b96b;
       --blue: #1d4ed8; --cta: #ff7a00; --shadow: 8px 8px 0 #141414;
+      --fs: 15px;
     }
-    body.font-large { font-size: 17px; }
-    body.font-large table { font-size: 15px; }
+    html { font-size: var(--fs); -webkit-text-size-adjust: 100%; }
+    html.font-large { --fs: 24px; }
     * { box-sizing: border-box; margin: 0; padding: 0; }
     body {
       font-family: 'Noto Sans SC', sans-serif;
+      font-size: 1rem;
       background:
         radial-gradient(circle at 8% 0%, rgba(255,229,102,0.55), transparent 22%),
         radial-gradient(circle at 95% 5%, rgba(255,36,66,0.12), transparent 18%),
@@ -32,7 +34,7 @@
     .hero::after {
       content: '就业沙盘'; position: absolute; top: 16px; right: -30px;
       background: var(--red); color: #fff; padding: 8px 54px; transform: rotate(24deg);
-      font-size: 12px; font-weight: 800;
+      font-size: 0.8rem; font-weight: 800;
     }
     .topbar { display: flex; justify-content: space-between; align-items: flex-start; gap: 16px; flex-wrap: wrap; }
     .topbar-actions { display: flex; flex-wrap: wrap; gap: 8px; align-items: center; }
@@ -41,7 +43,7 @@
       box-shadow: 3px 3px 0 var(--ink); background: #fff;
     }
     .font-toggle button {
-      border: none; border-radius: 0; padding: 8px 12px; font-size: 12px; font-weight: 800;
+      border: none; border-radius: 0; padding: 8px 12px; font-size: 0.8rem; font-weight: 800;
       cursor: pointer; background: #fff; color: var(--muted);
     }
     .font-toggle button.active { background: var(--yellow); color: var(--ink); }
@@ -52,50 +54,40 @@
     }
     h1 {
       font-family: 'ZCOOL QingKe HuangYou', cursive;
-      font-size: clamp(32px, 5vw, 48px); line-height: 1.1; margin-top: 10px;
+      font-size: clamp(2.13rem, 5vw, 3.2rem); line-height: 1.1; margin-top: 10px;
     }
     h1 .hl {
       background: linear-gradient(180deg, transparent 62%, var(--yellow) 62%, var(--yellow) 90%, transparent 90%);
     }
-    .sub { color: var(--muted); margin-top: 10px; line-height: 1.65; font-size: 15px; font-weight: 600; }
+    .sub { color: var(--muted); margin-top: 10px; line-height: 1.65; font-size: 1rem; font-weight: 600; }
+    .hero-badge {
+      display: inline-block; background: #ffe566; border: 2px solid #141414;
+      padding: 6px 12px; border-radius: 999px; font-size: 0.8rem; font-weight: 800;
+    }
     .panel {
       background: var(--card); border: 3px solid var(--ink); border-radius: 22px;
       padding: 24px; box-shadow: var(--shadow); margin-bottom: 18px;
     }
     .controls { display: grid; grid-template-columns: 1fr; gap: 14px; align-items: start; }
+    .major-picker { display: grid; gap: 10px; }
     .major-search {
       width: 100%; border: 2px solid var(--ink); border-radius: 14px; padding: 12px 14px;
-      font-size: 15px; font-weight: 700; background: #fff; box-shadow: 3px 3px 0 var(--ink);
+      font-size: 1rem; font-weight: 700; background: #fff; box-shadow: 3px 3px 0 var(--ink);
     }
-    .track-tabs { display: flex; flex-wrap: wrap; gap: 8px; margin-top: 10px; }
-    .track-tab {
-      border: 2px solid var(--ink); border-radius: 999px; padding: 8px 14px;
-      font-size: 13px; font-weight: 800; background: #fff; cursor: pointer;
-      box-shadow: 3px 3px 0 var(--ink);
-    }
-    .track-tab.active { background: var(--yellow); }
-    .major-chips { display: flex; flex-wrap: wrap; gap: 8px; margin-top: 10px; max-height: 200px; overflow: auto; }
-    .major-chip {
-      border: 2px solid var(--ink); border-radius: 12px; padding: 10px 12px;
-      font-size: 13px; font-weight: 800; background: #fff; cursor: pointer;
-      box-shadow: 3px 3px 0 var(--ink); text-align: left;
-    }
-    .major-chip.active { background: var(--yellow); }
-    .major-chip.hidden { display: none; }
-    .sr-only { position: absolute; width: 1px; height: 1px; overflow: hidden; clip: rect(0,0,0,0); }
-    label { display: block; font-size: 13px; color: var(--muted); margin-bottom: 8px; font-weight: 800; }
-    select {
+    label { display: block; font-size: 0.867rem; color: var(--muted); margin-bottom: 8px; font-weight: 800; }
+    select#major {
       width: 100%; border: 2px solid var(--ink); border-radius: 14px; padding: 12px 14px;
-      font-size: 15px; font-weight: 700; background: #fff;
+      font-size: 1rem; font-weight: 700; background: #fff; box-shadow: 3px 3px 0 var(--ink);
     }
+    .picker-hint { font-size: 0.8rem; color: var(--muted); font-weight: 600; line-height: 1.5; }
     .source-badges { display: flex; flex-wrap: wrap; gap: 8px; margin-top: 12px; }
     .src-badge {
-      font-size: 11px; font-weight: 800; padding: 5px 10px; border-radius: 999px;
+      font-size: 0.733rem; font-weight: 800; padding: 5px 10px; border-radius: 999px;
       border: 2px solid var(--ink); background: #f0f7ff;
     }
-    table { width: 100%; border-collapse: collapse; margin-top: 8px; font-size: 14px; }
+    table { width: 100%; border-collapse: collapse; margin-top: 8px; font-size: 0.933rem; }
     th, td { padding: 12px 10px; text-align: left; border-bottom: 2px solid #eee; vertical-align: middle; }
-    th { font-size: 12px; color: var(--muted); font-weight: 800; letter-spacing: .04em; }
+    th { font-size: 0.8rem; color: var(--muted); font-weight: 800; letter-spacing: .04em; }
     @media (max-width: 720px) {
       .job-table thead { display: none; }
       .job-table tbody tr.job-row {
@@ -108,7 +100,7 @@
         gap: 12px; border: none; padding: 8px 0;
       }
       .job-table tbody tr.job-row td::before {
-        content: attr(data-label); font-weight: 800; color: var(--muted); font-size: 12px; flex-shrink: 0;
+        content: attr(data-label); font-weight: 800; color: var(--muted); font-size: 0.8rem; flex-shrink: 0;
       }
       .job-table tbody tr.job-row td:first-child::before { content: '排名'; }
       .job-table tbody tr.detail-row { display: none; border: none; box-shadow: none; padding: 0; }
@@ -120,20 +112,20 @@
     .rank {
       display: inline-flex; align-items: center; justify-content: center;
       width: 28px; height: 28px; border-radius: 8px; border: 2px solid var(--ink);
-      background: var(--yellow); font-weight: 800; font-size: 13px;
+      background: var(--yellow); font-weight: 800; font-size: 0.867rem;
     }
     .rank.top3 { background: var(--red); color: #fff; }
-    .salary { font-weight: 800; font-size: 15px; }
+    .salary { font-weight: 800; font-size: 1rem; }
     .salary.grad { color: var(--blue); }
     .salary.yr5 { color: var(--ok); }
     .growth {
       display: inline-block; padding: 4px 10px; border-radius: 999px; font-weight: 800;
-      font-size: 12px; border: 2px solid var(--ink); background: #d8ffe8; color: #067647;
+      font-size: 0.8rem; border: 2px solid var(--ink); background: #d8ffe8; color: #067647;
     }
     .growth.mid { background: #fff4cc; color: #8a5b00; }
     .growth.low { background: #f3f4f6; color: #555; }
     .conf {
-      font-size: 11px; font-weight: 800; padding: 3px 8px; border-radius: 6px;
+      font-size: 0.733rem; font-weight: 800; padding: 3px 8px; border-radius: 6px;
       border: 1.5px solid var(--ink); white-space: nowrap;
     }
     .conf.verified_multi_source, .conf.verified { background: #d8ffe8; }
@@ -148,17 +140,17 @@
     @media (max-width: 800px) { .src-grid { grid-template-columns: 1fr 1fr; } }
     .src-card {
       border: 2px solid var(--ink); border-radius: 12px; padding: 10px;
-      background: #fff; box-shadow: 3px 3px 0 var(--ink); font-size: 12px;
+      background: #fff; box-shadow: 3px 3px 0 var(--ink); font-size: 0.8rem;
     }
-    .src-card strong { display: block; margin-bottom: 6px; font-size: 13px; }
+    .src-card strong { display: block; margin-bottom: 6px; font-size: 0.867rem; }
     .expand-btn {
       border: 2px solid var(--ink); background: #fff; border-radius: 8px;
-      padding: 4px 8px; font-size: 11px; font-weight: 800; cursor: pointer;
+      padding: 4px 8px; font-size: 0.733rem; font-weight: 800; cursor: pointer;
     }
-    .quality-plain { font-size: 11px; color: var(--muted); font-weight: 700; display: block; margin-top: 2px; }
-    .footer-note { font-size: 12px; color: var(--muted); line-height: 1.65; margin-top: 12px; }
+    .quality-plain { font-size: 0.733rem; color: var(--muted); font-weight: 700; display: block; margin-top: 2px; }
+    .footer-note { font-size: 0.8rem; color: var(--muted); line-height: 1.65; margin-top: 12px; }
     .empty { text-align: center; padding: 40px; color: var(--muted); font-weight: 600; }
-    .howto-panel h2 { font-size: 20px; font-weight: 800; margin-bottom: 12px; }
+    .howto-panel h2 { font-size: 1.33rem; font-weight: 800; margin-bottom: 12px; }
     .howto-grid {
       display: grid; grid-template-columns: repeat(3, 1fr); gap: 14px; margin-top: 8px;
     }
@@ -167,8 +159,8 @@
       border: 2px solid var(--ink); border-radius: 16px; padding: 16px;
       background: #fffbe6; box-shadow: 4px 4px 0 var(--ink);
     }
-    .howto-card strong { display: block; font-size: 15px; margin-bottom: 8px; color: var(--red); }
-    .howto-card p { font-size: 13px; line-height: 1.6; color: var(--muted); font-weight: 600; }
+    .howto-card strong { display: block; font-size: 1rem; margin-bottom: 8px; color: var(--red); }
+    .howto-card p { font-size: 0.867rem; line-height: 1.6; color: var(--muted); font-weight: 600; }
     .qr-panel {
       text-align: center; padding: 28px 24px 32px;
       background: linear-gradient(180deg, #fff 0%, #fff8e8 100%);
@@ -177,7 +169,17 @@
       width: min(280px, 90vw); height: auto; border: none;
       border-radius: 12px; box-shadow: none; background: transparent;
     }
-    .qr-hint { margin-top: 8px; font-size: 13px; color: var(--muted); font-weight: 600; }
+    .qr-hint { margin-top: 8px; font-size: 0.867rem; color: var(--muted); font-weight: 600; }
+    body.embed .hero,
+    body.embed .howto-panel,
+    body.embed .qr-panel,
+    body.embed .topbar-actions,
+    body.embed .controls > div:last-child,
+    body.embed .controls > div:nth-child(2) { display: none; }
+    body.embed .wrap { padding: 8px 10px 16px; max-width: none; }
+    body.embed .panel { margin-bottom: 10px; padding: 14px; box-shadow: 4px 4px 0 var(--ink); }
+    body.embed .hero::after { display: none; }
+    body.embed #tableTitle { font-size: 1.067rem; }
   </style>
 </head>
 <body>
@@ -185,9 +187,9 @@
     <section class="hero">
       <div class="topbar">
         <div>
-          <span style="display:inline-block;background:#ffe566;border:2px solid #141414;padding:6px 12px;border-radius:999px;font-size:12px;font-weight:800;">💼 四源交叉验证</span>
+          <span class="hero-badge">💼 四源交叉验证</span>
           <h1>毕业后能做什么？<br><span class="hl">薪资路径沙盘 TOP10</span></h1>
-          <p class="sub">先选专业，看<strong>毕业后能做什么、拿多少钱</strong>。不用懂数据分析，看排行就行。</p>
+          <p class="sub">输入或下拉选专业，看<strong>毕业后能做什么、拿多少钱</strong>。</p>
         </div>
         <div class="topbar-actions">
           <div class="font-toggle" role="group" aria-label="字号切换">
@@ -201,12 +203,12 @@
 
     <div class="panel">
       <div class="controls">
-        <div>
-          <label for="majorSearch">① 选专业（可搜索）</label>
-          <input id="majorSearch" class="major-search" type="search" placeholder="搜专业名，如：软件工程、临床医学…" autocomplete="off">
-          <div class="track-tabs" id="trackTabs"></div>
-          <div class="major-chips" id="majorChips"></div>
-          <select id="major" class="sr-only" aria-hidden="true" tabindex="-1"></select>
+        <div class="major-picker">
+          <label for="majorSearch">① 输入专业名筛选</label>
+          <input id="majorSearch" class="major-search" type="search" placeholder="如：软件工程、临床医学、会计学…" autocomplete="off">
+          <label for="major">② 下拉选择专业</label>
+          <select id="major"></select>
+          <p class="picker-hint" id="majorCountHint"></p>
         </div>
         <div>
           <label>数据怎么来的？</label>
@@ -225,18 +227,18 @@
     </div>
 
     <div class="panel">
-      <h2 style="font-size:18px;font-weight:800;margin-bottom:4px;" id="tableTitle">岗位薪资排行</h2>
+      <h2 style="font-size:1.2rem;font-weight:800;margin-bottom:4px;" id="tableTitle">岗位薪资排行</h2>
       <p class="footer-note" id="metaNote"></p>
       <div id="tableWrap"></div>
       <p class="footer-note" id="disclaimer"></p>
     </div>
 
     <div class="panel howto-panel">
-      <h2>📋 3 步用好沙盘（今晚就能做）</h2>
+      <h2>📋 3 步用好沙盘</h2>
       <div class="howto-grid">
         <div class="howto-card">
           <strong>① 选专业 → 看 Top3 岗位</strong>
-          <p>下拉选你意向的专业，先看应届薪资最高的 3 个岗位，判断孩子愿不愿意做这类工作。</p>
+          <p>输入筛选或下拉选择专业，先看应届薪资最高的岗位，判断愿不愿意做这类工作。</p>
         </div>
         <div class="howto-card">
           <strong>② 看数据质量徽章</strong>
@@ -255,11 +257,16 @@
     </div>
   </div>
 
+  <script>
+    if (new URLSearchParams(location.search).get('embed') === '1') {
+      document.body.classList.add('embed');
+    }
+  </script>
   <script src="data/career-embed.js"></script>
   <script>
     const $ = (id) => document.getElementById(id);
     let data = null;
-    let activeTrack = '全部';
+    let selectedMajor = '';
 
     const CONF_LABEL = {
       verified_multi_source: '四源一致 ✓',
@@ -267,6 +274,17 @@
       partially_verified: '部分一致',
       reference_only: '参考估算',
     };
+
+    function applyFontSize(large) {
+      document.documentElement.classList.toggle('font-large', large);
+      document.body.classList.toggle('font-large', large);
+      $('fontNormal').classList.toggle('active', !large);
+      $('fontLarge').classList.toggle('active', large);
+    }
+
+    window.addEventListener('message', (e) => {
+      if (e.data?.type === 'gk-font-large') applyFontSize(Boolean(e.data.large));
+    });
 
     function spreadPlain(pct, passed) {
       if (pct < 15 && passed >= 4) return '四个平台数据基本吻合 ✓';
@@ -319,7 +337,7 @@
                 涨幅 +${Math.round((s.yr5 - s.graduate) / s.graduate * 100)}%
               </div>`).join('')}
           </div>
-          <p style="margin-top:8px;font-size:12px;color:#888">${plain} · ${job.sourcesPassed}/4 家平台在合理范围内</p>
+          <p style="margin-top:8px;font-size:0.8rem;color:#888">${plain} · ${job.sourcesPassed}/4 家平台在合理范围内</p>
         </td></tr>`;
       });
       html += '</tbody></table>';
@@ -334,52 +352,37 @@
       });
     }
 
-    function getTracks() {
-      const tracks = [...new Set(data.majors.map((m) => m.track))];
-      return ['全部', ...tracks];
-    }
-
-    function renderMajorPicker() {
-      const tracks = getTracks();
-      $('trackTabs').innerHTML = tracks.map((t) =>
-        `<button type="button" class="track-tab${t === activeTrack ? ' active' : ''}" data-track="${t}">${t}</button>`
-      ).join('');
-      document.querySelectorAll('.track-tab').forEach((btn) => {
-        btn.onclick = () => {
-          activeTrack = btn.dataset.track;
-          renderMajorPicker();
-          filterMajors($('majorSearch').value);
-        };
-      });
-      filterMajors($('majorSearch').value);
-    }
-
-    function filterMajors(query) {
+    function filteredMajors(query) {
       const q = (query || '').trim();
-      const chips = data.majors.filter((m) => {
-        const trackOk = activeTrack === '全部' || m.track === activeTrack;
-        const nameOk = !q || m.major.includes(q);
-        return trackOk && nameOk;
-      });
-      $('majorChips').innerHTML = chips.map((m) =>
-        `<button type="button" class="major-chip${$('major').value === m.major ? ' active' : ''}" data-major="${m.major}">${m.major}<br><small style="color:#888;font-weight:600">${m.track}</small></button>`
-      ).join('') || '<span class="footer-note">没有匹配的专业</span>';
-      document.querySelectorAll('.major-chip').forEach((btn) => {
-        btn.onclick = () => selectMajor(btn.dataset.major);
-      });
+      return data.majors.filter((m) => !q || m.major.includes(q));
     }
 
-    function selectMajor(name) {
-      if ($('major').value === name) return;
-      $('major').value = name;
-      document.querySelectorAll('.major-chip').forEach((btn) => {
-        btn.classList.toggle('active', btn.dataset.major === name);
-      });
+    function rebuildMajorSelect(query, prefer) {
+      const list = filteredMajors(query);
+      const select = $('major');
+      if (!list.length) {
+        select.innerHTML = '<option value="">没有匹配的专业</option>';
+        selectedMajor = '';
+        $('majorCountHint').textContent = '请换个关键词试试';
+        $('tableWrap').innerHTML = '<div class="empty">没有匹配的专业</div>';
+        return;
+      }
+      select.innerHTML = list.map((m) =>
+        `<option value="${m.major}">${m.major}（${m.track}）</option>`
+      ).join('');
+      const pick = prefer && list.some((m) => m.major === prefer)
+        ? prefer
+        : (selectedMajor && list.some((m) => m.major === selectedMajor) ? selectedMajor : list[0].major);
+      select.value = pick;
+      selectedMajor = pick;
+      $('majorCountHint').textContent = `共 ${list.length} 个专业可选，可在下拉框中切换`;
       onMajorChange();
     }
 
     function onMajorChange() {
       const name = $('major').value;
+      if (!name) return;
+      selectedMajor = name;
       const majorData = data.majors.find((m) => m.major === name);
       $('tableTitle').textContent = `学「${name}」毕业后，哪些岗位最赚钱？`;
       renderTable(majorData);
@@ -395,22 +398,11 @@
       }
       $('metaNote').textContent = data.meta.method || '';
       $('disclaimer').textContent = data.meta.disclaimer || '';
-      $('major').innerHTML = data.majors.map((m) =>
-        `<option value="${m.major}">${m.major}（${m.track}）</option>`
-      ).join('');
-      $('majorSearch').addEventListener('input', (e) => filterMajors(e.target.value));
-      $('fontNormal').addEventListener('click', () => {
-        document.body.classList.remove('font-large');
-        $('fontNormal').classList.add('active');
-        $('fontLarge').classList.remove('active');
-      });
-      $('fontLarge').addEventListener('click', () => {
-        document.body.classList.add('font-large');
-        $('fontLarge').classList.add('active');
-        $('fontNormal').classList.remove('active');
-      });
-      renderMajorPicker();
-      onMajorChange();
+      $('majorSearch').addEventListener('input', (e) => rebuildMajorSelect(e.target.value));
+      $('major').addEventListener('change', onMajorChange);
+      $('fontNormal').addEventListener('click', () => applyFontSize(false));
+      $('fontLarge').addEventListener('click', () => applyFontSize(true));
+      rebuildMajorSelect('', data.majors[0]?.major || '');
     }
 
     init().catch((err) => {

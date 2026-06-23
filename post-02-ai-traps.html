@@ -32,7 +32,7 @@
 .slide-inner {
     width: 1920px;
     height: 1080px;
-    padding: 64px 88px;
+    padding: 32px 48px;
     display: flex;
     flex-direction: column;
     position: relative;
@@ -69,20 +69,20 @@
     display: inline-flex;
     align-items: center;
     gap: 8px;
-    padding: 14px 24px;
+    padding: 16px 28px;
     border: var(--stroke);
     border-radius: 999px;
     box-shadow: var(--shadow-pop);
-    font: 700 26px/1 var(--font-body);
+    font: 700 34px/1 var(--font-body);
     transform: rotate(-8deg);
 }
 .sticker-hot {
-    top: 48px; right: 72px;
+    top: 28px; right: 48px;
     background: var(--yellow);
     color: var(--ink);
 }
 .sticker-save {
-    top: 130px; right: 96px;
+    top: 108px; right: 64px;
     background: var(--red);
     color: #fff;
     transform: rotate(6deg);
@@ -92,12 +92,12 @@
     display: inline-flex;
     align-items: center;
     gap: 10px;
-    padding: 14px 28px;
+    padding: 16px 32px;
     border-radius: 12px;
     border: var(--stroke);
     background: var(--yellow);
     color: var(--ink);
-    font: 800 28px/1 var(--font-body);
+    font: 800 36px/1 var(--font-body);
     letter-spacing: 0.06em;
     width: fit-content;
     box-shadow: var(--shadow-pop);
@@ -106,10 +106,10 @@
     z-index: 3;
 }
 .title-slide .headline {
-    font: 400 108px/1.05 var(--font-display);
+    font: 400 132px/1.02 var(--font-display);
     color: var(--ink);
-    max-width: 1480px;
-    margin-top: 40px;
+    max-width: 100%;
+    margin-top: 20px;
     position: relative;
     z-index: 3;
     text-shadow: 4px 4px 0 #fff, 6px 6px 0 rgba(255,36,66,0.25);
@@ -120,11 +120,11 @@
     box-decoration-break: clone;
 }
 .subtitle {
-    font: 600 34px/1.55 var(--font-body);
+    font: 600 42px/1.45 var(--font-body);
     color: var(--text-secondary);
-    max-width: 1180px;
-    margin-top: 32px;
-    padding: 22px 26px;
+    max-width: 100%;
+    margin-top: 20px;
+    padding: 20px 24px;
     background: rgba(255,255,255,0.88);
     border: 2px dashed rgba(20,20,20,0.18);
     border-radius: 18px;
@@ -133,35 +133,35 @@
 }
 .meta-row {
     display: flex;
-    gap: 14px;
-    margin-top: auto;
+    gap: 12px;
+    margin-top: 16px;
     flex-wrap: wrap;
     position: relative;
     z-index: 3;
 }
 .tag {
-    padding: 12px 18px;
+    padding: 14px 22px;
     border-radius: 999px;
     background: #fff;
     border: 2px solid var(--ink);
-    font: 700 22px/1 var(--font-body);
+    font: 700 30px/1 var(--font-body);
     color: var(--red);
     box-shadow: 4px 4px 0 rgba(20,20,20,0.85);
 }
 .slide-no {
     position: absolute;
-    top: 42px; right: 88px;
-    font: 700 22px/1 var(--font-body);
+    top: 28px; right: 48px;
+    font: 700 28px/1 var(--font-body);
     color: #fff;
     background: var(--ink);
-    padding: 10px 16px;
+    padding: 12px 18px;
     border-radius: 10px;
     z-index: 4;
 }
 h2.slide-title {
-    font: 400 78px/1.08 var(--font-display);
+    font: 400 96px/1.05 var(--font-display);
     color: var(--ink);
-    margin-bottom: 24px;
+    margin-bottom: 16px;
     position: relative;
     z-index: 3;
     display: inline-block;
@@ -177,9 +177,9 @@ h2.slide-title::after {
     transform: skewX(-8deg);
 }
 .lead {
-    font: 600 32px/1.55 var(--font-body);
+    font: 600 40px/1.45 var(--font-body);
     color: var(--text-secondary);
-    margin-bottom: 24px;
+    margin-bottom: 16px;
     position: relative;
     z-index: 3;
 }
@@ -187,27 +187,30 @@ h2.slide-title::after {
     list-style: none;
     display: flex;
     flex-direction: column;
-    gap: 16px;
+    gap: 14px;
+    flex: 1;
+    justify-content: stretch;
     position: relative;
     z-index: 3;
 }
 .bullets li {
     display: flex;
-    gap: 16px;
-    align-items: flex-start;
-    font: 600 30px/1.42 var(--font-body);
+    gap: 18px;
+    align-items: center;
+    flex: 1;
+    font: 600 40px/1.35 var(--font-body);
     color: var(--text-primary);
     background: var(--card);
     border: var(--stroke);
     border-radius: 18px;
-    padding: 22px 24px;
+    padding: 26px 28px;
     box-shadow: 5px 5px 0 rgba(20,20,20,0.9);
 }
 .bullets li .icon {
     flex: 0 0 auto;
-    font-size: 30px;
+    font-size: 40px;
     line-height: 1.1;
-    width: 48px; height: 48px;
+    width: 64px; height: 64px;
     display: grid; place-items: center;
     background: var(--yellow);
     border: 2px solid var(--ink);
@@ -216,7 +219,7 @@ h2.slide-title::after {
 .grid-2 {
     display: grid;
     grid-template-columns: 1fr 1fr;
-    gap: 22px;
+    gap: 16px;
     flex: 1;
     position: relative;
     z-index: 3;
@@ -225,26 +228,26 @@ h2.slide-title::after {
     background: var(--card);
     border: var(--stroke);
     border-radius: 22px;
-    padding: 28px 30px;
+    padding: 24px 28px;
     box-shadow: var(--shadow-pop);
 }
 .card h3 {
-    font: 400 40px/1.1 var(--font-display);
+    font: 400 52px/1.08 var(--font-display);
     color: var(--red);
-    margin-bottom: 14px;
+    margin-bottom: 12px;
 }
 .card p, .card li {
-    font: 600 26px/1.5 var(--font-body);
+    font: 600 34px/1.42 var(--font-body);
     color: var(--text-primary);
 }
-.card ul { list-style: none; display: flex; flex-direction: column; gap: 10px; }
+.card ul { list-style: none; display: flex; flex-direction: column; gap: 14px; }
 .quote-box {
-    margin-top: 16px;
-    padding: 26px 32px;
+    margin-top: 10px;
+    padding: 28px 32px;
     border: var(--stroke);
     background: linear-gradient(135deg, #fff 0%, #fff8d8 100%);
     border-radius: 22px;
-    font: 400 34px/1.42 var(--font-display);
+    font: 400 46px/1.38 var(--font-display);
     color: var(--ink);
     box-shadow: var(--shadow-pop);
     position: relative;
@@ -253,8 +256,8 @@ h2.slide-title::after {
 .action-steps {
     display: grid;
     grid-template-columns: 1fr 1fr;
-    gap: 16px;
-    margin-top: 20px;
+    gap: 14px;
+    margin-top: 14px;
     flex: 1;
     position: relative;
     z-index: 3;
@@ -266,26 +269,26 @@ h2.slide-title::after {
     background: var(--card);
     border: var(--stroke);
     border-radius: 18px;
-    padding: 18px 20px;
+    padding: 20px 22px;
     box-shadow: 5px 5px 0 rgba(20,20,20,0.9);
 }
 .action-step .step-tag {
     flex: 0 0 auto;
     background: var(--red);
     color: #fff;
-    font: 800 18px/1 var(--font-body);
-    padding: 8px 12px;
+    font: 800 24px/1 var(--font-body);
+    padding: 10px 14px;
     border-radius: 10px;
     border: 2px solid var(--ink);
     white-space: nowrap;
 }
 .action-step strong {
     display: block;
-    font: 800 24px/1.25 var(--font-body);
+    font: 800 32px/1.2 var(--font-body);
     margin-bottom: 6px;
 }
 .action-step p {
-    font: 600 20px/1.45 var(--font-body);
+    font: 600 28px/1.4 var(--font-body);
     color: var(--text-secondary);
 }
 .card-slide .card {
@@ -300,29 +303,29 @@ h2.slide-title::after {
     gap: 12px;
 }
 .card-slide .card li {
-    font: 600 28px/1.45 var(--font-body);
+    font: 600 36px/1.4 var(--font-body);
     padding-left: 8px;
 }
 .card-tips {
-    margin-top: 16px;
+    margin-top: 12px;
     padding: 16px 20px;
     border: 2px dashed var(--ink);
     border-radius: 16px;
     background: #fffbe6;
-    font: 700 22px/1.5 var(--font-body);
+    font: 700 30px/1.45 var(--font-body);
     color: var(--ink);
     position: relative;
     z-index: 3;
 }
 .cta-slide .cta {
-    font: 400 52px/1.2 var(--font-display);
+    font: 400 68px/1.15 var(--font-display);
     color: var(--ink);
-    max-width: 1500px;
+    max-width: 100%;
     position: relative;
     z-index: 3;
 }
 .cta-checklist {
-    margin-top: 22px;
+    margin-top: 16px;
     display: grid;
     grid-template-columns: 1fr 1fr;
     gap: 12px;
@@ -331,15 +334,15 @@ h2.slide-title::after {
 }
 .cta-checklist li {
     list-style: none;
-    font: 700 22px/1.4 var(--font-body);
+    font: 700 30px/1.35 var(--font-body);
     background: #fff;
     border: 2px solid var(--ink);
     border-radius: 14px;
-    padding: 14px 16px;
+    padding: 16px 18px;
     box-shadow: 4px 4px 0 rgba(20,20,20,0.85);
 }
 .cta-tools {
-    margin-top: 18px;
+    margin-top: 14px;
     display: flex;
     gap: 14px;
     flex-wrap: wrap;
@@ -347,27 +350,34 @@ h2.slide-title::after {
     z-index: 3;
 }
 .cta-tools span {
-    padding: 12px 18px;
+    padding: 14px 20px;
     border: 2px solid var(--ink);
     border-radius: 12px;
     background: var(--yellow);
-    font: 800 20px/1 var(--font-body);
+    font: 800 28px/1 var(--font-body);
     box-shadow: 4px 4px 0 var(--ink);
 }
 .quote-box::before {
     content: '“';
     position: absolute;
     top: -10px; left: 24px;
-    font-size: 88px;
+    font-size: 100px;
     color: var(--red);
     line-height: 1;
 }
 .compare {
     display: grid;
     grid-template-columns: 1fr 1fr;
-    gap: 22px;
+    gap: 16px;
+    flex: 1;
+    align-items: stretch;
     position: relative;
     z-index: 3;
+}
+.compare .card {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
 }
 .compare .bad {
     border-top: 10px solid var(--warn);
@@ -377,9 +387,9 @@ h2.slide-title::after {
     border-top: 10px solid var(--ok);
     background: #f2fff8;
 }
-.compare .card h3 { color: var(--ink); font-size: 34px; }
+.compare .card h3 { color: var(--ink); font-size: 48px; }
 .cta-slide .actions {
-    margin-top: 20px;
+    margin-top: 14px;
     display: flex;
     gap: 18px;
     flex-wrap: wrap;
@@ -387,21 +397,24 @@ h2.slide-title::after {
     z-index: 3;
 }
 .cta-slide .action {
-    padding: 20px 32px;
+    padding: 18px 30px;
     border-radius: 16px;
     border: var(--stroke);
     background: var(--red);
     color: #fff;
-    font: 800 30px/1 var(--font-body);
+    font: 800 38px/1 var(--font-body);
     box-shadow: var(--shadow-pop);
 }
 .cta-slide .hashtags {
-    margin-top: auto;
-    font: 600 24px/1.7 var(--font-body);
+    margin-top: 14px;
+    font: 600 30px/1.5 var(--font-body);
     color: var(--text-secondary);
     position: relative;
     z-index: 3;
 }
+.title-slide .slide-inner { justify-content: center; gap: 8px; }
+.quote-slide .slide-inner { gap: 8px; }
+.cta-slide .slide-inner { justify-content: flex-start; gap: 8px; }
 .reveal {
     opacity: 0;
     transform: translateY(28px) scale(0.98);
@@ -425,18 +438,18 @@ h2.slide-title::after {
     background: rgba(20,20,20,0.88);
     backdrop-filter: blur(8px);
     color: #fff;
-    font: 600 16px/1 var(--font-body);
+    font: 600 20px/1 var(--font-body);
     box-shadow: 0 8px 24px rgba(0,0,0,0.28);
 }
 .deck-controls button {
     border: 2px solid #fff;
     background: var(--red);
     color: #fff;
-    width: 42px;
-    height: 42px;
+    width: 48px;
+    height: 48px;
     border-radius: 999px;
     cursor: pointer;
-    font-size: 18px;
+    font-size: 22px;
     font-weight: 800;
 }
 
@@ -448,13 +461,13 @@ html, body {
     height: 100%;
     margin: 0;
     overflow: hidden;
-    background: var(--stage-bg, #000);
+    background: var(--slide-bg, #fffdf5);
 }
 .deck-viewport {
     position: fixed;
     inset: 0;
     overflow: hidden;
-    background: var(--stage-bg, #1a1210);
+    background: var(--slide-bg, #fff8f4);
 }
 .deck-stage {
     position: absolute;
@@ -624,7 +637,7 @@ class SlidePresentation {
     }
     setupStageScale() {
         const scale = () => {
-            const f = Math.min(window.innerWidth / 1920, window.innerHeight / 1080);
+            const f = Math.max(window.innerWidth / 1920, window.innerHeight / 1080);
             const x = (window.innerWidth - 1920 * f) / 2;
             const y = (window.innerHeight - 1080 * f) / 2;
             this.stage.style.transform = `translate(${x}px, ${y}px) scale(${f})`;

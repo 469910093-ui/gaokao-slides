@@ -60,7 +60,7 @@ TRACK_API_NAME = {
     "综合类": "综合",
 }
 
-YEARS = list(range(2014, 2026))
+YEARS = list(range(2014, 2027))
 
 
 def api_get(session: requests.Session, uri: str, retries: int = 5, **params: Any) -> dict[str, Any]:

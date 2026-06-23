@@ -1,0 +1,142 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+  <title>录取与填报要点 · 志愿怎么排</title>
+  <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+SC:wght@400;600;700;800&family=ZCOOL+QingKe+HuangYou&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --bg: #fffdf5; --ink: #141414; --red: #ff2442; --yellow: #ffe566;
+      --muted: #5a5a5a; --blue: #1d4ed8; --cta: #ff7a00; --shadow: 8px 8px 0 #141414;
+    }
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    html { -webkit-text-size-adjust: 100%; }
+    body {
+      font-family: 'Noto Sans SC', sans-serif;
+      background:
+        radial-gradient(circle at 92% 0%, rgba(29,78,216,0.08), transparent 20%),
+        radial-gradient(circle at 8% 0%, rgba(255,229,102,0.55), transparent 22%),
+        var(--bg);
+      color: var(--ink);
+      min-height: 100dvh;
+      padding: max(16px, env(safe-area-inset-top)) max(16px, env(safe-area-inset-right)) max(40px, env(safe-area-inset-bottom)) max(16px, env(safe-area-inset-left));
+    }
+    .wrap { max-width: 720px; margin: 0 auto; }
+    .back {
+      display: inline-flex; align-items: center; gap: 6px;
+      text-decoration: none; color: var(--ink); font-weight: 800; font-size: 14px;
+      border: 2px solid var(--ink); padding: 8px 14px; border-radius: 12px;
+      background: var(--yellow); box-shadow: 3px 3px 0 var(--ink); margin-bottom: 16px;
+    }
+    .hero {
+      border: 3px solid var(--ink); border-radius: 22px; padding: 24px 22px;
+      background: linear-gradient(135deg, #fff, #eef4ff); box-shadow: var(--shadow);
+      margin-bottom: 18px;
+    }
+    .badge {
+      display: inline-block; background: var(--blue); color: #fff;
+      padding: 6px 12px; border-radius: 999px; font-size: 12px; font-weight: 800;
+    }
+    h1 {
+      font-family: 'ZCOOL QingKe HuangYou', cursive;
+      font-size: clamp(30px, 8vw, 44px); line-height: 1.12; margin-top: 10px;
+    }
+    .intro { color: var(--muted); margin-top: 10px; line-height: 1.7; font-size: 15px; font-weight: 600; }
+    .flow-steps {
+      display: grid; gap: 10px; margin-bottom: 18px;
+    }
+    .flow-step {
+      display: grid; grid-template-columns: 44px 1fr; gap: 12px; align-items: start;
+      border: 2px solid var(--ink); border-radius: 16px; padding: 14px 16px;
+      background: #fff; box-shadow: 4px 4px 0 var(--ink);
+    }
+    .flow-icon {
+      width: 44px; height: 44px; border-radius: 12px; display: grid; place-items: center;
+      background: var(--yellow); border: 2px solid var(--ink); font-size: 18px; font-weight: 800;
+    }
+    .flow-step strong { display: block; font-size: 15px; margin-bottom: 4px; }
+    .flow-step span { font-size: 13px; color: var(--muted); line-height: 1.55; font-weight: 600; }
+    .tip-card {
+      border: 3px solid var(--ink); border-radius: 18px; padding: 16px 18px;
+      background: #fff; box-shadow: 5px 5px 0 var(--ink); margin-bottom: 12px;
+    }
+    .tip-card h2 { font-size: 16px; font-weight: 800; margin-bottom: 6px; color: var(--red); }
+    .tip-card p { font-size: 14px; color: var(--muted); line-height: 1.65; font-weight: 600; }
+    .redline {
+      margin-top: 16px; padding: 16px; border-radius: 16px;
+      border: 2px dashed var(--red); background: #fff5f5;
+    }
+    .redline h2 { font-size: 16px; font-weight: 800; margin-bottom: 8px; }
+    .redline li { font-size: 14px; line-height: 1.65; font-weight: 600; color: var(--muted); margin-left: 18px; }
+    .cta-row { display: flex; flex-wrap: wrap; gap: 10px; margin-top: 18px; }
+    .cta {
+      flex: 1; min-width: 140px; text-align: center; text-decoration: none;
+      padding: 14px 16px; border-radius: 14px; font-weight: 800; font-size: 14px;
+      border: 2px solid var(--ink); box-shadow: 4px 4px 0 var(--ink);
+    }
+    .cta.primary { background: var(--cta); color: #fff; }
+    .cta.secondary { background: var(--yellow); color: var(--ink); }
+    @media (orientation: landscape) and (max-height: 520px) {
+      .flow-steps { grid-template-columns: 1fr 1fr; }
+      .hero { padding: 16px; }
+    }
+    @media (min-width: 600px) {
+      .flow-steps { grid-template-columns: 1fr 1fr; }
+    }
+  </style>
+</head>
+<body>
+  <div class="wrap">
+    <a class="back" href="selector.html#step-pitfalls">← 返回选校流程</a>
+    <section class="hero">
+      <span class="badge">通用录取逻辑</span>
+      <h1>平行志愿<br>是怎么录的？</h1>
+      <p class="intro">各省细则不同，但核心都是「按位次检索志愿」。理解流程后，再排志愿顺序会清晰很多。</p>
+    </section>
+
+    <div class="flow-steps">
+      <div class="flow-step"><div class="flow-icon">1</div><div><strong>划定批次与位次</strong><span>考生按成绩获得全省排名，并对应可填报的批次范围</span></div></div>
+      <div class="flow-step"><div class="flow-icon">2</div><div><strong>院校公布计划</strong><span>各高校发布招生人数、专业组及选科要求</span></div></div>
+      <div class="flow-step"><div class="flow-icon">3</div><div><strong>考生填报志愿</strong><span>在系统里按优先级排列院校和专业志愿</span></div></div>
+      <div class="flow-step"><div class="flow-icon">4</div><div><strong>系统依次检索</strong><span>从第一志愿开始，未满足投档条件则继续检索后续志愿</span></div></div>
+      <div class="flow-step"><div class="flow-icon">5</div><div><strong>投档与专业分配</strong><span>进档后按专业志愿或调剂规则确定录取专业</span></div></div>
+    </div>
+
+    <article class="tip-card">
+      <h2>要点 1 · 志愿不必机械填满</h2>
+      <p>若前几志愿已经覆盖你能接受的主要选择，后面不必为了「占满格子」而填明显不合适的院校或专业，以免增加被调剂到不愿就读方向的风险。</p>
+    </article>
+    <article class="tip-card">
+      <h2>要点 2 · 冲稳保比例因人而异</h2>
+      <p>网上常见的固定比例仅供参考。更实际的做法是：结合自己的位次，准备若干所<strong>层次拉开、都能接受</strong>的保底志愿，数量因省因人而定。</p>
+    </article>
+    <article class="tip-card">
+      <h2>要点 3 · 专业组内顺序要慎重</h2>
+      <p>新高考专业组模式下，组内专业也应按接受程度排序。只填热门、不接受组内其他专业时，调剂结果可能不理想。</p>
+    </article>
+    <article class="tip-card">
+      <h2>要点 4 · 冲刺前先看清专业组构成</h2>
+      <p>若计划冲高，建议先确认该专业组是否包含自己坚决不读的专业；组内专业越「干净」，冲刺时心理负担越小。</p>
+    </article>
+    <article class="tip-card">
+      <h2>要点 5 · 了解提前批与专项政策</h2>
+      <p>部分提前批、专项计划有单独投档规则。是否填报、未录取后是否影响后续批次，请以本省当年文件为准。</p>
+    </article>
+
+    <section class="redline">
+      <h2>填报时建议避免</h2>
+      <ul>
+        <li>仅为「不浪费分数」而牺牲城市、专业等更重要的因素</li>
+        <li>仅因院校标签好看，选择与自己规划明显不符的专业</li>
+      </ul>
+      <p style="margin-top:10px;font-size:14px;font-weight:700;color:var(--ink);">在分数有限时，城市与专业适配往往比单一院校名气更值得优先考虑。</p>
+    </section>
+
+    <div class="cta-row">
+      <a class="cta primary" href="selector.html#step-target">对标意向大学 →</a>
+      <a class="cta secondary" href="pitfalls.html">回看六项误区 →</a>
+    </div>
+  </div>
+</body>
+</html>

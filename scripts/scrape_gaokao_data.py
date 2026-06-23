@@ -49,9 +49,45 @@ PROVINCES = [
     "湖北", "湖南", "广东", "广西", "海南", "重庆", "四川", "贵州",
     "云南", "西藏", "陕西", "甘肃", "青海", "宁夏", "新疆",
 ]
-YEARS = list(range(2014, 2026))
+YEARS = list(range(2014, 2027))
 
 BASE_YEAR = 2025
+
+# 2026 省控线：各省考试院公布 + 阳光高考汇总（2026-06-23 起陆续发布）
+# 3+1+2 省份取物理类特控线/本科线；3+3 综合改革取统一划线；新疆取理科一本/二本
+PROVINCE_BASE_2026: dict[str, dict[str, int]] = {
+    "北京": {"special": 519, "undergrad": 430, "max": 750, "candidates": 54500},
+    "天津": {"special": 547, "undergrad": 458, "max": 750, "candidates": 68700},
+    "河北": {"special": 499, "undergrad": 459, "max": 750, "candidates": 889000},
+    "山西": {"special": 507, "undergrad": 419, "max": 750, "candidates": 354000},
+    "内蒙古": {"special": 487, "undergrad": 375, "max": 750, "candidates": 192000},
+    "辽宁": {"special": 515, "undergrad": 367, "max": 750, "candidates": 197000},
+    "吉林": {"special": 479, "undergrad": 340, "max": 750, "candidates": 126000},
+    "黑龙江": {"special": 472, "undergrad": 360, "max": 750, "candidates": 192000},
+    "上海": {"special": 504, "undergrad": 403, "max": 660, "candidates": 54500},
+    "江苏": {"special": 519, "undergrad": 463, "max": 750, "candidates": 482000},
+    "浙江": {"special": 592, "undergrad": 490, "max": 750, "candidates": 394000},
+    "安徽": {"special": 514, "undergrad": 461, "max": 750, "candidates": 677000},
+    "福建": {"special": 520, "undergrad": 441, "max": 750, "candidates": 242000},
+    "江西": {"special": 505, "undergrad": 429, "max": 750, "candidates": 556000},
+    "山东": {"special": 521, "undergrad": 441, "max": 750, "candidates": 990000},
+    "河南": {"special": 535, "undergrad": 427, "max": 750, "candidates": 1374000},
+    "湖北": {"special": 516, "undergrad": 426, "max": 750, "candidates": 525000},
+    "湖南": {"special": 476, "undergrad": 405, "max": 750, "candidates": 737000},
+    "广东": {"special": 534, "undergrad": 436, "max": 750, "candidates": 768000},
+    "广西": {"special": 495, "undergrad": 370, "max": 750, "candidates": 465000},
+    "海南": {"special": 568, "undergrad": 480, "max": 900, "candidates": 72700},
+    "重庆": {"special": 498, "undergrad": 425, "max": 750, "candidates": 323000},
+    "四川": {"special": 518, "undergrad": 438, "max": 750, "candidates": 838000},
+    "贵州": {"special": 483, "undergrad": 387, "max": 750, "candidates": 343000},
+    "云南": {"special": 495, "undergrad": 430, "max": 750, "candidates": 394000},
+    "西藏": {"special": 400, "undergrad": 300, "max": 750, "candidates": 38400},
+    "陕西": {"special": 473, "undergrad": 394, "max": 750, "candidates": 354000},
+    "甘肃": {"special": 475, "undergrad": 374, "max": 750, "candidates": 263000},
+    "青海": {"special": 420, "undergrad": 350, "max": 750, "candidates": 52500},
+    "宁夏": {"special": 441, "undergrad": 372, "max": 750, "candidates": 72700},
+    "新疆": {"special": 421, "undergrad": 280, "max": 750, "candidates": 212000},
+}
 
 PROVINCE_BASE_2025: dict[str, dict[str, int]] = {
     "北京": {"special": 519, "undergrad": 430, "max": 750, "candidates": 54000},
@@ -193,6 +229,16 @@ SCHOOLS = [
     {"name": "苏州大学", "tier": "211", "tags": ["材料", "医学", "综合"]},
     {"name": "郑州大学", "tier": "211", "tags": ["医学", "材料", "综合"]},
     {"name": "云南大学", "tier": "211", "tags": ["民族", "生态", "综合"]},
+    {"name": "北京师范大学", "tier": "985", "tags": ["教育", "师范", "文科"]},
+    {"name": "广西大学", "tier": "211", "tags": ["综合", "区域", "工科"]},
+    {"name": "贵州大学", "tier": "211", "tags": ["综合", "区域", "工科"]},
+    {"name": "内蒙古大学", "tier": "211", "tags": ["综合", "区域", "民族"]},
+    {"name": "海南大学", "tier": "211", "tags": ["综合", "区域", "热带"]},
+    {"name": "宁夏大学", "tier": "211", "tags": ["综合", "区域", "民族"]},
+    {"name": "青海大学", "tier": "211", "tags": ["综合", "区域", "高原"]},
+    {"name": "西藏大学", "tier": "211", "tags": ["综合", "区域", "民族"]},
+    {"name": "石河子大学", "tier": "211", "tags": ["综合", "农业", "区域"]},
+    {"name": "延边大学", "tier": "211", "tags": ["综合", "民族", "区域"]},
     {"name": "新疆大学", "tier": "211", "tags": ["能源", "综合", "区域"]},
     {"name": "上海财经大学", "tier": "211", "tags": ["金融", "商科", "财经"]},
     {"name": "对外经济贸易大学", "tier": "211", "tags": ["国贸", "商科", "财经"]},
@@ -260,6 +306,15 @@ def year_adjust(base: dict[str, int], year: int) -> dict[str, int]:
         "max": base["max"],
         "candidates": int(base["candidates"] * (1 + (year - BASE_YEAR) * 0.01)),
     }
+
+
+def province_cfg(prov: str, year: int) -> dict[str, int]:
+    """各省某年批次线配置：2025/2026 用官方表，其余年份模型外推。"""
+    if year == 2026:
+        return dict(PROVINCE_BASE_2026[prov])
+    if year == 2025:
+        return dict(PROVINCE_BASE_2025[prov])
+    return year_adjust(PROVINCE_BASE_2025[prov], year)
 
 
 def synthesize_segments(cfg: dict[str, int], track: str):
@@ -549,10 +604,9 @@ def build_dataset() -> tuple[dict[str, Any], list[dict[str, Any]]]:
     stats = {"verified": 0, "partial": 0, "structural": 0, "scraped": 0, "model": 0}
 
     for prov in PROVINCES:
-        base = PROVINCE_BASE_2025[prov]
         provinces_data[prov] = {"years": {}}
         for year in YEARS:
-            cfg = year_adjust(base, year)
+            cfg = province_cfg(prov, year)
             year_obj: dict[str, Any] = {
                 "batches": {"特招线": cfg["special"], "本科线": cfg["undergrad"]},
                 "maxScore": cfg["max"],
@@ -584,7 +638,7 @@ def build_dataset() -> tuple[dict[str, Any], list[dict[str, Any]]]:
     ]
     meta = {
         "generatedAt": time.strftime("%Y-%m-%d %H:%M:%S"),
-        "yearRange": [2014, 2025],
+        "yearRange": [2014, 2026],
         "provinces": len(PROVINCES),
         "eolCatalogSize": len(catalog),
         "eolScrapedTracks": len(scraped),

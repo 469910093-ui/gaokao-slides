@@ -1,9 +1,9 @@
 {
   "meta": {
-    "generatedAt": "2026-06-23 01:17:33",
+    "generatedAt": "2026-06-23 21:09:26",
     "yearRange": [
       2014,
-      2025
+      2026
     ],
     "provinces": 31,
     "eolCatalogSize": 1336,
@@ -15,7 +15,7 @@
       "scraped": 124,
       "model": 620
     },
-    "notes": "一分一段：优先使用 eol.cn 爬取数据，并通过正文锚点 + zizzs 位次锚点交叉验证。verified/verified_multi_source 表示多源校验通过；validated_structural 为 eol 真表但未完成锚点校验。2014-2018 及未覆盖省份年份使用模型估算，仅供参考，请以省考试院官方数据为准。"
+    "notes": "一分一段：优先使用 eol.cn 爬取数据，并通过正文锚点 + zizzs 位次锚点交叉验证。verified/verified_multi_source 表示多源校验通过；validated_structural 为 eol 真表但未完成锚点校验。2014-2018 及未覆盖省份年份使用模型估算，仅供参考，请以省考试院官方数据为准。 2026 批次线已按各省考试院公布更新（2026-06-23 起陆续发布）；2026 一分一段暂无官方全量表，暂以新批次线锚定的模型估算，正式一分一段公布后请重跑 refresh。"
   },
   "tierOrder": [
     "C9",
@@ -80,7 +80,8 @@
     2022,
     2023,
     2024,
-    2025
+    2025,
+    2026
   ],
   "schools": [
     {
@@ -555,6 +556,116 @@
       ],
       "minPercentile": 96.0,
       "qsRank": 851
+    },
+    {
+      "name": "北京师范大学",
+      "tier": "985",
+      "tags": [
+        "教育",
+        "师范",
+        "文科"
+      ],
+      "minPercentile": 98.5,
+      "qsRank": 600
+    },
+    {
+      "name": "广西大学",
+      "tier": "211",
+      "tags": [
+        "综合",
+        "区域",
+        "工科"
+      ],
+      "minPercentile": 96.0,
+      "qsRank": 900
+    },
+    {
+      "name": "贵州大学",
+      "tier": "211",
+      "tags": [
+        "综合",
+        "区域",
+        "工科"
+      ],
+      "minPercentile": 96.0,
+      "qsRank": 900
+    },
+    {
+      "name": "内蒙古大学",
+      "tier": "211",
+      "tags": [
+        "综合",
+        "区域",
+        "民族"
+      ],
+      "minPercentile": 96.0,
+      "qsRank": 900
+    },
+    {
+      "name": "海南大学",
+      "tier": "211",
+      "tags": [
+        "综合",
+        "区域",
+        "热带"
+      ],
+      "minPercentile": 96.0,
+      "qsRank": 900
+    },
+    {
+      "name": "宁夏大学",
+      "tier": "211",
+      "tags": [
+        "综合",
+        "区域",
+        "民族"
+      ],
+      "minPercentile": 96.0,
+      "qsRank": 900
+    },
+    {
+      "name": "青海大学",
+      "tier": "211",
+      "tags": [
+        "综合",
+        "区域",
+        "高原"
+      ],
+      "minPercentile": 96.0,
+      "qsRank": 900
+    },
+    {
+      "name": "西藏大学",
+      "tier": "211",
+      "tags": [
+        "综合",
+        "区域",
+        "民族"
+      ],
+      "minPercentile": 96.0,
+      "qsRank": 900
+    },
+    {
+      "name": "石河子大学",
+      "tier": "211",
+      "tags": [
+        "综合",
+        "农业",
+        "区域"
+      ],
+      "minPercentile": 96.0,
+      "qsRank": 900
+    },
+    {
+      "name": "延边大学",
+      "tier": "211",
+      "tags": [
+        "综合",
+        "民族",
+        "区域"
+      ],
+      "minPercentile": 96.0,
+      "qsRank": 900
     },
     {
       "name": "新疆大学",

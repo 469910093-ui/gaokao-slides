@@ -2,7 +2,7 @@
 <html lang="zh-CN">
 <head>
   <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
   <title>高考分数选校选专业 · 智能推荐</title>
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -21,14 +21,14 @@
       --cta: #ff7a00;
       --line: #141414;
       --shadow: 8px 8px 0 #141414;
+      --fs: 15px;
     }
-    body.font-large { font-size: 17px; }
-    body.font-large .stat .v { font-size: 28px; }
-    body.font-large .score-big { font-size: 72px; }
-    body.font-large h1 { font-size: clamp(38px, 6vw, 56px); }
+    html { font-size: var(--fs); -webkit-text-size-adjust: 100%; scroll-behavior: smooth; }
+    html.font-large { --fs: 24px; }
     * { box-sizing: border-box; margin: 0; padding: 0; }
     body {
       font-family: 'Noto Sans SC', sans-serif;
+      font-size: 1rem;
       background:
         radial-gradient(circle at 8% 0%, rgba(255,229,102,0.55), transparent 22%),
         radial-gradient(circle at 95% 5%, rgba(255,36,66,0.12), transparent 18%),
@@ -53,7 +53,7 @@
       position: absolute; top: 16px; right: -30px;
       background: var(--red); color: #fff;
       padding: 8px 54px; transform: rotate(24deg);
-      font-size: 12px; font-weight: 800; letter-spacing: .08em;
+      font-size: 0.8rem; font-weight: 800; letter-spacing: .08em;
     }
     .topbar { display: flex; justify-content: space-between; align-items: flex-start; gap: 16px; flex-wrap: wrap; }
     .topbar-actions { display: flex; flex-wrap: wrap; gap: 8px; align-items: center; }
@@ -63,7 +63,7 @@
     }
     .font-toggle button {
       width: auto; border: none; border-radius: 0; box-shadow: none; padding: 8px 12px;
-      font-size: 12px; font-weight: 800; cursor: pointer; background: #fff; color: var(--muted);
+      font-size: 0.8rem; font-weight: 800; cursor: pointer; background: #fff; color: var(--muted);
     }
     .font-toggle button.active { background: var(--yellow); color: var(--ink); }
     .topbar a {
@@ -73,14 +73,20 @@
     }
     h1 {
       font-family: 'ZCOOL QingKe HuangYou', cursive;
-      font-size: clamp(34px, 5vw, 52px);
+      font-size: clamp(2.27rem, 5vw, 3.47rem);
       line-height: 1.08;
       margin-top: 10px;
     }
     h1 .hl {
       background: linear-gradient(180deg, transparent 62%, var(--yellow) 62%, var(--yellow) 90%, transparent 90%);
     }
-    .sub { color: var(--muted); margin-top: 10px; line-height: 1.65; font-size: 15px; font-weight: 600; }
+    .sub { color: var(--muted); margin-top: 10px; line-height: 1.65; font-size: 1rem; font-weight: 600; }
+    .hero-badge {
+      display: inline-block; background: #ffe566; border: 2px solid #141414;
+      padding: 6px 12px; border-radius: 999px; font-size: 0.8rem; font-weight: 800;
+      box-shadow: 3px 3px 0 #141414;
+    }
+    .section-title { font-size: 1.2rem; font-weight: 800; margin-bottom: 6px; }
     .guide-steps {
       display: grid; grid-template-columns: repeat(3, 1fr); gap: 10px; margin-bottom: 18px;
     }
@@ -89,14 +95,14 @@
       border: 2px solid var(--ink); border-radius: 16px; padding: 14px 16px;
       background: #fffbe6; box-shadow: 4px 4px 0 var(--ink);
     }
-    .guide-step strong { display: block; font-size: 14px; margin-bottom: 4px; color: var(--red); }
-    .guide-step span { font-size: 13px; color: var(--muted); font-weight: 600; line-height: 1.5; }
+    .guide-step strong { display: block; font-size: 0.933rem; margin-bottom: 4px; color: var(--red); }
+    .guide-step span { font-size: 0.867rem; color: var(--muted); font-weight: 600; line-height: 1.5; }
     .answer-banner {
       margin: 0 0 16px; padding: 14px 16px; border-radius: 16px;
       border: 2px solid var(--ink); background: linear-gradient(90deg, #fff8e8, #fff);
-      box-shadow: 4px 4px 0 var(--ink); font-weight: 800; font-size: 16px; line-height: 1.5;
+      box-shadow: 4px 4px 0 var(--ink); font-weight: 800; font-size: 1.067rem; line-height: 1.5;
     }
-    .answer-banner em { font-style: normal; color: var(--cta); font-size: 18px; }
+    .answer-banner em { font-style: normal; color: var(--cta); font-size: 1.2rem; }
     .panel {
       background: var(--card);
       border: 3px solid var(--ink);
@@ -112,7 +118,7 @@
       width: 100%; display: flex; align-items: center; justify-content: space-between;
       gap: 8px; text-align: left; cursor: pointer;
     }
-    .province-caret { color: var(--muted); font-size: 12px; flex-shrink: 0; }
+    .province-caret { color: var(--muted); font-size: 0.8rem; flex-shrink: 0; }
     .province-dropdown {
       position: absolute; left: 0; right: 0; top: calc(100% + 6px); z-index: 50;
       background: #fff; border: 2px solid var(--ink); border-radius: 14px;
@@ -122,29 +128,29 @@
     .province-dropdown.hidden { display: none; }
     .province-dropdown input[type=search] {
       width: 100%; border: 2px solid var(--ink); border-radius: 10px; padding: 10px 12px;
-      font: 700 14px/1.2 'Noto Sans SC', sans-serif; background: #fffdf5;
+      font: 700 0.933rem/1.2 'Noto Sans SC', sans-serif; background: #fffdf5;
       box-shadow: none; margin-bottom: 6px;
     }
     .province-list { overflow: auto; flex: 1; }
     .province-option {
       width: 100%; border: none; border-radius: 10px; padding: 10px 12px;
-      font: 700 14px/1.2 'Noto Sans SC', sans-serif; background: transparent;
+      font: 700 0.933rem/1.2 'Noto Sans SC', sans-serif; background: transparent;
       text-align: left; cursor: pointer; box-shadow: none;
     }
     .province-option:hover, .province-option.active { background: var(--yellow); }
     .province-option.hidden { display: none; }
-    .province-empty { padding: 12px; font-size: 13px; color: var(--muted); font-weight: 600; }
+    .province-empty { padding: 12px; font-size: 0.867rem; color: var(--muted); font-weight: 600; }
     .sr-only {
       position: absolute; width: 1px; height: 1px; padding: 0; margin: -1px;
       overflow: hidden; clip: rect(0,0,0,0); border: 0;
     }
-    label { display: block; font-size: 13px; color: var(--muted); margin-bottom: 8px; font-weight: 800; }
+    label { display: block; font-size: 0.867rem; color: var(--muted); margin-bottom: 8px; font-weight: 800; }
     select, button {
       width: 100%;
       border: 2px solid var(--ink);
       border-radius: 14px;
       padding: 12px 14px;
-      font: 700 15px/1.2 'Noto Sans SC', sans-serif;
+      font: 700 1rem/1.2 'Noto Sans SC', sans-serif;
       background: #fff;
       color: var(--text);
       box-shadow: 3px 3px 0 var(--ink);
@@ -159,7 +165,7 @@
     }
     button.cta-orange {
       background: var(--cta); color: #fff; width: 100%; max-width: 360px;
-      display: block; margin: 14px auto 0; padding: 16px 20px; font-size: 17px;
+      display: block; margin: 14px auto 0; padding: 16px 20px; font-size: 1.133rem;
       animation: pulse-cta 2.2s ease-in-out infinite;
     }
     @keyframes pulse-cta {
@@ -180,15 +186,15 @@
       padding: 14px 16px;
       box-shadow: 4px 4px 0 var(--ink);
     }
-    .stat .k { font-size: 12px; color: var(--muted); font-weight: 700; }
-    .stat .v { font-size: 24px; font-weight: 800; margin-top: 6px; color: var(--red); }
-    .stat .v.small { font-size: 18px; line-height: 1.35; }
-    .stat .d { font-size: 11px; color: #888; margin-top: 6px; line-height: 1.45; font-weight: 600; }
+    .stat .k { font-size: 0.8rem; color: var(--muted); font-weight: 700; }
+    .stat .v { font-size: 1.6rem; font-weight: 800; margin-top: 6px; color: var(--red); }
+    .stat .v.small { font-size: 1.2rem; line-height: 1.35; }
+    .stat .d { font-size: 0.733rem; color: #888; margin-top: 6px; line-height: 1.45; font-weight: 600; }
     .chart-wrap { margin-top: 20px; padding-top: 20px; border-top: 2px dashed rgba(20,20,20,0.12); position: relative; }
     .chart-drag-hint {
       position: absolute; left: 50%; top: 50%; transform: translate(-50%, -50%);
       pointer-events: none; z-index: 2; padding: 6px 14px; border-radius: 999px;
-      background: rgba(20,20,20,0.72); color: #fff; font-size: 13px; font-weight: 800;
+      background: rgba(20,20,20,0.72); color: #fff; font-size: 0.867rem; font-weight: 800;
       white-space: nowrap; animation: hint-fade 3s ease-in-out infinite;
     }
     @keyframes hint-fade {
@@ -198,7 +204,7 @@
     .chart-wrap.dragging .chart-drag-hint { opacity: 0; }
     .chart-canvas-wrap { position: relative; }
     .chart-head { display: flex; justify-content: space-between; align-items: center; margin-bottom: 10px; gap: 10px; flex-wrap: wrap; }
-    .chart-head h2 { font-family: 'ZCOOL QingKe HuangYou', cursive; font-size: 24px; }
+    .chart-head h2 { font-family: 'ZCOOL QingKe HuangYou', cursive; font-size: 1.6rem; }
     canvas {
       width: 100%; height: 260px; border-radius: 16px;
       background: linear-gradient(180deg, #fff, #fff8e8);
@@ -212,7 +218,7 @@
       accent-color: var(--red);
       height: 10px;
     }
-    .slider-meta { display: flex; justify-content: space-between; color: var(--muted); font-size: 13px; margin-top: 8px; font-weight: 700; }
+    .slider-meta { display: flex; justify-content: space-between; color: var(--muted); font-size: 0.867rem; margin-top: 8px; font-weight: 700; }
     .score-manual {
       display: flex;
       align-items: center;
@@ -222,7 +228,7 @@
       flex-wrap: wrap;
     }
     .score-manual label {
-      font-size: 14px;
+      font-size: 0.933rem;
       font-weight: 800;
       color: var(--muted);
       margin: 0;
@@ -232,7 +238,7 @@
       border: 2px solid var(--ink);
       border-radius: 14px;
       padding: 12px 14px;
-      font: 800 28px/1 'ZCOOL QingKe HuangYou', cursive;
+      font: 800 1.867rem/1 'ZCOOL QingKe HuangYou', cursive;
       color: var(--red);
       text-align: center;
       background: #fff;
@@ -245,7 +251,7 @@
       margin: 0;
     }
     .score-manual .score-unit {
-      font-size: 18px;
+      font-size: 1.2rem;
       font-weight: 800;
       color: var(--ink);
     }
@@ -254,21 +260,21 @@
       border-radius: 12px;
       padding: 10px 16px;
       background: var(--yellow);
-      font: 800 14px/1 'Noto Sans SC', sans-serif;
+      font: 800 0.933rem/1 'Noto Sans SC', sans-serif;
       cursor: pointer;
       box-shadow: 3px 3px 0 var(--ink);
     }
     .score-big {
       text-align: center;
       margin-top: 14px;
-      font-size: 64px;
+      font-size: 4.27rem;
       font-weight: 400;
       color: var(--red);
       font-family: 'ZCOOL QingKe HuangYou', cursive;
       text-shadow: 3px 3px 0 var(--yellow);
     }
     .score-action { margin-top: 14px; max-width: 320px; }
-    .hint { color: var(--muted); font-size: 13px; line-height: 1.6; margin-top: 10px; }
+    .hint { color: var(--muted); font-size: 0.867rem; line-height: 1.6; margin-top: 10px; }
     .loading { color: var(--muted); padding: 20px 0; }
     .modal-backdrop {
       position: fixed; inset: 0; background: rgba(20,20,20,0.55);
@@ -288,14 +294,14 @@
       animation: pop .25s ease;
     }
     @keyframes pop { from { transform: translateY(12px); opacity: 0; } to { transform: none; opacity: 1; } }
-    .modal h3 { font-family: 'ZCOOL QingKe HuangYou', cursive; font-size: 34px; }
+    .modal h3 { font-family: 'ZCOOL QingKe HuangYou', cursive; font-size: 2.27rem; }
     .modal .close {
       float: right; border: 2px solid var(--ink); background: var(--yellow); color: var(--ink);
-      width: 38px; height: 38px; border-radius: 999px; cursor: pointer; font-size: 18px; font-weight: 800;
+      width: 38px; height: 38px; border-radius: 999px; cursor: pointer; font-size: 1.2rem; font-weight: 800;
       box-shadow: 3px 3px 0 var(--ink);
     }
     .modal-summary { color: var(--muted); margin: 10px 0 18px; line-height: 1.6; font-weight: 600; }
-    .section-title { font-size: 18px; font-weight: 800; margin: 18px 0 10px; display: flex; align-items: center; gap: 8px; }
+    .section-title { font-size: 1.2rem; font-weight: 800; margin: 18px 0 10px; display: flex; align-items: center; gap: 8px; }
     .school-list, .major-list { display: grid; gap: 10px; }
     .school-item, .major-item {
       border: 2px solid var(--ink);
@@ -309,41 +315,41 @@
       box-shadow: 4px 4px 0 var(--ink);
     }
     .school-item .name, .major-item .name { font-weight: 800; }
-    .school-item .tags, .major-item .meta { color: var(--muted); font-size: 13px; font-weight: 600; }
+    .school-item .tags, .major-item .meta { color: var(--muted); font-size: 0.867rem; font-weight: 600; }
     .tier {
-      padding: 6px 10px; border-radius: 999px; font-size: 12px; font-weight: 800;
+      padding: 6px 10px; border-radius: 999px; font-size: 0.8rem; font-weight: 800;
       background: var(--yellow); color: var(--ink); border: 2px solid var(--ink); white-space: nowrap;
     }
     .school-tag {
-      padding: 6px 10px; border-radius: 999px; font-size: 12px; font-weight: 800;
+      padding: 6px 10px; border-radius: 999px; font-size: 0.8rem; font-weight: 800;
       border: 2px solid var(--ink); white-space: nowrap;
     }
     .school-tag.chong { background: #ffe0e0; color: #b42318; }
     .school-tag.wen { background: #d8ffe8; color: #067647; }
     .school-tag.bao { background: #e8f0ff; color: #175cd3; }
-    .hot-score { color: var(--ok); font-weight: 800; font-size: 13px; }
+    .hot-score { color: var(--ok); font-weight: 800; font-size: 0.867rem; }
     .opportunity-badge {
       display: inline-block; margin-top: 4px; padding: 4px 8px; border-radius: 999px;
-      font-size: 11px; font-weight: 800; background: #fff4cc; color: #8a5b00;
+      font-size: 0.733rem; font-weight: 800; background: #fff4cc; color: #8a5b00;
       border: 2px solid var(--ink);
     }
     .tier-group-title {
-      font-size: 12px; font-weight: 800; color: var(--muted); margin: 10px 0 6px;
+      font-size: 0.8rem; font-weight: 800; color: var(--muted); margin: 10px 0 6px;
     }
-    .footer-note { margin-top: 16px; font-size: 12px; color: var(--muted); line-height: 1.6; }
+    .footer-note { margin-top: 16px; font-size: 0.8rem; color: var(--muted); line-height: 1.6; }
     .qr-panel {
       margin-top: 24px; text-align: center; padding: 28px 24px 32px;
       background: linear-gradient(180deg, #fff 0%, #fff8e8 100%);
       border: 3px solid var(--ink); border-radius: 16px; box-shadow: 6px 6px 0 var(--ink);
     }
-    .qr-panel h2 { font-size: 18px; margin-bottom: 12px; }
+    .qr-panel h2 { font-size: 1.2rem; margin-bottom: 12px; }
     .qr-panel img {
       width: min(280px, 90vw); height: auto; border-radius: 12px; background: transparent;
     }
-    .qr-hint { margin-top: 10px; font-size: 13px; color: var(--muted); font-weight: 600; line-height: 1.6; }
+    .qr-hint { margin-top: 10px; font-size: 0.867rem; color: var(--muted); font-weight: 600; line-height: 1.6; }
     .confidence-badge {
       display: inline-flex; align-items: center; gap: 6px;
-      padding: 6px 12px; border-radius: 999px; font-size: 12px; font-weight: 800;
+      padding: 6px 12px; border-radius: 999px; font-size: 0.8rem; font-weight: 800;
       border: 2px solid var(--ink); box-shadow: 3px 3px 0 var(--ink);
     }
     .confidence-badge.verified { background: #d8ffe8; color: #067647; }
@@ -357,13 +363,13 @@
       background: #fff1f0;
       border: 1px solid #ffa39e;
       color: #a8071a;
-      font-size: 13px;
+      font-size: 0.867rem;
       line-height: 1.5;
     }
-    .validation-detail { margin-top: 8px; font-size: 12px; color: var(--muted); line-height: 1.55; }
+    .validation-detail { margin-top: 8px; font-size: 0.8rem; color: var(--muted); line-height: 1.55; }
     .validation-detail.collapsed { display: none; }
     .toggle-detail-btn {
-      width: auto; margin-top: 8px; padding: 6px 12px; font-size: 12px;
+      width: auto; margin-top: 8px; padding: 6px 12px; font-size: 0.8rem;
       background: #fff; cursor: pointer;
     }
     .data-quality { text-align: right; }
@@ -372,17 +378,129 @@
       background: #fff; border: 3px solid var(--ink); border-radius: 16px;
       box-shadow: 6px 6px 0 var(--ink);
     }
-    .methodology-panel h2 { font-size: 18px; margin-bottom: 12px; }
-    .methodology-panel h3 { font-size: 14px; margin: 14px 0 6px; }
+    .methodology-panel h2 { font-size: 1.2rem; margin-bottom: 12px; }
+    .methodology-panel h3 { font-size: 0.933rem; margin: 14px 0 6px; }
     .methodology-panel p, .methodology-panel li {
-      font-size: 13px; color: var(--muted); line-height: 1.65; font-weight: 600;
+      font-size: 0.867rem; color: var(--muted); line-height: 1.65; font-weight: 600;
     }
     .methodology-panel ul { margin: 6px 0 0 18px; padding: 0; }
     .methodology-panel .source-tag {
       display: inline-block; margin-top: 8px; padding: 4px 8px; border-radius: 6px;
-      font-size: 11px; font-weight: 800; background: #f0f0f0; color: #333;
+      font-size: 0.733rem; font-weight: 800; background: #f0f0f0; color: #333;
     }
-    .admission-src { font-size: 11px; color: #8a5b00; font-weight: 700; }
+    .admission-src { font-size: 0.733rem; color: #8a5b00; font-weight: 700; }
+    .wrap {
+      padding: max(20px, env(safe-area-inset-top)) max(16px, env(safe-area-inset-right)) max(48px, env(safe-area-inset-bottom)) max(16px, env(safe-area-inset-left));
+    }
+    .flow-nav {
+      position: sticky; top: 0; z-index: 200;
+      display: flex; gap: 8px; overflow-x: auto; -webkit-overflow-scrolling: touch;
+      padding: 10px 2px 12px; margin: 0 0 14px;
+      background: linear-gradient(180deg, rgba(255,253,245,0.98) 70%, rgba(255,253,245,0));
+      scrollbar-width: none;
+    }
+    .flow-nav::-webkit-scrollbar { display: none; }
+    .flow-tab {
+      flex: 0 0 auto; border: 2px solid var(--ink); border-radius: 999px;
+      padding: 10px 14px; font: 800 0.8rem/1.2 'Noto Sans SC', sans-serif;
+      background: #fff; color: var(--muted); cursor: pointer;
+      box-shadow: 3px 3px 0 var(--ink); white-space: nowrap;
+    }
+    .flow-tab.active { background: var(--yellow); color: var(--ink); }
+    .flow-tab.cta-tab { background: var(--cta); color: #fff; }
+    .flow-section { scroll-margin-top: 72px; }
+    .pitfall-teaser {
+      display: grid; grid-template-columns: repeat(auto-fit, minmax(140px, 1fr)); gap: 10px; margin-top: 12px;
+    }
+    .pitfall-teaser a {
+      text-decoration: none; color: inherit; border: 2px solid var(--ink); border-radius: 14px;
+      padding: 12px 14px; background: #fff; box-shadow: 3px 3px 0 var(--ink);
+      font-size: 0.867rem; font-weight: 800; line-height: 1.45;
+    }
+    .pitfall-teaser a span { display: block; color: var(--red); font-size: 0.733rem; margin-bottom: 4px; }
+    .target-search-wrap { position: relative; }
+    .target-search {
+      width: 100%; border: 2px solid var(--ink); border-radius: 14px; padding: 12px 14px;
+      font: 700 1rem/1.2 'Noto Sans SC', sans-serif; background: #fff; box-shadow: 3px 3px 0 var(--ink);
+    }
+    .target-suggest {
+      position: absolute; left: 0; right: 0; top: calc(100% + 6px); z-index: 60;
+      background: #fff; border: 2px solid var(--ink); border-radius: 14px;
+      box-shadow: 6px 6px 0 var(--ink); max-height: min(240px, 40vh); overflow: auto;
+    }
+    .target-suggest.hidden { display: none; }
+    .target-suggest button {
+      width: 100%; border: none; border-radius: 10px; padding: 10px 12px;
+      font: 700 0.933rem/1.2 'Noto Sans SC', sans-serif; background: transparent;
+      text-align: left; cursor: pointer; box-shadow: none;
+    }
+    .target-suggest button:hover { background: var(--yellow); }
+    .target-chips { display: flex; flex-wrap: wrap; gap: 8px; margin-top: 12px; }
+    .target-chip {
+      display: inline-flex; align-items: center; gap: 6px;
+      border: 2px solid var(--ink); border-radius: 999px; padding: 8px 12px;
+      font-size: 0.867rem; font-weight: 800; background: #fffbe6;
+    }
+    .target-chip button {
+      width: 22px; height: 22px; padding: 0; border-radius: 999px;
+      font-size: 0.933rem; line-height: 1; cursor: pointer;
+    }
+    .target-results { display: grid; gap: 10px; margin-top: 14px; }
+    .target-card {
+      border: 2px solid var(--ink); border-radius: 16px; padding: 14px 16px;
+      background: #fff; box-shadow: 4px 4px 0 var(--ink);
+      display: grid; grid-template-columns: 1fr auto; gap: 8px; align-items: start;
+    }
+    .target-card .gap-line { font-size: 0.867rem; color: var(--muted); font-weight: 700; margin-top: 6px; line-height: 1.5; }
+    .target-card .name { font-weight: 800; font-size: 1.067rem; }
+    .target-card .tags { font-size: 0.867rem; color: var(--muted); font-weight: 600; margin-top: 4px; }
+    .target-card .tags.subtle { font-size: 0.8rem; margin-top: 6px; }
+    .target-card .gap-line strong { color: var(--ink); }
+    .target-empty { font-size: 0.867rem; color: var(--muted); font-weight: 600; line-height: 1.6; padding: 8px 0; }
+    .posts-rail {
+      display: flex; gap: 12px; overflow-x: auto; -webkit-overflow-scrolling: touch;
+      padding: 4px 2px 8px; scroll-snap-type: x mandatory;
+    }
+    .post-card {
+      flex: 0 0 min(260px, 78vw); scroll-snap-align: start;
+      text-decoration: none; color: inherit; border: 2px solid var(--ink); border-radius: 18px;
+      padding: 16px; background: #fff; box-shadow: 4px 4px 0 var(--ink);
+    }
+    .post-card .num {
+      width: 36px; height: 36px; border-radius: 10px; display: grid; place-items: center;
+      background: var(--yellow); border: 2px solid var(--ink); font-weight: 800; margin-bottom: 10px;
+    }
+    .post-card h3 { font-size: 1.067rem; font-weight: 800; line-height: 1.35; margin-bottom: 6px; }
+    .post-card p { font-size: 0.8rem; color: var(--muted); font-weight: 600; }
+    .career-embed-frame {
+      width: 100%; min-height: 360px; border: 2px solid var(--ink); border-radius: 16px;
+      background: #fff; box-shadow: 4px 4px 0 var(--ink);
+    }
+    @media (max-width: 480px) {
+      .hero { padding: 20px 18px; }
+      .hero::after { font-size: 0.667rem; padding: 6px 48px; }
+      .panel { padding: 18px 16px; }
+      .score-big { font-size: 3.2rem; }
+      .topbar-actions > a { display: none; }
+      .flow-tab { padding: 9px 12px; font-size: 0.733rem; }
+    }
+    @media (orientation: landscape) and (max-height: 520px) {
+      .hero { padding: 14px 18px; margin-bottom: 12px; }
+      .hero::after { display: none; }
+      h1 { font-size: clamp(1.73rem, 5vw, 2.4rem); }
+      .guide-steps { grid-template-columns: repeat(3, 1fr); gap: 8px; }
+      .guide-step { padding: 10px 12px; }
+      .stats { grid-template-columns: repeat(4, 1fr); gap: 8px; }
+      .stat { padding: 10px 12px; }
+      .stat .v { font-size: 1.33rem; }
+      canvas { height: 200px; }
+      .score-big { font-size: 2.93rem; margin-top: 8px; }
+      .flow-nav { padding: 6px 2px 8px; }
+      .career-embed-frame { min-height: 320px; }
+    }
+    @media (min-width: 900px) {
+      .pitfall-teaser { grid-template-columns: repeat(3, 1fr); }
+    }
   </style>
 </head>
 <body>
@@ -390,28 +508,46 @@
     <section class="hero">
       <div class="topbar">
         <div>
-          <span style="display:inline-block;background:#ffe566;border:2px solid #141414;padding:6px 12px;border-radius:999px;font-size:12px;font-weight:800;box-shadow:3px 3px 0 #141414;">🔥 祝愿心想事成！</span>
+          <span class="hero-badge">🔥 祝愿心想事成！</span>
           <h1>孩子 <span class="hl" id="heroScore">600</span> 分<br>能上什么学校？</h1>
-          <p class="sub">三步搞定：选省份 → 填分数 → 看推荐院校专业。不用懂一分一段表。</p>
+          <p class="sub">按流程走：先避坑 → 填分数 → 对标意向大学 → 看推荐 → 查就业 → 延伸阅读。</p>
         </div>
         <div class="topbar-actions">
           <div class="font-toggle" role="group" aria-label="字号切换">
             <button type="button" id="fontNormal" class="active">标准</button>
             <button type="button" id="fontLarge">大号</button>
           </div>
-          <a href="index.html">← 返回合集</a>
-          <a href="career-sandbox.html">💼 就业沙盘</a>
+          <a href="index.html">← 合集</a>
         </div>
+      </div>
+    </section>
+
+    <nav class="flow-nav" id="flowNav" aria-label="选校流程">
+      <button type="button" class="flow-tab active" data-step="step-pitfalls">① 避坑</button>
+      <button type="button" class="flow-tab" data-step="step-score">② 填分数</button>
+      <button type="button" class="flow-tab" data-step="step-target">③ 对标院校</button>
+      <button type="button" class="flow-tab cta-tab" data-action="recommend">④ 看推荐</button>
+      <button type="button" class="flow-tab" data-step="step-career">⑤ 就业沙盘</button>
+      <button type="button" class="flow-tab" data-step="step-posts">⑥ 爆帖</button>
+    </nav>
+
+    <section class="panel flow-section" id="step-pitfalls">
+      <h2 class="section-title">填报前：六项常见误区自查</h2>
+      <p class="hint">官方渠道、专业内涵、批次规则——这些基础项理顺了，再查分数和院校会更踏实。约 3 分钟浏览即可。</p>
+      <div class="pitfall-teaser">
+        <a href="pitfalls.html"><span>自查</span>六项常见误区<br>信源 / 专业名 / 转专业…</a>
+        <a href="fill-guide.html"><span>要点</span>录取与填报逻辑<br>志愿顺序与实操提醒</a>
+        <a href="pitfalls.html"><span>调研</span>了解真实就读情况<br>课程安排 + 毕业去向</a>
       </div>
     </section>
 
     <div class="guide-steps">
       <div class="guide-step"><strong>① 选省份和科类</strong><span>点省份框搜索或下拉选择</span></div>
       <div class="guide-step"><strong>② 输入孩子分数</strong><span>直接打字最准，滑块和图表也能调</span></div>
-      <div class="guide-step"><strong>③ 看能报什么</strong><span>点橙色按钮，立刻出院校和专业推荐</span></div>
+      <div class="guide-step"><strong>③ 对标意向大学</strong><span>搜校名，看和当前分数差多少</span></div>
     </div>
 
-    <div class="panel">
+    <div class="panel flow-section" id="step-score">
       <div class="answer-banner" id="answerBanner"><em>600 分</em> 对比近3年省控批次线，供填报参照</div>
       <div class="controls">
         <div>
@@ -480,6 +616,58 @@
       </div>
     </div>
 
+    <div class="panel flow-section" id="step-target">
+      <h2 class="section-title">对标意向大学</h2>
+      <p class="hint">输入你关心的学校（可多个），看当前分数与该校近年在<strong>本省普通批投档最低分</strong>的关系。</p>
+      <div class="target-search-wrap">
+        <label for="targetSearch" class="sr-only">搜索意向大学</label>
+        <input id="targetSearch" class="target-search" type="search" placeholder="搜大学，如：浙江大学、河海大学…" autocomplete="off">
+        <div class="target-suggest hidden" id="targetSuggest"></div>
+      </div>
+      <div class="target-chips" id="targetChips"></div>
+      <div class="target-results" id="targetResults">
+        <p class="target-empty">还没有添加意向大学。搜校名后点选，或试试：浙江大学、武汉大学、深圳大学。</p>
+      </div>
+    </div>
+
+    <section class="panel flow-section" id="step-career">
+      <h2 class="section-title">专业就业沙盘</h2>
+      <p class="hint">定好分数和院校方向后，查心仪专业毕业后能做什么、拿多少钱。数据来自猎聘 / BOSS / 脉脉 / OfferShow 四源交叉。</p>
+      <iframe class="career-embed-frame" id="careerFrame" src="career-sandbox.html?embed=1" title="就业沙盘" loading="lazy"></iframe>
+    </section>
+
+    <section class="panel flow-section" id="step-posts">
+      <h2 class="section-title">爆帖延伸阅读</h2>
+      <p class="hint">按你的分数段和方向选读。</p>
+      <div class="posts-rail">
+        <a class="post-card" href="post-01-no-never-unemploy.html">
+          <div class="num">01</div>
+          <h3>没有「永不失业」的专业</h3>
+          <p>6 页轮播 · 焦虑破冰</p>
+        </a>
+        <a class="post-card" href="post-02-ai-traps.html">
+          <div class="num">02</div>
+          <h3>AI 时代选专业 5 个坑</h3>
+          <p>7 页轮播 · 避坑收藏</p>
+        </a>
+        <a class="post-card" href="post-03-score-tiers.html">
+          <div class="num">03</div>
+          <h3>不同分数段怎么选专业</h3>
+          <p>6 页轮播 · 务实版</p>
+        </a>
+        <a class="post-card" href="post-04-liberal-arts.html">
+          <div class="num">04</div>
+          <h3>文科生家长别慌</h3>
+          <p>6 页轮播 · 方向参考</p>
+        </a>
+        <a class="post-card" href="post-05-three-tracks.html">
+          <div class="num">05</div>
+          <h3>工科 / 商科 / 艺术别同一套逻辑</h3>
+          <p>6 页轮播 · 分轨选专业</p>
+        </a>
+      </div>
+    </section>
+
     <p class="footer-note" id="globalNote"></p>
 
     <section class="methodology-panel" id="methodologyPanel" aria-label="排名与筛选说明">
@@ -539,6 +727,8 @@
       currentScore: 600,
       dragging: false,
       admissionIndex: null,
+      targetSchools: [],
+      schoolSearchIndex: null,
     };
 
     const COMBINED_33 = new Set(['北京', '天津', '上海', '浙江', '山东', '海南']);
@@ -558,6 +748,13 @@
     const ctx = chart.getContext('2d');
 
     const HOT_PROVINCES = ['广东', '江苏', '浙江', '北京', '上海', '山东', '河南', '四川', '湖北', '湖南', '安徽', '河北'];
+
+    const SCHOOL_ALIASES = {
+      '清华': '清华大学', '北大': '北京大学', '复旦': '复旦大学', '交大': '上海交通大学',
+      '浙大': '浙江大学', '武大': '武汉大学', '南大': '南京大学', '中科大': '中国科学技术大学',
+      '同济': '同济大学', '厦大': '厦门大学', '中大': '中山大学', '哈工大': '哈尔滨工业大学',
+      '北师大': '北京师范大学', '广西大': '广西大学', '贵大': '贵州大学', '山师': '山东师范大学',
+    };
 
     function provinceMatch(query, name) {
       const q = (query || '').trim().toLowerCase();
@@ -807,13 +1004,16 @@
       provinceEl.innerHTML = state.manifest.provinces.map((p) => `<option value="${p}">${p}</option>`).join('');
       initProvinceCombo();
       yearEl.innerHTML = state.manifest.years.map((y) => `<option value="${y}">${y}</option>`).join('');
-      yearEl.value = '2025';
+      yearEl.value = '2026';
       $('globalNote').textContent = (state.manifest.meta.notes || '')
         + (isFileProtocol() ? ' 本地 file:// 模式仅加载一分一段 embed；推荐数据在打开弹窗时按需加载。' : '');
       await loadProvince(provinceEl.value);
       renderTrackOptions(provinceEl.value);
       renderMethodologySources();
       prefetchAdmissionIndex(provinceEl.value);
+      await ensureSchoolSearchIndex();
+      initTargetSchools();
+      initFlowNav();
     }
 
     function renderMethodologySources() {
@@ -1173,6 +1373,7 @@
       $('dataSource').textContent = `数据来源：${srcLabel} · ${provinceEl.value} ${yearEl.value} ${trackEl.value}${gapHint}${admHint}`;
       renderConfidence(trackData);
       drawChart();
+      renderTargetResults();
     }
 
     function cumulativeAt(score) {
@@ -1472,6 +1673,7 @@
       $('statShare').textContent = `${sharePct.toFixed(2)}%`;
       updateStatDescriptions(clamped, sharePct);
       drawChart();
+      renderTargetResults();
       if (showModal) openModal();
     }
 
@@ -1494,6 +1696,11 @@
         return;
       }
       setScore(n, showModal);
+    }
+
+    function chartFont(ratio = 0.8) {
+      const px = parseFloat(getComputedStyle(document.documentElement).fontSize) * ratio;
+      return `${Math.round(px)}px Noto Sans SC`;
     }
 
     function drawChart() {
@@ -1520,7 +1727,7 @@
         ctx.stroke();
         ctx.setLineDash([]);
         ctx.fillStyle = '#1f9d63';
-        ctx.font = '12px Noto Sans SC';
+        ctx.font = chartFont();
         ctx.fillText(name, x(score) + 4, pad.t + 12);
       });
 
@@ -1564,7 +1771,7 @@
 
       // axes labels
       ctx.fillStyle = '#6b534d';
-      ctx.font = '12px Noto Sans SC';
+      ctx.font = chartFont();
       for (let s = Math.ceil(xMin / 50) * 50; s <= xMax; s += 50) {
         ctx.fillText(String(s), x(s) - 10, h - 10);
       }
@@ -1738,6 +1945,180 @@
 
     function subjectTrackShort() {
       return currentSubjectTrack() === '历史类' ? '历史类' : '物理类';
+    }
+
+    function allSchoolNames() {
+      if (state.schoolSearchIndex?.length) return state.schoolSearchIndex;
+      const names = new Set((state.manifest?.schools || []).map((s) => s.name));
+      const prov = provinceEl.value;
+      const track = admissionTrackKey();
+      const provMap = state.admissionIndex?.provinces?.[prov]?.[track] || {};
+      Object.keys(provMap).forEach((n) => names.add(n));
+      return [...names].sort((a, b) => a.localeCompare(b, 'zh'));
+    }
+
+    async function ensureSchoolSearchIndex() {
+      if (state.schoolSearchIndex?.length) return;
+      if (window.SCHOOLS_SEARCH_INDEX?.schools?.length) {
+        state.schoolSearchIndex = window.SCHOOLS_SEARCH_INDEX.schools.map((s) => s.name || s);
+        return;
+      }
+      if (isFileProtocol()) {
+        await loadScript('data/schools-search-embed.js');
+        if (window.SCHOOLS_SEARCH_INDEX?.schools?.length) {
+          state.schoolSearchIndex = window.SCHOOLS_SEARCH_INDEX.schools.map((s) => s.name || s);
+          return;
+        }
+      }
+      try {
+        const res = await fetch('data/schools_search_index.json');
+        if (res.ok) {
+          const data = await res.json();
+          state.schoolSearchIndex = (data.schools || []).map((s) => s.name).filter(Boolean);
+        }
+      } catch (_) { /* fallback to province-scoped list */ }
+    }
+
+    function schoolMeta(name) {
+      return (state.manifest?.schools || []).find((s) => s.name === name) || { name, tier: '—', tags: [] };
+    }
+
+    function gapExplain(score, refScore, tag) {
+      if (refScore == null) return '本省暂无该校普通批投档归档，无法精确对标。';
+      const diff = refScore - score;
+      if (tag?.key === 'chong') return `该校投档参考约 <strong>${refScore} 分</strong>，你差 <strong>${diff} 分</strong>，属于冲刺区间（+5~+15）。`;
+      if (tag?.key === 'wen') return `该校投档参考约 <strong>${refScore} 分</strong>，相差 <strong>${Math.abs(diff)} 分</strong>，在稳妥区间。`;
+      if (tag?.key === 'bao') return `该校投档参考约 <strong>${refScore} 分</strong>，你高 <strong>${Math.abs(diff)} 分</strong>，在保底区间。`;
+      if (diff > 15) return `该校投档参考约 <strong>${refScore} 分</strong>，还差 <strong>${diff} 分</strong>，差距较大，建议作远期目标或换相近层次院校。`;
+      if (diff < -30) return `该校投档参考约 <strong>${refScore} 分</strong>，你高出 <strong>${Math.abs(diff)} 分</strong>，分数有余量，可重点看专业和城市。`;
+      return `该校投档参考约 <strong>${refScore} 分</strong>，与当前分数差 <strong>${diff > 0 ? '+' : ''}${diff} 分</strong>。`;
+    }
+
+    function renderTargetChips() {
+      const el = $('targetChips');
+      if (!state.targetSchools.length) { el.innerHTML = ''; return; }
+      el.innerHTML = state.targetSchools.map((name) =>
+        `<span class="target-chip">${name}<button type="button" data-remove="${name}" aria-label="移除">×</button></span>`
+      ).join('');
+      el.querySelectorAll('[data-remove]').forEach((btn) => {
+        btn.onclick = () => {
+          state.targetSchools = state.targetSchools.filter((n) => n !== btn.dataset.remove);
+          renderTargetChips();
+          renderTargetResults();
+        };
+      });
+    }
+
+    function renderTargetResults() {
+      const box = $('targetResults');
+      if (!state.targetSchools.length) {
+        box.innerHTML = '<p class="target-empty">还没有添加意向大学。搜校名后点选，或试试：浙江大学、武汉大学、深圳大学。</p>';
+        return;
+      }
+      const score = state.currentScore;
+      const verified = provinceAdmissionVerified(provinceEl.value);
+      box.innerHTML = state.targetSchools.map((name) => {
+        const meta = schoolMeta(name);
+        const rec = lookupAdmission(name);
+        const refScore = admissionRecommendScore(rec);
+        const tag = schoolApplicationTag(score, refScore);
+        const tagHtml = tag
+          ? `<span class="school-tag ${tag.key}">${tag.label}</span>`
+          : (refScore != null ? '<span class="school-tag">参考</span>' : '');
+        const hist = rec?.yearsRegular || rec?.years;
+        const histLine = hist && Object.keys(hist).length
+          ? `历年投档：${formatAdmissionYears(hist)}`
+          : (verified ? '本省暂无投档归档' : '投档数据核验中');
+        const tierLine = `${meta.tier || '—'} · ${(meta.tags || []).slice(0, 3).join(' · ') || '院校'}`;
+        return `
+          <div class="target-card">
+            <div>
+              <div class="name">${name}</div>
+              <div class="tags">${tierLine}</div>
+              <div class="gap-line">${gapExplain(score, refScore, tag)}</div>
+              <div class="tags subtle">${histLine}</div>
+            </div>
+            ${tagHtml}
+          </div>`;
+      }).join('');
+    }
+
+    function addTargetSchool(name) {
+      const n = (name || '').trim();
+      if (!n || state.targetSchools.includes(n)) return;
+      state.targetSchools.push(n);
+      if (state.targetSchools.length > 8) state.targetSchools.shift();
+      $('targetSearch').value = '';
+      $('targetSuggest').classList.add('hidden');
+      renderTargetChips();
+      renderTargetResults();
+    }
+
+    function showTargetSuggest(query) {
+      const box = $('targetSuggest');
+      const q = (query || '').trim();
+      if (!q) { box.classList.add('hidden'); return; }
+      const aliasHit = SCHOOL_ALIASES[q];
+      const names = allSchoolNames();
+      let matched = names.filter((n) => n.includes(q) && !state.targetSchools.includes(n));
+      if (aliasHit && !state.targetSchools.includes(aliasHit) && names.includes(aliasHit)) {
+        matched = [aliasHit, ...matched.filter((n) => n !== aliasHit)];
+      }
+      matched = matched.slice(0, 10);
+      if (!matched.length) {
+        box.innerHTML = '<div class="province-empty">没有匹配的大学，可尝试简称如「浙大」→ 浙江大学</div>';
+        box.classList.remove('hidden');
+        return;
+      }
+      box.innerHTML = matched.map((n) =>
+        `<button type="button" data-school="${n}">${n}</button>`
+      ).join('');
+      box.querySelectorAll('[data-school]').forEach((btn) => {
+        btn.onclick = () => addTargetSchool(btn.dataset.school);
+      });
+      box.classList.remove('hidden');
+    }
+
+    function initTargetSchools() {
+      $('targetSearch').addEventListener('input', (e) => showTargetSuggest(e.target.value));
+      $('targetSearch').addEventListener('keydown', (e) => {
+        if (e.key === 'Enter') {
+          e.preventDefault();
+          const first = $('targetSuggest').querySelector('[data-school]');
+          if (first) addTargetSchool(first.dataset.school);
+        }
+        if (e.key === 'Escape') $('targetSuggest').classList.add('hidden');
+      });
+      document.addEventListener('click', (e) => {
+        if (!$('step-target').contains(e.target)) $('targetSuggest').classList.add('hidden');
+      });
+      renderTargetChips();
+      renderTargetResults();
+    }
+
+    function scrollToStep(id) {
+      const el = document.getElementById(id);
+      if (!el) return;
+      el.scrollIntoView({ behavior: 'smooth', block: 'start' });
+      document.querySelectorAll('.flow-tab').forEach((tab) => {
+        tab.classList.toggle('active', tab.dataset.step === id);
+      });
+    }
+
+    function initFlowNav() {
+      document.querySelectorAll('.flow-tab').forEach((tab) => {
+        tab.addEventListener('click', () => {
+          if (tab.dataset.action === 'recommend') {
+            openModal();
+            return;
+          }
+          const step = tab.dataset.step;
+          if (step) scrollToStep(step);
+        });
+      });
+      const hash = location.hash.replace('#', '');
+      const valid = ['step-pitfalls', 'step-score', 'step-target', 'step-career', 'step-posts'];
+      if (valid.includes(hash)) setTimeout(() => scrollToStep(hash), 300);
     }
 
     function renderSchoolRow(s) {
@@ -1920,6 +2301,7 @@
       loadProvince(provinceEl.value).then(() => {
         renderMethodologySources();
         prefetchAdmissionIndex(provinceEl.value);
+        loadAdmissionIndex(provinceEl.value).then(() => renderTargetResults());
       });
     });
     $('toggleValidation').addEventListener('click', () => {
@@ -1927,15 +2309,29 @@
       const open = detail.classList.toggle('collapsed');
       $('toggleValidation').textContent = open ? '查看数据说明 ▾' : '收起数据说明 ▴';
     });
-    $('fontNormal').addEventListener('click', () => {
-      document.body.classList.remove('font-large');
-      $('fontNormal').classList.add('active');
-      $('fontLarge').classList.remove('active');
-    });
-    $('fontLarge').addEventListener('click', () => {
-      document.body.classList.add('font-large');
-      $('fontLarge').classList.add('active');
-      $('fontNormal').classList.remove('active');
+    $('fontNormal').addEventListener('click', () => applyFontSize(false));
+    $('fontLarge').addEventListener('click', () => applyFontSize(true));
+
+    function applyFontSize(large) {
+      document.documentElement.classList.toggle('font-large', large);
+      document.body.classList.toggle('font-large', large);
+      $('fontNormal').classList.toggle('active', !large);
+      $('fontLarge').classList.toggle('active', large);
+      drawChart();
+      syncCareerFrameFont(large);
+    }
+
+    function syncCareerFrameFont(large) {
+      try {
+        const frame = $('careerFrame');
+        if (frame?.contentWindow) {
+          frame.contentWindow.postMessage({ type: 'gk-font-large', large }, '*');
+        }
+      } catch (_) { /* cross-origin guard */ }
+    }
+
+    $('careerFrame')?.addEventListener('load', () => {
+      syncCareerFrameFont(document.documentElement.classList.contains('font-large'));
     });
     yearEl.addEventListener('change', refreshTrackData);
     function refreshModalMajors() {
@@ -1950,6 +2346,7 @@
       refreshTrackData();
       renderMethodologySources();
       refreshModalMajors();
+      loadAdmissionIndex(provinceEl.value).then(() => renderTargetResults());
     });
     sliderEl.addEventListener('input', () => setScore(Number(sliderEl.value), false));
     sliderEl.addEventListener('change', () => setScore(Number(sliderEl.value), true));
