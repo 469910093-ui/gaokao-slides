@@ -10,6 +10,7 @@ from admission_filter_lib import PROVINCE_EXAM_PORTALS, primary_undergrad_batch
 from portals.adapters.discover import classify_kind
 from portals.adapters.html_admission import parse_html_admission
 from portals.adapters.pdf_admission import parse_pdf_admission
+from portals.adapters.pdf_jiangsu_admission import parse_pdf_jiangsu_admission
 from portals.adapters.xls_admission import parse_xls_admission
 from portals.adapters.xlsx_admission import parse_xlsx_admission
 from portals.base import ProvincePortalParser
@@ -34,6 +35,28 @@ KNOWN_PAGES: dict[int, list[dict[str, Any]]] = {
                     "title": "江苏省2024年普通类本科批次平行志愿投档线（历史等科目类）",
                     "url": "https://www.jseea.cn/webfile/upload/2024/07-18/09-11-430408314109108.xls",
                     "track": "历史类",
+                },
+            ],
+        },
+    ],
+    2025: [
+        {
+            "page": "https://www.jseea.cn/webfile/index/index_zkxx/2025-07-18/7351781284785426432.html",
+            "files": [
+                {
+                    "title": "江苏省2025年普通类本科批次平行志愿投档线（历史等科目类）",
+                    "url": "https://www.jseea.cn/webfile/upload/2025/07-18/09-33-380724-1917118608.pdf",
+                    "track": "历史类",
+                },
+            ],
+        },
+        {
+            "page": "https://www.jseea.cn/webfile/index/index_zkxx/2025-07-18/7351781448019349504.html",
+            "files": [
+                {
+                    "title": "江苏省2025年普通类本科批次平行志愿投档线（物理等科目类）",
+                    "url": "https://www.jseea.cn/webfile/upload/2025/07-18/09-33-5302461102655621.pdf",
+                    "track": "物理类",
                 },
             ],
         },
@@ -147,6 +170,8 @@ class JiangsuPortalParser(ProvincePortalParser):
             return parse_xlsx_admission(artifact, data)
         if artifact.kind == "pdf":
             data = raw if isinstance(raw, bytes) else raw.encode("utf-8")
+            if artifact.year >= 2025:
+                return parse_pdf_jiangsu_admission(artifact, data)
             return parse_pdf_admission(artifact, data)
         html = raw if isinstance(raw, str) else raw.decode("utf-8", errors="replace")
         return parse_html_admission(artifact, html)

@@ -10,6 +10,7 @@ from portals.provinces.hebei import HebeiPortalParser
 from portals.provinces.henan import HenanPortalParser
 from portals.provinces.hunan import HunanPortalParser
 from portals.provinces.jiangsu import JiangsuPortalParser
+from portals.provinces.shaanxi import ShaanxiPortalParser
 from portals.provinces.shandong import ShandongPortalParser
 from portals.provinces.shanghai import ShanghaiPortalParser
 from portals.provinces.sichuan import SichuanPortalParser
@@ -28,6 +29,7 @@ _FULL: dict[str, type[ProvincePortalParser]] = {
     "广西": GuangxiPortalParser,
     "贵州": GuizhouPortalParser,
     "湖南": HunanPortalParser,
+    "陕西": ShaanxiPortalParser,
 }
 
 # 已有 listing/known 配置、待逐步验收的省份

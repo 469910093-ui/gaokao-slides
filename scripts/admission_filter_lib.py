@@ -52,7 +52,7 @@ PROVINCE_EXAM_PORTALS: dict[str, str] = {
     "福建": "https://www.eeafj.cn/",
     "江西": "http://www.jxeea.cn/",
     "山东": "http://www.sdzk.cn/",
-    "河南": "http://www.haeea.cn/",
+    "河南": "https://gaokao.haedu.cn/",
     "湖北": "http://www.hbea.edu.cn/",
     "湖南": "https://www.hneeb.cn/",
     "广东": "https://eea.gd.gov.cn/",
@@ -125,7 +125,15 @@ def row_is_undergrad_primary(province: str, row: dict[str, Any]) -> bool:
     if not batch:
         return False
     primary = primary_undergrad_batch(province)
-    if batch != primary:
+    if province == "河南":
+        # 2024 及以前为本科一批；2025 年起合并为本科批（datacenter pc=1）
+        if batch not in (primary, "本科一批") or "二批" in batch:
+            return False
+    elif province == "陕西":
+        allowed = {primary, "本科一批", "本科二批", "本科批次", "本科批"}
+        if batch not in allowed or "专科" in batch:
+            return False
+    elif batch != primary:
         return False
     if batch in FOREIGN_BATCH_MARKERS and province not in PRIMARY_UNDERGRAD_BATCH:
         return False
