@@ -16,6 +16,8 @@ from typing import Any
 ROOT = Path(__file__).resolve().parents[1]
 DATA = ROOT / "data"
 OUT_DIR = DATA / "acceptance"
+from admission_filter_lib import recommend_floor_from_entry
+
 from province_tracks import COMBINED_33_PROVINCES, major_match_tracks, tracks_for_province
 
 NO_SEGMENT_EOL_PROVINCES = frozenset({"新疆", "西藏"})
@@ -66,6 +68,19 @@ def admission_track_key(province: str, track: str) -> str:
     return "物理类"
 
 
+def province_admission_verified(admission_index: dict[str, Any] | None, province: str) -> bool:
+    if not admission_index:
+        return False
+    verified = admission_index.get("meta", {}).get("verifiedProvinces") or []
+    return province in verified
+
+
+def admission_recommend_score(rec: dict[str, Any] | None) -> int | None:
+    if not rec:
+        return None
+    return recommend_floor_from_entry(rec)
+
+
 def lookup_admission(
     admission_index: dict[str, Any] | None,
     province: str,
@@ -104,15 +119,16 @@ def enrich_school(
     track: str,
 ) -> dict[str, Any] | None:
     rec = lookup_admission(admission_index, province, track, school["name"])
-    if not rec or rec.get("avgMin3y") is None:
+    ref_score = admission_recommend_score(rec)
+    if ref_score is None:
         return None
-    tag = school_application_tag(score, int(rec["avgMin3y"]))
+    tag = school_application_tag(score, ref_score)
     if not tag:
         return None
     return {
         **school,
-        "avgAdmission": rec["avgMin3y"],
-        "admissionYears": rec.get("years"),
+        "avgAdmission": ref_score,
+        "admissionYears": rec.get("yearsRegular") or rec.get("years"),
         "appTag": {"key": tag},
     }
 
@@ -139,7 +155,7 @@ def enrich_admission_entry(
 ) -> dict[str, Any] | None:
     if rec.get("isVocational"):
         return None
-    avg = rec.get("avgMin3y")
+    avg = admission_recommend_score(rec)
     if avg is None:
         return None
     tag = school_application_tag(score, int(avg))
@@ -159,7 +175,7 @@ def enrich_admission_entry(
     return {
         **school,
         "avgAdmission": avg,
-        "admissionYears": rec.get("years"),
+        "admissionYears": rec.get("yearsRegular") or rec.get("years"),
         "appTag": {"key": tag},
     }
 
@@ -173,7 +189,7 @@ def recommend_schools(
 ) -> dict[str, Any]:
     tkey = admission_track_key(province, track)
     prov_map = (admission_index or {}).get("provinces", {}).get(province, {}).get(tkey, {})
-    has_admission = bool(prov_map)
+    has_admission = province_admission_verified(admission_index, province) and bool(prov_map)
     manifest_by_name = {s["name"]: s for s in schools}
     enriched = [
         s for s in (
@@ -420,20 +436,51 @@ def audit_case(
     if case.has_admission:
         for name in case.schools_chong + case.schools_wen:
             rec = lookup_admission(admission_index, case.province, case.track, name)
-            if not rec or rec.get("avgMin3y") is None:
+            ref_score = admission_recommend_score(rec)
+            if ref_score is None:
                 case.issues.append({
                     "severity": "ERROR",
                     "code": "SCHOOL_NO_ADMISSION",
-                    "message": f"冲/稳推荐「{name}」无投档均分数据",
+                    "message": f"冲/稳推荐「{name}」无普通批投档参考分",
                 })
                 continue
-            tag = school_application_tag(case.score, int(rec["avgMin3y"]))
+            tag = school_application_tag(case.score, int(ref_score))
             if tag not in ("chong", "wen"):
                 case.issues.append({
                     "severity": "ERROR",
                     "code": "SCHOOL_BUCKET_MISMATCH",
-                    "message": f"「{name}」投档均分{rec['avgMin3y']}分，与{case.score}分差{rec['avgMin3y']-case.score}，不应在冲/稳",
+                    "message": f"「{name}」普通批参考分{ref_score}，与{case.score}分差{ref_score-case.score}，不应在冲/稳",
                 })
+
+        if case.province == "广西" and case.score == 634:
+            bad = [
+                n for n in case.schools_chong + case.schools_wen + case.schools_bao
+                if n in ("北京大学", "清华大学")
+            ]
+            if bad:
+                case.issues.append({
+                    "severity": "ERROR",
+                    "code": "GX634_C9_FORBIDDEN",
+                    "message": f"广西634分不得推荐清北: {bad}",
+                })
+
+    if not province_admission_verified(admission_index, case.province) and (
+        case.schools_chong or case.schools_wen or case.schools_bao
+    ):
+        case.issues.append({
+            "severity": "ERROR",
+            "code": "UNVERIFIED_HAS_RECOMMENDATION",
+            "message": f"{case.province} 未验收官方投档，不应输出院校冲稳保",
+        })
+
+    if case.has_admission is False and case.province in (
+        (admission_index or {}).get("meta", {}).get("verifiedProvinces") or []
+    ):
+        case.issues.append({
+            "severity": "WARN",
+            "code": "VERIFIED_NO_INDEX_TRACK",
+            "message": f"{case.province}{case.track} 已验收但当前科类无索引",
+        })
 
     if case.province == "北京" and case.score == 587:
         bad = [n for n in case.schools_chong + case.schools_wen if n == "安徽建筑大学"]
@@ -485,6 +532,9 @@ tier_order: list[str] = []
 
 
 def main() -> None:
+    import sys
+
+    strict = "--strict" in sys.argv
     global tier_order
     manifest = load_json(DATA / "manifest.json")
     catalog = load_json(DATA / "major_catalog.json")
@@ -644,6 +694,10 @@ def main() -> None:
     if admission_index:
         bj_count = len(admission_index.get("provinces", {}).get("北京", {}).get("综合类", {}))
         print(f"\n投档索引：北京综合类 {bj_count} 校")
+
+    if strict and errors > 0:
+        print(f"\n[STRICT] {errors} ERROR(s) — exit 1")
+        sys.exit(1)
 
 
 if __name__ == "__main__":

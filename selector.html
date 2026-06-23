@@ -721,11 +721,13 @@
       const prov = provinceEl.value;
       const track = admissionTrackKey();
       const count = Object.keys(state.admissionIndex?.provinces?.[prov]?.[track] || {}).length;
+      const statusLabel = admissionStatusLabel(prov);
       if (!meta) {
-        el.textContent = '院校投档索引未加载：请运行 scripts/scrape_gaokao_cn.py 与 scripts/build_admission_index.py';
+        el.textContent = '院校投档索引未加载：请运行 scripts/build_admission_index.py';
         return;
       }
-      el.textContent = `院校投档：${meta.provider || ADMISSION_SOURCE.provider}（${meta.api || ADMISSION_SOURCE.api}）· ${prov}${track}已归档 ${count} 校 · 索引更新 ${meta.generatedAt || '—'} · QS：QS World University Rankings 2025 · 专业趋势：major_catalog.json / career_sandbox`;
+      const portal = meta.examPortals?.[prov] || ADMISSION_SOURCE.url;
+      el.innerHTML = `院校投档：${meta.provider || ADMISSION_SOURCE.provider} · 数据状态：<strong>${statusLabel}</strong> · ${prov}${track}已归档 ${count} 校 · 索引更新 ${meta.generatedAt || '—'} · <a href="${portal}" target="_blank" rel="noopener">省考试院</a> · QS：QS World University Rankings 2025 · 专业趋势：major_catalog.json / career_sandbox`;
     }
 
     async function loadProvince(name) {
@@ -1065,7 +1067,8 @@
       setScore(defaultScore, false);
       const srcLabel = (trackData.source || '').startsWith('eol') ? 'eol.cn 真实爬取' : '模型估算';
       const gapHint = isDataGap(trackData) ? ' · ⚠️ 数据源缺失/估算' : '';
-      $('dataSource').textContent = `数据来源：${srcLabel} · ${provinceEl.value} ${yearEl.value} ${trackEl.value}${gapHint}`;
+      const admHint = ` · 投档：${admissionStatusLabel(provinceEl.value)}`;
+      $('dataSource').textContent = `数据来源：${srcLabel} · ${provinceEl.value} ${yearEl.value} ${trackEl.value}${gapHint}${admHint}`;
       renderConfidence(trackData);
       drawChart();
     }
@@ -1181,6 +1184,36 @@
       return '物理类';
     }
 
+    function admissionRecommendScore(rec) {
+      if (!rec) return null;
+      if (rec.latestFloor != null) return rec.latestFloor;
+      const years = rec.yearsRegular || rec.years;
+      if (years && Object.keys(years).length) {
+        const vals = Object.values(years).map(Number);
+        return Math.round(vals.reduce((a, b) => a + b, 0) / vals.length);
+      }
+      return rec.avgMin3y ?? null;
+    }
+
+    function provinceAdmissionStatus(province) {
+      const st = state.admissionIndex?.meta?.provinceStatus?.[province];
+      if (st?.status === 'verified') return 'verified';
+      if (st?.status) return st.status;
+      const verified = state.admissionIndex?.meta?.verifiedProvinces || [];
+      return verified.includes(province) ? 'verified' : 'unavailable';
+    }
+
+    function provinceAdmissionVerified(province) {
+      return provinceAdmissionStatus(province) === 'verified';
+    }
+
+    function admissionStatusLabel(province) {
+      const s = provinceAdmissionStatus(province);
+      if (s === 'verified') return '已验收官方投档（普通批）';
+      if (s === 'unavailable') return '投档数据不可用';
+      return '投档数据核验中';
+    }
+
     function lookupAdmission(schoolName) {
       const prov = state.admissionIndex?.provinces?.[provinceEl.value];
       if (!prov) return null;
@@ -1204,15 +1237,18 @@
 
     function enrichSchool(school, score) {
       const rec = lookupAdmission(school.name);
-      if (!rec?.avgMin3y) return null;
-      const tag = schoolApplicationTag(score, rec.avgMin3y);
+      const refScore = admissionRecommendScore(rec);
+      if (refScore == null) return null;
+      const tag = schoolApplicationTag(score, refScore);
       if (!tag) return null;
       return {
         ...school,
-        avgAdmission: rec.avgMin3y,
-        admissionYears: rec.years,
+        avgAdmission: refScore,
+        latestFloor: rec.latestFloor,
+        latestYear: rec.latestYear,
+        admissionYears: rec.yearsRegular || rec.years,
         admissionYearCount: rec.yearCount,
-        admissionSource: rec.source || 'gaokao.cn',
+        admissionSource: rec.source || 'province_exam_portal',
         admissionSourceUrl: rec.sourceUrl || ADMISSION_SOURCE.url,
         appTag: tag,
       };
@@ -1455,9 +1491,9 @@
 
     function enrichAdmissionEntry(schoolName, rec, score) {
       if (rec?.isVocational) return null;
-      const avg = rec?.avgMin3y;
-      if (avg == null) return null;
-      const tag = schoolApplicationTag(score, avg);
+      const refScore = admissionRecommendScore(rec);
+      if (refScore == null) return null;
+      const tag = schoolApplicationTag(score, refScore);
       if (!tag) return null;
       const base = state.manifest.schools.find((s) => s.name === schoolName);
       const school = base
@@ -1466,10 +1502,12 @@
       if (school.tier === '专科') return null;
       return {
         ...school,
-        avgAdmission: avg,
-        admissionYears: rec.years,
+        avgAdmission: refScore,
+        latestFloor: rec.latestFloor,
+        latestYear: rec.latestYear,
+        admissionYears: rec.yearsRegular || rec.years,
         admissionYearCount: rec.yearCount,
-        admissionSource: rec.source || 'gaokao.cn',
+        admissionSource: rec.source || 'province_exam_portal',
         admissionSourceUrl: rec.sourceUrl || ADMISSION_SOURCE.url,
         appTag: tag,
       };
@@ -1483,7 +1521,8 @@
       const vocTierIdx = order.indexOf('专科');
       const track = admissionTrackKey();
       const provMap = state.admissionIndex?.provinces?.[province]?.[track] || {};
-      const hasAdmission = Boolean(Object.keys(provMap).length);
+      const verified = provinceAdmissionVerified(province);
+      const hasAdmission = verified && Boolean(Object.keys(provMap).length);
 
       const eligible = Object.entries(provMap)
         .map(([name, rec]) => enrichAdmissionEntry(name, rec, score))
@@ -1513,8 +1552,10 @@
         vocationalTotal: provinceVoc.length,
         province,
         hasAdmission,
-        admissionTrack: admissionTrackKey(),
+        admissionVerified: verified,
+        admissionStatus: provinceAdmissionStatus(province),
         dataGap: isDataGap(getYearTrackData()),
+        admissionTrack: admissionTrackKey(),
       };
     }
 
@@ -1609,12 +1650,16 @@
     }
 
     function renderSchoolRow(s) {
-      const yearsLine = s.admissionYears ? formatAdmissionYears(s.admissionYears) : '';
-      const avgLine = s.avgAdmission != null
-        ? ` · 近三年投档均分 ${s.avgAdmission}${yearsLine ? `（${yearsLine}）` : ''}`
+      const floorLine = s.latestFloor != null && s.latestYear
+        ? ` · 普通批最低 ${s.latestFloor} 分（${s.latestYear}年）`
+        : s.avgAdmission != null
+          ? ` · 普通批参考 ${s.avgAdmission} 分`
+          : '';
+      const histLine = s.admissionYears && Object.keys(s.admissionYears).length > 1
+        ? ` · 历年：${formatAdmissionYears(s.admissionYears)}`
         : '';
       const srcLine = s.admissionSource
-        ? `<div class="admission-src">数据来源：${s.admissionSource} · <a href="${s.admissionSourceUrl}" target="_blank" rel="noopener">查阅</a></div>`
+        ? `<div class="admission-src">数据来源：${s.admissionSource} · <a href="${s.admissionSourceUrl}" target="_blank" rel="noopener">查阅官方</a></div>`
         : '';
       const tagHtml = s.appTag
         ? `<span class="school-tag ${s.appTag.key}">${s.appTag.label}</span>`
@@ -1623,7 +1668,7 @@
         <div class="school-item">
           <div>
             <div class="name">${s.name}</div>
-            <div class="tags">${(s.tags || []).join(' · ')}${avgLine}</div>
+            <div class="tags">${(s.tags || []).join(' · ')}${floorLine}${histLine}</div>
             ${srcLine}
           </div>
           ${tagHtml}
@@ -1633,13 +1678,19 @@
     function renderSchoolList(result) {
       const {
         chong, wen, bao, undergrad, vocational, vocationalTotal, province,
-        dataGap, hasAdmission,
+        dataGap, hasAdmission, admissionVerified, admissionStatus,
       } = result;
+      if (!admissionVerified) {
+        const statusText = admissionStatus === 'unavailable'
+          ? '本省投档数据不可用'
+          : '本省投档数据核验中';
+        return `<div class="hint">数据状态：${statusText}。当前仅展示一分一段与批次线，冲稳保院校推荐暂不开放。验收通过后将启用普通批最低投档分推荐。</div>`;
+      }
       if (!hasAdmission) {
-        return '<div class="hint">当前省份/科类尚无 gaokao.cn 投档归档数据，无法生成院校冲稳保推荐。请先运行数据爬取与索引构建脚本。</div>';
+        return '<div class="hint">当前省份/科类尚无已验收的官方普通批投档数据，无法生成院校冲稳保推荐。</div>';
       }
       if (!undergrad.length && !vocational.length) {
-        return '<div class="hint">当前分数下无院校落入冲/稳/保区间（投档均分与您的分数差需在：冲刺 +5~+15、稳妥 -12~+5、保底 -30~-12）。请调整分数或等待投档数据更新。</div>';
+        return '<div class="hint">当前分数下无院校落入冲/稳/保区间（普通批最低分与您的分数差需在：冲刺 +5~+15、稳妥 -12~+5、保底 -30~-12）。请调整分数或等待投档数据更新。</div>';
       }
       let html = '';
       if (dataGap) {

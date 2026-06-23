@@ -20,10 +20,11 @@ ROOT = Path(__file__).resolve().parents[1]
 sys.path.insert(0, str(ROOT / "scripts"))
 
 from admission_filter_lib import (
-    filter_admission_row,
+    filter_regular_admission_row,
     normalize_track,
     parse_min_score,
-    select_admission_archive_files,
+    regular_floor_from_rows,
+    select_official_archive_files,
     track_key_from_filename,
 )
 from portals.registry import get_parser, list_provinces
@@ -33,28 +34,27 @@ TOLERANCE = 0  # 官方 floor 须与归档 floor 完全一致
 
 
 def floor_by_school(rows: list[dict[str, Any]]) -> dict[str, int]:
-    out: dict[str, int] = {}
+    """同年同校普通批专业组 floor（与 build_admission_index 一致）。"""
+    by_school: dict[str, list[dict[str, Any]]] = defaultdict(list)
     for r in rows:
         school = (r.get("schoolName") or "").strip()
-        score = parse_min_score(r.get("minScore"))
-        if not school or score is None:
-            continue
-        prev = out.get(school)
-        if prev is None or score < prev:
-            out[school] = score
+        if school:
+            by_school[school].append(r)
+    out: dict[str, int] = {}
+    for school, school_rows in by_school.items():
+        floor = regular_floor_from_rows(school_rows)
+        if floor is not None:
+            out[school] = floor
     return out
 
 
 def load_archive_floors(province: str, year: int, track: str) -> dict[str, int]:
     rows: list[dict[str, Any]] = []
     suffix = "综合" if track == "综合类" else track
-    for pattern in (
-        REF_DIR / f"admissions_{province}_{year}_{suffix}.json",
-        REF_DIR / f"admissions_{province}_{year}_{suffix}_official.json",
-    ):
-        if pattern.exists():
-            rows.extend(json.loads(pattern.read_text(encoding="utf-8")))
-    filtered = [r for r in rows if filter_admission_row(province, r)]
+    pattern = REF_DIR / f"admissions_{province}_{year}_{suffix}_official.json"
+    if pattern.exists():
+        rows.extend(json.loads(pattern.read_text(encoding="utf-8")))
+    filtered = [r for r in rows if filter_regular_admission_row(province, r)]
     track_rows = [r for r in filtered if normalize_track(r.get("track"), track) == track]
     return floor_by_school(track_rows)
 

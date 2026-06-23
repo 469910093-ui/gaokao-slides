@@ -1,9 +1,10 @@
 #!/usr/bin/env python3
-"""从投档 JSON 构建「省×科类×院校」近三年最低投档均分索引（经主批次与分数校验）。"""
+"""从官方投档 JSON 构建「省×科类×院校」普通批最低投档索引。"""
 
 from __future__ import annotations
 
 import json
+import subprocess
 import sys
 import time
 from collections import defaultdict
@@ -17,10 +18,11 @@ if str(ROOT / "scripts") not in sys.path:
 from admission_filter_lib import (  # noqa: E402
     OFFICIAL_REFERENCES,
     PROVINCE_EXAM_PORTALS,
-    filter_admission_row,
+    filter_regular_admission_row,
     normalize_track,
-    parse_min_score,
-    select_admission_archive_files,
+    official_provinces_in_ref,
+    regular_floor_from_rows,
+    select_official_archive_files,
     track_key_from_filename,
 )
 
@@ -29,16 +31,14 @@ OUT_JSON = REF_DIR / "admission_index.json"
 OUT_EMBED = ROOT / "data" / "admission-index-embed.js"
 
 SOURCE_META = {
-    "provider": "阳光高考 / 各省招生考试院（经掌上高考接口归档并校验）",
-    "crawlApi": "https://api.zjzw.cn/web/api/",
-    "crawlPage": "https://www.gaokao.cn/control-line",
+    "provider": "各省招生考试院官方投档（普通批专业组，已剔除专项计划）",
+    "crawlApi": None,
+    "crawlPage": None,
     "chsiUrl": OFFICIAL_REFERENCES["chsi"]["url"],
     "method": (
-        "仅收录本省普通本科主批次（如北京本科批、浙江平行录取一段）投档行；"
-        "剔除外省批次与 min>合理上限的异常分；"
-        "每校每年取各专业组投档最低分中的最小值（floor）；"
-        "近三年有数据的年份取 floor 算术平均，记为 avgMin3y；"
-        "同省同年同科类多份归档时仅保留 `_综合.json`（弃用旧版 `_综合类.json`）。"
+        "仅收录 _official.json；剔除国家/地方专项、定向、预科、中外合作等非普通志愿计划；"
+        "同年同校在普通专业组中取最低投档分，并剔除组内极低值；"
+        "推荐参考分优先使用最近一年普通批最低分 latestFloor。"
     ),
     "disclaimer": OFFICIAL_REFERENCES["note"],
     "examPortals": PROVINCE_EXAM_PORTALS,
@@ -47,17 +47,17 @@ SOURCE_META = {
 
 def build_index() -> dict[str, Any]:
     # province -> track -> school -> year -> floor
-    raw: dict[str, dict[str, dict[str, dict[int, int]]]] = defaultdict(
-        lambda: defaultdict(lambda: defaultdict(dict))
+    raw_rows: dict[str, dict[str, dict[str, dict[int, list[dict[str, Any]]]]]] = defaultdict(
+        lambda: defaultdict(lambda: defaultdict(lambda: defaultdict(list)))
     )
-    meta: dict[str, dict[str, dict[str, dict[str, Any]]]] = defaultdict(
-        lambda: defaultdict(lambda: defaultdict(dict))
+    source_urls: dict[str, dict[str, dict[str, str]]] = defaultdict(
+        lambda: defaultdict(dict)
     )
     file_count = 0
     row_count = 0
     skipped = 0
 
-    archive_files = select_admission_archive_files(REF_DIR)
+    archive_files = select_official_archive_files(REF_DIR)
     for path in archive_files:
         file_count += 1
         rows = json.loads(path.read_text(encoding="utf-8"))
@@ -66,58 +66,64 @@ def build_index() -> dict[str, Any]:
             province = (row.get("province") or "").strip()
             if not province:
                 continue
-            if not filter_admission_row(province, row):
+            if not filter_regular_admission_row(province, row):
                 skipped += 1
                 continue
             school = (row.get("schoolName") or "").strip()
             year = row.get("year")
-            score = parse_min_score(row.get("minScore"))
-            if not school or not year or score is None:
+            if not school or not year:
                 skipped += 1
                 continue
             t_key = normalize_track(row.get("track"), file_track)
             y = int(year)
-            prev = raw[province][t_key][school].get(y)
-            if prev is None or score < prev:
-                raw[province][t_key][school][y] = score
-            sm = meta[province][t_key][school]
-            level = str(row.get("level") or "")
-            batch = str(row.get("batch") or "")
-            if level:
-                sm["levels"] = sm.get("levels", set()) | {level}
-            if batch:
-                sm["batches"] = sm.get("batches", set()) | {batch}
-            if row.get("f985") == 1:
-                sm["tierRank"] = min(sm.get("tierRank", 9), 0)
-            elif row.get("f211") == 1:
-                sm["tierRank"] = min(sm.get("tierRank", 9), 2)
-            elif str(row.get("dualClass") or "") == "双一流":
-                sm["tierRank"] = min(sm.get("tierRank", 9), 3)
+            raw_rows[province][t_key][school][y].append(row)
+            if row.get("sourceUrl"):
+                source_urls[province][t_key][school] = str(row["sourceUrl"])
             row_count += 1
 
     tier_by_rank = ["985", "211", "双一流", "一本", "二本", "专科"]
-
     provinces_out: dict[str, Any] = {}
-    for province, tracks in raw.items():
+    official_provs = official_provinces_in_ref(REF_DIR)
+
+    for province, tracks in raw_rows.items():
         provinces_out[province] = {}
         portal = PROVINCE_EXAM_PORTALS.get(province, OFFICIAL_REFERENCES["chsi"]["url"])
         for track, schools in tracks.items():
             provinces_out[province][track] = {}
             for school, years_map in schools.items():
-                years_sorted = dict(sorted(years_map.items()))
-                floor_vals = list(years_sorted.values())
-                if not floor_vals:
+                years_regular: dict[int, int] = {}
+                for y, y_rows in years_map.items():
+                    floor = regular_floor_from_rows(y_rows)
+                    if floor is not None:
+                        years_regular[y] = floor
+                if not years_regular:
                     continue
-                sm = meta[province][track].get(school, {})
-                levels = sm.get("levels") or set()
-                batches = sm.get("batches") or set()
-                only_voc = bool(levels) and all("专科" in x for x in levels)
-                only_voc = only_voc or (
-                    bool(batches) and all("专科" in x for x in batches) and "本科" not in "".join(batches)
-                )
-                tr = sm.get("tierRank", 9)
+                years_sorted = dict(sorted(years_regular.items()))
+                floor_vals = list(years_sorted.values())
+                latest_year = max(years_sorted)
+                latest_floor = years_sorted[latest_year]
+                sm_levels = set()
+                sm_batches = set()
+                tr = 9
+                for y_rows in years_map.values():
+                    for row in y_rows:
+                        if row.get("level"):
+                            sm_levels.add(str(row["level"]))
+                        if row.get("batch"):
+                            sm_batches.add(str(row["batch"]))
+                        if row.get("f985") == 1:
+                            tr = min(tr, 0)
+                        elif row.get("f211") == 1:
+                            tr = min(tr, 2)
+                        elif str(row.get("dualClass") or "") == "双一流":
+                            tr = min(tr, 3)
+                only_voc = bool(sm_levels) and all("专科" in x for x in sm_levels)
                 inferred_tier = tier_by_rank[tr] if tr < len(tier_by_rank) else "二本"
+                school_url = source_urls.get(province, {}).get(track, {}).get(school, portal)
                 provinces_out[province][track][school] = {
+                    "latestFloor": latest_floor,
+                    "latestYear": str(latest_year),
+                    "yearsRegular": {str(y): v for y, v in years_sorted.items()},
                     "avgMin3y": round(sum(floor_vals) / len(floor_vals)),
                     "avgFloor3y": round(sum(floor_vals) / len(floor_vals)),
                     "years": {str(y): v for y, v in years_sorted.items()},
@@ -126,8 +132,23 @@ def build_index() -> dict[str, Any]:
                     "tier": inferred_tier,
                     "isVocational": only_voc,
                     "source": "province_exam_portal",
-                    "sourceUrl": portal,
+                    "sourceUrl": school_url,
                 }
+
+    province_status: dict[str, dict[str, Any]] = {}
+    for prov in sorted(official_provs):
+        tracks = provinces_out.get(prov, {})
+        if tracks and any(tracks[t] for t in tracks):
+            province_status[prov] = {
+                "status": "verified",
+                "tracks": sorted(tracks.keys()),
+                "schoolCount": sum(len(tracks[t]) for t in tracks),
+            }
+        else:
+            province_status[prov] = {
+                "status": "unavailable",
+                "reason": "官方归档无有效普通批投档行",
+            }
 
     return {
         "meta": {
@@ -136,6 +157,11 @@ def build_index() -> dict[str, Any]:
             "files": file_count,
             "rowsParsed": row_count,
             "rowsSkipped": skipped,
+            "officialProvinces": sorted(official_provs),
+            "verifiedProvinces": sorted(
+                p for p, s in province_status.items() if s.get("status") == "verified"
+            ),
+            "provinceStatus": province_status,
             "schoolEntries": sum(
                 len(schools) for tracks in provinces_out.values() for schools in tracks.values()
             ),
@@ -153,16 +179,33 @@ def write_embed(payload: dict[str, Any]) -> None:
     )
 
 
+def run_quality_gate(strict: bool = True) -> int:
+    script = ROOT / "scripts" / "admission_quality_gate.py"
+    cmd = [sys.executable, str(script)]
+    if strict:
+        cmd.append("--strict")
+    print("\n--- admission quality gate ---")
+    return subprocess.call(cmd)
+
+
 def main() -> None:
+    skip_gate = "--skip-gate" in sys.argv
     payload = build_index()
     OUT_JSON.write_text(json.dumps(payload, ensure_ascii=False, indent=2) + "\n", encoding="utf-8")
     write_embed(payload)
     meta = payload["meta"]
     print(
         f"Wrote {OUT_JSON.name}: {meta['schoolEntries']} school entries "
-        f"from {meta['files']} files ({meta['rowsParsed']} rows kept, {meta['rowsSkipped']} skipped)"
+        f"from {meta['files']} official files ({meta['rowsParsed']} rows kept, "
+        f"{meta['rowsSkipped']} skipped)"
     )
+    print(f"Verified provinces: {len(meta['verifiedProvinces'])}/{len(meta['officialProvinces'])}")
     print(f"Wrote {OUT_EMBED.name} ({OUT_EMBED.stat().st_size / 1024:.1f} KB)")
+
+    if not skip_gate:
+        code = run_quality_gate(strict=True)
+        if code != 0:
+            sys.exit(code)
 
 
 if __name__ == "__main__":

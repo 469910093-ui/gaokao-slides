@@ -73,6 +73,44 @@ PROVINCE_EXAM_PORTALS: dict[str, str] = {
 SCORE_MIN = 250
 SCORE_MAX = 750
 
+# 非普通志愿计划（专项/定向/合作等）— 不进推荐索引
+SPECIAL_PLAN_MARKERS = frozenset({
+    "国家专项",
+    "地方专项",
+    "高校专项",
+    "定向",
+    "预科",
+    "民族班",
+    "少数民族",
+    "中外合作",
+    "校企合作",
+    "护理",
+    "单列",
+    "征集志愿",
+    "蒙授",
+    "边防",
+    "内地班",
+    "援疆",
+    "援藏",
+})
+
+C9_SCHOOLS = frozenset({
+    "北京大学",
+    "清华大学",
+    "复旦大学",
+    "上海交通大学",
+    "浙江大学",
+    "南京大学",
+    "中国科学技术大学",
+    "哈尔滨工业大学",
+    "西安交通大学",
+})
+
+# 同年同校普通组内：最低分与次低分差距 ≥ 此值则剔除最低（防漏标专项）
+REGULAR_FLOOR_OUTLIER_GAP = 20
+# 无标注组若低于已标注普通组最低分超过此值，视为专项污染
+REGULAR_UNLABELED_BELOW_LABELED = 15
+
 
 def primary_undergrad_batch(province: str) -> str:
     return PRIMARY_UNDERGRAD_BATCH.get(province, "本科批")
@@ -144,6 +182,47 @@ def row_is_undergrad_primary(province: str, row: dict[str, Any]) -> bool:
     return True
 
 
+def admission_row_text(row: dict[str, Any]) -> str:
+    return " ".join(
+        str(row.get(k) or "")
+        for k in ("groupInfo", "groupName", "batch", "schoolName", "level")
+    )
+
+
+def row_is_special_plan(row: dict[str, Any]) -> bool:
+    text = admission_row_text(row)
+    return any(m in text for m in SPECIAL_PLAN_MARKERS)
+
+
+def drop_low_outliers(scores: list[int], gap: int = REGULAR_FLOOR_OUTLIER_GAP) -> list[int]:
+    """剔除同年同校普通组内的极低值（多为漏标专项）。"""
+    vals = sorted(scores)
+    while len(vals) >= 2 and vals[1] - vals[0] >= gap:
+        vals.pop(0)
+    return vals
+
+
+def regular_floor_from_rows(rows: list[dict[str, Any]]) -> int | None:
+    """同年同校：普通专业组最低投档分（剔除专项与极低值）。"""
+    labeled_regular: list[int] = []
+    other_regular: list[int] = []
+    for row in rows:
+        if row_is_special_plan(row):
+            continue
+        score = parse_min_score(row.get("minScore"))
+        if score is None:
+            continue
+        info = str(row.get("groupInfo") or "").strip()
+        if info:
+            continue
+        other_regular.append(score)
+
+    candidates = drop_low_outliers(other_regular)
+    if not candidates:
+        return None
+    return min(candidates)
+
+
 def filter_admission_row(province: str, row: dict[str, Any]) -> bool:
     if (row.get("province") or "").strip() != province:
         return False
@@ -153,6 +232,28 @@ def filter_admission_row(province: str, row: dict[str, Any]) -> bool:
     if score is None or not is_plausible_score(score, province, row):
         return False
     return True
+
+
+def filter_regular_admission_row(province: str, row: dict[str, Any]) -> bool:
+    """推荐索引用：主批次 + 非专项 + 合理分数。"""
+    if not filter_admission_row(province, row):
+        return False
+    if row_is_special_plan(row):
+        return False
+    return True
+
+
+def recommend_floor_from_entry(entry: dict[str, Any]) -> int | None:
+    """推荐算法使用的普通批参考分（优先最近一年）。"""
+    latest = entry.get("latestFloor")
+    if latest is not None:
+        return int(latest)
+    years = entry.get("yearsRegular") or entry.get("years")
+    if years:
+        vals = [int(v) for v in years.values()]
+        return round(sum(vals) / len(vals))
+    legacy = entry.get("avgMin3y")
+    return int(legacy) if legacy is not None else None
 
 
 def parse_admission_file_key(fname: str) -> tuple[str, int, str] | None:
@@ -189,3 +290,28 @@ def select_admission_archive_files(ref_dir) -> list:
         if prev is None or admission_file_priority(path.name) < admission_file_priority(prev.name):
             chosen[key] = path
     return sorted(chosen.values(), key=lambda p: p.name)
+
+
+def select_official_archive_files(ref_dir) -> list:
+    """推荐索引仅使用各省考试院 _official.json。"""
+    from pathlib import Path
+
+    ref = Path(ref_dir)
+    chosen: dict[tuple[str, int, str], object] = {}
+    for path in sorted(ref.glob("admissions_*_official.json")):
+        key = parse_admission_file_key(path.name)
+        if key is None:
+            continue
+        chosen[key] = path
+    return sorted(chosen.values(), key=lambda p: p.name)
+
+
+def official_provinces_in_ref(ref_dir) -> set[str]:
+    from pathlib import Path
+
+    out: set[str] = set()
+    for path in Path(ref_dir).glob("admissions_*_official.json"):
+        key = parse_admission_file_key(path.name)
+        if key:
+            out.add(key[0])
+    return out

@@ -1,0 +1,46 @@
+{
+  "recommendation": [
+    {
+      "province": "广西",
+      "track": "历史类",
+      "score": 634,
+      "mustNotRecommend": ["北京大学", "清华大学"]
+    },
+    {
+      "province": "广西",
+      "track": "物理类",
+      "score": 634,
+      "mustNotRecommend": ["北京大学", "清华大学"]
+    }
+  ],
+  "floorMin": [
+    {
+      "province": "广西",
+      "track": "历史类",
+      "school": "北京大学",
+      "year": 2025,
+      "minScore": 650
+    },
+    {
+      "province": "广西",
+      "track": "历史类",
+      "school": "清华大学",
+      "year": 2025,
+      "minScore": 655
+    },
+    {
+      "province": "广西",
+      "track": "物理类",
+      "school": "北京大学",
+      "year": 2025,
+      "minScore": 665
+    },
+    {
+      "province": "广西",
+      "track": "物理类",
+      "school": "清华大学",
+      "year": 2025,
+      "minScore": 665
+    }
+  ]
+}
