@@ -1,125 +1,23 @@
 {
-  "generatedAt": "2026-06-23 19:37:19",
+  "generatedAt": "2026-06-23 20:48:53",
   "results": [
     {
-      "province": "江苏",
-      "year": 2023,
-      "track": "物理类",
-      "rows": 2455,
-      "schools": 992,
-      "file": "admissions_江苏_2023_物理类_official.json",
-      "errors": []
-    },
-    {
-      "province": "江苏",
-      "year": 2023,
-      "track": "历史类",
-      "rows": 1208,
-      "schools": 828,
-      "file": "admissions_江苏_2023_历史类_official.json",
-      "errors": []
-    },
-    {
-      "province": "江苏",
+      "province": "河南",
       "year": 2024,
-      "track": "物理类",
-      "rows": 2737,
-      "schools": 1014,
-      "file": "admissions_江苏_2024_物理类_official.json",
-      "errors": []
+      "rows": 0,
+      "errors": [
+        "https://datacenter.haeea.cn/PagePZQuery/ShowPZTDTJ.aspx?yearTip=2024&pc=1&kl=5: 0 rows (haeea_datacenter_html)",
+        "https://datacenter.haeea.cn/PagePZQuery/ShowPZTDTJ.aspx?yearTip=2024&pc=1&kl=1: Page.goto: net::ERR_NAME_NOT_RESOLVED at https://gaokao.haedu.cn/501/552/2024/0721/135558.html\nCall log:\n  - navigating to \"https://gaokao.haedu.cn/501/552/2024/0721/135558.html\", waiting until \"domcontentloaded\"\n"
+      ]
     },
     {
-      "province": "江苏",
-      "year": 2024,
-      "track": "历史类",
-      "rows": 1238,
-      "schools": 829,
-      "file": "admissions_江苏_2024_历史类_official.json",
-      "errors": []
-    },
-    {
-      "province": "江苏",
-      "year": 2025,
-      "track": "历史类",
-      "rows": 1182,
-      "schools": 787,
-      "file": "admissions_江苏_2025_历史类_official.json",
-      "errors": []
-    },
-    {
-      "province": "江苏",
-      "year": 2025,
-      "track": "物理类",
-      "rows": 2798,
-      "schools": 1046,
-      "file": "admissions_江苏_2025_物理类_official.json",
-      "errors": []
-    },
-    {
-      "province": "陕西",
-      "year": 2023,
-      "track": "历史类",
-      "rows": 771,
-      "schools": 771,
-      "file": "admissions_陕西_2023_历史类_official.json",
-      "errors": []
-    },
-    {
-      "province": "陕西",
-      "year": 2023,
-      "track": "物理类",
-      "rows": 938,
-      "schools": 938,
-      "file": "admissions_陕西_2023_物理类_official.json",
-      "errors": []
-    },
-    {
-      "province": "陕西",
-      "year": 2024,
-      "track": "历史类",
-      "rows": 793,
-      "schools": 793,
-      "file": "admissions_陕西_2024_历史类_official.json",
-      "errors": []
-    },
-    {
-      "province": "陕西",
-      "year": 2024,
-      "track": "物理类",
-      "rows": 967,
-      "schools": 967,
-      "file": "admissions_陕西_2024_物理类_official.json",
-      "errors": []
-    },
-    {
-      "province": "陕西",
+      "province": "河南",
       "year": 2025,
       "rows": 0,
-      "errors": []
-    },
-    {
-      "province": "浙江",
-      "year": 2023,
-      "rows": 0,
-      "errors": []
-    },
-    {
-      "province": "浙江",
-      "year": 2024,
-      "track": "综合类",
-      "rows": 17171,
-      "schools": 1258,
-      "file": "admissions_浙江_2024_综合_official.json",
-      "errors": []
-    },
-    {
-      "province": "浙江",
-      "year": 2025,
-      "track": "综合类",
-      "rows": 17816,
-      "schools": 1291,
-      "file": "admissions_浙江_2025_综合_official.json",
-      "errors": []
+      "errors": [
+        "https://datacenter.haeea.cn/PagePZQuery/ShowPZTDTJ.aspx?yearTip=2025&pc=1&kl=5: 0 rows (haeea_datacenter_html)",
+        "https://datacenter.haeea.cn/PagePZQuery/ShowPZTDTJ.aspx?yearTip=2025&pc=1&kl=1: 0 rows (haeea_datacenter_html)"
+      ]
     }
   ]
 }

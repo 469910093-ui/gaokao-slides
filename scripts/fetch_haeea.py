@@ -43,11 +43,16 @@ def load_playwright_cookies() -> list[dict[str, Any]]:
     return out
 
 
-def fetch_haeea_datacenter_html(url: str, timeout_ms: int = 90000) -> str:
+def fetch_haeea_datacenter_html(
+    url: str,
+    timeout_ms: int = 90000,
+    referer: str | None = None,
+) -> str:
     """经 gaokao.haedu.cn 预热 + 可选 Cookie 访问 datacenter 投档统计页。"""
     from playwright.sync_api import sync_playwright
 
     cookies = load_playwright_cookies()
+    warmup = referer or WARMUP_URL
     with sync_playwright() as p:
         browser = p.chromium.launch(headless=True)
         context = browser.new_context(
@@ -60,7 +65,7 @@ def fetch_haeea_datacenter_html(url: str, timeout_ms: int = 90000) -> str:
         if cookies:
             context.add_cookies(cookies)
         page = context.new_page()
-        page.goto(WARMUP_URL, wait_until="domcontentloaded", timeout=timeout_ms)
+        page.goto(warmup, wait_until="domcontentloaded", timeout=timeout_ms)
         page.goto(url, wait_until="networkidle", timeout=timeout_ms)
         html = page.content()
         browser.close()

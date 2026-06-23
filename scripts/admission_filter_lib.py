@@ -204,23 +204,35 @@ def drop_low_outliers(scores: list[int], gap: int = REGULAR_FLOOR_OUTLIER_GAP) -
 
 def regular_floor_from_rows(rows: list[dict[str, Any]]) -> int | None:
     """同年同校：普通专业组最低投档分（剔除专项与极低值）。"""
-    labeled_regular: list[int] = []
-    other_regular: list[int] = []
+    labeled: list[int] = []
+    unlabeled: list[int] = []
     for row in rows:
         if row_is_special_plan(row):
             continue
         score = parse_min_score(row.get("minScore"))
         if score is None:
             continue
-        info = str(row.get("groupInfo") or "").strip()
+        info = str(row.get("groupInfo") or row.get("groupName") or "").strip()
         if info:
-            continue
-        other_regular.append(score)
+            labeled.append(score)
+        else:
+            unlabeled.append(score)
 
-    candidates = drop_low_outliers(other_regular)
-    if not candidates:
-        return None
-    return min(candidates)
+    if labeled:
+        candidates = drop_low_outliers(labeled)
+        if not candidates:
+            return None
+        floor = min(candidates)
+        if unlabeled:
+            unl = drop_low_outliers(unlabeled)
+            if unl:
+                low_unl = min(unl)
+                if floor - low_unl <= REGULAR_UNLABELED_BELOW_LABELED:
+                    floor = min(floor, low_unl)
+        return floor
+
+    candidates = drop_low_outliers(unlabeled)
+    return min(candidates) if candidates else None
 
 
 def filter_admission_row(province: str, row: dict[str, Any]) -> bool:

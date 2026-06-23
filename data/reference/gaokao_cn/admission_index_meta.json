@@ -38,7 +38,7 @@
     "宁夏": "https://www.nxjyks.cn/",
     "新疆": "https://www.xjzk.gov.cn/"
   },
-  "generatedAt": "2026-06-23 20:21:35",
+  "generatedAt": "2026-06-23 20:52:57",
   "files": 34,
   "rowsParsed": 188466,
   "rowsSkipped": 10562,
@@ -57,9 +57,15 @@
   ],
   "verifiedProvinces": [
     "上海",
+    "北京",
     "四川",
+    "山东",
     "广西",
     "江苏",
+    "河北",
+    "浙江",
+    "湖南",
+    "贵州",
     "陕西"
   ],
   "provinceStatus": {
@@ -68,11 +74,14 @@
       "tracks": [
         "综合类"
       ],
-      "schoolCount": 633
+      "schoolCount": 646
     },
     "北京": {
-      "status": "unavailable",
-      "reason": "官方归档无有效普通批投档行"
+      "status": "verified",
+      "tracks": [
+        "综合类"
+      ],
+      "schoolCount": 622
     },
     "四川": {
       "status": "verified",
@@ -83,8 +92,11 @@
       "schoolCount": 693
     },
     "山东": {
-      "status": "unavailable",
-      "reason": "官方归档无有效普通批投档行"
+      "status": "verified",
+      "tracks": [
+        "综合类"
+      ],
+      "schoolCount": 1161
     },
     "广西": {
       "status": "verified",
@@ -92,7 +104,7 @@
         "历史类",
         "物理类"
       ],
-      "schoolCount": 2027
+      "schoolCount": 2028
     },
     "江苏": {
       "status": "verified",
@@ -100,23 +112,38 @@
         "历史类",
         "物理类"
       ],
-      "schoolCount": 14
+      "schoolCount": 2008
     },
     "河北": {
-      "status": "unavailable",
-      "reason": "官方归档无有效普通批投档行"
+      "status": "verified",
+      "tracks": [
+        "历史类",
+        "物理类"
+      ],
+      "schoolCount": 2182
     },
     "浙江": {
-      "status": "unavailable",
-      "reason": "官方归档无有效普通批投档行"
+      "status": "verified",
+      "tracks": [
+        "综合类"
+      ],
+      "schoolCount": 1332
     },
     "湖南": {
-      "status": "unavailable",
-      "reason": "官方归档无有效普通批投档行"
+      "status": "verified",
+      "tracks": [
+        "历史类",
+        "物理类"
+      ],
+      "schoolCount": 1864
     },
     "贵州": {
-      "status": "unavailable",
-      "reason": "官方归档无有效普通批投档行"
+      "status": "verified",
+      "tracks": [
+        "历史类",
+        "物理类"
+      ],
+      "schoolCount": 1726
     },
     "陕西": {
       "status": "verified",
@@ -127,5 +154,5 @@
       "schoolCount": 1814
     }
   },
-  "schoolEntries": 5181
+  "schoolEntries": 16076
 }

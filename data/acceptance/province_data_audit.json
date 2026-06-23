@@ -1,0 +1,758 @@
+{
+  "generatedAt": "2026-06-23 20:52:57",
+  "summary": {
+    "total_provinces": 31,
+    "admission_verified": 11,
+    "admission_official_archive": 11,
+    "recommendation_closed": 20,
+    "segment_verified_or_partial": 2,
+    "segment_model_or_worse": 6
+  },
+  "provinces": [
+    {
+      "province": "北京",
+      "segment_worst_2025": "verified",
+      "segment_tracks": [
+        {
+          "track": "综合类",
+          "confidence": "verified",
+          "source": "eol.cn"
+        }
+      ],
+      "admission_verified": true,
+      "admission_official_archive": true,
+      "admission_status": "verified",
+      "admission_reason": "",
+      "admission_school_count": 622,
+      "official_file_count": 3,
+      "non_official_file_count": 3,
+      "recommendation_open": true,
+      "overall_tier": "L1_双验收"
+    },
+    {
+      "province": "天津",
+      "segment_worst_2025": "validated_structural",
+      "segment_tracks": [
+        {
+          "track": "综合类",
+          "confidence": "validated_structural",
+          "source": "eol.cn+ocr"
+        }
+      ],
+      "admission_verified": false,
+      "admission_official_archive": false,
+      "admission_status": "no_official_archive",
+      "admission_reason": "",
+      "admission_school_count": null,
+      "official_file_count": 0,
+      "non_official_file_count": 2,
+      "recommendation_open": false,
+      "overall_tier": "L4_仅结构真表"
+    },
+    {
+      "province": "河北",
+      "segment_worst_2025": "validated_structural",
+      "segment_tracks": [
+        {
+          "track": "物理类",
+          "confidence": "validated_structural",
+          "source": "eol.cn"
+        },
+        {
+          "track": "历史类",
+          "confidence": "validated_structural",
+          "source": "eol.cn"
+        }
+      ],
+      "admission_verified": true,
+      "admission_official_archive": true,
+      "admission_status": "verified",
+      "admission_reason": "",
+      "admission_school_count": 2182,
+      "official_file_count": 4,
+      "non_official_file_count": 4,
+      "recommendation_open": true,
+      "overall_tier": "L2_投档已验收_一分一段待加强"
+    },
+    {
+      "province": "山西",
+      "segment_worst_2025": "model_estimate",
+      "segment_tracks": [
+        {
+          "track": "物理类",
+          "confidence": "model_estimate",
+          "source": "model"
+        },
+        {
+          "track": "历史类",
+          "confidence": "model_estimate",
+          "source": "model"
+        }
+      ],
+      "admission_verified": false,
+      "admission_official_archive": false,
+      "admission_status": "no_official_archive",
+      "admission_reason": "",
+      "admission_school_count": null,
+      "official_file_count": 0,
+      "non_official_file_count": 4,
+      "recommendation_open": false,
+      "overall_tier": "L5_全未校验"
+    },
+    {
+      "province": "内蒙古",
+      "segment_worst_2025": "validated_structural",
+      "segment_tracks": [
+        {
+          "track": "物理类",
+          "confidence": "validated_structural",
+          "source": "eol.cn"
+        },
+        {
+          "track": "历史类",
+          "confidence": "validated_structural",
+          "source": "eol.cn"
+        }
+      ],
+      "admission_verified": false,
+      "admission_official_archive": false,
+      "admission_status": "no_official_archive",
+      "admission_reason": "",
+      "admission_school_count": null,
+      "official_file_count": 0,
+      "non_official_file_count": 4,
+      "recommendation_open": false,
+      "overall_tier": "L4_仅结构真表"
+    },
+    {
+      "province": "辽宁",
+      "segment_worst_2025": "verified",
+      "segment_tracks": [
+        {
+          "track": "物理类",
+          "confidence": "verified",
+          "source": "eol.cn"
+        },
+        {
+          "track": "历史类",
+          "confidence": "verified",
+          "source": "eol.cn"
+        }
+      ],
+      "admission_verified": false,
+      "admission_official_archive": false,
+      "admission_status": "no_official_archive",
+      "admission_reason": "",
+      "admission_school_count": null,
+      "official_file_count": 0,
+      "non_official_file_count": 4,
+      "recommendation_open": false,
+      "overall_tier": "L4_仅一分一段可信"
+    },
+    {
+      "province": "吉林",
+      "segment_worst_2025": "validated_structural",
+      "segment_tracks": [
+        {
+          "track": "物理类",
+          "confidence": "validated_structural",
+          "source": "eol.cn"
+        },
+        {
+          "track": "历史类",
+          "confidence": "validated_structural",
+          "source": "eol.cn"
+        }
+      ],
+      "admission_verified": false,
+      "admission_official_archive": false,
+      "admission_status": "no_official_archive",
+      "admission_reason": "",
+      "admission_school_count": null,
+      "official_file_count": 0,
+      "non_official_file_count": 3,
+      "recommendation_open": false,
+      "overall_tier": "L4_仅结构真表"
+    },
+    {
+      "province": "黑龙江",
+      "segment_worst_2025": "validated_structural",
+      "segment_tracks": [
+        {
+          "track": "物理类",
+          "confidence": "validated_structural",
+          "source": "eol.cn"
+        },
+        {
+          "track": "历史类",
+          "confidence": "validated_structural",
+          "source": "eol.cn"
+        }
+      ],
+      "admission_verified": false,
+      "admission_official_archive": false,
+      "admission_status": "no_official_archive",
+      "admission_reason": "",
+      "admission_school_count": null,
+      "official_file_count": 0,
+      "non_official_file_count": 2,
+      "recommendation_open": false,
+      "overall_tier": "L4_仅结构真表"
+    },
+    {
+      "province": "上海",
+      "segment_worst_2025": "validated_structural",
+      "segment_tracks": [
+        {
+          "track": "综合类",
+          "confidence": "validated_structural",
+          "source": "eol.cn+ocr"
+        }
+      ],
+      "admission_verified": true,
+      "admission_official_archive": true,
+      "admission_status": "verified",
+      "admission_reason": "",
+      "admission_school_count": 646,
+      "official_file_count": 2,
+      "non_official_file_count": 3,
+      "recommendation_open": true,
+      "overall_tier": "L2_投档已验收_一分一段待加强"
+    },
+    {
+      "province": "江苏",
+      "segment_worst_2025": "partially_verified",
+      "segment_tracks": [
+        {
+          "track": "物理类",
+          "confidence": "partially_verified",
+          "source": "eol.cn"
+        },
+        {
+          "track": "历史类",
+          "confidence": "failed_validation",
+          "source": "eol.cn"
+        }
+      ],
+      "admission_verified": true,
+      "admission_official_archive": true,
+      "admission_status": "verified",
+      "admission_reason": "",
+      "admission_school_count": 2008,
+      "official_file_count": 6,
+      "non_official_file_count": 6,
+      "recommendation_open": true,
+      "overall_tier": "L2_投档已验收_一分一段待加强"
+    },
+    {
+      "province": "浙江",
+      "segment_worst_2025": "validated_structural",
+      "segment_tracks": [
+        {
+          "track": "综合类",
+          "confidence": "validated_structural",
+          "source": "eol.cn"
+        }
+      ],
+      "admission_verified": true,
+      "admission_official_archive": true,
+      "admission_status": "verified",
+      "admission_reason": "",
+      "admission_school_count": 1332,
+      "official_file_count": 2,
+      "non_official_file_count": 3,
+      "recommendation_open": true,
+      "overall_tier": "L2_投档已验收_一分一段待加强"
+    },
+    {
+      "province": "安徽",
+      "segment_worst_2025": "validated_structural",
+      "segment_tracks": [
+        {
+          "track": "物理类",
+          "confidence": "validated_structural",
+          "source": "eol.cn"
+        },
+        {
+          "track": "历史类",
+          "confidence": "validated_structural",
+          "source": "eol.cn"
+        }
+      ],
+      "admission_verified": false,
+      "admission_official_archive": false,
+      "admission_status": "no_official_archive",
+      "admission_reason": "",
+      "admission_school_count": null,
+      "official_file_count": 0,
+      "non_official_file_count": 2,
+      "recommendation_open": false,
+      "overall_tier": "L4_仅结构真表"
+    },
+    {
+      "province": "福建",
+      "segment_worst_2025": "validated_structural",
+      "segment_tracks": [
+        {
+          "track": "物理类",
+          "confidence": "validated_structural",
+          "source": "eol.cn"
+        },
+        {
+          "track": "历史类",
+          "confidence": "validated_structural",
+          "source": "eol.cn"
+        }
+      ],
+      "admission_verified": false,
+      "admission_official_archive": false,
+      "admission_status": "no_official_archive",
+      "admission_reason": "",
+      "admission_school_count": null,
+      "official_file_count": 0,
+      "non_official_file_count": 2,
+      "recommendation_open": false,
+      "overall_tier": "L4_仅结构真表"
+    },
+    {
+      "province": "江西",
+      "segment_worst_2025": "model_estimate",
+      "segment_tracks": [
+        {
+          "track": "物理类",
+          "confidence": "model_estimate",
+          "source": "model"
+        },
+        {
+          "track": "历史类",
+          "confidence": "model_estimate",
+          "source": "model"
+        }
+      ],
+      "admission_verified": false,
+      "admission_official_archive": false,
+      "admission_status": "no_official_archive",
+      "admission_reason": "",
+      "admission_school_count": null,
+      "official_file_count": 0,
+      "non_official_file_count": 2,
+      "recommendation_open": false,
+      "overall_tier": "L5_全未校验"
+    },
+    {
+      "province": "山东",
+      "segment_worst_2025": "validated_structural",
+      "segment_tracks": [
+        {
+          "track": "综合类",
+          "confidence": "validated_structural",
+          "source": "eol.cn"
+        }
+      ],
+      "admission_verified": true,
+      "admission_official_archive": true,
+      "admission_status": "verified",
+      "admission_reason": "",
+      "admission_school_count": 1161,
+      "official_file_count": 3,
+      "non_official_file_count": 3,
+      "recommendation_open": true,
+      "overall_tier": "L2_投档已验收_一分一段待加强"
+    },
+    {
+      "province": "河南",
+      "segment_worst_2025": "validated_structural",
+      "segment_tracks": [
+        {
+          "track": "物理类",
+          "confidence": "verified",
+          "source": "eol.cn"
+        },
+        {
+          "track": "历史类",
+          "confidence": "validated_structural",
+          "source": "eol.cn"
+        }
+      ],
+      "admission_verified": false,
+      "admission_official_archive": false,
+      "admission_status": "no_official_archive",
+      "admission_reason": "",
+      "admission_school_count": null,
+      "official_file_count": 0,
+      "non_official_file_count": 2,
+      "recommendation_open": false,
+      "overall_tier": "L4_仅结构真表"
+    },
+    {
+      "province": "湖北",
+      "segment_worst_2025": "validated_structural",
+      "segment_tracks": [
+        {
+          "track": "物理类",
+          "confidence": "validated_structural",
+          "source": "eol.cn"
+        },
+        {
+          "track": "历史类",
+          "confidence": "validated_structural",
+          "source": "eol.cn"
+        }
+      ],
+      "admission_verified": false,
+      "admission_official_archive": false,
+      "admission_status": "no_official_archive",
+      "admission_reason": "",
+      "admission_school_count": null,
+      "official_file_count": 0,
+      "non_official_file_count": 2,
+      "recommendation_open": false,
+      "overall_tier": "L4_仅结构真表"
+    },
+    {
+      "province": "湖南",
+      "segment_worst_2025": "validated_structural",
+      "segment_tracks": [
+        {
+          "track": "物理类",
+          "confidence": "validated_structural",
+          "source": "eol.cn"
+        },
+        {
+          "track": "历史类",
+          "confidence": "validated_structural",
+          "source": "eol.cn"
+        }
+      ],
+      "admission_verified": true,
+      "admission_official_archive": true,
+      "admission_status": "verified",
+      "admission_reason": "",
+      "admission_school_count": 1864,
+      "official_file_count": 2,
+      "non_official_file_count": 4,
+      "recommendation_open": true,
+      "overall_tier": "L2_投档已验收_一分一段待加强"
+    },
+    {
+      "province": "广东",
+      "segment_worst_2025": "validated_structural",
+      "segment_tracks": [
+        {
+          "track": "物理类",
+          "confidence": "verified_multi_source",
+          "source": "eol.cn"
+        },
+        {
+          "track": "历史类",
+          "confidence": "validated_structural",
+          "source": "eol.cn+ocr"
+        }
+      ],
+      "admission_verified": false,
+      "admission_official_archive": false,
+      "admission_status": "no_official_archive",
+      "admission_reason": "",
+      "admission_school_count": null,
+      "official_file_count": 0,
+      "non_official_file_count": 2,
+      "recommendation_open": false,
+      "overall_tier": "L4_仅结构真表"
+    },
+    {
+      "province": "广西",
+      "segment_worst_2025": "validated_structural",
+      "segment_tracks": [
+        {
+          "track": "物理类",
+          "confidence": "validated_structural",
+          "source": "eol.cn"
+        },
+        {
+          "track": "历史类",
+          "confidence": "validated_structural",
+          "source": "eol.cn"
+        }
+      ],
+      "admission_verified": true,
+      "admission_official_archive": true,
+      "admission_status": "verified",
+      "admission_reason": "",
+      "admission_school_count": 2028,
+      "official_file_count": 4,
+      "non_official_file_count": 6,
+      "recommendation_open": true,
+      "overall_tier": "L2_投档已验收_一分一段待加强"
+    },
+    {
+      "province": "海南",
+      "segment_worst_2025": "validated_structural",
+      "segment_tracks": [
+        {
+          "track": "综合类",
+          "confidence": "validated_structural",
+          "source": "eol.cn"
+        }
+      ],
+      "admission_verified": false,
+      "admission_official_archive": false,
+      "admission_status": "no_official_archive",
+      "admission_reason": "",
+      "admission_school_count": null,
+      "official_file_count": 0,
+      "non_official_file_count": 1,
+      "recommendation_open": false,
+      "overall_tier": "L4_仅结构真表"
+    },
+    {
+      "province": "重庆",
+      "segment_worst_2025": "validated_structural",
+      "segment_tracks": [
+        {
+          "track": "物理类",
+          "confidence": "validated_structural",
+          "source": "eol.cn"
+        },
+        {
+          "track": "历史类",
+          "confidence": "verified",
+          "source": "eol.cn"
+        }
+      ],
+      "admission_verified": false,
+      "admission_official_archive": false,
+      "admission_status": "no_official_archive",
+      "admission_reason": "",
+      "admission_school_count": null,
+      "official_file_count": 0,
+      "non_official_file_count": 2,
+      "recommendation_open": false,
+      "overall_tier": "L4_仅结构真表"
+    },
+    {
+      "province": "四川",
+      "segment_worst_2025": "validated_structural",
+      "segment_tracks": [
+        {
+          "track": "物理类",
+          "confidence": "verified_multi_source",
+          "source": "eol.cn"
+        },
+        {
+          "track": "历史类",
+          "confidence": "validated_structural",
+          "source": "eol.cn"
+        }
+      ],
+      "admission_verified": true,
+      "admission_official_archive": true,
+      "admission_status": "verified",
+      "admission_reason": "",
+      "admission_school_count": 693,
+      "official_file_count": 2,
+      "non_official_file_count": 4,
+      "recommendation_open": true,
+      "overall_tier": "L2_投档已验收_一分一段待加强"
+    },
+    {
+      "province": "贵州",
+      "segment_worst_2025": "validated_structural",
+      "segment_tracks": [
+        {
+          "track": "物理类",
+          "confidence": "validated_structural",
+          "source": "eol.cn+ocr"
+        },
+        {
+          "track": "历史类",
+          "confidence": "validated_structural",
+          "source": "eol.cn+ocr"
+        }
+      ],
+      "admission_verified": true,
+      "admission_official_archive": true,
+      "admission_status": "verified",
+      "admission_reason": "",
+      "admission_school_count": 1726,
+      "official_file_count": 2,
+      "non_official_file_count": 4,
+      "recommendation_open": true,
+      "overall_tier": "L2_投档已验收_一分一段待加强"
+    },
+    {
+      "province": "云南",
+      "segment_worst_2025": "validated_structural",
+      "segment_tracks": [
+        {
+          "track": "物理类",
+          "confidence": "validated_structural",
+          "source": "eol.cn+ocr"
+        },
+        {
+          "track": "历史类",
+          "confidence": "validated_structural",
+          "source": "eol.cn+ocr"
+        }
+      ],
+      "admission_verified": false,
+      "admission_official_archive": false,
+      "admission_status": "no_official_archive",
+      "admission_reason": "",
+      "admission_school_count": null,
+      "official_file_count": 0,
+      "non_official_file_count": 2,
+      "recommendation_open": false,
+      "overall_tier": "L4_仅结构真表"
+    },
+    {
+      "province": "西藏",
+      "segment_worst_2025": "model_estimate",
+      "segment_tracks": [
+        {
+          "track": "物理类",
+          "confidence": "model_estimate",
+          "source": "model"
+        },
+        {
+          "track": "历史类",
+          "confidence": "model_estimate",
+          "source": "model"
+        }
+      ],
+      "admission_verified": false,
+      "admission_official_archive": false,
+      "admission_status": "no_official_archive",
+      "admission_reason": "",
+      "admission_school_count": null,
+      "official_file_count": 0,
+      "non_official_file_count": 2,
+      "recommendation_open": false,
+      "overall_tier": "L5_全未校验"
+    },
+    {
+      "province": "陕西",
+      "segment_worst_2025": "partially_verified",
+      "segment_tracks": [
+        {
+          "track": "物理类",
+          "confidence": "partially_verified",
+          "source": "eol.cn"
+        },
+        {
+          "track": "历史类",
+          "confidence": "failed_validation",
+          "source": "eol.cn"
+        }
+      ],
+      "admission_verified": true,
+      "admission_official_archive": true,
+      "admission_status": "verified",
+      "admission_reason": "",
+      "admission_school_count": 1814,
+      "official_file_count": 4,
+      "non_official_file_count": 4,
+      "recommendation_open": true,
+      "overall_tier": "L2_投档已验收_一分一段待加强"
+    },
+    {
+      "province": "甘肃",
+      "segment_worst_2025": "validated_structural",
+      "segment_tracks": [
+        {
+          "track": "物理类",
+          "confidence": "validated_structural",
+          "source": "eol.cn"
+        },
+        {
+          "track": "历史类",
+          "confidence": "validated_structural",
+          "source": "eol.cn"
+        }
+      ],
+      "admission_verified": false,
+      "admission_official_archive": false,
+      "admission_status": "no_official_archive",
+      "admission_reason": "",
+      "admission_school_count": null,
+      "official_file_count": 0,
+      "non_official_file_count": 2,
+      "recommendation_open": false,
+      "overall_tier": "L4_仅结构真表"
+    },
+    {
+      "province": "青海",
+      "segment_worst_2025": "validated_structural",
+      "segment_tracks": [
+        {
+          "track": "物理类",
+          "confidence": "validated_structural",
+          "source": "eol.cn"
+        },
+        {
+          "track": "历史类",
+          "confidence": "validated_structural",
+          "source": "eol.cn"
+        }
+      ],
+      "admission_verified": false,
+      "admission_official_archive": false,
+      "admission_status": "no_official_archive",
+      "admission_reason": "",
+      "admission_school_count": null,
+      "official_file_count": 0,
+      "non_official_file_count": 2,
+      "recommendation_open": false,
+      "overall_tier": "L4_仅结构真表"
+    },
+    {
+      "province": "宁夏",
+      "segment_worst_2025": "validated_structural",
+      "segment_tracks": [
+        {
+          "track": "物理类",
+          "confidence": "validated_structural",
+          "source": "eol.cn"
+        },
+        {
+          "track": "历史类",
+          "confidence": "validated_structural",
+          "source": "eol.cn"
+        }
+      ],
+      "admission_verified": false,
+      "admission_official_archive": false,
+      "admission_status": "no_official_archive",
+      "admission_reason": "",
+      "admission_school_count": null,
+      "official_file_count": 0,
+      "non_official_file_count": 2,
+      "recommendation_open": false,
+      "overall_tier": "L4_仅结构真表"
+    },
+    {
+      "province": "新疆",
+      "segment_worst_2025": "model_estimate",
+      "segment_tracks": [
+        {
+          "track": "物理类",
+          "confidence": "model_estimate",
+          "source": "model"
+        },
+        {
+          "track": "历史类",
+          "confidence": "model_estimate",
+          "source": "model"
+        }
+      ],
+      "admission_verified": false,
+      "admission_official_archive": false,
+      "admission_status": "no_official_archive",
+      "admission_reason": "",
+      "admission_school_count": null,
+      "official_file_count": 0,
+      "non_official_file_count": 2,
+      "recommendation_open": false,
+      "overall_tier": "L5_全未校验"
+    }
+  ]
+}
