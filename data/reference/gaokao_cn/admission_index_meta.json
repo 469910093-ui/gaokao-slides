@@ -38,10 +38,10 @@
     "宁夏": "https://www.nxjyks.cn/",
     "新疆": "https://www.xjzk.gov.cn/"
   },
-  "generatedAt": "2026-06-23 20:52:57",
-  "files": 34,
-  "rowsParsed": 188466,
-  "rowsSkipped": 10562,
+  "generatedAt": "2026-06-23 21:04:39",
+  "files": 36,
+  "rowsParsed": 192479,
+  "rowsSkipped": 11921,
   "officialProvinces": [
     "上海",
     "北京",
@@ -135,7 +135,7 @@
         "历史类",
         "物理类"
       ],
-      "schoolCount": 1864
+      "schoolCount": 1966
     },
     "贵州": {
       "status": "verified",
@@ -154,5 +154,5 @@
       "schoolCount": 1814
     }
   },
-  "schoolEntries": 16076
+  "schoolEntries": 16178
 }

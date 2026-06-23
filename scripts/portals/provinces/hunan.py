@@ -17,6 +17,13 @@ KNOWN_ARTIFACTS: dict[int, list[dict[str, Any]]] = {
             "track": "综合类",
         },
     ],
+    2025: [
+        {
+            "title": "湖南省2025年普通高校招生本科批(普通类)第一次投档分数线",
+            "url": "https://www.hneeb.cn/hnxxg/741/742/2025072001.xlsx",
+            "track": "综合类",
+        },
+    ],
 }
 
 

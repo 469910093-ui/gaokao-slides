@@ -1,23 +1,75 @@
 {
-  "generatedAt": "2026-06-23 20:48:53",
+  "generatedAt": "2026-06-23 21:03:34",
   "results": [
     {
-      "province": "河南",
+      "province": "辽宁",
       "year": 2024,
       "rows": 0,
-      "errors": [
-        "https://datacenter.haeea.cn/PagePZQuery/ShowPZTDTJ.aspx?yearTip=2024&pc=1&kl=5: 0 rows (haeea_datacenter_html)",
-        "https://datacenter.haeea.cn/PagePZQuery/ShowPZTDTJ.aspx?yearTip=2024&pc=1&kl=1: Page.goto: net::ERR_NAME_NOT_RESOLVED at https://gaokao.haedu.cn/501/552/2024/0721/135558.html\nCall log:\n  - navigating to \"https://gaokao.haedu.cn/501/552/2024/0721/135558.html\", waiting until \"domcontentloaded\"\n"
-      ]
+      "errors": []
     },
     {
-      "province": "河南",
+      "province": "辽宁",
       "year": 2025,
       "rows": 0,
       "errors": [
-        "https://datacenter.haeea.cn/PagePZQuery/ShowPZTDTJ.aspx?yearTip=2025&pc=1&kl=5: 0 rows (haeea_datacenter_html)",
-        "https://datacenter.haeea.cn/PagePZQuery/ShowPZTDTJ.aspx?yearTip=2025&pc=1&kl=1: 0 rows (haeea_datacenter_html)"
+        "https://www.lnzsks.com/newsinfo/IMS_20250814_45115_YmLCvFdtOA.htm: 0 rows (html_beijing_style)",
+        "https://www.lnzsks.com/newsinfo/IMS_20250811_45110_7Q3t4b0zLv.htm: 0 rows (html_beijing_style)",
+        "https://www.lnzsks.com/newsinfo/IMS_20250808_45093_7pLmWuaEc0.htm: 0 rows (html_beijing_style)",
+        "https://www.lnzsks.com/newsinfo/IMS_20250730_45083_LdXKut8W21.htm: 0 rows (html_beijing_style)"
       ]
+    },
+    {
+      "province": "广东",
+      "year": 2024,
+      "rows": 0,
+      "errors": [
+        "https://gaokao.eol.cn/guang_dong/dongtai/202406/t20240626_2619547.shtml: 0 rows (html_beijing_style)"
+      ]
+    },
+    {
+      "province": "广东",
+      "year": 2025,
+      "rows": 0,
+      "errors": [
+        "https://eea.gd.gov.cn/crgk/content/post_4811365.html: 0 rows (html_beijing_style)",
+        "https://eea.gd.gov.cn/crgk/content/post_4810143.html: 0 rows (html_beijing_style)"
+      ]
+    },
+    {
+      "province": "湖北",
+      "year": 2024,
+      "rows": 0,
+      "errors": []
+    },
+    {
+      "province": "湖北",
+      "year": 2025,
+      "rows": 0,
+      "errors": []
+    },
+    {
+      "province": "重庆",
+      "year": 2024,
+      "rows": 0,
+      "errors": []
+    },
+    {
+      "province": "重庆",
+      "year": 2025,
+      "rows": 0,
+      "errors": []
+    },
+    {
+      "province": "天津",
+      "year": 2024,
+      "rows": 0,
+      "errors": []
+    },
+    {
+      "province": "天津",
+      "year": 2025,
+      "rows": 0,
+      "errors": []
     }
   ]
 }

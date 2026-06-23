@@ -9,7 +9,11 @@ from typing import Any
 
 ROOT = Path(__file__).resolve().parents[1]
 DEFAULT_COOKIE_PATH = ROOT / "data" / "secrets" / "haeea_cookies.json"
-WARMUP_URL = "https://gaokao.haedu.cn/"
+WARMUP_URLS = (
+    "https://gaokao.haedu.cn/",
+    "https://www.haeea.cn/",
+    "http://www.haeea.cn/",
+)
 
 
 def _cookie_path() -> Path | None:
@@ -52,7 +56,8 @@ def fetch_haeea_datacenter_html(
     from playwright.sync_api import sync_playwright
 
     cookies = load_playwright_cookies()
-    warmup = referer or WARMUP_URL
+    warmups = [referer] if referer else []
+    warmups.extend(WARMUP_URLS)
     with sync_playwright() as p:
         browser = p.chromium.launch(headless=True)
         context = browser.new_context(
@@ -65,7 +70,21 @@ def fetch_haeea_datacenter_html(
         if cookies:
             context.add_cookies(cookies)
         page = context.new_page()
-        page.goto(warmup, wait_until="domcontentloaded", timeout=timeout_ms)
+        warmed = False
+        for warmup in warmups:
+            if not warmup:
+                continue
+            try:
+                page.goto(warmup, wait_until="domcontentloaded", timeout=timeout_ms)
+                warmed = True
+                break
+            except Exception:
+                continue
+        if not warmed and not cookies:
+            raise RuntimeError(
+                "无法访问河南考试院预热页（gaokao.haedu.cn / haeea.cn）。"
+                "请在 data/secrets/haeea_cookies.json 配置 datacenter 登录 Cookie。"
+            )
         page.goto(url, wait_until="networkidle", timeout=timeout_ms)
         html = page.content()
         browser.close()

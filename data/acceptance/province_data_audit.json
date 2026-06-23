@@ -1,12 +1,12 @@
 {
-  "generatedAt": "2026-06-23 20:52:57",
+  "generatedAt": "2026-06-23 21:04:39",
   "summary": {
     "total_provinces": 31,
     "admission_verified": 11,
     "admission_official_archive": 11,
     "recommendation_closed": 20,
     "segment_verified_or_partial": 2,
-    "segment_model_or_worse": 6
+    "segment_model_or_worse": 11
   },
   "provinces": [
     {
@@ -51,17 +51,17 @@
     },
     {
       "province": "河北",
-      "segment_worst_2025": "validated_structural",
+      "segment_worst_2025": "model_estimate",
       "segment_tracks": [
         {
           "track": "物理类",
-          "confidence": "validated_structural",
-          "source": "eol.cn"
+          "confidence": "model_estimate",
+          "source": "model"
         },
         {
           "track": "历史类",
-          "confidence": "validated_structural",
-          "source": "eol.cn"
+          "confidence": "model_estimate",
+          "source": "model"
         }
       ],
       "admission_verified": true,
@@ -386,17 +386,17 @@
     },
     {
       "province": "湖北",
-      "segment_worst_2025": "validated_structural",
+      "segment_worst_2025": "failed_validation",
       "segment_tracks": [
         {
           "track": "物理类",
-          "confidence": "validated_structural",
-          "source": "eol.cn"
+          "confidence": "failed_validation",
+          "source": "eol.cn+ocr"
         },
         {
           "track": "历史类",
-          "confidence": "validated_structural",
-          "source": "eol.cn"
+          "confidence": "failed_validation",
+          "source": "eol.cn+ocr"
         }
       ],
       "admission_verified": false,
@@ -407,7 +407,7 @@
       "official_file_count": 0,
       "non_official_file_count": 2,
       "recommendation_open": false,
-      "overall_tier": "L4_仅结构真表"
+      "overall_tier": "L5_全未校验"
     },
     {
       "province": "湖南",
@@ -428,25 +428,25 @@
       "admission_official_archive": true,
       "admission_status": "verified",
       "admission_reason": "",
-      "admission_school_count": 1864,
-      "official_file_count": 2,
+      "admission_school_count": 1966,
+      "official_file_count": 4,
       "non_official_file_count": 4,
       "recommendation_open": true,
       "overall_tier": "L2_投档已验收_一分一段待加强"
     },
     {
       "province": "广东",
-      "segment_worst_2025": "validated_structural",
+      "segment_worst_2025": "model_estimate",
       "segment_tracks": [
         {
           "track": "物理类",
-          "confidence": "verified_multi_source",
-          "source": "eol.cn"
+          "confidence": "model_estimate",
+          "source": "model"
         },
         {
           "track": "历史类",
-          "confidence": "validated_structural",
-          "source": "eol.cn+ocr"
+          "confidence": "model_estimate",
+          "source": "model"
         }
       ],
       "admission_verified": false,
@@ -457,7 +457,7 @@
       "official_file_count": 0,
       "non_official_file_count": 2,
       "recommendation_open": false,
-      "overall_tier": "L4_仅结构真表"
+      "overall_tier": "L5_全未校验"
     },
     {
       "province": "广西",
@@ -506,11 +506,11 @@
     },
     {
       "province": "重庆",
-      "segment_worst_2025": "validated_structural",
+      "segment_worst_2025": "failed_validation",
       "segment_tracks": [
         {
           "track": "物理类",
-          "confidence": "validated_structural",
+          "confidence": "failed_validation",
           "source": "eol.cn"
         },
         {
@@ -527,7 +527,7 @@
       "official_file_count": 0,
       "non_official_file_count": 2,
       "recommendation_open": false,
-      "overall_tier": "L4_仅结构真表"
+      "overall_tier": "L5_全未校验"
     },
     {
       "province": "四川",
@@ -556,17 +556,17 @@
     },
     {
       "province": "贵州",
-      "segment_worst_2025": "validated_structural",
+      "segment_worst_2025": "model_estimate",
       "segment_tracks": [
         {
           "track": "物理类",
-          "confidence": "validated_structural",
-          "source": "eol.cn+ocr"
+          "confidence": "model_estimate",
+          "source": "model"
         },
         {
           "track": "历史类",
-          "confidence": "validated_structural",
-          "source": "eol.cn+ocr"
+          "confidence": "model_estimate",
+          "source": "model"
         }
       ],
       "admission_verified": true,
