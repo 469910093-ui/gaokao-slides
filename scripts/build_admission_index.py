@@ -28,6 +28,8 @@ from admission_filter_lib import (  # noqa: E402
 
 REF_DIR = ROOT / "data" / "reference" / "gaokao_cn"
 OUT_JSON = REF_DIR / "admission_index.json"
+OUT_META = REF_DIR / "admission_index_meta.json"
+SHARD_DIR = REF_DIR / "admission_by_province"
 OUT_EMBED = ROOT / "data" / "admission-index-embed.js"
 
 SOURCE_META = {
@@ -179,6 +181,26 @@ def write_embed(payload: dict[str, Any]) -> None:
     )
 
 
+def write_province_shards(payload: dict[str, Any]) -> None:
+    """按省分片，供 selector 懒加载（避免首屏拉取全量 admission_index）。"""
+    meta = payload["meta"]
+    OUT_META.write_text(json.dumps(meta, ensure_ascii=False, indent=2) + "\n", encoding="utf-8")
+    SHARD_DIR.mkdir(parents=True, exist_ok=True)
+    for old in SHARD_DIR.glob("*.json"):
+        old.unlink()
+    count = 0
+    for province, tracks in payload["provinces"].items():
+        shard = {
+            "meta": meta,
+            "province": province,
+            "tracks": tracks,
+        }
+        out = SHARD_DIR / f"{province}.json"
+        out.write_text(json.dumps(shard, ensure_ascii=False, separators=(",", ":")) + "\n", encoding="utf-8")
+        count += 1
+    print(f"Wrote {OUT_META.name} + {count} shards in {SHARD_DIR.name}/")
+
+
 def run_quality_gate(strict: bool = True) -> int:
     script = ROOT / "scripts" / "admission_quality_gate.py"
     cmd = [sys.executable, str(script)]
@@ -193,6 +215,7 @@ def main() -> None:
     payload = build_index()
     OUT_JSON.write_text(json.dumps(payload, ensure_ascii=False, indent=2) + "\n", encoding="utf-8")
     write_embed(payload)
+    write_province_shards(payload)
     meta = payload["meta"]
     print(
         f"Wrote {OUT_JSON.name}: {meta['schoolEntries']} school entries "

@@ -4,7 +4,10 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>高考分数选校选专业 · 智能推荐</title>
-  <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+SC:wght@400;500;600;700;800&family=ZCOOL+QingKe+HuangYou&display=swap" rel="stylesheet">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+SC:wght@400;500;600;700;800&family=ZCOOL+QingKe+HuangYou&display=swap" rel="stylesheet" media="print" onload="this.media='all'">
+  <noscript><link href="https://fonts.googleapis.com/css2?family=Noto+Sans+SC:wght@400;500;600;700;800&family=ZCOOL+QingKe+HuangYou&display=swap" rel="stylesheet"></noscript>
   <style>
     :root {
       --bg: #fffdf5;
@@ -520,10 +523,6 @@
     </div>
   </div>
 
-    <script src="data/gaokao-embed.js"></script>
-    <script src="data/admission-index-embed.js"></script>
-    <script src="data/schools-vocational-embed.js"></script>
-    <script src="data/major-catalog-embed.js"></script>
   <script>
     const state = {
       manifest: null,
@@ -627,23 +626,105 @@
       });
     }
 
+    function isFileProtocol() {
+      return location.protocol === 'file:';
+    }
+
+    function loadScript(src) {
+      return new Promise((resolve, reject) => {
+        if (document.querySelector(`script[src="${src}"]`)) {
+          resolve();
+          return;
+        }
+        const s = document.createElement('script');
+        s.src = src;
+        s.async = true;
+        s.onload = () => resolve();
+        s.onerror = () => reject(new Error(`无法加载 ${src}`));
+        document.head.appendChild(s);
+      });
+    }
+
+    async function bootstrapGaokaoEmbed() {
+      if (!isFileProtocol() || window.GAOKAO_EMBED) return;
+      await loadScript('data/gaokao-embed.js');
+    }
+
+    function prefetchAdmissionIndex(province) {
+      const run = () => {
+        loadAdmissionIndex(province).then(() => renderMethodologySources()).catch(() => {});
+      };
+      if (typeof requestIdleCallback === 'function') requestIdleCallback(run, { timeout: 2000 });
+      else setTimeout(run, 400);
+    }
+
     function hasEmbed() {
       return window.GAOKAO_EMBED?.manifest && window.GAOKAO_EMBED?.provinces;
     }
 
-    async function loadMajorCatalog() {
-      if (window.MAJOR_CATALOG?.majors) {
-        state.majorCatalog = window.MAJOR_CATALOG.majors;
-        state.majorCatalogMeta = window.MAJOR_CATALOG.meta || null;
+    async function ensureAdmissionMeta() {
+      if (state.admissionIndex?.meta?.verifiedProvinces) return;
+      if (window.ADMISSION_INDEX?.meta) {
+        state.admissionIndex = state.admissionIndex || { provinces: {} };
+        state.admissionIndex.meta = window.ADMISSION_INDEX.meta;
         return;
       }
       try {
-        const res = await fetch('data/major_catalog.json');
-        if (!res.ok) return;
-        const data = await res.json();
-        state.majorCatalog = data.majors || [];
-        state.majorCatalogMeta = data.meta || null;
+        const res = await fetch('data/reference/gaokao_cn/admission_index_meta.json');
+        if (res.ok) {
+          const meta = await res.json();
+          state.admissionIndex = state.admissionIndex || { provinces: {} };
+          state.admissionIndex.meta = meta;
+        }
       } catch (_) { /* optional */ }
+    }
+
+    async function loadAdmissionIndex(province = provinceEl?.value) {
+      const p = province || '广东';
+      if (!state._admissionLoaded) state._admissionLoaded = new Set();
+      if (state._admissionLoaded.has(p)) return;
+
+      await ensureAdmissionMeta();
+
+      if (isFileProtocol() && !window.ADMISSION_INDEX) {
+        await loadScript('data/admission-index-embed.js');
+      }
+      if (window.ADMISSION_INDEX?.provinces) {
+        state.admissionIndex = state.admissionIndex || { meta: window.ADMISSION_INDEX.meta, provinces: {} };
+        state.admissionIndex.meta = state.admissionIndex.meta || window.ADMISSION_INDEX.meta;
+        Object.assign(state.admissionIndex.provinces, window.ADMISSION_INDEX.provinces);
+        Object.keys(window.ADMISSION_INDEX.provinces).forEach((k) => state._admissionLoaded.add(k));
+        return;
+      }
+
+      try {
+        const res = await fetch(`data/reference/gaokao_cn/admission_by_province/${encodeURIComponent(p)}.json`);
+        if (res.status === 404) {
+          state.admissionIndex = state.admissionIndex || { meta: {}, provinces: {} };
+          state.admissionIndex.provinces[p] = {};
+          state._admissionLoaded.add(p);
+          return;
+        }
+        if (res.ok) {
+          const shard = await res.json();
+          state.admissionIndex = state.admissionIndex || { meta: {}, provinces: {} };
+          if (shard.meta) state.admissionIndex.meta = { ...state.admissionIndex.meta, ...shard.meta };
+          state.admissionIndex.provinces[p] = shard.tracks || shard.provinces?.[p] || {};
+          state._admissionLoaded.add(p);
+          return;
+        }
+      } catch (_) { /* fallback below */ }
+
+      if (!state._admissionFullLoaded) {
+        try {
+          const res = await fetch('data/reference/gaokao_cn/admission_index.json');
+          if (res.ok) {
+            state.admissionIndex = await res.json();
+            state._admissionFullLoaded = true;
+            Object.keys(state.admissionIndex.provinces || {}).forEach((k) => state._admissionLoaded.add(k));
+          }
+        } catch (_) { /* optional */ }
+      }
     }
 
     function currentSubjectTrack() {
@@ -675,7 +756,11 @@
       return subjects.includes(track);
     }
 
-    async function loadVocationalSchools() {
+    async function ensureVocationalSchools() {
+      if (state.vocationalSchools?.length) return;
+      if (isFileProtocol() && !window.SCHOOLS_VOCATIONAL) {
+        await loadScript('data/schools-vocational-embed.js');
+      }
       if (window.SCHOOLS_VOCATIONAL?.schools) {
         state.vocationalSchools = window.SCHOOLS_VOCATIONAL.schools;
         state.vocationalMeta = window.SCHOOLS_VOCATIONAL.meta || null;
@@ -690,7 +775,27 @@
       } catch (_) { /* optional */ }
     }
 
+    async function ensureMajorCatalog() {
+      if (state.majorCatalog?.length) return;
+      if (isFileProtocol() && !window.MAJOR_CATALOG) {
+        await loadScript('data/major-catalog-embed.js');
+      }
+      if (window.MAJOR_CATALOG?.majors) {
+        state.majorCatalog = window.MAJOR_CATALOG.majors;
+        state.majorCatalogMeta = window.MAJOR_CATALOG.meta || null;
+        return;
+      }
+      try {
+        const res = await fetch('data/major_catalog.json');
+        if (!res.ok) return;
+        const data = await res.json();
+        state.majorCatalog = data.majors || [];
+        state.majorCatalogMeta = data.meta || null;
+      } catch (_) { /* optional */ }
+    }
+
     async function loadManifest() {
+      await bootstrapGaokaoEmbed();
       if (hasEmbed()) {
         state.manifest = window.GAOKAO_EMBED.manifest;
       } else {
@@ -698,20 +803,17 @@
         if (!res.ok) throw new Error(`无法加载 manifest.json（${res.status}）`);
         state.manifest = await res.json();
       }
-      await loadVocationalSchools();
-      await loadMajorCatalog();
-      await loadAdmissionIndex();
+      await ensureAdmissionMeta();
       provinceEl.innerHTML = state.manifest.provinces.map((p) => `<option value="${p}">${p}</option>`).join('');
       initProvinceCombo();
       yearEl.innerHTML = state.manifest.years.map((y) => `<option value="${y}">${y}</option>`).join('');
       yearEl.value = '2025';
-      const vocNote = state.vocationalMeta?.total
-        ? ` 专科院校库：全国 ${state.vocationalMeta.total} 所（eol.cn 完整名录）。`
-        : '';
-      $('globalNote').textContent = (state.manifest.meta.notes || '') + vocNote;
+      $('globalNote').textContent = (state.manifest.meta.notes || '')
+        + (isFileProtocol() ? ' 本地 file:// 模式仅加载一分一段 embed；推荐数据在打开弹窗时按需加载。' : '');
       await loadProvince(provinceEl.value);
       renderTrackOptions(provinceEl.value);
       renderMethodologySources();
+      prefetchAdmissionIndex(provinceEl.value);
     }
 
     function renderMethodologySources() {
@@ -1163,17 +1265,6 @@
     function rankAt(score) {
       const cum = cumulativeAt(score);
       return cum != null ? Math.round(cum) : null;
-    }
-
-    async function loadAdmissionIndex() {
-      if (window.ADMISSION_INDEX?.provinces) {
-        state.admissionIndex = window.ADMISSION_INDEX;
-        return;
-      }
-      try {
-        const res = await fetch('data/reference/gaokao_cn/admission_index.json');
-        if (res.ok) state.admissionIndex = await res.json();
-      } catch (_) { /* optional */ }
     }
 
     function admissionTrackKey() {
@@ -1785,11 +1876,8 @@
       return html;
     }
 
-    function openModal() {
+    async function openModal() {
       const score = state.currentScore;
-      const schoolResult = recommendSchools(score);
-      const majors = recommendMajors(score);
-
       $('modalTitle').textContent = `${score} 分能上什么学校？`;
       const batch = getBatchAverages();
       const p = percentileAt(score);
@@ -1799,13 +1887,26 @@
         : '';
       $('modalSummary').textContent = `${provinceEl.value} · ${yearEl.value} · ${trackEl.value}${rankPart ? ` | ${rankPart}` : ''} | ${batchCompareText(score, batch)}`;
 
-      $('schoolList').innerHTML = renderSchoolList(schoolResult);
-      $('majorList').innerHTML = renderMajorList(majors);
-      const trackLabel = $('majorTrackLabel');
-      if (trackLabel) trackLabel.textContent = subjectTrackShort();
-
+      $('schoolList').innerHTML = '<div class="hint">正在加载院校投档与专业数据…</div>';
+      $('majorList').innerHTML = '';
       $('modalBackdrop').classList.add('show');
       $('modalBackdrop').setAttribute('aria-hidden', 'false');
+
+      try {
+        await Promise.all([
+          loadAdmissionIndex(provinceEl.value),
+          ensureMajorCatalog(),
+          ensureVocationalSchools(),
+        ]);
+        const schoolResult = recommendSchools(score);
+        const majors = recommendMajors(score);
+        $('schoolList').innerHTML = renderSchoolList(schoolResult);
+        $('majorList').innerHTML = renderMajorList(majors);
+        const trackLabel = $('majorTrackLabel');
+        if (trackLabel) trackLabel.textContent = subjectTrackShort();
+      } catch (err) {
+        $('schoolList').innerHTML = `<div class="hint">推荐数据加载失败：${err.message || err}</div>`;
+      }
     }
 
     function closeModal() {
@@ -1816,7 +1917,10 @@
     provinceEl.addEventListener('change', () => {
       updateProvinceDisplay(provinceEl.value);
       renderTrackOptions(provinceEl.value);
-      loadProvince(provinceEl.value).then(() => renderMethodologySources());
+      loadProvince(provinceEl.value).then(() => {
+        renderMethodologySources();
+        prefetchAdmissionIndex(provinceEl.value);
+      });
     });
     $('toggleValidation').addEventListener('click', () => {
       const detail = $('validationDetail');
