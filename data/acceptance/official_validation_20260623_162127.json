@@ -1,0 +1,19 @@
+{
+  "generatedAt": "2026-06-23 16:21:22",
+  "tolerance": 0,
+  "cases": [
+    {
+      "province": "北京",
+      "year": 2024,
+      "track": "综合类",
+      "officialSchools": 591,
+      "archiveSchools": 591,
+      "matches": 591,
+      "mismatches": 0,
+      "pass": true,
+      "samples": [],
+      "errors": []
+    }
+  ],
+  "totalMismatches": 0
+}

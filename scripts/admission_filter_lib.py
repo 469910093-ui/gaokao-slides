@@ -144,20 +144,22 @@ def filter_admission_row(province: str, row: dict[str, Any]) -> bool:
 
 def parse_admission_file_key(fname: str) -> tuple[str, int, str] | None:
     """(省, 年, 归一化科类) — 用于同键多文件去重。"""
-    m = re.match(r"admissions_(.+)_(\d{4})_(.+)\.json$", fname)
+    m = re.match(r"admissions_(.+)_(\d{4})_(.+?)(?:_official)?\.json$", fname)
     if not m:
         return None
     province, year_s, _raw_track = m.group(1), m.group(2), m.group(3)
-    return province, int(year_s), track_key_from_filename(fname)
+    return province, int(year_s), track_key_from_filename(fname.replace("_official", ""))
 
 
 def admission_file_priority(fname: str) -> tuple[int, int]:
-    """同省同年同科类时优先 `_综合.json`（新爬虫），弃用旧版 `_综合类.json`。"""
-    if fname.endswith("_综合.json"):
+    """同省同年同科类时优先 official > _综合.json > _综合类.json。"""
+    if "_official.json" in fname:
         return (0, 0)
-    if fname.endswith("_综合类.json"):
+    if fname.endswith("_综合.json"):
         return (1, 0)
-    return (2, 0)
+    if fname.endswith("_综合类.json"):
+        return (2, 0)
+    return (3, 0)
 
 
 def select_admission_archive_files(ref_dir) -> list:

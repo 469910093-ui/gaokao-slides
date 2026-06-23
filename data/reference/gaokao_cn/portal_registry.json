@@ -1,0 +1,302 @@
+{
+  "meta": {
+    "version": 1,
+    "description": "31省招生考试院官方投档/一分一段解析器注册表。implementation: full=专用解析器, partial=通用发现+适配器, stub=待实现。",
+    "updatedAt": "2026-06-23"
+  },
+  "provinces": {
+    "北京": {
+      "portal": "https://www.bjeea.cn/",
+      "implementation": "full",
+      "tier": "B",
+      "listingPages": [
+        "https://www.bjeea.cn/html/gkgz/tzgg/",
+        "https://www.bjeea.cn/html/gkgz/tzgg/2025/",
+        "https://www.bjeea.cn/html/gkgz/tzgg/2024/"
+      ],
+      "discoverKeywords": ["本科普通批", "投档线", "投档"]
+    },
+    "天津": {
+      "portal": "https://www.zhaokao.net/",
+      "implementation": "partial",
+      "tier": "B",
+      "listingPages": ["https://www.zhaokao.net/"],
+      "discoverKeywords": ["投档", "平行志愿", "本科批"]
+    },
+    "河北": {
+      "portal": "http://www.hebeea.edu.cn/",
+      "implementation": "partial",
+      "tier": "A",
+      "listingPages": ["http://www.hebeea.edu.cn/html/zxgg/index.html"],
+      "discoverKeywords": ["投档", "平行志愿", "物理类", "历史类"],
+      "knownArtifacts": {
+        "2024": [
+          {
+            "title": "河北省2024年本科批物理类投档分数线（EOL转载对照）",
+            "url": "https://gaokao.eol.cn/he_bei/dongtai/202406/t20240625_2619073.shtml",
+            "kind": "html",
+            "track": "物理类",
+            "note": "临时对照源，待替换为 hebeea 官方 PDF"
+          }
+        ]
+      }
+    },
+    "山西": {
+      "portal": "http://www.sxkszx.cn/",
+      "implementation": "partial",
+      "tier": "C",
+      "listingPages": ["http://www.sxkszx.cn/"],
+      "discoverKeywords": ["投档", "录取", "一分一段"]
+    },
+    "内蒙古": {
+      "portal": "https://www.nm.zsks.cn/",
+      "implementation": "partial",
+      "tier": "B",
+      "listingPages": ["https://www.nm.zsks.cn/"],
+      "discoverKeywords": ["投档", "平行志愿"]
+    },
+    "辽宁": {
+      "portal": "https://www.lnzsks.com/",
+      "implementation": "partial",
+      "tier": "B",
+      "listingPages": ["https://www.lnzsks.com/"],
+      "discoverKeywords": ["投档", "平行志愿"]
+    },
+    "吉林": {
+      "portal": "https://www.jleea.com.cn/",
+      "implementation": "partial",
+      "tier": "B",
+      "listingPages": ["https://www.jleea.com.cn/"],
+      "discoverKeywords": ["投档", "平行志愿"]
+    },
+    "黑龙江": {
+      "portal": "https://www.lzk.hl.cn/",
+      "implementation": "partial",
+      "tier": "B",
+      "listingPages": ["https://www.lzk.hl.cn/"],
+      "discoverKeywords": ["投档", "平行志愿"]
+    },
+    "上海": {
+      "portal": "https://www.shmeea.edu.cn/",
+      "implementation": "partial",
+      "tier": "B",
+      "listingPages": ["https://www.shmeea.edu.cn/"],
+      "discoverKeywords": ["投档", "本科", "录取"],
+      "knownArtifacts": {
+        "2025": [
+          {
+            "title": "上海市2025年综合评价批次院校录取最低分（EOL对照）",
+            "url": "https://gaokao.eol.cn/shang_hai/dongtai/202506/t20250623_2676341.shtml",
+            "kind": "html",
+            "track": "综合类"
+          }
+        ]
+      }
+    },
+    "江苏": {
+      "portal": "https://www.jseea.cn/",
+      "implementation": "full",
+      "tier": "A",
+      "listingPages": [
+        "https://www.jseea.cn/webfile/index/index_zkxx/"
+      ],
+      "discoverKeywords": ["投档", "平行志愿", "物理类", "历史类"]
+    },
+    "浙江": {
+      "portal": "https://www.zjzs.net/",
+      "implementation": "partial",
+      "tier": "C",
+      "listingPages": ["https://www.zjzs.net/"],
+      "discoverKeywords": ["平行录取", "投档", "一段"],
+      "knownArtifacts": {
+        "2025": [
+          {
+            "title": "浙江省2025年一分一段（EOL对照）",
+            "url": "https://gaokao.eol.cn/zhe_jiang/dongtai/202506/t20250625_2677143.shtml",
+            "kind": "html",
+            "track": "综合类",
+            "dataKind": "segments"
+          }
+        ]
+      }
+    },
+    "安徽": {
+      "portal": "https://www.ahzsks.cn/",
+      "implementation": "partial",
+      "tier": "B",
+      "listingPages": ["https://www.ahzsks.cn/"],
+      "discoverKeywords": ["投档", "平行志愿"]
+    },
+    "福建": {
+      "portal": "https://www.eeafj.cn/",
+      "implementation": "partial",
+      "tier": "B",
+      "listingPages": ["https://www.eeafj.cn/"],
+      "discoverKeywords": ["投档", "平行志愿"]
+    },
+    "江西": {
+      "portal": "http://www.jxeea.cn/",
+      "implementation": "partial",
+      "tier": "C",
+      "listingPages": ["http://www.jxeea.cn/"],
+      "discoverKeywords": ["投档", "平行志愿", "录取"]
+    },
+    "山东": {
+      "portal": "http://www.sdzk.cn/",
+      "implementation": "partial",
+      "tier": "A",
+      "listingPages": ["http://www.sdzk.cn/"],
+      "discoverKeywords": ["投档", "普通类一段", "平行志愿"]
+    },
+    "河南": {
+      "portal": "http://www.haeea.cn/",
+      "implementation": "partial",
+      "tier": "A",
+      "listingPages": ["http://www.haeea.cn/"],
+      "discoverKeywords": ["投档", "平行志愿", "本科批"],
+      "knownArtifacts": {
+        "2025": [
+          {
+            "title": "河南省2025年物理类本科批投档线（EOL对照）",
+            "url": "https://gaokao.eol.cn/he_nan/dongtai/202506/t20250625_2676859.shtml",
+            "kind": "html",
+            "track": "物理类"
+          },
+          {
+            "title": "河南省2025年历史类本科批投档线（EOL对照）",
+            "url": "https://gaokao.eol.cn/he_nan/dongtai/202506/t20250625_2676858.shtml",
+            "kind": "html",
+            "track": "历史类"
+          }
+        ]
+      }
+    },
+    "湖北": {
+      "portal": "http://www.hbea.edu.cn/",
+      "implementation": "partial",
+      "tier": "B",
+      "listingPages": ["http://www.hbea.edu.cn/"],
+      "discoverKeywords": ["投档", "平行志愿"]
+    },
+    "湖南": {
+      "portal": "https://www.hneeb.cn/",
+      "implementation": "partial",
+      "tier": "B",
+      "listingPages": ["https://www.hneeb.cn/"],
+      "discoverKeywords": ["投档", "平行志愿"]
+    },
+    "广东": {
+      "portal": "https://eea.gd.gov.cn/",
+      "implementation": "partial",
+      "tier": "B",
+      "listingPages": ["https://eea.gd.gov.cn/"],
+      "discoverKeywords": ["投档", "平行志愿", "本科"],
+      "knownArtifacts": {
+        "2024": [
+          {
+            "title": "广东省2024年物理类投档（EOL对照）",
+            "url": "https://gaokao.eol.cn/guang_dong/dongtai/202406/t20240626_2619547.shtml",
+            "kind": "html",
+            "track": "物理类"
+          }
+        ]
+      }
+    },
+    "广西": {
+      "portal": "https://www.gxeea.cn/",
+      "implementation": "partial",
+      "tier": "B",
+      "listingPages": ["https://www.gxeea.cn/"],
+      "discoverKeywords": ["投档", "平行志愿"]
+    },
+    "海南": {
+      "portal": "https://ea.hainan.gov.cn/",
+      "implementation": "partial",
+      "tier": "B",
+      "listingPages": ["https://ea.hainan.gov.cn/"],
+      "discoverKeywords": ["投档", "本科批"]
+    },
+    "重庆": {
+      "portal": "https://www.cqksy.cn/",
+      "implementation": "partial",
+      "tier": "B",
+      "listingPages": ["https://www.cqksy.cn/"],
+      "discoverKeywords": ["投档", "平行志愿"]
+    },
+    "四川": {
+      "portal": "https://www.sceea.cn/",
+      "implementation": "partial",
+      "tier": "A",
+      "listingPages": ["https://www.sceea.cn/"],
+      "discoverKeywords": ["投档", "平行志愿", "本科批"],
+      "knownArtifacts": {
+        "2024": [
+          {
+            "title": "四川省2024年物理类本科批投档（EOL对照）",
+            "url": "https://gaokao.eol.cn/si_chuan/dongtai/202406/t20240624_2618669.shtml",
+            "kind": "html",
+            "track": "物理类"
+          }
+        ]
+      }
+    },
+    "贵州": {
+      "portal": "http://zsksy.guizhou.gov.cn/",
+      "implementation": "partial",
+      "tier": "B",
+      "listingPages": ["http://zsksy.guizhou.gov.cn/"],
+      "discoverKeywords": ["投档", "平行志愿"]
+    },
+    "云南": {
+      "portal": "https://www.ynzs.cn/",
+      "implementation": "partial",
+      "tier": "B",
+      "listingPages": ["https://www.ynzs.cn/"],
+      "discoverKeywords": ["投档", "平行志愿"]
+    },
+    "西藏": {
+      "portal": "http://zsks.edu.xizang.gov.cn/",
+      "implementation": "stub",
+      "tier": "D",
+      "listingPages": [],
+      "discoverKeywords": ["投档", "录取"],
+      "notes": "公开渠道稀缺，待人工确认官方发布地址"
+    },
+    "陕西": {
+      "portal": "https://www.sneea.cn/",
+      "implementation": "partial",
+      "tier": "B",
+      "listingPages": ["https://www.sneea.cn/"],
+      "discoverKeywords": ["投档", "平行志愿"]
+    },
+    "甘肃": {
+      "portal": "https://www.ganseea.cn/",
+      "implementation": "partial",
+      "tier": "B",
+      "listingPages": ["https://www.ganseea.cn/"],
+      "discoverKeywords": ["投档", "平行志愿"]
+    },
+    "青海": {
+      "portal": "http://www.qhjyks.com/",
+      "implementation": "partial",
+      "tier": "B",
+      "listingPages": ["http://www.qhjyks.com/"],
+      "discoverKeywords": ["投档", "录取"]
+    },
+    "宁夏": {
+      "portal": "https://www.nxjyks.cn/",
+      "implementation": "partial",
+      "tier": "B",
+      "listingPages": ["https://www.nxjyks.cn/"],
+      "discoverKeywords": ["投档", "平行志愿"]
+    },
+    "新疆": {
+      "portal": "https://www.xjzk.gov.cn/",
+      "implementation": "stub",
+      "tier": "D",
+      "listingPages": [],
+      "discoverKeywords": ["投档", "录取"],
+      "notes": "一分一段/投档公开数据待确认"
+    }
+  }
+}
