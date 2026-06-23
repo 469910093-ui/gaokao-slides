@@ -1,23 +1,14 @@
 {
-  "generatedAt": "2026-06-23 17:55:06",
+  "generatedAt": "2026-06-23 18:09:25",
   "results": [
     {
-      "province": "河北",
-      "year": 2023,
-      "track": "历史类",
-      "rows": 6464,
-      "schools": 954,
-      "file": "admissions_河北_2023_历史类_official.json",
-      "errors": []
-    },
-    {
-      "province": "河北",
-      "year": 2023,
-      "track": "物理类",
-      "rows": 16590,
-      "schools": 1070,
-      "file": "admissions_河北_2023_物理类_official.json",
-      "errors": []
+      "province": "河南",
+      "year": 2024,
+      "rows": 0,
+      "errors": [
+        "https://datacenter.haeea.cn/PagePZQuery/ShowPZTDTJ.aspx?yearTip=2024&pc=1&kl=5: 0 rows (haeea_datacenter_html)",
+        "https://datacenter.haeea.cn/PagePZQuery/ShowPZTDTJ.aspx?yearTip=2024&pc=1&kl=1: 0 rows (haeea_datacenter_html)"
+      ]
     }
   ]
 }

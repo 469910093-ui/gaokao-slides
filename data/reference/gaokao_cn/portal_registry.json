@@ -139,10 +139,11 @@
     },
     "河南": {
       "portal": "http://www.haeea.cn/",
-      "implementation": "partial",
+      "implementation": "full",
       "tier": "A",
-      "listingPages": ["http://www.haeea.cn/"],
-      "discoverKeywords": ["投档", "平行志愿", "本科批"]
+      "listingPages": ["https://gaokao.haedu.cn/"],
+      "discoverKeywords": ["投档", "平行志愿", "本科批"],
+      "notes": "datacenter 需 data/secrets/haeea_cookies.json（Playwright Cookie）"
     },
     "湖北": {
       "portal": "http://www.hbea.edu.cn/",
@@ -198,10 +199,10 @@
     },
     "四川": {
       "portal": "https://www.sceea.cn/",
-      "implementation": "partial",
+      "implementation": "full",
       "tier": "A",
       "listingPages": ["https://www.sceea.cn/"],
-      "discoverKeywords": ["投档", "平行志愿", "本科批"]
+      "discoverKeywords": ["调档线", "投档", "本科批"]
     },
     "贵州": {
       "portal": "http://zsksy.guizhou.gov.cn/",

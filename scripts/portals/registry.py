@@ -5,8 +5,10 @@ from __future__ import annotations
 from portals.base import ProvincePortalParser
 from portals.provinces.beijing import BeijingPortalParser
 from portals.provinces.hebei import HebeiPortalParser
+from portals.provinces.henan import HenanPortalParser
 from portals.provinces.jiangsu import JiangsuPortalParser
 from portals.provinces.shandong import ShandongPortalParser
+from portals.provinces.sichuan import SichuanPortalParser
 from portals.provinces.generic import GenericPortalParser, StubPortalParser, load_registry
 
 _FULL: dict[str, type[ProvincePortalParser]] = {
@@ -14,6 +16,8 @@ _FULL: dict[str, type[ProvincePortalParser]] = {
     "江苏": JiangsuPortalParser,
     "山东": ShandongPortalParser,
     "河北": HebeiPortalParser,
+    "四川": SichuanPortalParser,
+    "河南": HenanPortalParser,
 }
 
 # 已有 listing/known 配置、待逐步验收的省份

@@ -2,6 +2,7 @@ __pycache__/
 *.pyc
 .Python
 .env
+data/secrets/haeea_cookies.json
 .DS_Store
 Thumbs.db
 
