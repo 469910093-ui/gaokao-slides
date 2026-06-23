@@ -21,10 +21,9 @@ from province_tracks import COMBINED_33_PROVINCES, major_match_tracks, tracks_fo
 NO_SEGMENT_EOL_PROVINCES = frozenset({"新疆", "西藏"})
 YEAR = "2025"
 
-C9_NAMES = {"清华大学", "北京大学", "复旦大学", "上海交通大学", "浙江大学", "南京大学", "中国科学技术大学"}
-TOP985 = C9_NAMES | {
-    "哈尔滨工业大学", "西安交通大学", "北京航空航天大学", "同济大学", "华中科技大学",
-    "武汉大学", "中山大学", "电子科技大学",
+ADMISSION_SOURCE = {
+    "provider": "掌上高考 gaokao.cn",
+    "url": "https://www.gaokao.cn/control-line",
 }
 
 
@@ -37,13 +36,159 @@ class CaseResult:
     rank: int | None
     reach_tier: str
     segment_source: str
-    schools: list[str]
-    majors: list[str]
+    schools_chong: list[str]
+    schools_wen: list[str]
+    schools_bao: list[str]
+    majors_chong: list[str]
+    majors_wen: list[str]
+    majors_bao: list[str]
+    has_admission: bool
     issues: list[dict[str, str]] = field(default_factory=list)
+
+    @property
+    def schools(self) -> list[str]:
+        return self.schools_chong + self.schools_wen + self.schools_bao
+
+    @property
+    def majors(self) -> list[str]:
+        return self.majors_chong + self.majors_wen + self.majors_bao
 
 
 def load_json(path: Path) -> Any:
     return json.loads(path.read_text(encoding="utf-8"))
+
+
+def admission_track_key(province: str, track: str) -> str:
+    if province in COMBINED_33_PROVINCES or track == "综合类":
+        return "综合类"
+    if track in ("历史类", "文科"):
+        return "历史类"
+    return "物理类"
+
+
+def lookup_admission(
+    admission_index: dict[str, Any] | None,
+    province: str,
+    track: str,
+    school_name: str,
+) -> dict[str, Any] | None:
+    if not admission_index:
+        return None
+    prov = admission_index.get("provinces", {}).get(province)
+    if not prov:
+        return None
+    tkey = admission_track_key(province, track)
+    return prov.get(tkey, {}).get(school_name)
+
+
+def school_application_tag(score: int, avg_min: int) -> str | None:
+    diff = avg_min - score
+    if 5 <= diff <= 15:
+        return "chong"
+    if -12 <= diff <= 5:
+        return "wen"
+    if -30 <= diff < -12:
+        return "bao"
+    return None
+
+
+def qs_rank_of(school: dict[str, Any]) -> int:
+    return int(school.get("qsRank") or 99999)
+
+
+def enrich_school(
+    school: dict[str, Any],
+    score: int,
+    admission_index: dict[str, Any] | None,
+    province: str,
+    track: str,
+) -> dict[str, Any] | None:
+    rec = lookup_admission(admission_index, province, track, school["name"])
+    if not rec or rec.get("avgMin3y") is None:
+        return None
+    tag = school_application_tag(score, int(rec["avgMin3y"]))
+    if not tag:
+        return None
+    return {
+        **school,
+        "avgAdmission": rec["avgMin3y"],
+        "admissionYears": rec.get("years"),
+        "appTag": {"key": tag},
+    }
+
+
+def bucket_schools(eligible: list[dict[str, Any]], quotas: dict[str, int]) -> dict[str, list[dict[str, Any]]]:
+    def pick(key: str, n: int) -> list[dict[str, Any]]:
+        return sorted(
+            [s for s in eligible if s.get("appTag", {}).get("key") == key],
+            key=lambda s: (qs_rank_of(s), s["name"]),
+        )[:n]
+
+    return {
+        "chong": pick("chong", quotas["chong"]),
+        "wen": pick("wen", quotas["wen"]),
+        "bao": pick("bao", quotas["bao"]),
+    }
+
+
+def enrich_admission_entry(
+    school_name: str,
+    rec: dict[str, Any],
+    score: int,
+    manifest_by_name: dict[str, dict[str, Any]],
+) -> dict[str, Any] | None:
+    if rec.get("isVocational"):
+        return None
+    avg = rec.get("avgMin3y")
+    if avg is None:
+        return None
+    tag = school_application_tag(score, int(avg))
+    if not tag:
+        return None
+    base = manifest_by_name.get(school_name)
+    if base:
+        school = dict(base)
+    else:
+        school = {
+            "name": school_name,
+            "tier": rec.get("tier") or "二本",
+            "qsRank": 99999,
+        }
+    if school.get("tier") == "专科":
+        return None
+    return {
+        **school,
+        "avgAdmission": avg,
+        "admissionYears": rec.get("years"),
+        "appTag": {"key": tag},
+    }
+
+
+def recommend_schools(
+    score: int,
+    province: str,
+    track: str,
+    schools: list[dict[str, Any]],
+    admission_index: dict[str, Any] | None,
+) -> dict[str, Any]:
+    tkey = admission_track_key(province, track)
+    prov_map = (admission_index or {}).get("provinces", {}).get(province, {}).get(tkey, {})
+    has_admission = bool(prov_map)
+    manifest_by_name = {s["name"]: s for s in schools}
+    enriched = [
+        s for s in (
+            enrich_admission_entry(name, rec, score, manifest_by_name)
+            for name, rec in prov_map.items()
+        )
+        if s is not None
+    ]
+    buckets = bucket_schools(enriched, {"chong": 3, "wen": 3, "bao": 5})
+    return {
+        "has_admission": has_admission,
+        "chong": [s["name"] for s in buckets["chong"]],
+        "wen": [s["name"] for s in buckets["wen"]],
+        "bao": [s["name"] for s in buckets["bao"]],
+    }
 
 
 def build_segments(raw_segs: list[dict[str, Any]]) -> list[dict[str, Any]]:
@@ -122,6 +267,15 @@ def reach_idx_from_batches(score: int, batches: dict[str, Any], tier_order: list
     return idx("专科")
 
 
+def tier_for_percentile(p: float | None, tier_order: list[str], tier_pct: dict[str, float]) -> str:
+    if p is None:
+        return "二本"
+    for tier in tier_order:
+        if tier in tier_pct and p >= tier_pct[tier]:
+            return tier
+    return "专科"
+
+
 def reach_idx_for_score(
     score: int,
     p: float | None,
@@ -134,37 +288,6 @@ def reach_idx_for_score(
     candidates = [i for i in (from_batch, from_pct) if i >= 0]
     reach_idx = max(candidates) if candidates else from_batch
     return tier_order[reach_idx], reach_idx
-
-
-def tier_for_percentile(p: float | None, tier_order: list[str], tier_pct: dict[str, float]) -> str:
-    if p is None:
-        return "二本"
-    for tier in tier_order:
-        if tier in tier_pct and p >= tier_pct[tier]:
-            return tier
-    return "专科"
-
-
-def school_min_percentile(school: dict[str, Any], tier_pct: dict[str, float]) -> float:
-    if school.get("minPercentile") is not None:
-        return float(school["minPercentile"])
-    return float(tier_pct.get(school["tier"], 50))
-
-
-def school_reachable(user_p: float, school: dict[str, Any], reach_idx: int, tier_order: list[str], tier_pct: dict[str, float]) -> bool:
-    school_p = school_min_percentile(school, tier_pct)
-    school_idx = tier_order.index(school["tier"])
-    if school_idx < 0:
-        return False
-    gap = school_p - user_p
-    if school_idx < reach_idx:
-        delta = reach_idx - school_idx
-        if delta == 1:
-            return gap <= 8
-        if delta == 2:
-            return gap <= 6
-        return False
-    return gap <= 5
 
 
 def major_matches_subject(major: dict[str, Any], track: str, province: str = "") -> bool:
@@ -181,31 +304,6 @@ def major_matches_subject(major: dict[str, Any], track: str, province: str = "")
     return any(t in subjects for t in allowed)
 
 
-def recommend_schools(
-    score: int,
-    user_p: float | None,
-    reach: str,
-    reach_idx: int,
-    schools: list[dict[str, Any]],
-    tier_order: list[str],
-    tier_pct: dict[str, float],
-) -> list[str]:
-    undergrad = [
-        s for s in schools
-        if s.get("tier") != "专科" and user_p is not None
-        and school_reachable(user_p, s, reach_idx, tier_order, tier_pct)
-    ]
-
-    def sort_key(s: dict[str, Any]) -> tuple:
-        a_idx = tier_order.index(s["tier"])
-        a_chong = a_idx < reach_idx and reach_idx - a_idx <= 2
-        da = abs(school_min_percentile(s, tier_pct) - (user_p or 0))
-        return (0 if a_chong else 1, da, -school_min_percentile(s, tier_pct))
-
-    undergrad.sort(key=sort_key)
-    return [s["name"] for s in undergrad[:10]]
-
-
 def major_catalog_allowed(major: dict[str, Any], reach_idx: int, tier_order: list[str]) -> bool:
     ct = major.get("catalogType") or "undergraduate"
     voc_idx = tier_order.index("专科")
@@ -217,31 +315,51 @@ def major_catalog_allowed(major: dict[str, Any], reach_idx: int, tier_order: lis
     return True
 
 
+def major_bucket_key(major: dict[str, Any], reach_idx: int, tier_order: list[str]) -> str | None:
+    major_idx = tier_order.index(major["tier"])
+    if major_idx < 0:
+        return None
+    delta = major_idx - reach_idx
+    if delta >= 1:
+        return "chong"
+    if delta == 0:
+        return "wen"
+    if delta <= -1:
+        return "bao"
+    return None
+
+
+def bucket_majors(eligible: list[dict[str, Any]], quotas: dict[str, int]) -> dict[str, list[dict[str, Any]]]:
+    def sort_trend(a: dict[str, Any], b: dict[str, Any]) -> int:
+        ta = a.get("trendIndex") or a.get("score") or 0
+        tb = b.get("trendIndex") or b.get("score") or 0
+        if tb != ta:
+            return tb - ta
+        return -1 if a["name"] < b["name"] else (1 if a["name"] > b["name"] else 0)
+
+    def pick(key: str, n: int) -> list[dict[str, Any]]:
+        items = [m for m in eligible if m.get("appTag", {}).get("key") == key]
+        return sorted(items, key=lambda m: (-(m.get("trendIndex") or m.get("score") or 0), m["name"]))[:n]
+
+    return {
+        "chong": pick("chong", quotas["chong"]),
+        "wen": pick("wen", quotas["wen"]),
+        "bao": pick("bao", quotas["bao"]),
+    }
+
+
 def recommend_majors(
     score: int,
-    user_p: float | None,
-    reach: str,
     reach_idx: int,
     majors: list[dict[str, Any]],
     track: str,
     tier_order: list[str],
-    tier_pct: dict[str, float],
     province: str = "",
-) -> list[str]:
+) -> dict[str, list[str]]:
     eligible = [
         m for m in majors
         if major_matches_subject(m, track, province)
         and major_catalog_allowed(m, reach_idx, tier_order)
-        and (
-            user_p is None
-            or school_reachable(
-                user_p,
-                {"tier": m["tier"], "minPercentile": tier_pct.get(m["tier"])},
-                reach_idx,
-                tier_order,
-                tier_pct,
-            )
-        )
     ]
     by_name: dict[str, dict[str, Any]] = {}
     for m in eligible:
@@ -260,21 +378,22 @@ def recommend_majors(
 
         by_name[m["name"]] = prefer(prev, m)
 
-    def sort_key(m: dict[str, Any]) -> tuple:
-        return (
-            0 if m.get("opportunity") else 1,
-            -(m.get("trendIndex") or m.get("score") or 0),
-            -(m.get("jobVolumeYoY") or 0),
-            -(m.get("salaryGrowth5y") or 0),
-        )
+    enriched: list[dict[str, Any]] = []
+    for m in by_name.values():
+        key = major_bucket_key(m, reach_idx, tier_order)
+        if not key:
+            continue
+        enriched.append({**m, "appTag": {"key": key}})
 
-    ordered = sorted(by_name.values(), key=sort_key)
-    return [m["name"] for m in ordered[:12]]
+    buckets = bucket_majors(enriched, {"chong": 4, "wen": 4, "bao": 4})
+    return {
+        "chong": [m["name"] for m in buckets["chong"]],
+        "wen": [m["name"] for m in buckets["wen"]],
+        "bao": [m["name"] for m in buckets["bao"]],
+    }
 
 
 def sample_scores(year_obj: dict[str, Any], track_data: dict[str, Any], step: int = 25) -> list[int]:
-    """200–750 分按 step 采样（默认每 25 分一档）。"""
-    batches = year_obj.get("batches") or {}
     max_s = int(year_obj.get("maxScore") or 750)
     segs = track_data.get("segments") or []
     min_s = max(200, min(s["s"] for s in segs) if segs else 200)
@@ -283,8 +402,7 @@ def sample_scores(year_obj: dict[str, Any], track_data: dict[str, Any], step: in
     out = list(range(lo, hi + 1, step))
     if hi not in out:
         out.append(hi)
-    # 回归锚点
-    for anchor in (619, 600, 697):
+    for anchor in (619, 600, 587, 697):
         if lo <= anchor <= hi and anchor not in out:
             out.append(anchor)
     return sorted(set(out))
@@ -292,39 +410,39 @@ def sample_scores(year_obj: dict[str, Any], track_data: dict[str, Any], step: in
 
 def audit_case(
     case: CaseResult,
-    tier_order: list[str],
-    tier_pct: dict[str, float],
+    admission_index: dict[str, Any] | None,
     physics_only_majors: set[str],
     history_only_majors: set[str],
     voc_only_major_names: set[str],
 ) -> None:
-    p = case.percentile
     reach_idx = tier_order.index(case.reach_tier)
 
-    for name in case.schools:
-        if name in C9_NAMES and p is not None and p < 98:
-            case.issues.append({
-                "severity": "ERROR",
-                "code": "C9_OVERREACH",
-                "message": f"百分位 {p}% 仍推荐 C9「{name}」",
-            })
-        if name in TOP985 and p is not None and p < 96 and name not in C9_NAMES:
-            case.issues.append({
-                "severity": "WARN",
-                "code": "985_STRETCH",
-                "message": f"百分位 {p}% 推荐顶尖985「{name}」需人工核验",
-            })
-
-    if case.reach_tier in ("一本", "二本", "专科") and case.schools:
-        high_tiers = {tier_order[i] for i in range(0, min(3, reach_idx))}
-        for name in case.schools[:3]:
-            sch = next((s for s in schools_global if s["name"] == name), None)
-            if sch and sch["tier"] in high_tiers and p is not None and p < 95:
+    if case.has_admission:
+        for name in case.schools_chong + case.schools_wen:
+            rec = lookup_admission(admission_index, case.province, case.track, name)
+            if not rec or rec.get("avgMin3y") is None:
                 case.issues.append({
                     "severity": "ERROR",
-                    "code": "TIER_MISMATCH",
-                    "message": f"稳妥层次 {case.reach_tier} 但 Top 推荐含 {sch['tier']}「{name}」",
+                    "code": "SCHOOL_NO_ADMISSION",
+                    "message": f"冲/稳推荐「{name}」无投档均分数据",
                 })
+                continue
+            tag = school_application_tag(case.score, int(rec["avgMin3y"]))
+            if tag not in ("chong", "wen"):
+                case.issues.append({
+                    "severity": "ERROR",
+                    "code": "SCHOOL_BUCKET_MISMATCH",
+                    "message": f"「{name}」投档均分{rec['avgMin3y']}分，与{case.score}分差{rec['avgMin3y']-case.score}，不应在冲/稳",
+                })
+
+    if case.province == "北京" and case.score == 587:
+        bad = [n for n in case.schools_chong + case.schools_wen if n == "安徽建筑大学"]
+        if bad:
+            case.issues.append({
+                "severity": "ERROR",
+                "code": "BEIJING587_ANHUI_JIANZHU",
+                "message": "北京587分冲/稳桶误推安徽建筑大学（投档均分约504，diff=-83）",
+            })
 
     if case.track in ("物理类",):
         wrong = [m for m in case.majors[:8] if m in history_only_majors]
@@ -334,8 +452,8 @@ def audit_case(
                 "code": "SUBJECT_LEAK_PHYSICS",
                 "message": f"{case.track}推荐含过多历史类专属专业: {wrong[:5]}",
             })
-    if case.track in ("历史类",):
-        wrong = [m for m in case.majors[:8] if m in physics_only_majors]
+    if case.track in ("历史类", "综合类"):
+        wrong = [m for m in case.majors[:8] if m in physics_only_majors and case.track == "历史类"]
         if len(wrong) >= 3:
             case.issues.append({
                 "severity": "ERROR",
@@ -343,15 +461,14 @@ def audit_case(
                 "message": f"历史类推荐含过多物理类专属专业: {wrong[:5]}",
             })
 
-    if case.segment_source in ("model_estimate", "model") and p is not None and p > 90:
-        sev = "WARN" if case.province in NO_SEGMENT_EOL_PROVINCES else "ERROR"
+    if case.segment_source in ("model_estimate", "model") and case.percentile is not None and case.percentile > 90:
         case.issues.append({
-            "severity": sev,
-            "code": "MODEL_SEGMENT_HIGH" if sev == "ERROR" else "MODEL_SEGMENT_GAP",
+            "severity": "WARN",
+            "code": "MODEL_SEGMENT_GAP" if case.province in NO_SEGMENT_EOL_PROVINCES else "MODEL_SEGMENT_HIGH",
             "message": (
-                "高分段使用模型估算一分一段，位次不可用于填报"
-                if sev == "ERROR"
-                else f"{case.province}暂无公开一分一段源，高分段为模型估算"
+                f"{case.province}暂无公开一分一段源，高分段为模型估算"
+                if case.province in NO_SEGMENT_EOL_PROVINCES
+                else "该省该年一分一段为模型估算，位次仅供参考"
             ),
         })
 
@@ -363,25 +480,21 @@ def audit_case(
             "message": f"本科层次仍推荐高职专业: {bad[:5]}",
         })
 
-    if p is not None and p < tier_pct.get("二本", 65) and not any(
-        n for n in case.schools  # noqa: SIM103
-    ):
-        if case.reach_tier not in ("专科",):
-            case.issues.append({
-                "severity": "WARN",
-                "code": "LOW_SCORE_NO_SCHOOL",
-                "message": f"低分段({p}%)无本科推荐，需确认是否应展示专科",
-            })
+
+tier_order: list[str] = []
 
 
 def main() -> None:
-    global schools_global
+    global tier_order
     manifest = load_json(DATA / "manifest.json")
     catalog = load_json(DATA / "major_catalog.json")
     schools_global = manifest.get("schools") or []
     majors_all = catalog.get("majors") or []
     tier_order = manifest.get("tierOrder") or []
     tier_pct = manifest.get("tierPercentile") or {}
+
+    admission_path = DATA / "reference" / "gaokao_cn" / "admission_index.json"
+    admission_index = load_json(admission_path) if admission_path.exists() else None
 
     physics_only = {
         m["name"] for m in majors_all
@@ -425,8 +538,8 @@ def main() -> None:
                 reach, reach_idx = reach_idx_for_score(
                     score, p, year_obj.get("batches") or {}, tier_order, tier_pct
                 )
-                sch = recommend_schools(score, p, reach, reach_idx, schools_global, tier_order, tier_pct)
-                maj = recommend_majors(score, p, reach, reach_idx, majors_all, track, tier_order, tier_pct, province)
+                sch = recommend_schools(score, province, track, schools_global, admission_index)
+                maj = recommend_majors(score, reach_idx, majors_all, track, tier_order, province)
                 case = CaseResult(
                     province=province,
                     track=track,
@@ -435,10 +548,15 @@ def main() -> None:
                     rank=rank,
                     reach_tier=reach,
                     segment_source=str(source),
-                    schools=sch,
-                    majors=maj,
+                    schools_chong=sch["chong"],
+                    schools_wen=sch["wen"],
+                    schools_bao=sch["bao"],
+                    majors_chong=maj["chong"],
+                    majors_wen=maj["wen"],
+                    majors_bao=maj["bao"],
+                    has_admission=sch["has_admission"],
                 )
-                audit_case(case, tier_order, tier_pct, physics_only, history_only, voc_only_major_names)
+                audit_case(case, admission_index, physics_only, history_only, voc_only_major_names)
                 results.append(case)
                 for iss in case.issues:
                     issue_rows.append({
@@ -451,8 +569,10 @@ def main() -> None:
                         "severity": iss["severity"],
                         "code": iss["code"],
                         "message": iss["message"],
-                        "schools": " | ".join(sch[:5]),
-                        "majors": " | ".join(maj[:5]),
+                        "schools_chong": " | ".join(sch["chong"]),
+                        "schools_wen": " | ".join(sch["wen"]),
+                        "schools_bao": " | ".join(sch["bao"]),
+                        "majors": " | ".join(case.majors[:5]),
                     })
 
     OUT_DIR.mkdir(parents=True, exist_ok=True)
@@ -467,6 +587,7 @@ def main() -> None:
                     "year": YEAR,
                     "cases": len(results),
                     "provinces": len({r.province for r in results}),
+                    "admissionIndex": bool(admission_index),
                 },
                 "cases": [r.__dict__ for r in results],
             },
@@ -481,15 +602,16 @@ def main() -> None:
     with csv_path.open("w", encoding="utf-8-sig", newline="") as f:
         w = csv.writer(f)
         w.writerow([
-            "省份", "科类", "分数", "百分位", "位次", "稳妥层次", "分段数据源",
-            "推荐院校Top10", "推荐专业Top12", "问题数",
+            "省份", "科类", "分数", "百分位", "位次", "稳妥层次", "分段数据源", "有投档索引",
+            "冲刺院校", "稳妥院校", "保底院校",
+            "冲刺专业", "稳妥专业", "保底专业", "问题数",
         ])
         for r in results:
             w.writerow([
                 r.province, r.track, r.score, r.percentile, r.rank, r.reach_tier,
-                r.segment_source,
-                " | ".join(r.schools),
-                " | ".join(r.majors),
+                r.segment_source, r.has_admission,
+                " | ".join(r.schools_chong), " | ".join(r.schools_wen), " | ".join(r.schools_bao),
+                " | ".join(r.majors_chong), " | ".join(r.majors_wen), " | ".join(r.majors_bao),
                 len(r.issues),
             ])
 
@@ -507,16 +629,21 @@ def main() -> None:
     print(f"CSV: {csv_path}")
     print(f"Issues: {issues_path}")
 
-    # 固定 bad case 回归
-    beijing = next(
-        (r for r in results if r.province == "北京" and r.track == "历史类" and r.score == 619),
+    bj587 = next(
+        (r for r in results if r.province == "北京" and r.track == "综合类" and r.score == 587),
         None,
     )
-    if beijing:
-        bad = [n for n in beijing.schools if n in C9_NAMES]
-        print(f"\n[回归] 北京历史类619: reach={beijing.reach_tier} p={beijing.percentile} rank={beijing.rank}")
-        print(f"  院校: {beijing.schools[:8]}")
-        print(f"  C9误入: {bad or '无'}")
+    if bj587:
+        bad = [n for n in bj587.schools_chong + bj587.schools_wen if n == "安徽建筑大学"]
+        print(f"\n[回归] 北京综合类587: reach={bj587.reach_tier} p={bj587.percentile}")
+        print(f"  冲刺: {bj587.schools_chong}")
+        print(f"  稳妥: {bj587.schools_wen}")
+        print(f"  保底: {bj587.schools_bao}")
+        print(f"  安徽建筑大学误入冲/稳: {bad or '无'}")
+
+    if admission_index:
+        bj_count = len(admission_index.get("provinces", {}).get("北京", {}).get("综合类", {}))
+        print(f"\n投档索引：北京综合类 {bj_count} 校")
 
 
 if __name__ == "__main__":

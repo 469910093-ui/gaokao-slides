@@ -19,6 +19,7 @@ from gaokao_crawl_lib import (
     ScrapeResult,
     SegmentRow,
     calibrate_segments_to_anchors,
+    calibrate_segments_to_anchors,
     cross_validate,
     cumulative_at,
     detect_track,
@@ -320,11 +321,50 @@ def downsample_segments(segments, undergrad: int, max_score: int):
 
 def enrich_track_payload(result: ScrapeResult, cfg: dict[str, int]) -> dict[str, Any]:
     segments = [s for s in result.segments if s.score >= cfg["undergrad"] - 80]
-    segments = downsample_segments(segments, cfg["undergrad"], cfg["max"])
     segments = normalize_segment_rows(segments)
+    high_trust = result.confidence in (
+        "verified",
+        "verified_multi_source",
+        "partially_verified",
+    )
+    if not high_trust or len(segments) > 240:
+        segments = downsample_segments(segments, cfg["undergrad"], cfg["max"])
+        segments = normalize_segment_rows(segments)
     segments = densify_segments(segments, step=2)
-    segments = smooth_segment_counts(segments, window=5)
-    total = result.total or max((s.cumulative for s in segments), default=0)
+    segments = normalize_segment_rows(segments)
+
+    rank_anchors = getattr(result, "rank_anchors", None) or {}
+
+    bottom_cum = max((s.cumulative for s in segments), default=0)
+    stated_total = result.total or bottom_cum
+    if rank_anchors:
+        stated_total = max(stated_total, max(rank_anchors.values(), default=0))
+    if bottom_cum > 0 and stated_total > 0 and abs(bottom_cum - stated_total) / stated_total > 0.02 and not rank_anchors:
+        ratio = stated_total / bottom_cum
+        scaled: list[SegmentRow] = []
+        prev_cum = 0
+        for seg in sorted(segments, key=lambda s: s.score, reverse=True):
+            new_cum = max(prev_cum, int(round(seg.cumulative * ratio)))
+            new_count = max(0, new_cum - prev_cum)
+            scaled.append(SegmentRow(seg.score, new_count, new_cum))
+            prev_cum = new_cum
+        segments = normalize_segment_rows(scaled)
+        bottom_cum = max((s.cumulative for s in segments), default=stated_total)
+    total = stated_total if stated_total > 0 else bottom_cum
+    if bottom_cum > 0 and total > 0 and abs(bottom_cum - total) / total > 0.01:
+        total = bottom_cum
+
+    if rank_anchors:
+        by_score = {seg.score: seg for seg in segments}
+        for score, expected_rank in rank_anchors.items():
+            if score in by_score:
+                seg = by_score[score]
+                by_score[score] = SegmentRow(score, seg.count, int(expected_rank))
+            else:
+                by_score[score] = SegmentRow(score, 1, int(expected_rank))
+        segments = normalize_segment_rows(list(by_score.values()))
+        total = max(total, max((s.cumulative for s in segments), default=total))
+
     enriched = []
     for seg in segments:
         share = round(seg.count / total * 100, 4) if total else 0
@@ -336,6 +376,7 @@ def enrich_track_payload(result: ScrapeResult, cfg: dict[str, int]) -> dict[str,
             "c": seg.cumulative,
             "n": seg.count,
         })
+    data_gap = result.source == "model" or result.confidence == "model_estimate"
     return {
         "totalCandidates": total,
         "segments": enriched,
@@ -343,6 +384,7 @@ def enrich_track_payload(result: ScrapeResult, cfg: dict[str, int]) -> dict[str,
         "sourceUrl": result.url,
         "confidence": result.confidence,
         "confidenceScore": result.confidence_score,
+        "dataGap": data_gap,
         "validation": {
             "structural": result.structural,
             "crossChecks": result.cross_checks,
@@ -427,20 +469,31 @@ def resolve_track_data(
                     break
 
     if result:
-        if result.confidence_score < 0.8 and zizzs and len(zizzs) >= 2:
-            result.segments, result.total, checks, confidence, score = maybe_calibrate_segments(
-                result.segments,
-                result.total,
-                track,
-                result.anchors,
-                zizzs,
-                result.cross_checks,
-                result.confidence,
-                result.confidence_score,
-            )
-            result.cross_checks = checks
-            result.confidence = confidence
-            result.confidence_score = score
+        if zizzs:
+            cal_segs, cal_total = calibrate_segments_to_anchors(result.segments, result.total, zizzs)
+            if cal_segs:
+                checks, confidence, score = cross_validate(
+                    cal_segs, track, result.anchors, zizzs
+                )
+                result.segments, result.total = cal_segs, cal_total
+                result.cross_checks = checks
+                result.confidence = confidence
+                result.confidence_score = max(score, result.confidence_score)
+                result.rank_anchors = dict(zizzs)
+            elif result.confidence_score < 0.95 and len(zizzs) >= 2:
+                result.segments, result.total, checks, confidence, score = maybe_calibrate_segments(
+                    result.segments,
+                    result.total,
+                    track,
+                    result.anchors,
+                    zizzs,
+                    result.cross_checks,
+                    result.confidence,
+                    result.confidence_score,
+                )
+                result.cross_checks = checks
+                result.confidence = confidence
+                result.confidence_score = score
         return enrich_track_payload(result, cfg)
 
     segments, total = synthesize_segments(cfg, track)

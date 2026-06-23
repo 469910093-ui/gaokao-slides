@@ -1,0 +1,130 @@
+[
+  {
+    "province": "上海",
+    "year": 2023,
+    "track": "综合",
+    "batch": "本科批",
+    "controlScore": 483,
+    "source": "gaokao.cn"
+  },
+  {
+    "province": "上海",
+    "year": 2023,
+    "track": "综合",
+    "batch": "本科批",
+    "controlScore": 448,
+    "source": "gaokao.cn"
+  },
+  {
+    "province": "上海",
+    "year": 2023,
+    "track": "综合",
+    "batch": "本科批",
+    "controlScore": 405,
+    "source": "gaokao.cn"
+  },
+  {
+    "province": "上海",
+    "year": 2023,
+    "track": "综合",
+    "batch": "本科批A段",
+    "controlScore": 472,
+    "source": "gaokao.cn"
+  },
+  {
+    "province": "上海",
+    "year": 2023,
+    "track": "综合",
+    "batch": "平行录取一段",
+    "controlScore": 488,
+    "source": "gaokao.cn"
+  },
+  {
+    "province": "上海",
+    "year": 2023,
+    "track": "综合",
+    "batch": "普通类一段",
+    "controlScore": 443,
+    "source": "gaokao.cn"
+  },
+  {
+    "province": "上海",
+    "year": 2023,
+    "track": "综合",
+    "batch": "本科批B段",
+    "controlScore": 472,
+    "source": "gaokao.cn"
+  },
+  {
+    "province": "上海",
+    "year": 2023,
+    "track": "综合",
+    "batch": "平行录取二段",
+    "controlScore": 274,
+    "source": "gaokao.cn"
+  },
+  {
+    "province": "上海",
+    "year": 2023,
+    "track": "综合",
+    "batch": "普通类二段",
+    "controlScore": 150,
+    "source": "gaokao.cn"
+  },
+  {
+    "province": "上海",
+    "year": 2023,
+    "track": "综合",
+    "batch": "本科提前批",
+    "controlScore": 483,
+    "source": "gaokao.cn"
+  },
+  {
+    "province": "上海",
+    "year": 2023,
+    "track": "综合",
+    "batch": "本科提前批",
+    "controlScore": 569,
+    "source": "gaokao.cn"
+  },
+  {
+    "province": "上海",
+    "year": 2023,
+    "track": "综合",
+    "batch": "本科提前批A段",
+    "controlScore": 527,
+    "source": "gaokao.cn"
+  },
+  {
+    "province": "上海",
+    "year": 2023,
+    "track": "综合",
+    "batch": "专科批",
+    "controlScore": 250,
+    "source": "gaokao.cn"
+  },
+  {
+    "province": "上海",
+    "year": 2023,
+    "track": "综合",
+    "batch": "专科批",
+    "controlScore": 160,
+    "source": "gaokao.cn"
+  },
+  {
+    "province": "上海",
+    "year": 2023,
+    "track": "综合",
+    "batch": "专科批",
+    "controlScore": 100,
+    "source": "gaokao.cn"
+  },
+  {
+    "province": "上海",
+    "year": 2023,
+    "track": "综合",
+    "batch": "专科批",
+    "controlScore": 120,
+    "source": "gaokao.cn"
+  }
+]

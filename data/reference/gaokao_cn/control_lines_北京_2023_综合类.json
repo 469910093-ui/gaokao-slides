@@ -1,0 +1,930 @@
+[
+  {
+    "province": "北京",
+    "year": 2023,
+    "track": "综合",
+    "batch": "本科批",
+    "controlScore": 483,
+    "source": "gaokao.cn"
+  },
+  {
+    "province": "北京",
+    "year": 2023,
+    "track": "物理类",
+    "batch": "本科批",
+    "controlScore": 360,
+    "source": "gaokao.cn"
+  },
+  {
+    "province": "北京",
+    "year": 2023,
+    "track": "物理类",
+    "batch": "本科批",
+    "controlScore": 439,
+    "source": "gaokao.cn"
+  },
+  {
+    "province": "北京",
+    "year": 2023,
+    "track": "物理类",
+    "batch": "本科批",
+    "controlScore": 448,
+    "source": "gaokao.cn"
+  },
+  {
+    "province": "北京",
+    "year": 2023,
+    "track": "物理类",
+    "batch": "本科批",
+    "controlScore": 424,
+    "source": "gaokao.cn"
+  },
+  {
+    "province": "北京",
+    "year": 2023,
+    "track": "综合",
+    "batch": "本科批",
+    "controlScore": 448,
+    "source": "gaokao.cn"
+  },
+  {
+    "province": "北京",
+    "year": 2023,
+    "track": "物理类",
+    "batch": "本科批",
+    "controlScore": 431,
+    "source": "gaokao.cn"
+  },
+  {
+    "province": "北京",
+    "year": 2023,
+    "track": "物理类",
+    "batch": "本科批",
+    "controlScore": 406,
+    "source": "gaokao.cn"
+  },
+  {
+    "province": "北京",
+    "year": 2023,
+    "track": "物理类",
+    "batch": "本科批",
+    "controlScore": 415,
+    "source": "gaokao.cn"
+  },
+  {
+    "province": "北京",
+    "year": 2023,
+    "track": "历史类",
+    "batch": "本科批",
+    "controlScore": 433,
+    "source": "gaokao.cn"
+  },
+  {
+    "province": "北京",
+    "year": 2023,
+    "track": "历史类",
+    "batch": "本科批",
+    "controlScore": 474,
+    "source": "gaokao.cn"
+  },
+  {
+    "province": "北京",
+    "year": 2023,
+    "track": "历史类",
+    "batch": "本科批",
+    "controlScore": 453,
+    "source": "gaokao.cn"
+  },
+  {
+    "province": "北京",
+    "year": 2023,
+    "track": "历史类",
+    "batch": "本科批",
+    "controlScore": 430,
+    "source": "gaokao.cn"
+  },
+  {
+    "province": "北京",
+    "year": 2023,
+    "track": "历史类",
+    "batch": "本科批",
+    "controlScore": 426,
+    "source": "gaokao.cn"
+  },
+  {
+    "province": "北京",
+    "year": 2023,
+    "track": "历史类",
+    "batch": "本科批",
+    "controlScore": 404,
+    "source": "gaokao.cn"
+  },
+  {
+    "province": "北京",
+    "year": 2023,
+    "track": "历史类",
+    "batch": "本科批",
+    "controlScore": 407,
+    "source": "gaokao.cn"
+  },
+  {
+    "province": "北京",
+    "year": 2023,
+    "track": "历史类",
+    "batch": "本科批",
+    "controlScore": 428,
+    "source": "gaokao.cn"
+  },
+  {
+    "province": "北京",
+    "year": 2023,
+    "track": "综合",
+    "batch": "本科批",
+    "controlScore": 405,
+    "source": "gaokao.cn"
+  },
+  {
+    "province": "北京",
+    "year": 2023,
+    "track": "综合",
+    "batch": "本科批A段",
+    "controlScore": 472,
+    "source": "gaokao.cn"
+  },
+  {
+    "province": "北京",
+    "year": 2023,
+    "track": "理科",
+    "batch": "本科一段",
+    "controlScore": 330,
+    "source": "gaokao.cn"
+  },
+  {
+    "province": "北京",
+    "year": 2023,
+    "track": "文科",
+    "batch": "本科一段",
+    "controlScore": 406,
+    "source": "gaokao.cn"
+  },
+  {
+    "province": "北京",
+    "year": 2023,
+    "track": "理科",
+    "batch": "本科一批A1段",
+    "controlScore": 480,
+    "source": "gaokao.cn"
+  },
+  {
+    "province": "北京",
+    "year": 2023,
+    "track": "文科",
+    "batch": "本科一批A1段",
+    "controlScore": 490,
+    "source": "gaokao.cn"
+  },
+  {
+    "province": "北京",
+    "year": 2023,
+    "track": "理科",
+    "batch": "本科一批",
+    "controlScore": 443,
+    "source": "gaokao.cn"
+  },
+  {
+    "province": "北京",
+    "year": 2023,
+    "track": "理科",
+    "batch": "本科一批",
+    "controlScore": 485,
+    "source": "gaokao.cn"
+  },
+  {
+    "province": "北京",
+    "year": 2023,
+    "track": "理科",
+    "batch": "本科一批",
+    "controlScore": 520,
+    "source": "gaokao.cn"
+  },
+  {
+    "province": "北京",
+    "year": 2023,
+    "track": "理科",
+    "batch": "本科一批",
+    "controlScore": 514,
+    "source": "gaokao.cn"
+  },
+  {
+    "province": "北京",
+    "year": 2023,
+    "track": "理科",
+    "batch": "本科一批",
+    "controlScore": 482,
+    "source": "gaokao.cn"
+  },
+  {
+    "province": "北京",
+    "year": 2023,
+    "track": "理科",
+    "batch": "本科一批",
+    "controlScore": 475,
+    "source": "gaokao.cn"
+  },
+  {
+    "province": "北京",
+    "year": 2023,
+    "track": "理科",
+    "batch": "本科一批",
+    "controlScore": 518,
+    "source": "gaokao.cn"
+  },
+  {
+    "province": "北京",
+    "year": 2023,
+    "track": "文科",
+    "batch": "本科一批",
+    "controlScore": 547,
+    "source": "gaokao.cn"
+  },
+  {
+    "province": "北京",
+    "year": 2023,
+    "track": "理科",
+    "batch": "本科一批",
+    "controlScore": 459,
+    "source": "gaokao.cn"
+  },
+  {
+    "province": "北京",
+    "year": 2023,
+    "track": "理科",
+    "batch": "本科一批A段",
+    "controlScore": 480,
+    "source": "gaokao.cn"
+  },
+  {
+    "province": "北京",
+    "year": 2023,
+    "track": "文科",
+    "batch": "本科一批",
+    "controlScore": 545,
+    "source": "gaokao.cn"
+  },
+  {
+    "province": "北京",
+    "year": 2023,
+    "track": "理科",
+    "batch": "本科一批",
+    "controlScore": 434,
+    "source": "gaokao.cn"
+  },
+  {
+    "province": "北京",
+    "year": 2023,
+    "track": "文科",
+    "batch": "本科一批",
+    "controlScore": 530,
+    "source": "gaokao.cn"
+  },
+  {
+    "province": "北京",
+    "year": 2023,
+    "track": "理科",
+    "batch": "本科一批A段",
+    "controlScore": 463,
+    "source": "gaokao.cn"
+  },
+  {
+    "province": "北京",
+    "year": 2023,
+    "track": "文科",
+    "batch": "本科一批",
+    "controlScore": 489,
+    "source": "gaokao.cn"
+  },
+  {
+    "province": "北京",
+    "year": 2023,
+    "track": "理科",
+    "batch": "本科一批A段",
+    "controlScore": 408,
+    "source": "gaokao.cn"
+  },
+  {
+    "province": "北京",
+    "year": 2023,
+    "track": "文科",
+    "batch": "本科一批",
+    "controlScore": 528,
+    "source": "gaokao.cn"
+  },
+  {
+    "province": "北京",
+    "year": 2023,
+    "track": "理科",
+    "batch": "本科一批I段",
+    "controlScore": 433,
+    "source": "gaokao.cn"
+  },
+  {
+    "province": "北京",
+    "year": 2023,
+    "track": "理科",
+    "batch": "本科一批",
+    "controlScore": 396,
+    "source": "gaokao.cn"
+  },
+  {
+    "province": "北京",
+    "year": 2023,
+    "track": "文科",
+    "batch": "本科一批",
+    "controlScore": 533,
+    "source": "gaokao.cn"
+  },
+  {
+    "province": "北京",
+    "year": 2023,
+    "track": "文科",
+    "batch": "本科一批",
+    "controlScore": 495,
+    "source": "gaokao.cn"
+  },
+  {
+    "province": "北京",
+    "year": 2023,
+    "track": "文科",
+    "batch": "本科一批",
+    "controlScore": 468,
+    "source": "gaokao.cn"
+  },
+  {
+    "province": "北京",
+    "year": 2023,
+    "track": "文科",
+    "batch": "本科一批",
+    "controlScore": 527,
+    "source": "gaokao.cn"
+  },
+  {
+    "province": "北京",
+    "year": 2023,
+    "track": "理科",
+    "batch": "本科一批",
+    "controlScore": 397,
+    "source": "gaokao.cn"
+  },
+  {
+    "province": "北京",
+    "year": 2023,
+    "track": "文科",
+    "batch": "本科一批",
+    "controlScore": 488,
+    "source": "gaokao.cn"
+  },
+  {
+    "province": "北京",
+    "year": 2023,
+    "track": "文科",
+    "batch": "本科一批I段",
+    "controlScore": 488,
+    "source": "gaokao.cn"
+  },
+  {
+    "province": "北京",
+    "year": 2023,
+    "track": "文科",
+    "batch": "本科一批A段",
+    "controlScore": 490,
+    "source": "gaokao.cn"
+  },
+  {
+    "province": "北京",
+    "year": 2023,
+    "track": "文科",
+    "batch": "本科一批A段",
+    "controlScore": 485,
+    "source": "gaokao.cn"
+  },
+  {
+    "province": "北京",
+    "year": 2023,
+    "track": "文科",
+    "batch": "本科一批",
+    "controlScore": 458,
+    "source": "gaokao.cn"
+  },
+  {
+    "province": "北京",
+    "year": 2023,
+    "track": "文科",
+    "batch": "本科一批A段",
+    "controlScore": 430,
+    "source": "gaokao.cn"
+  },
+  {
+    "province": "北京",
+    "year": 2023,
+    "track": "蒙授文科",
+    "batch": "本科一批",
+    "controlScore": 449,
+    "source": "gaokao.cn"
+  },
+  {
+    "province": "北京",
+    "year": 2023,
+    "track": "蒙授理科",
+    "batch": "本科一批",
+    "controlScore": 385,
+    "source": "gaokao.cn"
+  },
+  {
+    "province": "北京",
+    "year": 2023,
+    "track": "理科",
+    "batch": "本科一批B段",
+    "controlScore": 434,
+    "source": "gaokao.cn"
+  },
+  {
+    "province": "北京",
+    "year": 2023,
+    "track": "文科",
+    "batch": "本科一批B段",
+    "controlScore": 468,
+    "source": "gaokao.cn"
+  },
+  {
+    "province": "北京",
+    "year": 2023,
+    "track": "理科",
+    "batch": "本科一批B段",
+    "controlScore": 480,
+    "source": "gaokao.cn"
+  },
+  {
+    "province": "北京",
+    "year": 2023,
+    "track": "文科",
+    "batch": "本科一批B段",
+    "controlScore": 490,
+    "source": "gaokao.cn"
+  },
+  {
+    "province": "北京",
+    "year": 2023,
+    "track": "理科",
+    "batch": "本科一批B段",
+    "controlScore": 408,
+    "source": "gaokao.cn"
+  },
+  {
+    "province": "北京",
+    "year": 2023,
+    "track": "文科",
+    "batch": "本科一批B段",
+    "controlScore": 430,
+    "source": "gaokao.cn"
+  },
+  {
+    "province": "北京",
+    "year": 2023,
+    "track": "综合",
+    "batch": "平行录取一段",
+    "controlScore": 488,
+    "source": "gaokao.cn"
+  },
+  {
+    "province": "北京",
+    "year": 2023,
+    "track": "综合",
+    "batch": "普通类一段",
+    "controlScore": 443,
+    "source": "gaokao.cn"
+  },
+  {
+    "province": "北京",
+    "year": 2023,
+    "track": "文科",
+    "batch": "本科一批预科",
+    "controlScore": 530,
+    "source": "gaokao.cn"
+  },
+  {
+    "province": "北京",
+    "year": 2023,
+    "track": "理科",
+    "batch": "本科一批预科",
+    "controlScore": 485,
+    "source": "gaokao.cn"
+  },
+  {
+    "province": "北京",
+    "year": 2023,
+    "track": "文科",
+    "batch": "本科二段",
+    "controlScore": 378,
+    "source": "gaokao.cn"
+  },
+  {
+    "province": "北京",
+    "year": 2023,
+    "track": "理科",
+    "batch": "本科二段",
+    "controlScore": 309,
+    "source": "gaokao.cn"
+  },
+  {
+    "province": "北京",
+    "year": 2023,
+    "track": "文科",
+    "batch": "本科二批",
+    "controlScore": 465,
+    "source": "gaokao.cn"
+  },
+  {
+    "province": "北京",
+    "year": 2023,
+    "track": "文科",
+    "batch": "本科二批",
+    "controlScore": 477,
+    "source": "gaokao.cn"
+  },
+  {
+    "province": "北京",
+    "year": 2023,
+    "track": "文科",
+    "batch": "本科二批",
+    "controlScore": 472,
+    "source": "gaokao.cn"
+  },
+  {
+    "province": "北京",
+    "year": 2023,
+    "track": "理科",
+    "batch": "本科二批",
+    "controlScore": 433,
+    "source": "gaokao.cn"
+  },
+  {
+    "province": "北京",
+    "year": 2023,
+    "track": "文科",
+    "batch": "本科二批",
+    "controlScore": 458,
+    "source": "gaokao.cn"
+  },
+  {
+    "province": "北京",
+    "year": 2023,
+    "track": "理科",
+    "batch": "本科二批",
+    "controlScore": 409,
+    "source": "gaokao.cn"
+  },
+  {
+    "province": "北京",
+    "year": 2023,
+    "track": "文科",
+    "batch": "本科二批",
+    "controlScore": 428,
+    "source": "gaokao.cn"
+  },
+  {
+    "province": "北京",
+    "year": 2023,
+    "track": "理科",
+    "batch": "本科二批",
+    "controlScore": 445,
+    "source": "gaokao.cn"
+  },
+  {
+    "province": "北京",
+    "year": 2023,
+    "track": "文科",
+    "batch": "本科二批",
+    "controlScore": 421,
+    "source": "gaokao.cn"
+  },
+  {
+    "province": "北京",
+    "year": 2023,
+    "track": "理科",
+    "batch": "本科二批",
+    "controlScore": 427,
+    "source": "gaokao.cn"
+  },
+  {
+    "province": "北京",
+    "year": 2023,
+    "track": "文科",
+    "batch": "本科二批",
+    "controlScore": 440,
+    "source": "gaokao.cn"
+  },
+  {
+    "province": "北京",
+    "year": 2023,
+    "track": "文科",
+    "batch": "本科二批",
+    "controlScore": 403,
+    "source": "gaokao.cn"
+  },
+  {
+    "province": "北京",
+    "year": 2023,
+    "track": "文科",
+    "batch": "本科二批K段",
+    "controlScore": 420,
+    "source": "gaokao.cn"
+  },
+  {
+    "province": "北京",
+    "year": 2023,
+    "track": "理科",
+    "batch": "本科二批",
+    "controlScore": 347,
+    "source": "gaokao.cn"
+  },
+  {
+    "province": "北京",
+    "year": 2023,
+    "track": "文科",
+    "batch": "本科二批",
+    "controlScore": 379,
+    "source": "gaokao.cn"
+  },
+  {
+    "province": "北京",
+    "year": 2023,
+    "track": "理科",
+    "batch": "本科二批",
+    "controlScore": 371,
+    "source": "gaokao.cn"
+  },
+  {
+    "province": "北京",
+    "year": 2023,
+    "track": "文科",
+    "batch": "本科二批",
+    "controlScore": 354,
+    "source": "gaokao.cn"
+  },
+  {
+    "province": "北京",
+    "year": 2023,
+    "track": "理科",
+    "batch": "本科二批",
+    "controlScore": 336,
+    "source": "gaokao.cn"
+  },
+  {
+    "province": "北京",
+    "year": 2023,
+    "track": "理科",
+    "batch": "本科二批",
+    "controlScore": 333,
+    "source": "gaokao.cn"
+  },
+  {
+    "province": "北京",
+    "year": 2023,
+    "track": "理科",
+    "batch": "本科二批K段",
+    "controlScore": 337,
+    "source": "gaokao.cn"
+  },
+  {
+    "province": "北京",
+    "year": 2023,
+    "track": "理科",
+    "batch": "本科二批",
+    "controlScore": 285,
+    "source": "gaokao.cn"
+  },
+  {
+    "province": "北京",
+    "year": 2023,
+    "track": "理科",
+    "batch": "本科二批",
+    "controlScore": 340,
+    "source": "gaokao.cn"
+  },
+  {
+    "province": "北京",
+    "year": 2023,
+    "track": "综合",
+    "batch": "本科批B段",
+    "controlScore": 472,
+    "source": "gaokao.cn"
+  },
+  {
+    "province": "北京",
+    "year": 2023,
+    "track": "综合",
+    "batch": "平行录取二段",
+    "controlScore": 274,
+    "source": "gaokao.cn"
+  },
+  {
+    "province": "北京",
+    "year": 2023,
+    "track": "综合",
+    "batch": "普通类二段",
+    "controlScore": 150,
+    "source": "gaokao.cn"
+  },
+  {
+    "province": "北京",
+    "year": 2023,
+    "track": "文科",
+    "batch": "本科二批A段",
+    "controlScore": 341,
+    "source": "gaokao.cn"
+  },
+  {
+    "province": "北京",
+    "year": 2023,
+    "track": "文科",
+    "batch": "本科二批A段",
+    "controlScore": 418,
+    "source": "gaokao.cn"
+  },
+  {
+    "province": "北京",
+    "year": 2023,
+    "track": "理科",
+    "batch": "本科二批A段",
+    "controlScore": 396,
+    "source": "gaokao.cn"
+  },
+  {
+    "province": "北京",
+    "year": 2023,
+    "track": "理科",
+    "batch": "本科二批A段",
+    "controlScore": 292,
+    "source": "gaokao.cn"
+  },
+  {
+    "province": "北京",
+    "year": 2023,
+    "track": "理科",
+    "batch": "本科二批A段",
+    "controlScore": 287,
+    "source": "gaokao.cn"
+  },
+  {
+    "province": "北京",
+    "year": 2023,
+    "track": "理科",
+    "batch": "本科二批B段",
+    "controlScore": 396,
+    "source": "gaokao.cn"
+  },
+  {
+    "province": "北京",
+    "year": 2023,
+    "track": "文科",
+    "batch": "本科二批B段",
+    "controlScore": 379,
+    "source": "gaokao.cn"
+  },
+  {
+    "province": "北京",
+    "year": 2023,
+    "track": "理科",
+    "batch": "本科二批B段",
+    "controlScore": 333,
+    "source": "gaokao.cn"
+  },
+  {
+    "province": "北京",
+    "year": 2023,
+    "track": "文科",
+    "batch": "本科二批及预科",
+    "controlScore": 465,
+    "source": "gaokao.cn"
+  },
+  {
+    "province": "北京",
+    "year": 2023,
+    "track": "理科",
+    "batch": "本科二批及预科",
+    "controlScore": 405,
+    "source": "gaokao.cn"
+  },
+  {
+    "province": "北京",
+    "year": 2023,
+    "track": "文科",
+    "batch": "本科二批C段",
+    "controlScore": 369,
+    "source": "gaokao.cn"
+  },
+  {
+    "province": "北京",
+    "year": 2023,
+    "track": "理科",
+    "batch": "本科二批C段",
+    "controlScore": 344,
+    "source": "gaokao.cn"
+  },
+  {
+    "province": "北京",
+    "year": 2023,
+    "track": "综合",
+    "batch": "本科提前批",
+    "controlScore": 569,
+    "source": "gaokao.cn"
+  },
+  {
+    "province": "北京",
+    "year": 2023,
+    "track": "综合",
+    "batch": "本科提前批",
+    "controlScore": 483,
+    "source": "gaokao.cn"
+  },
+  {
+    "province": "北京",
+    "year": 2023,
+    "track": "理科",
+    "batch": "本科提前批",
+    "controlScore": 520,
+    "source": "gaokao.cn"
+  },
+  {
+    "province": "北京",
+    "year": 2023,
+    "track": "理科",
+    "batch": "本科提前批",
+    "controlScore": 482,
+    "source": "gaokao.cn"
+  },
+  {
+    "province": "北京",
+    "year": 2023,
+    "track": "物理类",
+    "batch": "本科提前批",
+    "controlScore": 448,
+    "source": "gaokao.cn"
+  },
+  {
+    "province": "北京",
+    "year": 2023,
+    "track": "理科",
+    "batch": "本科提前批",
+    "controlScore": 518,
+    "source": "gaokao.cn"
+  },
+  {
+    "province": "北京",
+    "year": 2023,
+    "track": "历史类",
+    "batch": "本科提前批",
+    "controlScore": 474,
+    "source": "gaokao.cn"
+  },
+  {
+    "province": "北京",
+    "year": 2023,
+    "track": "文科",
+    "batch": "本科提前批",
+    "controlScore": 533,
+    "source": "gaokao.cn"
+  },
+  {
+    "province": "北京",
+    "year": 2023,
+    "track": "文科",
+    "batch": "本科提前批",
+    "controlScore": 495,
+    "source": "gaokao.cn"
+  },
+  {
+    "province": "北京",
+    "year": 2023,
+    "track": "文科",
+    "batch": "本科提前批",
+    "controlScore": 527,
+    "source": "gaokao.cn"
+  },
+  {
+    "province": "北京",
+    "year": 2023,
+    "track": "文科",
+    "batch": "本科提前批",
+    "controlScore": 488,
+    "source": "gaokao.cn"
+  },
+  {
+    "province": "北京",
+    "year": 2023,
+    "track": "理科",
+    "batch": "本科提前批",
+    "controlScore": 397,
+    "source": "gaokao.cn"
+  }
+]

@@ -112,8 +112,8 @@ def icon_kind(text: str, emoji: str = "") -> str:
     return "dot"
 
 
-def text_col_w(card_w: int) -> int:
-    return card_w - ICON_LANE - 20
+def text_col_w(card_w: int, lane: int | None = None) -> int:
+    return card_w - (lane or ICON_LANE) - 16
 
 
 def title_desc_fonts() -> tuple[ImageFont.FreeTypeFont, ImageFont.FreeTypeFont]:
@@ -222,18 +222,21 @@ def fit_title_fill(
     tw: int,
     max_block_h: int,
 ) -> ImageFont.FreeTypeFont:
-    best = load_font(FS_ROW_TITLE, bold=True)
-    best_bh = 0
-    cap = min(128, FS_ROW_TITLE + max(48, int(max_block_h * 0.72)))
-    for ts in range(cap, FS_ROW_TITLE - 4, -3):
+    ts = min(128, max(FS_ROW_TITLE, int(max_block_h * 0.68)))
+    tf = load_font(ts, bold=True)
+    bh = measure_list_block(draw, highlight, "", tw, tf, load_font(FS_ROW_DESC))
+    while bh < max_block_h * 0.92 and ts < 128:
+        ts += 4
         tf = load_font(ts, bold=True)
-        lines = wrap_cn(draw, highlight, tf, tw)
-        _, th = measure_lines(draw, lines, tf, HL_LINE_GAP)
-        bh = th + ROW_PAD_Y * 2
-        if bh <= max_block_h and bh >= best_bh:
-            best_bh = bh
-            best = tf
-    return best
+        nbh = measure_list_block(draw, highlight, "", tw, tf, load_font(FS_ROW_DESC))
+        if nbh > max_block_h:
+            break
+        bh = nbh
+    while bh > max_block_h and ts > FS_ROW_TITLE:
+        ts -= 3
+        tf = load_font(ts, bold=True)
+        bh = measure_list_block(draw, highlight, "", tw, tf, load_font(FS_ROW_DESC))
+    return tf
 
 
 def fit_fonts_to_row(
@@ -247,19 +250,24 @@ def fit_fonts_to_row(
     if not desc.strip():
         return fit_title_fill(draw, highlight, tw, max_block_h), load_font(FS_ROW_DESC)
 
-    best_tf, best_df = title_desc_fonts()
-    best_bh = 0
-    ts_cap = min(112, FS_ROW_TITLE + max(40, int(max_block_h * 0.55)))
-    ds_cap = min(92, FS_ROW_DESC + max(28, int(max_block_h * 0.35)))
-    for ts in range(ts_cap, FS_ROW_TITLE - 4, -3):
-        for ds in range(min(ds_cap, ts - 6), FS_ROW_DESC - 4, -3):
-            tf = load_font(ts, bold=True)
-            df = load_font(ds)
-            bh = measure_list_block(draw, highlight, desc, tw, tf, df)
-            if bh <= max_block_h and bh >= best_bh:
-                best_bh = bh
-                best_tf, best_df = tf, df
-    return best_tf, best_df
+    ts = min(112, max(FS_ROW_TITLE, int(max_block_h * 0.46)))
+    ds = min(92, max(FS_ROW_DESC, int(max_block_h * 0.30)))
+    tf, df = load_font(ts, bold=True), load_font(ds)
+    bh = measure_list_block(draw, highlight, desc, tw, tf, df)
+    while bh < max_block_h * 0.92 and ts < 112:
+        ts += 3
+        ds = min(92, ds + 2)
+        tf, df = load_font(ts, bold=True), load_font(ds)
+        nbh = measure_list_block(draw, highlight, desc, tw, tf, df)
+        if nbh > max_block_h:
+            break
+        bh = nbh
+    while bh > max_block_h and ts > FS_ROW_TITLE:
+        ts -= 2
+        ds = max(FS_ROW_DESC - 4, ds - 2)
+        tf, df = load_font(ts, bold=True), load_font(ds)
+        bh = measure_list_block(draw, highlight, desc, tw, tf, df)
+    return tf, df
 
 
 def draw_list_row(
@@ -274,13 +282,14 @@ def draw_list_row(
     theme: dict[str, str],
 ) -> None:
     draw_round_card(draw, (x, y, x + w, y + h), theme)
-    icon_sz = min(220, max(ICON_SIZE, int(h * 0.62)))
-    icon_x = x + ICON_LANE // 2
+    icon_sz = min(200, max(ICON_SIZE, int(h * 0.56)))
+    lane = max(ICON_LANE, icon_sz + 28)
+    icon_x = x + lane // 2
     icon_y = y + h // 2
     draw_flat_icon(draw, icon_x, icon_y, icon_sz, kind, theme)
 
-    tx = x + ICON_LANE + 6
-    tw = text_col_w(w)
+    tx = x + lane + 8
+    tw = w - lane - 16
     inner_h = h - ROW_PAD_Y * 2
     title_font, desc_font = fit_fonts_to_row(draw, highlight, desc, tw, inner_h)
     block_h = measure_list_block(draw, highlight, desc, tw, title_font, desc_font)

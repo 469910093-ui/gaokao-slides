@@ -5,6 +5,7 @@ from __future__ import annotations
 import html
 import json
 import re
+from functools import lru_cache
 from pathlib import Path
 
 from PIL import Image, ImageDraw, ImageFont
@@ -803,6 +804,7 @@ PUBLISH = {
 }
 
 
+@lru_cache(maxsize=512)
 def load_font(size: int, bold: bool = False, emoji: bool = False) -> ImageFont.FreeTypeFont | ImageFont.ImageFont:
     if emoji:
         for path in [

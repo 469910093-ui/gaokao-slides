@@ -1,0 +1,82 @@
+[
+  {
+    "province": "浙江",
+    "year": 2025,
+    "track": "综合",
+    "batch": "本科批",
+    "controlScore": 480,
+    "source": "gaokao.cn"
+  },
+  {
+    "province": "浙江",
+    "year": 2025,
+    "track": "综合",
+    "batch": "本科批",
+    "controlScore": 430,
+    "source": "gaokao.cn"
+  },
+  {
+    "province": "浙江",
+    "year": 2025,
+    "track": "综合",
+    "batch": "本科批",
+    "controlScore": 402,
+    "source": "gaokao.cn"
+  },
+  {
+    "province": "浙江",
+    "year": 2025,
+    "track": "综合",
+    "batch": "普通类一段",
+    "controlScore": 490,
+    "source": "gaokao.cn"
+  },
+  {
+    "province": "浙江",
+    "year": 2025,
+    "track": "综合",
+    "batch": "普通类一段",
+    "controlScore": 441,
+    "source": "gaokao.cn"
+  },
+  {
+    "province": "浙江",
+    "year": 2025,
+    "track": "综合",
+    "batch": "普通类二段",
+    "controlScore": 268,
+    "source": "gaokao.cn"
+  },
+  {
+    "province": "浙江",
+    "year": 2025,
+    "track": "综合",
+    "batch": "普通类二段",
+    "controlScore": 150,
+    "source": "gaokao.cn"
+  },
+  {
+    "province": "浙江",
+    "year": 2025,
+    "track": "综合",
+    "batch": "本科提前批A段",
+    "controlScore": 519,
+    "source": "gaokao.cn"
+  },
+  {
+    "province": "浙江",
+    "year": 2025,
+    "track": "综合",
+    "batch": "专科批",
+    "controlScore": 246,
+    "source": "gaokao.cn"
+  },
+  {
+    "province": "浙江",
+    "year": 2025,
+    "track": "综合",
+    "batch": "专科批",
+    "controlScore": 100,
+    "source": "gaokao.cn"
+  }
+]

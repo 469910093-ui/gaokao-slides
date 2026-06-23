@@ -104,6 +104,12 @@ ZIZZS_ANCHOR_PAGES: list[tuple[str, int, str, str]] = [
     ("河北", 2025, "物理类", "https://www.zizzs.com/gk/gaokao/203615.html"),
 ]
 
+# 验收/交叉验证用公开位次锚点（省考试院公布或权威媒体转载）
+OFFICIAL_RANK_ANCHORS: dict[tuple[str, int, str], dict[int, int]] = {
+    ("北京", 2025, "综合类"): {619: 7983, 697: 136},
+    ("河南", 2025, "物理类"): {600: 45887},
+}
+
 
 @dataclass
 class CatalogEntry:
@@ -133,6 +139,7 @@ class ScrapeResult:
     cross_checks: list[dict[str, Any]] = field(default_factory=list)
     confidence: str = "unknown"
     confidence_score: float = 0.0
+    rank_anchors: dict[int, int] = field(default_factory=dict)
 
 
 def normalize_url(url: str) -> str:
@@ -955,7 +962,7 @@ def maybe_calibrate_segments(
     score: float,
 ) -> tuple[list[SegmentRow], int, list[dict[str, Any]], str, float]:
     """仅在 zizzs 校准能提升交叉验证得分时才改写分段表。"""
-    if score >= 0.8 or not zizzs or len(zizzs) < 2:
+    if score >= 0.95 or not zizzs or len(zizzs) < 2:
         return segments, total, checks, confidence, score
     cal_segs, cal_total = calibrate_segments_to_anchors(segments, total, zizzs)
     if not cal_segs:
@@ -1016,12 +1023,16 @@ def load_zizzs_anchors(session: requests.Session) -> dict[tuple[str, int, str], 
         if parsed:
             cache[(prov, year, track)] = parsed
         time.sleep(0.4)
+    for key, anchors in OFFICIAL_RANK_ANCHORS.items():
+        merged = dict(cache.get(key, {}))
+        merged.update(anchors)
+        cache[key] = merged
     return cache
 
 
 def pick_best_scrape(items: list[ScrapeResult]) -> ScrapeResult:
-    def quality(r: ScrapeResult) -> tuple[int, float, int]:
-        return (len(r.segments), r.confidence_score, r.total or 0)
+    def quality(r: ScrapeResult) -> tuple[float, int, int]:
+        return (r.confidence_score, len(r.segments), r.total or 0)
 
     return max(items, key=quality)
 

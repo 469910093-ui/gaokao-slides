@@ -25,6 +25,7 @@ if str(ROOT / "scripts") not in sys.path:
     sys.path.insert(0, str(ROOT / "scripts"))
 
 from gaokao_crawl_lib import HEADERS
+from province_tracks import COMBINED_33_PROVINCES
 OUT_DIR = ROOT / "data" / "reference" / "gaokao_cn"
 API_BASE = "https://api.zjzw.cn/web/api/"
 
@@ -38,10 +39,25 @@ PROVINCE_ID = {
     "新疆": 65,
 }
 
+def tracks_for_admission_crawl(province: str, tracks_cli: list[str]) -> list[str | None]:
+    """3+3 省用综合科类；其余省按物历爬取。"""
+    if province in COMBINED_33_PROVINCES:
+        return ["综合"]
+    out: list[str] = []
+    for t in tracks_cli:
+        if t == "理科":
+            out.append("物理类")
+        elif t == "文科":
+            out.append("历史类")
+        elif t in ("物理类", "历史类"):
+            out.append(t)
+    return out or ["物理类", "历史类"]
+
 TRACK_API_NAME = {
     "物理类": "物理类",
     "历史类": "历史类",
     "综合": "综合",
+    "综合类": "综合",
 }
 
 YEARS = list(range(2014, 2026))
@@ -59,9 +75,19 @@ def api_get(session: requests.Session, uri: str, retries: int = 5, **params: Any
             code = data.get("code")
             msg = str(data.get("message") or "")
             if code == "0000":
-                return data.get("data") or {}
+                raw = data.get("data")
+                if isinstance(raw, list):
+                    inner = {"item": raw, "numFound": len(raw)}
+                else:
+                    inner = raw or {}
+                if not inner.get("item") and attempt < retries - 1:
+                    time.sleep(2.5 * (attempt + 1))
+                    continue
+                return inner
             if "频繁" in msg or code in ("1064", "1065"):
-                time.sleep(2.5 * (attempt + 1))
+                wait = min(90, 12 * (attempt + 1))
+                print(f"  [rate-limit] wait {wait}s ({msg})", flush=True)
+                time.sleep(wait)
                 last_err = RuntimeError(f"API {uri} rate limited: {msg}")
                 continue
             raise RuntimeError(f"API {uri} failed: {msg}")
@@ -76,7 +102,8 @@ def crawl_province_admissions(
     province: str,
     year: int,
     track: str | None = None,
-    page_size: int = 50,
+    page_size: int = 20,
+    page_sleep: float = 3.5,
 ) -> list[dict[str, Any]]:
     """院校专业组/院校投档最低分（掌上高考）。"""
     pid = PROVINCE_ID[province]
@@ -89,8 +116,8 @@ def crawl_province_admissions(
             "page": page,
             "size": page_size,
         }
-        if track and track != "综合":
-            params["local_type_name"] = TRACK_API_NAME.get(track, track)
+        if track:
+            params["local_type_name"] = "综合" if track in ("综合", "综合类") else TRACK_API_NAME.get(track, track)
         data = api_get(session, "apidata/api/gk/score/province", **params)
         items = data.get("item") or []
         if not items:
@@ -122,7 +149,7 @@ def crawl_province_admissions(
         if page * page_size >= num or len(items) < page_size:
             break
         page += 1
-        time.sleep(1.2)
+        time.sleep(page_sleep)
     return rows
 
 
@@ -151,6 +178,13 @@ def main() -> None:
     parser.add_argument("--provinces", default=",".join(PROVINCE_ID.keys()))
     parser.add_argument("--years", default="2024,2025")
     parser.add_argument("--tracks", default="物理类,历史类")
+    parser.add_argument(
+        "--skip-existing",
+        action="store_true",
+        help="若对应 JSON 已存在且非空则跳过（断点续爬）",
+    )
+    parser.add_argument("--pause", type=float, default=8.0, help="每省×年×科类任务间隔秒数")
+    parser.add_argument("--page-sleep", type=float, default=3.5, help="分页请求间隔秒数")
     args = parser.parse_args()
     provinces = [p.strip() for p in args.provinces.split(",") if p.strip()]
     years = [int(y.strip()) for y in args.years.split(",") if y.strip()]
@@ -172,28 +206,44 @@ def main() -> None:
         for province in provinces:
             if province not in PROVINCE_ID:
                 continue
-            for track in tracks:
+            crawl_tracks = tracks_for_admission_crawl(province, tracks)
+            for track in crawl_tracks:
+                track_label = track or "综合类"
+                fname = f"admissions_{province}_{year}_{track_label}.json"
+                path = OUT_DIR / fname
+                if args.skip_existing and path.exists():
+                    try:
+                        existing = json.loads(path.read_text(encoding="utf-8"))
+                    except json.JSONDecodeError:
+                        existing = None
+                    if existing:
+                        print(f"  [skip-existing] {province} {year} {track_label}: {len(existing)} rows", flush=True)
+                        summary["files"][fname] = len(existing)
+                        continue
                 try:
-                    rows = crawl_province_admissions(session, province, year, track)
+                    rows = crawl_province_admissions(
+                        session, province, year, track, page_sleep=args.page_sleep
+                    )
                 except Exception as exc:  # noqa: BLE001
-                    print(f"  [warn] {province} {year} {track}: {exc}")
+                    print(f"  [warn] {province} {year} {track_label}: {exc}", flush=True)
+                    if "rate limited" in str(exc).lower() or "频繁" in str(exc):
+                        time.sleep(max(args.pause * 3, 45))
                     continue
                 if not rows:
+                    print(f"  [skip] {province} {year} {track_label}: 0 rows", flush=True)
                     continue
-                fname = f"admissions_{province}_{year}_{track}.json"
-                path = OUT_DIR / fname
                 path.write_text(json.dumps(rows, ensure_ascii=False, indent=2), encoding="utf-8")
                 summary["files"][fname] = len(rows)
                 lines = crawl_control_lines_from_admissions(rows)
                 if lines:
-                    lname = f"control_lines_{province}_{year}_{track}.json"
+                    lname = f"control_lines_{province}_{year}_{track_label}.json"
                     (OUT_DIR / lname).write_text(
                         json.dumps(lines, ensure_ascii=False, indent=2),
                         encoding="utf-8",
                     )
                     summary["files"][lname] = len(lines)
-                print(f"  {province} {year} {track}: {len(rows)} rows")
-                time.sleep(2.0)
+                print(f"  {province} {year} {track_label}: {len(rows)} rows", flush=True)
+                time.sleep(args.pause)
 
     (OUT_DIR / "manifest.json").write_text(
         json.dumps(summary, ensure_ascii=False, indent=2),

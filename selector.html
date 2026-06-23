@@ -347,6 +347,16 @@
     .confidence-badge.partial { background: #fff4cc; color: #8a5b00; }
     .confidence-badge.structural { background: #e8f0ff; color: #1d4ed8; }
     .confidence-badge.model { background: #ffe8e8; color: #b42318; }
+    .data-gap-banner {
+      margin-top: 8px;
+      padding: 10px 12px;
+      border-radius: 8px;
+      background: #fff1f0;
+      border: 1px solid #ffa39e;
+      color: #a8071a;
+      font-size: 13px;
+      line-height: 1.5;
+    }
     .validation-detail { margin-top: 8px; font-size: 12px; color: var(--muted); line-height: 1.55; }
     .validation-detail.collapsed { display: none; }
     .toggle-detail-btn {
@@ -354,6 +364,22 @@
       background: #fff; cursor: pointer;
     }
     .data-quality { text-align: right; }
+    .methodology-panel {
+      margin-top: 28px; padding: 20px 22px;
+      background: #fff; border: 3px solid var(--ink); border-radius: 16px;
+      box-shadow: 6px 6px 0 var(--ink);
+    }
+    .methodology-panel h2 { font-size: 18px; margin-bottom: 12px; }
+    .methodology-panel h3 { font-size: 14px; margin: 14px 0 6px; }
+    .methodology-panel p, .methodology-panel li {
+      font-size: 13px; color: var(--muted); line-height: 1.65; font-weight: 600;
+    }
+    .methodology-panel ul { margin: 6px 0 0 18px; padding: 0; }
+    .methodology-panel .source-tag {
+      display: inline-block; margin-top: 8px; padding: 4px 8px; border-radius: 6px;
+      font-size: 11px; font-weight: 800; background: #f0f0f0; color: #333;
+    }
+    .admission-src { font-size: 11px; color: #8a5b00; font-weight: 700; }
   </style>
 </head>
 <body>
@@ -453,6 +479,27 @@
 
     <p class="footer-note" id="globalNote"></p>
 
+    <section class="methodology-panel" id="methodologyPanel" aria-label="排名与筛选说明">
+      <h2>📋 排名与筛选说明（公允口径）</h2>
+      <h3>院校推荐</h3>
+      <ul>
+        <li><strong>分档依据</strong>：使用本省 gaokao.cn 归档的<strong>院校投档竞争档均分</strong>（各专业组投档最低分取高值后跨年平均），与当前分数之差：高 5–15 分为<strong>冲刺</strong>，-12~5 分为<strong>稳妥</strong>，-30~-12 分为<strong>保底</strong>。</li>
+        <li><strong>桶内排序</strong>：同一档位内按 QS 世界大学排名 2025 升序（排名数字越小越靠前）。</li>
+        <li><strong>数据边界</strong>：某省某科类无投档归档数据的院校<strong>不会</strong>进入推荐列表；不使用估算百分位或全国档次臆测分数。</li>
+      </ul>
+      <h3>专业推荐</h3>
+      <ul>
+        <li><strong>分档依据</strong>：专业目录标注层级相对当前分数批次线位置（冲=高于当前批次档、稳=同档、保=低于当前批次档）；<strong>非</strong>院校投档分。</li>
+        <li><strong>桶内排序</strong>：产业趋势指数降序（构成见 major_catalog methodology）。</li>
+      </ul>
+      <h3>一分一段与位次</h3>
+      <ul>
+        <li>来源：各省 eol.cn 官方表 / OCR 归档；标注 confidence 字段。模型估算省份会显示警示。</li>
+      </ul>
+      <p class="source-tag" id="methodologySources">数据源加载中…</p>
+      <p><strong>免责声明</strong>：本工具汇总公开数据供志愿参考，不构成录取承诺；填报请以省教育考试院及院校招生简章为准。</p>
+    </section>
+
     <section class="qr-panel" aria-label="扫码入群">
       <h2>📱 扫码加入高考志愿交流群</h2>
       <img src="assets/wechat-group-qr.png" alt="微信扫码入群，备注地区+高考分数获取更多院校专业资讯">
@@ -465,15 +512,16 @@
       <button class="close" id="closeModal" type="button" aria-label="关闭">×</button>
       <h3 id="modalTitle">分数推荐结果</h3>
       <p class="modal-summary" id="modalSummary"></p>
-      <div class="section-title">🏫 院校推荐（按 QS 排名 · 冲稳保标注）</div>
+      <div class="section-title">🏫 院校推荐（投档分冲稳保 · QS 桶内排序）</div>
       <div class="school-list" id="schoolList"></div>
-      <div class="section-title">🎯 专业推荐（<span id="majorTrackLabel">物理类</span>可报 · 产业趋势指数 + 就业涨幅交叉验证）</div>
+      <div class="section-title">🎯 专业推荐（<span id="majorTrackLabel">物理类</span>可报 · 分层 + 趋势指数）</div>
       <div class="major-list" id="majorList"></div>
-      <p class="footer-note" id="modalDisclaimer">说明：专业按科类（物理类/历史类）分别推荐。产业趋势指数 = 人工产业研判与就业沙盘5年薪资涨幅交叉校准；无就业数据的专业仅含人工研判。院校招生以当年简章为准。</p>
+      <p class="footer-note" id="modalDisclaimer">说明：院校仅展示有 gaokao.cn 投档归档且落入冲/稳/保区间的学校；专业分层依据专业目录层级，趋势指数来源见页脚方法论。</p>
     </div>
   </div>
 
     <script src="data/gaokao-embed.js"></script>
+    <script src="data/admission-index-embed.js"></script>
     <script src="data/schools-vocational-embed.js"></script>
     <script src="data/major-catalog-embed.js"></script>
   <script>
@@ -491,6 +539,14 @@
       minScore: 400,
       currentScore: 600,
       dragging: false,
+      admissionIndex: null,
+    };
+
+    const COMBINED_33 = new Set(['北京', '天津', '上海', '浙江', '山东', '海南']);
+    const ADMISSION_SOURCE = {
+      provider: '掌上高考 gaokao.cn',
+      url: 'https://www.gaokao.cn/control-line',
+      api: 'https://api.zjzw.cn/web/api/',
     };
 
     const $ = (id) => document.getElementById(id);
@@ -644,6 +700,7 @@
       }
       await loadVocationalSchools();
       await loadMajorCatalog();
+      await loadAdmissionIndex();
       provinceEl.innerHTML = state.manifest.provinces.map((p) => `<option value="${p}">${p}</option>`).join('');
       initProvinceCombo();
       yearEl.innerHTML = state.manifest.years.map((y) => `<option value="${y}">${y}</option>`).join('');
@@ -654,6 +711,21 @@
       $('globalNote').textContent = (state.manifest.meta.notes || '') + vocNote;
       await loadProvince(provinceEl.value);
       renderTrackOptions(provinceEl.value);
+      renderMethodologySources();
+    }
+
+    function renderMethodologySources() {
+      const el = $('methodologySources');
+      if (!el) return;
+      const meta = state.admissionIndex?.meta;
+      const prov = provinceEl.value;
+      const track = admissionTrackKey();
+      const count = Object.keys(state.admissionIndex?.provinces?.[prov]?.[track] || {}).length;
+      if (!meta) {
+        el.textContent = '院校投档索引未加载：请运行 scripts/scrape_gaokao_cn.py 与 scripts/build_admission_index.py';
+        return;
+      }
+      el.textContent = `院校投档：${meta.provider || ADMISSION_SOURCE.provider}（${meta.api || ADMISSION_SOURCE.api}）· ${prov}${track}已归档 ${count} 校 · 索引更新 ${meta.generatedAt || '—'} · QS：QS World University Rankings 2025 · 专业趋势：major_catalog.json / career_sandbox`;
     }
 
     async function loadProvince(name) {
@@ -729,6 +801,16 @@
       return { ...plain, conf, score };
     }
 
+    function isDataGap(trackData) {
+      if (!trackData) return true;
+      return Boolean(
+        trackData.dataGap
+        || trackData.source === 'model'
+        || trackData.confidence === 'model_estimate'
+        || !(trackData.segments || []).length,
+      );
+    }
+
     function renderConfidence(trackData) {
       const meta = confidenceMeta(trackData);
       const badge = $('confidenceBadge');
@@ -737,9 +819,12 @@
       badge.innerHTML = `<span class="confidence-badge ${meta.cls}">${meta.label}${scoreTxt}</span>`;
       const checks = trackData?.validation?.crossChecks || [];
       const passed = checks.filter((c) => c.ok).length;
-      const checkTxt = checks.length
+      let checkTxt = checks.length
         ? `已核对 ${passed}/${checks.length} 项。${meta.hint}`
         : meta.hint;
+      if (isDataGap(trackData)) {
+        checkTxt = `⚠️ 数据源缺失或仅为模型估算：位次与院校推荐不可用于精确填报，请以${provinceEl.value}教育考试院官方一分一段为准。${checkTxt}`;
+      }
       const srcUrl = trackData?.sourceUrl
         ? ` <a href="${trackData.sourceUrl}" target="_blank" rel="noopener">查看原始页面</a>`
         : '';
@@ -979,7 +1064,8 @@
       const defaultScore = Math.min(state.maxScore, Math.max(state.minScore, state.batches['本科线'] || 500) + 60);
       setScore(defaultScore, false);
       const srcLabel = (trackData.source || '').startsWith('eol') ? 'eol.cn 真实爬取' : '模型估算';
-      $('dataSource').textContent = `数据来源：${srcLabel} · ${provinceEl.value} ${yearEl.value} ${trackEl.value}`;
+      const gapHint = isDataGap(trackData) ? ' · ⚠️ 数据源缺失/估算' : '';
+      $('dataSource').textContent = `数据来源：${srcLabel} · ${provinceEl.value} ${yearEl.value} ${trackEl.value}${gapHint}`;
       renderConfidence(trackData);
       drawChart();
     }
@@ -1076,71 +1162,80 @@
       return cum != null ? Math.round(cum) : null;
     }
 
-    function schoolMinPercentile(school) {
-      if (school.minPercentile != null) return school.minPercentile;
-      const tp = state.manifest.tierPercentile || {};
-      return tp[school.tier] ?? 50;
+    async function loadAdmissionIndex() {
+      if (window.ADMISSION_INDEX?.provinces) {
+        state.admissionIndex = window.ADMISSION_INDEX;
+        return;
+      }
+      try {
+        const res = await fetch('data/reference/gaokao_cn/admission_index.json');
+        if (res.ok) state.admissionIndex = await res.json();
+      } catch (_) { /* optional */ }
     }
 
-    function scoreAtPercentileFromRaw(segments, total, targetP) {
-      if (!segments?.length || !total) return null;
-      const targetRank = total * (1 - targetP / 100);
-      const ordered = segments
-        .map((seg) => ({
-          score: seg.s ?? seg.score,
-          cumulative: seg.c ?? seg.cumulative,
-        }))
-        .sort((a, b) => a.score - b.score);
-      for (const seg of ordered) {
-        if (seg.cumulative >= targetRank) return seg.score;
-      }
-      return ordered[ordered.length - 1]?.score ?? null;
+    function admissionTrackKey() {
+      const province = provinceEl.value;
+      const track = trackEl.value;
+      if (COMBINED_33.has(province) || track === '综合类') return '综合类';
+      if (track === '历史类' || track === '文科') return '历史类';
+      return '物理类';
     }
 
-    function schoolAvgAdmissionScore(school) {
-      const currentYear = Number(yearEl.value);
-      const years = [currentYear - 2, currentYear - 1, currentYear];
-      const p = schoolMinPercentile(school);
-      const scores = [];
-      for (const y of years) {
-        const td = pickTrackPayload(String(y), trackEl.value);
-        if (!td?.segments?.length) continue;
-        const total = td.totalCandidates || td.segments[td.segments.length - 1]?.c || 0;
-        const s = scoreAtPercentileFromRaw(td.segments, total, p);
-        if (s != null) scores.push(s);
-      }
-      if (!scores.length) {
-        const td = getYearTrackData();
-        if (!td?.segments?.length) return null;
-        const total = state.totalCandidates || segmentTotal();
-        return scoreAtPercentileFromRaw(td.segments, total, p);
-      }
-      return Math.round(scores.reduce((a, b) => a + b, 0) / scores.length);
+    function lookupAdmission(schoolName) {
+      const prov = state.admissionIndex?.provinces?.[provinceEl.value];
+      if (!prov) return null;
+      const track = admissionTrackKey();
+      return prov[track]?.[schoolName] || null;
     }
 
-    function schoolApplicationTag(currentScore, avgAdmission) {
-      if (avgAdmission == null) return null;
-      const diff = avgAdmission - currentScore;
-      if (diff >= 5 && diff <= 10) return { key: 'chong', label: '冲刺' };
-      if (diff >= -10 && diff <= -5) return { key: 'wen', label: '稳妥' };
-      if (diff >= -20 && diff <= -10) return { key: 'bao', label: '保底' };
-      if (diff > 10) return { key: 'chong', label: '冲刺' };
-      if (diff > -5 && diff < 5) return { key: 'wen', label: '稳妥' };
-      if (diff < -20) return { key: 'bao', label: '保底' };
+    function formatAdmissionYears(years) {
+      if (!years) return '';
+      return Object.entries(years).map(([y, s]) => `${y}年${s}分`).join('、');
+    }
+
+    function schoolApplicationTag(currentScore, avgMin) {
+      if (avgMin == null) return null;
+      const diff = avgMin - currentScore;
+      if (diff >= 5 && diff <= 15) return { key: 'chong', label: '冲刺', diff };
+      if (diff >= -12 && diff <= 5) return { key: 'wen', label: '稳妥', diff };
+      if (diff >= -30 && diff < -12) return { key: 'bao', label: '保底', diff };
       return null;
     }
 
     function enrichSchool(school, score) {
-      const avgAdmission = schoolAvgAdmissionScore(school);
+      const rec = lookupAdmission(school.name);
+      if (!rec?.avgMin3y) return null;
+      const tag = schoolApplicationTag(score, rec.avgMin3y);
+      if (!tag) return null;
       return {
         ...school,
-        avgAdmission,
-        appTag: schoolApplicationTag(score, avgAdmission),
+        avgAdmission: rec.avgMin3y,
+        admissionYears: rec.years,
+        admissionYearCount: rec.yearCount,
+        admissionSource: rec.source || 'gaokao.cn',
+        admissionSourceUrl: rec.sourceUrl || ADMISSION_SOURCE.url,
+        appTag: tag,
       };
     }
 
     function qsRankOf(school) {
       return school.qsRank ?? 99999;
+    }
+
+    function sortByQsThenName(a, b) {
+      return qsRankOf(a) - qsRankOf(b) || a.name.localeCompare(b.name, 'zh');
+    }
+
+    function bucketSchools(eligible, quotas) {
+      const pick = (key, n) => eligible
+        .filter((s) => s.appTag?.key === key)
+        .sort(sortByQsThenName)
+        .slice(0, n);
+      return {
+        chong: pick('chong', quotas.chong),
+        wen: pick('wen', quotas.wen),
+        bao: pick('bao', quotas.bao),
+      };
     }
 
     function tierForPercentile(p) {
@@ -1151,6 +1246,12 @@
         if (tp[tier] != null && p >= tp[tier]) return tier;
       }
       return '专科';
+    }
+
+    function schoolMinPercentile(school) {
+      if (school.minPercentile != null) return school.minPercentile;
+      const tp = state.manifest.tierPercentile || {};
+      return tp[school.tier] ?? 50;
     }
 
     function schoolReachable(userP, school, reachIdx) {
@@ -1352,20 +1453,44 @@
       return Math.round(xMin + ratio * (xMax - xMin));
     }
 
+    function enrichAdmissionEntry(schoolName, rec, score) {
+      if (rec?.isVocational) return null;
+      const avg = rec?.avgMin3y;
+      if (avg == null) return null;
+      const tag = schoolApplicationTag(score, avg);
+      if (!tag) return null;
+      const base = state.manifest.schools.find((s) => s.name === schoolName);
+      const school = base
+        ? { ...base }
+        : { name: schoolName, tier: rec.tier || '二本', qsRank: 99999 };
+      if (school.tier === '专科') return null;
+      return {
+        ...school,
+        avgAdmission: avg,
+        admissionYears: rec.years,
+        admissionYearCount: rec.yearCount,
+        admissionSource: rec.source || 'gaokao.cn',
+        admissionSourceUrl: rec.sourceUrl || ADMISSION_SOURCE.url,
+        appTag: tag,
+      };
+    }
+
     function recommendSchools(score) {
       const province = provinceEl.value;
       const order = state.manifest.tierOrder;
-      const userP = percentileAt(score);
-      const reachIdx = reachIdxForScore(score);
+      const reachIdx = reachIdxFromBatches(score);
       const undergradLine = state.batches['本科线'] || 450;
       const vocTierIdx = order.indexOf('专科');
+      const track = admissionTrackKey();
+      const provMap = state.admissionIndex?.provinces?.[province]?.[track] || {};
+      const hasAdmission = Boolean(Object.keys(provMap).length);
 
-      const undergrad = state.manifest.schools
-        .filter((s) => s.tier !== '专科')
-        .filter((s) => userP != null && schoolReachable(userP, s, reachIdx))
-        .map((s) => enrichSchool(s, score))
-        .sort((a, b) => qsRankOf(a) - qsRankOf(b) || a.name.localeCompare(b.name, 'zh'))
-        .slice(0, 10);
+      const eligible = Object.entries(provMap)
+        .map(([name, rec]) => enrichAdmissionEntry(name, rec, score))
+        .filter(Boolean);
+
+      const buckets = bucketSchools(eligible, { chong: 3, wen: 3, bao: 5 });
+      const undergrad = [...buckets.chong, ...buckets.wen, ...buckets.bao];
 
       const provinceVoc = (state.vocationalSchools || []).filter((s) => s.province === province);
       const showVoc = score < undergradLine - 5 && reachIdx >= vocTierIdx - 1;
@@ -1379,7 +1504,18 @@
             .slice(0, 15)
         : [];
 
-      return { undergrad, vocational, vocationalTotal: provinceVoc.length, province };
+      return {
+        chong: buckets.chong,
+        wen: buckets.wen,
+        bao: buckets.bao,
+        undergrad,
+        vocational,
+        vocationalTotal: provinceVoc.length,
+        province,
+        hasAdmission,
+        admissionTrack: admissionTrackKey(),
+        dataGap: isDataGap(getYearTrackData()),
+      };
     }
 
     function majorCatalogAllowed(major, reachIdx) {
@@ -1396,19 +1532,43 @@
       return true;
     }
 
+    function majorBucketKey(major, score) {
+      const order = state.manifest.tierOrder || [];
+      const reachIdx = reachIdxFromBatches(score);
+      const majorIdx = order.indexOf(major.tier);
+      if (majorIdx < 0) return null;
+      const delta = majorIdx - reachIdx;
+      if (delta >= 1) return 'chong';
+      if (delta === 0) return 'wen';
+      if (delta <= -1) return 'bao';
+      return null;
+    }
+
+    function bucketMajors(eligible, quotas) {
+      const sortTrend = (a, b) => {
+        const ta = a.trendIndex ?? a.score ?? 0;
+        const tb = b.trendIndex ?? b.score ?? 0;
+        if (tb !== ta) return tb - ta;
+        return a.name.localeCompare(b.name, 'zh');
+      };
+      const pick = (key, n) => eligible
+        .filter((m) => m.appTag?.key === key)
+        .sort(sortTrend)
+        .slice(0, n);
+      return {
+        chong: pick('chong', quotas.chong),
+        wen: pick('wen', quotas.wen),
+        bao: pick('bao', quotas.bao),
+      };
+    }
+
     function recommendMajors(score) {
       const order = state.manifest.tierOrder;
-      const userP = percentileAt(score);
-      const reachIdx = reachIdxForScore(score);
+      const reachIdx = reachIdxFromBatches(score);
 
       const eligible = majorPool()
         .filter((m) => majorMatchesSubject(m))
-        .filter((m) => majorCatalogAllowed(m, reachIdx))
-        .filter((m) => {
-          if (userP == null) return order.indexOf(m.tier) <= reachIdx + 1;
-          const fakeSchool = { tier: m.tier, minPercentile: state.manifest.tierPercentile?.[m.tier] };
-          return schoolReachable(userP, fakeSchool, reachIdx);
-        });
+        .filter((m) => majorCatalogAllowed(m, reachIdx));
 
       const byName = new Map();
       for (const m of eligible) {
@@ -1426,47 +1586,76 @@
         byName.set(m.name, prefer(prev, m));
       }
 
-      return [...byName.values()]
-        .sort((a, b) => {
-          if (a.opportunity && !b.opportunity) return -1;
-          if (!a.opportunity && b.opportunity) return 1;
-          const ta = a.trendIndex ?? a.score ?? 0;
-          const tb = b.trendIndex ?? b.score ?? 0;
-          if (tb !== ta) return tb - ta;
-          const ja = a.jobVolumeYoY ?? 0;
-          const jb = b.jobVolumeYoY ?? 0;
-          if (jb !== ja) return jb - ja;
-          return (b.salaryGrowth5y || 0) - (a.salaryGrowth5y || 0);
+      const enriched = [...byName.values()]
+        .map((m) => {
+          const key = majorBucketKey(m, score);
+          if (!key) return null;
+          const label = key === 'chong' ? '冲刺' : key === 'wen' ? '稳妥' : '保底';
+          return { ...m, appTag: { key, label } };
         })
-        .slice(0, 12);
+        .filter(Boolean);
+
+      const buckets = bucketMajors(enriched, { chong: 4, wen: 4, bao: 4 });
+      return {
+        chong: buckets.chong,
+        wen: buckets.wen,
+        bao: buckets.bao,
+        all: [...buckets.chong, ...buckets.wen, ...buckets.bao],
+      };
     }
 
     function subjectTrackShort() {
       return currentSubjectTrack() === '历史类' ? '历史类' : '物理类';
     }
 
-    function renderSchoolList(result) {
-      const { undergrad, vocational, vocationalTotal, province } = result;
-      if (!undergrad.length && !vocational.length) {
-        return '<div class="hint">暂无匹配院校，请调整分数或切换省份/科类</div>';
-      }
-      let html = '';
-
-      if (undergrad.length) {
-        html += undergrad.map((s) => {
-          const avgLine = s.avgAdmission != null ? ` · 近三年均分约 ${s.avgAdmission}` : '';
-          const tagHtml = s.appTag
-            ? `<span class="school-tag ${s.appTag.key}">${s.appTag.label}</span>`
-            : '';
-          return `
+    function renderSchoolRow(s) {
+      const yearsLine = s.admissionYears ? formatAdmissionYears(s.admissionYears) : '';
+      const avgLine = s.avgAdmission != null
+        ? ` · 近三年投档均分 ${s.avgAdmission}${yearsLine ? `（${yearsLine}）` : ''}`
+        : '';
+      const srcLine = s.admissionSource
+        ? `<div class="admission-src">数据来源：${s.admissionSource} · <a href="${s.admissionSourceUrl}" target="_blank" rel="noopener">查阅</a></div>`
+        : '';
+      const tagHtml = s.appTag
+        ? `<span class="school-tag ${s.appTag.key}">${s.appTag.label}</span>`
+        : '';
+      return `
         <div class="school-item">
           <div>
             <div class="name">${s.name}</div>
             <div class="tags">${(s.tags || []).join(' · ')}${avgLine}</div>
+            ${srcLine}
           </div>
           ${tagHtml}
         </div>`;
-        }).join('');
+    }
+
+    function renderSchoolList(result) {
+      const {
+        chong, wen, bao, undergrad, vocational, vocationalTotal, province,
+        dataGap, hasAdmission,
+      } = result;
+      if (!hasAdmission) {
+        return '<div class="hint">当前省份/科类尚无 gaokao.cn 投档归档数据，无法生成院校冲稳保推荐。请先运行数据爬取与索引构建脚本。</div>';
+      }
+      if (!undergrad.length && !vocational.length) {
+        return '<div class="hint">当前分数下无院校落入冲/稳/保区间（投档均分与您的分数差需在：冲刺 +5~+15、稳妥 -12~+5、保底 -30~-12）。请调整分数或等待投档数据更新。</div>';
+      }
+      let html = '';
+      if (dataGap) {
+        html += '<div class="data-gap-banner">当前省份/年份一分一段为模型估算或公开数据缺失，下列冲稳保院校仅供参考，不可用于精确位次填报。</div>';
+      }
+      if (chong?.length) {
+        html += `<div class="tier-group-title">冲刺院校（${chong.length} 所 · 桶内按 QS 升序）</div>`;
+        html += chong.map(renderSchoolRow).join('');
+      }
+      if (wen?.length) {
+        html += `<div class="tier-group-title">稳妥院校（${wen.length} 所 · 桶内按 QS 升序）</div>`;
+        html += wen.map(renderSchoolRow).join('');
+      }
+      if (bao?.length) {
+        html += `<div class="tier-group-title">保底院校（${bao.length} 所 · 桶内按 QS 升序）</div>`;
+        html += bao.map(renderSchoolRow).join('');
       }
 
       if (vocational.length) {
@@ -1486,44 +1675,63 @@
       return html;
     }
 
-    function renderMajorList(majors) {
-      if (!majors.length) {
-        const label = currentSubjectTrack() === '历史类' ? '文科/历史类' : '理科/物理类';
-        return `<div class="hint">${label}暂无匹配专业，请调整分数或切换科类</div>`;
-      }
-      return majors.map((m, i) => {
-        const opp = m.opportunity
-          ? '<span class="opportunity-badge">机会点 · 当前录取分数较低</span>'
-          : '';
-        const rationale = m.trendRationale || m.outlook10y || '';
-        const outlook = rationale ? `<div class="meta">${rationale}</div>` : '';
-        const trend = m.trendIndex ?? m.score ?? '--';
-        const growth = m.salaryGrowth5y != null
-          ? `<div class="meta">就业沙盘：5年薪资涨幅约 ${m.salaryGrowth5y}%${m.validated ? ' · 四源校验' : ''}</div>`
-          : '';
-        const jobVol = m.jobVolumeYoY != null
-          ? `<div class="meta">岗位量趋势：${m.jobVolumeYoY > 0 ? '+' : ''}${m.jobVolumeYoY}%${m.jobVolumeSource ? ` · ${m.jobVolumeSource}` : ''}</div>`
-          : '';
-        const occ = (m.occupationCodes && m.occupationCodes.length)
-          ? `<div class="meta">人社部职业编码：${m.occupationCodes.join('、')}${m.occupations?.[0]?.name ? `（如 ${m.occupations[0].name}）` : ''}</div>`
-          : '';
-        const moeCode = m.moeCode ? `<div class="meta">教育部专业代码：${m.moeCode}</div>` : '';
-        const discipline = m.discipline || m.track || '';
-        return `
+    function renderMajorRow(m, index) {
+      const opp = m.opportunity
+        ? '<span class="opportunity-badge">机会点 · 产业研判标注</span>'
+        : '';
+      const rationale = m.trendRationale || m.outlook10y || '';
+      const outlook = rationale ? `<div class="meta">${rationale}</div>` : '';
+      const trend = m.trendIndex ?? m.score ?? '--';
+      const growth = m.salaryGrowth5y != null
+        ? `<div class="meta">就业沙盘：5年薪资涨幅约 ${m.salaryGrowth5y}%${m.validated ? ' · 四源校验' : ''}</div>`
+        : '';
+      const jobVol = m.jobVolumeYoY != null
+        ? `<div class="meta">岗位量趋势：${m.jobVolumeYoY > 0 ? '+' : ''}${m.jobVolumeYoY}%${m.jobVolumeSource ? ` · ${m.jobVolumeSource}` : ''}</div>`
+        : '';
+      const moeCode = m.moeCode ? `<div class="meta">教育部专业代码：${m.moeCode}</div>` : '';
+      const discipline = m.discipline || m.track || '';
+      const tagHtml = m.appTag
+        ? `<span class="school-tag ${m.appTag.key}">${m.appTag.label}</span>`
+        : '';
+      return `
         <div class="major-item">
           <div>
-            <div class="name">${i + 1}. ${m.name}</div>
-            <div class="meta">${discipline} · ${subjectTrackShort()}可报</div>
+            <div class="name">${index}. ${m.name}</div>
+            <div class="meta">${discipline} · ${subjectTrackShort()}可报 · 目录层级 ${m.tier || '—'}</div>
             ${outlook}
             ${growth}
             ${jobVol}
             ${moeCode}
-            ${occ}
             ${opp}
           </div>
-          <span class="hot-score">趋势指数 ${trend}</span>
+          <div style="text-align:right;">
+            ${tagHtml}
+            <div class="hot-score">趋势指数 ${trend}</div>
+          </div>
         </div>`;
-      }).join('');
+    }
+
+    function renderMajorList(result) {
+      const { chong = [], wen = [], bao = [], all = [] } = result || {};
+      if (!all.length) {
+        const label = currentSubjectTrack() === '历史类' ? '文科/历史类' : '理科/物理类';
+        return `<div class="hint">${label}暂无匹配专业，请调整分数或切换科类</div>`;
+      }
+      let html = '';
+      let idx = 1;
+      if (chong.length) {
+        html += `<div class="tier-group-title">冲刺专业（${chong.length} 个 · 桶内按趋势指数降序）</div>`;
+        html += chong.map((m) => renderMajorRow(m, idx++)).join('');
+      }
+      if (wen.length) {
+        html += `<div class="tier-group-title">稳妥专业（${wen.length} 个 · 桶内按趋势指数降序）</div>`;
+        html += wen.map((m) => renderMajorRow(m, idx++)).join('');
+      }
+      if (bao.length) {
+        html += `<div class="tier-group-title">保底专业（${bao.length} 个 · 桶内按趋势指数降序）</div>`;
+        html += bao.map((m) => renderMajorRow(m, idx++)).join('');
+      }
+      return html;
     }
 
     function openModal() {
@@ -1557,7 +1765,7 @@
     provinceEl.addEventListener('change', () => {
       updateProvinceDisplay(provinceEl.value);
       renderTrackOptions(provinceEl.value);
-      loadProvince(provinceEl.value);
+      loadProvince(provinceEl.value).then(() => renderMethodologySources());
     });
     $('toggleValidation').addEventListener('click', () => {
       const detail = $('validationDetail');
@@ -1577,14 +1785,15 @@
     yearEl.addEventListener('change', refreshTrackData);
     function refreshModalMajors() {
       if (!$('modalBackdrop').classList.contains('show')) return;
-      const majors = recommendMajors(state.currentScore);
-      $('majorList').innerHTML = renderMajorList(majors);
+      const majorResult = recommendMajors(state.currentScore);
+      $('majorList').innerHTML = renderMajorList(majorResult);
       const trackLabel = $('majorTrackLabel');
       if (trackLabel) trackLabel.textContent = subjectTrackShort();
     }
 
     trackEl.addEventListener('change', () => {
       refreshTrackData();
+      renderMethodologySources();
       refreshModalMajors();
     });
     sliderEl.addEventListener('input', () => setScore(Number(sliderEl.value), false));
