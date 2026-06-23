@@ -1,14 +1,23 @@
 {
-  "generatedAt": "2026-06-23 18:09:25",
+  "generatedAt": "2026-06-23 19:06:56",
   "results": [
     {
-      "province": "河南",
-      "year": 2024,
-      "rows": 0,
-      "errors": [
-        "https://datacenter.haeea.cn/PagePZQuery/ShowPZTDTJ.aspx?yearTip=2024&pc=1&kl=5: 0 rows (haeea_datacenter_html)",
-        "https://datacenter.haeea.cn/PagePZQuery/ShowPZTDTJ.aspx?yearTip=2024&pc=1&kl=1: 0 rows (haeea_datacenter_html)"
-      ]
+      "province": "广西",
+      "year": 2025,
+      "track": "物理类",
+      "rows": 3460,
+      "schools": 1080,
+      "file": "admissions_广西_2025_物理类_official.json",
+      "errors": []
+    },
+    {
+      "province": "广西",
+      "year": 2025,
+      "track": "历史类",
+      "rows": 1590,
+      "schools": 870,
+      "file": "admissions_广西_2025_历史类_official.json",
+      "errors": []
     }
   ]
 }

@@ -67,20 +67,11 @@
     },
     "上海": {
       "portal": "https://www.shmeea.edu.cn/",
-      "implementation": "partial",
-      "tier": "B",
+      "implementation": "full",
+      "tier": "A",
       "listingPages": ["https://www.shmeea.edu.cn/"],
-      "discoverKeywords": ["投档", "本科", "录取"],
-      "knownArtifacts": {
-        "2025": [
-          {
-            "title": "上海市2025年综合评价批次院校录取最低分（EOL对照）",
-            "url": "https://gaokao.eol.cn/shang_hai/dongtai/202506/t20250623_2676341.shtml",
-            "kind": "html",
-            "track": "综合类"
-          }
-        ]
-      }
+      "discoverKeywords": ["投档", "本科普通批", "平行志愿"],
+      "notes": "本科普通批 PDF；580分及以上院校专业组仅标注「580分及以上」"
     },
     "江苏": {
       "portal": "https://www.jseea.cn/",
@@ -93,21 +84,11 @@
     },
     "浙江": {
       "portal": "https://www.zjzs.net/",
-      "implementation": "partial",
-      "tier": "C",
+      "implementation": "full",
+      "tier": "A",
       "listingPages": ["https://www.zjzs.net/"],
       "discoverKeywords": ["平行录取", "投档", "一段"],
-      "knownArtifacts": {
-        "2025": [
-          {
-            "title": "浙江省2025年一分一段（EOL对照）",
-            "url": "https://gaokao.eol.cn/zhe_jiang/dongtai/202506/t20250625_2677143.shtml",
-            "kind": "html",
-            "track": "综合类",
-            "dataKind": "segments"
-          }
-        ]
-      }
+      "notes": "普通类一段平行投档 XLS（院校+专业，含分数线与位次）"
     },
     "安徽": {
       "portal": "https://www.ahzsks.cn/",
@@ -138,12 +119,12 @@
       "discoverKeywords": ["投档", "普通类一段", "平行志愿"]
     },
     "河南": {
-      "portal": "http://www.haeea.cn/",
+      "portal": "https://gaokao.haedu.cn/",
       "implementation": "full",
       "tier": "A",
       "listingPages": ["https://gaokao.haedu.cn/"],
       "discoverKeywords": ["投档", "平行志愿", "本科批"],
-      "notes": "datacenter 需 data/secrets/haeea_cookies.json（Playwright Cookie）"
+      "notes": "投档数据在 datacenter.haeea.cn（ShowPZTDTJ），需 Cookie；勿用 www.haeea.cn 直链（易 WAF）。索引页见 OFFICIAL_INDEX"
     },
     "湖北": {
       "portal": "http://www.hbea.edu.cn/",
@@ -154,10 +135,11 @@
     },
     "湖南": {
       "portal": "https://www.hneeb.cn/",
-      "implementation": "partial",
+      "implementation": "full",
       "tier": "B",
       "listingPages": ["https://www.hneeb.cn/"],
-      "discoverKeywords": ["投档", "平行志愿"]
+      "discoverKeywords": ["投档", "平行志愿", "本科批"],
+      "notes": "官网 TLS 握手异常，抓取需 Playwright"
     },
     "广东": {
       "portal": "https://eea.gd.gov.cn/",
@@ -178,10 +160,11 @@
     },
     "广西": {
       "portal": "https://www.gxeea.cn/",
-      "implementation": "partial",
+      "implementation": "full",
       "tier": "B",
       "listingPages": ["https://www.gxeea.cn/"],
-      "discoverKeywords": ["投档", "平行志愿"]
+      "discoverKeywords": ["投档", "本科普通批", "平行志愿"],
+      "notes": "本科普通批 HTML 表：2024 content_1013_30534/30535；2025 content_1013_31850/31851（招考新闻栏目，非首页）"
     },
     "海南": {
       "portal": "https://ea.hainan.gov.cn/",
@@ -206,10 +189,11 @@
     },
     "贵州": {
       "portal": "http://zsksy.guizhou.gov.cn/",
-      "implementation": "partial",
+      "implementation": "full",
       "tier": "B",
-      "listingPages": ["http://zsksy.guizhou.gov.cn/"],
-      "discoverKeywords": ["投档", "平行志愿"]
+      "listingPages": ["http://zsksy.guizhou.gov.cn/ygpt/tdqk/"],
+      "discoverKeywords": ["投档", "本科批", "平行志愿"],
+      "notes": "本科批 PDF（物理/历史分附件）；2024 历史页需人工补链"
     },
     "云南": {
       "portal": "https://www.ynzs.cn/",
