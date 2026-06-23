@@ -1,8 +1,7 @@
 #!/usr/bin/env python3
 """
-掌上高考 gaokao.cn 数据归档：省控线参考 + 分省院校投档最低分。
-数据源：https://api.zjzw.cn/web/api/ （与 gaokao.cn 同源）
-说明：仅供参考，填报请以省教育考试院官方公布为准。
+投档数据归档：经掌上高考（阳光高考同源）接口拉取，入库前按各省主批次与分数区间校验。
+填报请以各省招生考试院、院校招生网公布为准；考试院入口见 admission_filter_lib.PROVINCE_EXAM_PORTALS。
 
 用法:
   python scripts/scrape_gaokao_cn.py
@@ -24,6 +23,7 @@ ROOT = Path(__file__).resolve().parents[1]
 if str(ROOT / "scripts") not in sys.path:
     sys.path.insert(0, str(ROOT / "scripts"))
 
+from admission_filter_lib import PROVINCE_EXAM_PORTALS, filter_admission_row
 from gaokao_crawl_lib import HEADERS
 from province_tracks import COMBINED_33_PROVINCES
 OUT_DIR = ROOT / "data" / "reference" / "gaokao_cn"
@@ -150,7 +150,10 @@ def crawl_province_admissions(
             break
         page += 1
         time.sleep(page_sleep)
-    return rows
+    kept = [r for r in rows if filter_admission_row(province, r)]
+    if len(kept) < len(rows):
+        print(f"  [filter] {province} {year} {track or 'all'}: kept {len(kept)}/{len(rows)} rows", flush=True)
+    return kept
 
 
 def crawl_control_lines_from_admissions(rows: list[dict[str, Any]]) -> list[dict[str, Any]]:
@@ -168,7 +171,8 @@ def crawl_control_lines_from_admissions(rows: list[dict[str, Any]]) -> list[dict
             "track": r.get("track"),
             "batch": r.get("batch"),
             "controlScore": r.get("provinceControlScore"),
-            "source": "gaokao.cn",
+            "source": "province_exam_portal",
+            "sourceUrl": PROVINCE_EXAM_PORTALS.get(r["province"], "https://gaokao.chsi.com.cn/"),
         })
     return lines
 

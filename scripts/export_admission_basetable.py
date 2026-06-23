@@ -1,50 +1,27 @@
 #!/usr/bin/env python3
-"""导出 gaokao.cn 投档底表为 CSV（明细 + 校年最低分 + 近三年均分索引）。"""
+"""导出投档底表为 CSV（明细 + 校年最低分 + 近三年均分索引），仅含校验后主批次数据。"""
 
 from __future__ import annotations
 
 import csv
 import json
-import re
+import sys
 from collections import defaultdict
 from pathlib import Path
 from typing import Any
 
 ROOT = Path(__file__).resolve().parents[1]
+
+if str(ROOT / "scripts") not in sys.path:
+    sys.path.insert(0, str(ROOT / "scripts"))
+
+from admission_filter_lib import filter_admission_row, normalize_track, parse_min_score, track_key_from_filename
+
 REF_DIR = ROOT / "data" / "reference" / "gaokao_cn"
 OUT_DETAIL = REF_DIR / "admission_lines_detail.csv"
 OUT_SCHOOL_YEAR = REF_DIR / "admission_lines_school_year.csv"
 OUT_INDEX = REF_DIR / "admission_index_flat.csv"
 INDEX_JSON = REF_DIR / "admission_index.json"
-
-
-def parse_min_score(raw: Any) -> int | None:
-    if raw in (None, "", "-"):
-        return None
-    try:
-        v = int(float(str(raw).strip()))
-        return v if v > 0 else None
-    except (TypeError, ValueError):
-        return None
-
-
-def track_key_from_filename(fname: str) -> str:
-    m = re.match(r"admissions_.+_\d+_(.+)\.json$", fname)
-    key = m.group(1) if m else "综合类"
-    if key in ("综合", "综合类"):
-        return "综合类"
-    return key
-
-
-def normalize_track(row_track: str | None, file_track: str) -> str:
-    t = row_track or file_track
-    if file_track == "综合类" or t in ("综合", "综合类"):
-        return "综合类"
-    if "历史" in str(t) or "文科" in str(t):
-        return "历史类"
-    if "物理" in str(t) or "理科" in str(t):
-        return "物理类"
-    return file_track
 
 
 def export_detail_and_school_year() -> tuple[int, int, set[str], set[str]]:
@@ -59,10 +36,12 @@ def export_detail_and_school_year() -> tuple[int, int, set[str], set[str]]:
         rows = json.loads(path.read_text(encoding="utf-8"))
         for row in rows:
             province = (row.get("province") or "").strip()
+            if not province or not filter_admission_row(province, row):
+                continue
             school = (row.get("schoolName") or "").strip()
             year = row.get("year")
             score = parse_min_score(row.get("minScore"))
-            if not province or not school or not year or score is None:
+            if not school or not year or score is None:
                 continue
             track = normalize_track(row.get("track"), file_track)
             detail_rows.append({
