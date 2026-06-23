@@ -105,12 +105,15 @@ def parse_min_score(raw: Any) -> int | None:
         return None
 
 
-def is_plausible_score(score: int, province: str) -> bool:
+def is_plausible_score(score: int, province: str, row: dict[str, Any] | None = None) -> bool:
     """剔除 API 中 >750 的异常投档分（如混批/字段错位）。"""
     if score < SCORE_MIN or score > SCORE_MAX:
         return False
     if province in COMBINED_33_PROVINCES and score > 720:
-        # 3+3 省满分 750，极少数专业组可略高于 700，>720 视为脏数据
+        # 官方仅公布位次、由一分一段换算的分可能 >720（如山东），保留
+        if row and row.get("minRank") and row.get("source") == "province_exam_portal_direct":
+            return True
+        # 3+3 省掌上高考 API 偶有 >720 脏数据（字段错位/外省批）
         return False
     return True
 
@@ -137,7 +140,7 @@ def filter_admission_row(province: str, row: dict[str, Any]) -> bool:
     if not row_is_undergrad_primary(province, row):
         return False
     score = parse_min_score(row.get("minScore"))
-    if score is None or not is_plausible_score(score, province):
+    if score is None or not is_plausible_score(score, province, row):
         return False
     return True
 

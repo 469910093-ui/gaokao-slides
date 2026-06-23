@@ -25,21 +25,10 @@
     },
     "河北": {
       "portal": "http://www.hebeea.edu.cn/",
-      "implementation": "partial",
+      "implementation": "full",
       "tier": "A",
       "listingPages": ["http://www.hebeea.edu.cn/html/zxgg/index.html"],
-      "discoverKeywords": ["投档", "平行志愿", "物理类", "历史类"],
-      "knownArtifacts": {
-        "2024": [
-          {
-            "title": "河北省2024年本科批物理类投档分数线（EOL转载对照）",
-            "url": "https://gaokao.eol.cn/he_bei/dongtai/202406/t20240625_2619073.shtml",
-            "kind": "html",
-            "track": "物理类",
-            "note": "临时对照源，待替换为 hebeea 官方 PDF"
-          }
-        ]
-      }
+      "discoverKeywords": ["投档", "平行志愿", "物理类", "历史类"]
     },
     "山西": {
       "portal": "http://www.sxkszx.cn/",
@@ -143,7 +132,7 @@
     },
     "山东": {
       "portal": "http://www.sdzk.cn/",
-      "implementation": "partial",
+      "implementation": "full",
       "tier": "A",
       "listingPages": ["http://www.sdzk.cn/"],
       "discoverKeywords": ["投档", "普通类一段", "平行志愿"]
@@ -153,23 +142,7 @@
       "implementation": "partial",
       "tier": "A",
       "listingPages": ["http://www.haeea.cn/"],
-      "discoverKeywords": ["投档", "平行志愿", "本科批"],
-      "knownArtifacts": {
-        "2025": [
-          {
-            "title": "河南省2025年物理类本科批投档线（EOL对照）",
-            "url": "https://gaokao.eol.cn/he_nan/dongtai/202506/t20250625_2676859.shtml",
-            "kind": "html",
-            "track": "物理类"
-          },
-          {
-            "title": "河南省2025年历史类本科批投档线（EOL对照）",
-            "url": "https://gaokao.eol.cn/he_nan/dongtai/202506/t20250625_2676858.shtml",
-            "kind": "html",
-            "track": "历史类"
-          }
-        ]
-      }
+      "discoverKeywords": ["投档", "平行志愿", "本科批"]
     },
     "湖北": {
       "portal": "http://www.hbea.edu.cn/",
@@ -228,17 +201,7 @@
       "implementation": "partial",
       "tier": "A",
       "listingPages": ["https://www.sceea.cn/"],
-      "discoverKeywords": ["投档", "平行志愿", "本科批"],
-      "knownArtifacts": {
-        "2024": [
-          {
-            "title": "四川省2024年物理类本科批投档（EOL对照）",
-            "url": "https://gaokao.eol.cn/si_chuan/dongtai/202406/t20240624_2618669.shtml",
-            "kind": "html",
-            "track": "物理类"
-          }
-        ]
-      }
+      "discoverKeywords": ["投档", "平行志愿", "本科批"]
     },
     "贵州": {
       "portal": "http://zsksy.guizhou.gov.cn/",

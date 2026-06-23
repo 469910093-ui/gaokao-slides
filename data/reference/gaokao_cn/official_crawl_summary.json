@@ -1,22 +1,22 @@
 {
-  "generatedAt": "2026-06-23 16:49:15",
+  "generatedAt": "2026-06-23 17:55:06",
   "results": [
     {
-      "province": "江苏",
+      "province": "河北",
       "year": 2023,
-      "track": "物理类",
-      "rows": 2455,
-      "schools": 992,
-      "file": "admissions_江苏_2023_物理类_official.json",
+      "track": "历史类",
+      "rows": 6464,
+      "schools": 954,
+      "file": "admissions_河北_2023_历史类_official.json",
       "errors": []
     },
     {
-      "province": "江苏",
+      "province": "河北",
       "year": 2023,
-      "track": "历史类",
-      "rows": 1208,
-      "schools": 828,
-      "file": "admissions_江苏_2023_历史类_official.json",
+      "track": "物理类",
+      "rows": 16590,
+      "schools": 1070,
+      "file": "admissions_河北_2023_物理类_official.json",
       "errors": []
     }
   ]

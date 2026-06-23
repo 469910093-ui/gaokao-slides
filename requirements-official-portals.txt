@@ -1,3 +1,5 @@
 # 官方考试院投档 PDF / 旧版 XLS 解析
 pdfplumber>=0.11.0
 xlrd>=2.0.1
+# 河南 datacenter 反爬（可选，需 playwright install chromium）
+playwright>=1.40.0
