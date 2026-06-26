@@ -1,72 +1,278 @@
 {
-  "generatedAt": "2026-06-23 21:03:34",
+  "generatedAt": "2026-06-26 12:50:35",
   "results": [
     {
-      "province": "辽宁",
-      "year": 2024,
+      "province": "上海",
+      "year": 2023,
       "rows": 0,
       "errors": []
     },
     {
-      "province": "辽宁",
+      "province": "上海",
+      "year": 2024,
+      "track": "综合类",
+      "rows": 1244,
+      "schools": 604,
+      "file": "admissions_上海_2024_综合_official.json",
+      "errors": []
+    },
+    {
+      "province": "上海",
       "year": 2025,
-      "rows": 0,
-      "errors": [
-        "https://www.lnzsks.com/newsinfo/IMS_20250814_45115_YmLCvFdtOA.htm: 0 rows (html_beijing_style)",
-        "https://www.lnzsks.com/newsinfo/IMS_20250811_45110_7Q3t4b0zLv.htm: 0 rows (html_beijing_style)",
-        "https://www.lnzsks.com/newsinfo/IMS_20250808_45093_7pLmWuaEc0.htm: 0 rows (html_beijing_style)",
-        "https://www.lnzsks.com/newsinfo/IMS_20250730_45083_LdXKut8W21.htm: 0 rows (html_beijing_style)"
-      ]
+      "track": "综合类",
+      "rows": 1265,
+      "schools": 591,
+      "file": "admissions_上海_2025_综合_official.json",
+      "errors": []
     },
     {
-      "province": "广东",
-      "year": 2024,
-      "rows": 0,
-      "errors": [
-        "https://gaokao.eol.cn/guang_dong/dongtai/202406/t20240626_2619547.shtml: 0 rows (html_beijing_style)"
-      ]
-    },
-    {
-      "province": "广东",
-      "year": 2025,
-      "rows": 0,
-      "errors": [
-        "https://eea.gd.gov.cn/crgk/content/post_4811365.html: 0 rows (html_beijing_style)",
-        "https://eea.gd.gov.cn/crgk/content/post_4810143.html: 0 rows (html_beijing_style)"
-      ]
-    },
-    {
-      "province": "湖北",
-      "year": 2024,
+      "province": "四川",
+      "year": 2023,
       "rows": 0,
       "errors": []
     },
     {
-      "province": "湖北",
-      "year": 2025,
-      "rows": 0,
-      "errors": []
-    },
-    {
-      "province": "重庆",
+      "province": "四川",
       "year": 2024,
-      "rows": 0,
+      "track": "历史类",
+      "rows": 301,
+      "schools": 301,
+      "file": "admissions_四川_2024_历史类_official.json",
       "errors": []
     },
     {
-      "province": "重庆",
+      "province": "四川",
+      "year": 2024,
+      "track": "物理类",
+      "rows": 396,
+      "schools": 396,
+      "file": "admissions_四川_2024_物理类_official.json",
+      "errors": []
+    },
+    {
+      "province": "四川",
       "year": 2025,
       "rows": 0,
       "errors": []
     },
     {
-      "province": "天津",
+      "province": "广西",
+      "year": 2023,
+      "rows": 0,
+      "errors": []
+    },
+    {
+      "province": "广西",
+      "year": 2024,
+      "track": "物理类",
+      "rows": 3095,
+      "schools": 1062,
+      "file": "admissions_广西_2024_物理类_official.json",
+      "errors": []
+    },
+    {
+      "province": "广西",
+      "year": 2024,
+      "track": "历史类",
+      "rows": 1533,
+      "schools": 876,
+      "file": "admissions_广西_2024_历史类_official.json",
+      "errors": []
+    },
+    {
+      "province": "广西",
+      "year": 2025,
+      "track": "物理类",
+      "rows": 3460,
+      "schools": 1080,
+      "file": "admissions_广西_2025_物理类_official.json",
+      "errors": []
+    },
+    {
+      "province": "广西",
+      "year": 2025,
+      "track": "历史类",
+      "rows": 1590,
+      "schools": 870,
+      "file": "admissions_广西_2025_历史类_official.json",
+      "errors": []
+    },
+    {
+      "province": "河北",
+      "year": 2023,
+      "track": "历史类",
+      "rows": 6464,
+      "schools": 954,
+      "file": "admissions_河北_2023_历史类_official.json",
+      "errors": []
+    },
+    {
+      "province": "河北",
+      "year": 2023,
+      "track": "物理类",
+      "rows": 16590,
+      "schools": 1070,
+      "file": "admissions_河北_2023_物理类_official.json",
+      "errors": []
+    },
+    {
+      "province": "河北",
+      "year": 2024,
+      "track": "历史类",
+      "rows": 6398,
+      "schools": 997,
+      "file": "admissions_河北_2024_历史类_official.json",
+      "errors": []
+    },
+    {
+      "province": "河北",
+      "year": 2024,
+      "track": "物理类",
+      "rows": 17902,
+      "schools": 1124,
+      "file": "admissions_河北_2024_物理类_official.json",
+      "errors": []
+    },
+    {
+      "province": "河北",
+      "year": 2025,
+      "rows": 0,
+      "errors": []
+    },
+    {
+      "province": "浙江",
+      "year": 2023,
+      "rows": 0,
+      "errors": []
+    },
+    {
+      "province": "浙江",
+      "year": 2024,
+      "track": "综合类",
+      "rows": 17171,
+      "schools": 1258,
+      "file": "admissions_浙江_2024_综合_official.json",
+      "errors": []
+    },
+    {
+      "province": "浙江",
+      "year": 2025,
+      "track": "综合类",
+      "rows": 17816,
+      "schools": 1291,
+      "file": "admissions_浙江_2025_综合_official.json",
+      "errors": []
+    },
+    {
+      "province": "湖南",
+      "year": 2023,
+      "rows": 0,
+      "errors": []
+    },
+    {
+      "province": "湖南",
+      "year": 2024,
+      "track": "历史类",
+      "rows": 1584,
+      "schools": 829,
+      "file": "admissions_湖南_2024_历史类_official.json",
+      "errors": []
+    },
+    {
+      "province": "湖南",
+      "year": 2024,
+      "track": "物理类",
+      "rows": 3474,
+      "schools": 1051,
+      "file": "admissions_湖南_2024_物理类_official.json",
+      "errors": []
+    },
+    {
+      "province": "湖南",
+      "year": 2025,
+      "track": "历史类",
+      "rows": 1646,
+      "schools": 825,
+      "file": "admissions_湖南_2025_历史类_official.json",
+      "errors": []
+    },
+    {
+      "province": "湖南",
+      "year": 2025,
+      "track": "物理类",
+      "rows": 3726,
+      "schools": 1059,
+      "file": "admissions_湖南_2025_物理类_official.json",
+      "errors": []
+    },
+    {
+      "province": "贵州",
+      "year": 2023,
+      "rows": 0,
+      "errors": []
+    },
+    {
+      "province": "贵州",
       "year": 2024,
       "rows": 0,
       "errors": []
     },
     {
-      "province": "天津",
+      "province": "贵州",
+      "year": 2025,
+      "track": "物理类",
+      "rows": 14050,
+      "schools": 937,
+      "file": "admissions_贵州_2025_物理类_official.json",
+      "errors": []
+    },
+    {
+      "province": "贵州",
+      "year": 2025,
+      "track": "历史类",
+      "rows": 4784,
+      "schools": 796,
+      "file": "admissions_贵州_2025_历史类_official.json",
+      "errors": []
+    },
+    {
+      "province": "陕西",
+      "year": 2023,
+      "track": "历史类",
+      "rows": 771,
+      "schools": 771,
+      "file": "admissions_陕西_2023_历史类_official.json",
+      "errors": []
+    },
+    {
+      "province": "陕西",
+      "year": 2023,
+      "track": "物理类",
+      "rows": 938,
+      "schools": 938,
+      "file": "admissions_陕西_2023_物理类_official.json",
+      "errors": []
+    },
+    {
+      "province": "陕西",
+      "year": 2024,
+      "track": "历史类",
+      "rows": 793,
+      "schools": 793,
+      "file": "admissions_陕西_2024_历史类_official.json",
+      "errors": []
+    },
+    {
+      "province": "陕西",
+      "year": 2024,
+      "track": "物理类",
+      "rows": 967,
+      "schools": 967,
+      "file": "admissions_陕西_2024_物理类_official.json",
+      "errors": []
+    },
+    {
+      "province": "陕西",
       "year": 2025,
       "rows": 0,
       "errors": []

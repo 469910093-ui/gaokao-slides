@@ -80,7 +80,7 @@ def main() -> None:
         p = get_parser(province)
         for year in years:
             official_rows, errs = p.crawl_admissions(year)
-            official_dicts = [r.to_dict() for r in official_rows if filter_admission_row(province, r.to_dict())]
+            official_dicts = [r.to_dict() for r in official_rows if filter_regular_admission_row(province, r.to_dict())]
             by_track: dict[str, list[dict]] = defaultdict(list)
             for row in official_dicts:
                 tk = normalize_track(row.get("track"), "综合类")

@@ -1,0 +1,445 @@
+{
+  "year": 2026,
+  "source": "阳光高考",
+  "sourceUrl": "https://gaokao.chsi.com.cn/z/gkbmfslq/pcx.jsp",
+  "generatedAt": "2026-06-26 12:38:09",
+  "provinces": [
+    {
+      "province": "北京",
+      "maxScore": 750,
+      "tracks": {
+        "综合类": {
+          "特招线": 521,
+          "本科线": 429
+        }
+      },
+      "batchSource": "official_2026_chsi"
+    },
+    {
+      "province": "天津",
+      "maxScore": 750,
+      "tracks": {
+        "综合类": {
+          "特招线": 547,
+          "本科线": 458
+        }
+      },
+      "batchSource": "official_2026_chsi"
+    },
+    {
+      "province": "河北",
+      "maxScore": 750,
+      "tracks": {
+        "历史类": {
+          "特招线": 542,
+          "本科线": 485
+        },
+        "物理类": {
+          "特招线": 510,
+          "本科线": 443
+        }
+      },
+      "batchSource": "official_2026_chsi"
+    },
+    {
+      "province": "山西",
+      "maxScore": 750,
+      "tracks": {
+        "历史类": {
+          "特招线": 538,
+          "本科线": 409
+        },
+        "物理类": {
+          "特招线": 524,
+          "本科线": 401
+        }
+      },
+      "batchSource": "official_2026_chsi"
+    },
+    {
+      "province": "内蒙古",
+      "maxScore": 750,
+      "tracks": {
+        "历史类": {
+          "特招线": 512,
+          "本科线": 403
+        },
+        "物理类": {
+          "特招线": 488,
+          "本科线": 363
+        }
+      },
+      "batchSource": "official_2026_chsi"
+    },
+    {
+      "province": "辽宁",
+      "maxScore": 750,
+      "tracks": {
+        "历史类": {
+          "特招线": 527,
+          "本科线": 442
+        },
+        "物理类": {
+          "特招线": 508,
+          "本科线": 344
+        }
+      },
+      "batchSource": "official_2026_chsi"
+    },
+    {
+      "province": "吉林",
+      "maxScore": 750,
+      "tracks": {
+        "历史类": {
+          "特招线": 478,
+          "本科线": 343
+        },
+        "物理类": {
+          "特招线": 473,
+          "本科线": 321
+        }
+      },
+      "batchSource": "official_2026_chsi"
+    },
+    {
+      "province": "黑龙江",
+      "maxScore": 750,
+      "tracks": {
+        "历史类": {
+          "特招线": 466,
+          "本科线": 385
+        },
+        "物理类": {
+          "特招线": 464,
+          "本科线": 340
+        }
+      },
+      "batchSource": "official_2026_chsi"
+    },
+    {
+      "province": "上海",
+      "maxScore": 660,
+      "tracks": {
+        "综合类": {
+          "特招线": 504,
+          "本科线": 403
+        }
+      },
+      "batchSource": "official_2026_chsi"
+    },
+    {
+      "province": "江苏",
+      "maxScore": 750,
+      "tracks": {
+        "历史类": {
+          "特招线": 532,
+          "本科线": 484
+        },
+        "物理类": {
+          "特招线": 513,
+          "本科线": 456
+        }
+      },
+      "batchSource": "official_2026_chsi"
+    },
+    {
+      "province": "浙江",
+      "maxScore": 750,
+      "tracks": {
+        "综合类": {
+          "特招线": 594,
+          "本科线": 494
+        }
+      },
+      "batchSource": "official_2026_chsi"
+    },
+    {
+      "province": "安徽",
+      "maxScore": 750,
+      "tracks": {
+        "历史类": {
+          "特招线": 522,
+          "本科线": 490
+        },
+        "物理类": {
+          "特招线": 514,
+          "本科线": 451
+        }
+      },
+      "batchSource": "official_2026_chsi"
+    },
+    {
+      "province": "福建",
+      "maxScore": 750,
+      "tracks": {
+        "历史类": {
+          "特招线": 533,
+          "本科线": 458
+        },
+        "物理类": {
+          "特招线": 528,
+          "本科线": 446
+        }
+      },
+      "batchSource": "official_2026_chsi"
+    },
+    {
+      "province": "江西",
+      "maxScore": 750,
+      "tracks": {
+        "历史类": {
+          "特招线": 535,
+          "本科线": 479
+        },
+        "物理类": {
+          "特招线": 505,
+          "本科线": 412
+        }
+      },
+      "batchSource": "official_2026_chsi"
+    },
+    {
+      "province": "山东",
+      "maxScore": 750,
+      "tracks": {
+        "综合类": {
+          "特招线": 525,
+          "本科线": 442
+        }
+      },
+      "batchSource": "official_2026_chsi"
+    },
+    {
+      "province": "河南",
+      "maxScore": 750,
+      "tracks": {
+        "历史类": {
+          "特招线": 534,
+          "本科线": 459
+        },
+        "物理类": {
+          "特招线": 513,
+          "本科线": 419
+        }
+      },
+      "batchSource": "official_2026_chsi"
+    },
+    {
+      "province": "湖北",
+      "maxScore": 750,
+      "tracks": {
+        "历史类": {
+          "特招线": 532,
+          "本科线": 443
+        },
+        "物理类": {
+          "特招线": 529,
+          "本科线": 435
+        }
+      },
+      "batchSource": "official_2026_chsi"
+    },
+    {
+      "province": "湖南",
+      "maxScore": 750,
+      "tracks": {
+        "历史类": {
+          "特招线": 494,
+          "本科线": 446
+        },
+        "物理类": {
+          "特招线": 481,
+          "本科线": 400
+        }
+      },
+      "batchSource": "official_2026_chsi"
+    },
+    {
+      "province": "广东",
+      "maxScore": 750,
+      "tracks": {
+        "历史类": {
+          "特招线": 546,
+          "本科线": 440
+        },
+        "物理类": {
+          "特招线": 539,
+          "本科线": 425
+        }
+      },
+      "batchSource": "official_2026_chsi"
+    },
+    {
+      "province": "广西",
+      "maxScore": 750,
+      "tracks": {
+        "历史类": {
+          "特招线": 520,
+          "本科线": 398
+        },
+        "物理类": {
+          "特招线": 510,
+          "本科线": 368
+        }
+      },
+      "batchSource": "official_2026_chsi"
+    },
+    {
+      "province": "海南",
+      "maxScore": 900,
+      "tracks": {
+        "综合类": {
+          "特招线": 568,
+          "本科线": 479
+        }
+      },
+      "batchSource": "official_2026_chsi"
+    },
+    {
+      "province": "重庆",
+      "maxScore": 750,
+      "tracks": {
+        "历史类": {
+          "特招线": 510,
+          "本科线": 415
+        },
+        "物理类": {
+          "特招线": 496,
+          "本科线": 406
+        }
+      },
+      "batchSource": "official_2026_chsi"
+    },
+    {
+      "province": "四川",
+      "maxScore": 750,
+      "tracks": {
+        "历史类": {
+          "特招线": 525,
+          "本科线": 455
+        },
+        "物理类": {
+          "特招线": 519,
+          "本科线": 435
+        }
+      },
+      "batchSource": "official_2026_chsi"
+    },
+    {
+      "province": "贵州",
+      "maxScore": 750,
+      "tracks": {
+        "历史类": {
+          "特招线": 503,
+          "本科线": 439
+        },
+        "物理类": {
+          "特招线": 494,
+          "本科线": 393
+        }
+      },
+      "batchSource": "official_2026_chsi"
+    },
+    {
+      "province": "云南",
+      "maxScore": 750,
+      "tracks": {
+        "历史类": {
+          "特招线": 545,
+          "本科线": 465
+        },
+        "物理类": {
+          "特招线": 505,
+          "本科线": 435
+        }
+      },
+      "batchSource": "official_2026_chsi"
+    },
+    {
+      "province": "西藏",
+      "maxScore": 750,
+      "tracks": {
+        "综合类": {
+          "特招线": 400,
+          "本科线": 304
+        }
+      },
+      "batchSource": "official_2026_chsi"
+    },
+    {
+      "province": "陕西",
+      "maxScore": 750,
+      "tracks": {
+        "历史类": {
+          "特招线": 462,
+          "本科线": 385
+        },
+        "物理类": {
+          "特招线": 451,
+          "本科线": 376
+        }
+      },
+      "batchSource": "official_2026_chsi"
+    },
+    {
+      "province": "甘肃",
+      "maxScore": 750,
+      "tracks": {
+        "历史类": {
+          "特招线": 508,
+          "本科线": 405
+        },
+        "物理类": {
+          "特招线": 477,
+          "本科线": 367
+        }
+      },
+      "batchSource": "official_2026_chsi"
+    },
+    {
+      "province": "青海",
+      "maxScore": 750,
+      "tracks": {
+        "历史类": {
+          "特招线": 427,
+          "本科线": 376
+        },
+        "物理类": {
+          "特招线": 417,
+          "本科线": 344
+        }
+      },
+      "batchSource": "official_2026_chsi"
+    },
+    {
+      "province": "宁夏",
+      "maxScore": 750,
+      "tracks": {
+        "历史类": {
+          "特招线": 474,
+          "本科线": 393
+        },
+        "物理类": {
+          "特招线": 437,
+          "本科线": 360
+        }
+      },
+      "batchSource": "official_2026_chsi"
+    },
+    {
+      "province": "新疆",
+      "maxScore": 750,
+      "tracks": {
+        "物理类": {
+          "特招线": 451,
+          "本科线": 315
+        },
+        "历史类": {
+          "特招线": 451,
+          "本科线": 315
+        }
+      },
+      "batchSource": "official_2026_chsi"
+    }
+  ]
+}

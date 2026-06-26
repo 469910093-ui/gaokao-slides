@@ -138,7 +138,20 @@ def build_index() -> dict[str, Any]:
                 }
 
     province_status: dict[str, dict[str, Any]] = {}
+    coverage_gaps: dict[str, list[int]] = {}
+    years_check = (2023, 2024, 2025)
     for prov in sorted(official_provs):
+        present: set[int] = set()
+        for path in archive_files:
+            parts = path.stem.removeprefix("admissions_").removesuffix("_official").split("_")
+            if len(parts) >= 2 and parts[0] == prov:
+                try:
+                    present.add(int(parts[1]))
+                except ValueError:
+                    pass
+        missing = [y for y in years_check if y not in present]
+        if missing:
+            coverage_gaps[prov] = missing
         tracks = provinces_out.get(prov, {})
         if tracks and any(tracks[t] for t in tracks):
             province_status[prov] = {
@@ -164,6 +177,7 @@ def build_index() -> dict[str, Any]:
                 p for p, s in province_status.items() if s.get("status") == "verified"
             ),
             "provinceStatus": province_status,
+            "coverageGaps2023_2025": coverage_gaps,
             "schoolEntries": sum(
                 len(schools) for tracks in provinces_out.values() for schools in tracks.values()
             ),

@@ -53,40 +53,116 @@ YEARS = list(range(2014, 2027))
 
 BASE_YEAR = 2025
 
-# 2026 省控线：各省考试院公布 + 阳光高考汇总（2026-06-23 起陆续发布）
-# 3+1+2 省份取物理类特控线/本科线；3+3 综合改革取统一划线；新疆取理科一本/二本
+# 2026 省控线：阳光高考 gaokao.chsi.com.cn/z/gkbmfslq/pcx.jsp（2026-06-26 核对）
+# 3+1+2 分历史/物理；3+3 为综合类；新疆为本科一批/二批；西藏取 B 类考生线
+CHSI_BATCH_URL = "https://gaokao.chsi.com.cn/z/gkbmfslq/pcx.jsp"
+
+PROVINCE_TRACK_BATCHES_2026: dict[str, dict[str, dict[str, int]]] = {
+    "北京": {"综合类": {"special": 521, "undergrad": 429}},
+    "天津": {"综合类": {"special": 547, "undergrad": 458}},
+    "河北": {"历史类": {"special": 542, "undergrad": 485}, "物理类": {"special": 510, "undergrad": 443}},
+    "山西": {"历史类": {"special": 538, "undergrad": 409}, "物理类": {"special": 524, "undergrad": 401}},
+    "内蒙古": {"历史类": {"special": 512, "undergrad": 403}, "物理类": {"special": 488, "undergrad": 363}},
+    "辽宁": {"历史类": {"special": 527, "undergrad": 442}, "物理类": {"special": 508, "undergrad": 344}},
+    "吉林": {"历史类": {"special": 478, "undergrad": 343}, "物理类": {"special": 473, "undergrad": 321}},
+    "黑龙江": {"历史类": {"special": 466, "undergrad": 385}, "物理类": {"special": 464, "undergrad": 340}},
+    "上海": {"综合类": {"special": 504, "undergrad": 403}},
+    "江苏": {"历史类": {"special": 532, "undergrad": 484}, "物理类": {"special": 513, "undergrad": 456}},
+    "浙江": {"综合类": {"special": 594, "undergrad": 494}},
+    "安徽": {"历史类": {"special": 522, "undergrad": 490}, "物理类": {"special": 514, "undergrad": 451}},
+    "福建": {"历史类": {"special": 533, "undergrad": 458}, "物理类": {"special": 528, "undergrad": 446}},
+    "江西": {"历史类": {"special": 535, "undergrad": 479}, "物理类": {"special": 505, "undergrad": 412}},
+    "山东": {"综合类": {"special": 525, "undergrad": 442}},
+    "河南": {"历史类": {"special": 534, "undergrad": 459}, "物理类": {"special": 513, "undergrad": 419}},
+    "湖北": {"历史类": {"special": 532, "undergrad": 443}, "物理类": {"special": 529, "undergrad": 435}},
+    "湖南": {"历史类": {"special": 494, "undergrad": 446}, "物理类": {"special": 481, "undergrad": 400}},
+    "广东": {"历史类": {"special": 546, "undergrad": 440}, "物理类": {"special": 539, "undergrad": 425}},
+    "广西": {"历史类": {"special": 520, "undergrad": 398}, "物理类": {"special": 510, "undergrad": 368}},
+    "海南": {"综合类": {"special": 568, "undergrad": 479}},
+    "重庆": {"历史类": {"special": 510, "undergrad": 415}, "物理类": {"special": 496, "undergrad": 406}},
+    "四川": {"历史类": {"special": 525, "undergrad": 455}, "物理类": {"special": 519, "undergrad": 435}},
+    "贵州": {"历史类": {"special": 503, "undergrad": 439}, "物理类": {"special": 494, "undergrad": 393}},
+    "云南": {"历史类": {"special": 545, "undergrad": 465}, "物理类": {"special": 505, "undergrad": 435}},
+    "西藏": {"综合类": {"special": 400, "undergrad": 304}},
+    "陕西": {"历史类": {"special": 462, "undergrad": 385}, "物理类": {"special": 451, "undergrad": 376}},
+    "甘肃": {"历史类": {"special": 508, "undergrad": 405}, "物理类": {"special": 477, "undergrad": 367}},
+    "青海": {"历史类": {"special": 427, "undergrad": 376}, "物理类": {"special": 417, "undergrad": 344}},
+    "宁夏": {"历史类": {"special": 474, "undergrad": 393}, "物理类": {"special": 437, "undergrad": 360}},
+    "新疆": {"物理类": {"special": 451, "undergrad": 315}, "历史类": {"special": 451, "undergrad": 315}},
+}
+
+_PROVINCE_META_2026: dict[str, dict[str, int]] = {
+    "北京": {"max": 750, "candidates": 54500},
+    "天津": {"max": 750, "candidates": 68700},
+    "河北": {"max": 750, "candidates": 889000},
+    "山西": {"max": 750, "candidates": 354000},
+    "内蒙古": {"max": 750, "candidates": 192000},
+    "辽宁": {"max": 750, "candidates": 197000},
+    "吉林": {"max": 750, "candidates": 126000},
+    "黑龙江": {"max": 750, "candidates": 192000},
+    "上海": {"max": 660, "candidates": 54500},
+    "江苏": {"max": 750, "candidates": 482000},
+    "浙江": {"max": 750, "candidates": 394000},
+    "安徽": {"max": 750, "candidates": 677000},
+    "福建": {"max": 750, "candidates": 242000},
+    "江西": {"max": 750, "candidates": 556000},
+    "山东": {"max": 750, "candidates": 990000},
+    "河南": {"max": 750, "candidates": 1374000},
+    "湖北": {"max": 750, "candidates": 525000},
+    "湖南": {"max": 750, "candidates": 737000},
+    "广东": {"max": 750, "candidates": 768000},
+    "广西": {"max": 750, "candidates": 465000},
+    "海南": {"max": 900, "candidates": 72700},
+    "重庆": {"max": 750, "candidates": 323000},
+    "四川": {"max": 750, "candidates": 838000},
+    "贵州": {"max": 750, "candidates": 343000},
+    "云南": {"max": 750, "candidates": 394000},
+    "西藏": {"max": 750, "candidates": 38400},
+    "陕西": {"max": 750, "candidates": 354000},
+    "甘肃": {"max": 750, "candidates": 263000},
+    "青海": {"max": 750, "candidates": 52500},
+    "宁夏": {"max": 750, "candidates": 72700},
+    "新疆": {"max": 750, "candidates": 212000},
+}
+
+
+def _default_track_2026(prov: str) -> str:
+    from province_tracks import tracks_for_province
+
+    return tracks_for_province(prov, 2026)[0]
+
+
+def track_batches_for_year(prov: str, year: int) -> dict[str, dict[str, int]]:
+    if year == 2026:
+        return {
+            t: {"特招线": v["special"], "本科线": v["undergrad"]}
+            for t, v in PROVINCE_TRACK_BATCHES_2026.get(prov, {}).items()
+        }
+    return {}
+
+
+def province_cfg(prov: str, year: int, track: str | None = None) -> dict[str, int]:
+    """各省某年批次线配置：2025/2026 用官方表，其余年份模型外推。"""
+    if year == 2026:
+        meta = dict(_PROVINCE_META_2026.get(prov, {"max": 750, "candidates": 300000}))
+        tb = PROVINCE_TRACK_BATCHES_2026.get(prov, {})
+        key = track if track and track in tb else _default_track_2026(prov)
+        if key not in tb and tb:
+            key = next(iter(tb))
+        lines = tb.get(key, {"special": 500, "undergrad": 400})
+        return {
+            "special": lines["special"],
+            "undergrad": lines["undergrad"],
+            **meta,
+        }
+    if year == 2025:
+        return dict(PROVINCE_BASE_2025[prov])
+    return year_adjust(PROVINCE_BASE_2025[prov], year)
+
+
+# 兼容旧引用：默认科类（3+3 综合 / 3+1+2 物理 / 新疆理科）
 PROVINCE_BASE_2026: dict[str, dict[str, int]] = {
-    "北京": {"special": 519, "undergrad": 430, "max": 750, "candidates": 54500},
-    "天津": {"special": 547, "undergrad": 458, "max": 750, "candidates": 68700},
-    "河北": {"special": 499, "undergrad": 459, "max": 750, "candidates": 889000},
-    "山西": {"special": 507, "undergrad": 419, "max": 750, "candidates": 354000},
-    "内蒙古": {"special": 487, "undergrad": 375, "max": 750, "candidates": 192000},
-    "辽宁": {"special": 515, "undergrad": 367, "max": 750, "candidates": 197000},
-    "吉林": {"special": 479, "undergrad": 340, "max": 750, "candidates": 126000},
-    "黑龙江": {"special": 472, "undergrad": 360, "max": 750, "candidates": 192000},
-    "上海": {"special": 504, "undergrad": 403, "max": 660, "candidates": 54500},
-    "江苏": {"special": 519, "undergrad": 463, "max": 750, "candidates": 482000},
-    "浙江": {"special": 592, "undergrad": 490, "max": 750, "candidates": 394000},
-    "安徽": {"special": 514, "undergrad": 461, "max": 750, "candidates": 677000},
-    "福建": {"special": 520, "undergrad": 441, "max": 750, "candidates": 242000},
-    "江西": {"special": 505, "undergrad": 429, "max": 750, "candidates": 556000},
-    "山东": {"special": 521, "undergrad": 441, "max": 750, "candidates": 990000},
-    "河南": {"special": 535, "undergrad": 427, "max": 750, "candidates": 1374000},
-    "湖北": {"special": 516, "undergrad": 426, "max": 750, "candidates": 525000},
-    "湖南": {"special": 476, "undergrad": 405, "max": 750, "candidates": 737000},
-    "广东": {"special": 534, "undergrad": 436, "max": 750, "candidates": 768000},
-    "广西": {"special": 495, "undergrad": 370, "max": 750, "candidates": 465000},
-    "海南": {"special": 568, "undergrad": 480, "max": 900, "candidates": 72700},
-    "重庆": {"special": 498, "undergrad": 425, "max": 750, "candidates": 323000},
-    "四川": {"special": 518, "undergrad": 438, "max": 750, "candidates": 838000},
-    "贵州": {"special": 483, "undergrad": 387, "max": 750, "candidates": 343000},
-    "云南": {"special": 495, "undergrad": 430, "max": 750, "candidates": 394000},
-    "西藏": {"special": 400, "undergrad": 300, "max": 750, "candidates": 38400},
-    "陕西": {"special": 473, "undergrad": 394, "max": 750, "candidates": 354000},
-    "甘肃": {"special": 475, "undergrad": 374, "max": 750, "candidates": 263000},
-    "青海": {"special": 420, "undergrad": 350, "max": 750, "candidates": 52500},
-    "宁夏": {"special": 441, "undergrad": 372, "max": 750, "candidates": 72700},
-    "新疆": {"special": 421, "undergrad": 280, "max": 750, "candidates": 212000},
+    prov: province_cfg(prov, 2026) for prov in _PROVINCE_META_2026
 }
 
 PROVINCE_BASE_2025: dict[str, dict[str, int]] = {
@@ -306,15 +382,6 @@ def year_adjust(base: dict[str, int], year: int) -> dict[str, int]:
         "max": base["max"],
         "candidates": int(base["candidates"] * (1 + (year - BASE_YEAR) * 0.01)),
     }
-
-
-def province_cfg(prov: str, year: int) -> dict[str, int]:
-    """各省某年批次线配置：2025/2026 用官方表，其余年份模型外推。"""
-    if year == 2026:
-        return dict(PROVINCE_BASE_2026[prov])
-    if year == 2025:
-        return dict(PROVINCE_BASE_2025[prov])
-    return year_adjust(PROVINCE_BASE_2025[prov], year)
 
 
 def synthesize_segments(cfg: dict[str, int], track: str):

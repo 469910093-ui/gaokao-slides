@@ -501,6 +501,62 @@
     @media (min-width: 900px) {
       .pitfall-teaser { grid-template-columns: repeat(3, 1fr); }
     }
+    .batch-summary-panel {
+      margin-bottom: 14px;
+      padding: 16px 18px;
+      background: linear-gradient(135deg, #f8fbff 0%, #fff 55%);
+      border: 1px solid #d8e6f5;
+      border-radius: 14px;
+    }
+    .batch-summary-head {
+      display: flex;
+      flex-wrap: wrap;
+      align-items: flex-end;
+      justify-content: space-between;
+      gap: 8px 16px;
+      margin-bottom: 10px;
+    }
+    .batch-summary-head .hint { margin: 0; }
+    .batch-summary-table-wrap {
+      overflow-x: auto;
+      max-height: 320px;
+      border: 1px solid #e8edf3;
+      border-radius: 10px;
+      background: #fff;
+    }
+    .batch-summary-table {
+      width: 100%;
+      border-collapse: collapse;
+      font-size: 0.82rem;
+      min-width: 640px;
+    }
+    .batch-summary-table th,
+    .batch-summary-table td {
+      padding: 7px 10px;
+      border-bottom: 1px solid #eef2f6;
+      text-align: center;
+      white-space: nowrap;
+    }
+    .batch-summary-table th {
+      position: sticky;
+      top: 0;
+      background: #f3f7fb;
+      font-weight: 700;
+      color: #334155;
+      z-index: 1;
+    }
+    .batch-summary-table td:first-child,
+    .batch-summary-table th:first-child {
+      text-align: left;
+      position: sticky;
+      left: 0;
+      background: #fff;
+      z-index: 2;
+      font-weight: 600;
+    }
+    .batch-summary-table th:first-child { background: #f3f7fb; z-index: 3; }
+    .batch-summary-table tbody tr:hover { background: #f8fafc; }
+    .batch-summary-table .muted { color: #94a3b8; }
   </style>
 </head>
 <body>
@@ -519,6 +575,32 @@
           </div>
           <a href="index.html">← 合集</a>
         </div>
+      </div>
+    </section>
+
+    <section class="batch-summary-panel" id="batchSummary2026" aria-label="2026年高考分数线汇总">
+      <div class="batch-summary-head">
+        <div>
+          <h2 class="section-title" style="margin:0 0 4px">2026年高考分数线汇总</h2>
+          <p class="hint">数据来源：教育部阳光高考平台及各省招生考试院公布批次线（特控/本科）。</p>
+        </div>
+        <a href="https://gaokao.chsi.com.cn/z/gkbmfslq/pcx.jsp" target="_blank" rel="noopener">阳光高考官方页 ↗</a>
+      </div>
+      <div class="batch-summary-table-wrap">
+        <table class="batch-summary-table" id="batchSummaryTable">
+          <thead>
+            <tr>
+              <th>省份</th>
+              <th>科类</th>
+              <th>特招线/特控线</th>
+              <th>本科线</th>
+              <th>满分</th>
+            </tr>
+          </thead>
+          <tbody id="batchSummaryBody">
+            <tr><td colspan="5" class="muted">加载中…</td></tr>
+          </tbody>
+        </table>
       </div>
     </section>
 
@@ -647,8 +729,8 @@
         </a>
         <a class="post-card" href="post-02-ai-traps.html">
           <div class="num">02</div>
-          <h3>AI 时代选专业 5 个坑</h3>
-          <p>7 页轮播 · 避坑收藏</p>
+          <h3>智能时代选专业 · 5 个误判</h3>
+          <p>7 页轮播 · 每页附改法</p>
         </a>
         <a class="post-card" href="post-03-score-tiers.html">
           <div class="num">03</div>
@@ -991,6 +1073,64 @@
       } catch (_) { /* optional */ }
     }
 
+    function resolveYearBatches(yearObj, track) {
+      if (!yearObj) return {};
+      const tb = yearObj.trackBatches;
+      if (tb && tb[track]) return tb[track];
+      if (track === '物理类' && tb?.['理科']) return tb['理科'];
+      if (track === '历史类' && tb?.['文科']) return tb['文科'];
+      if (COMBINED_33.has(provinceEl.value) && tb?.['综合类']) return tb['综合类'];
+      return yearObj.batches || {};
+    }
+
+    function renderBatchSummary2026() {
+      const body = $('batchSummaryBody');
+      if (!body) return;
+      const provinces = state.manifest?.provinces || [];
+      const embedProvinces = window.GAOKAO_EMBED?.provinces || {};
+      const rows = [];
+      provinces.forEach((p) => {
+        const yo = embedProvinces[p]?.years?.['2026'];
+        if (!yo) return;
+        const max = yo.maxScore || 750;
+        const tb = yo.trackBatches || {};
+        const tracks = Object.keys(tb).length ? Object.keys(tb) : Object.keys(yo.batches || {}).length ? ['默认'] : [];
+        if (!tracks.length && yo.batches) {
+          rows.push({
+            province: p,
+            track: COMBINED_33.has(p) ? '综合类' : '—',
+            special: yo.batches['特招线'],
+            undergrad: yo.batches['本科线'],
+            max,
+          });
+          return;
+        }
+        tracks.forEach((t) => {
+          const b = tb[t] || {};
+          rows.push({
+            province: p,
+            track: t,
+            special: b['特招线'],
+            undergrad: b['本科线'],
+            max,
+          });
+        });
+      });
+      if (!rows.length) {
+        body.innerHTML = '<tr><td colspan="5" class="muted">暂无 2026 批次线数据，请运行 patch_2026_batches.py</td></tr>';
+        return;
+      }
+      body.innerHTML = rows.map((r) => `
+        <tr>
+          <td>${r.province}</td>
+          <td>${r.track}</td>
+          <td>${r.special ?? '—'}</td>
+          <td>${r.undergrad ?? '—'}</td>
+          <td>${r.max}</td>
+        </tr>
+      `).join('');
+    }
+
     async function loadManifest() {
       await bootstrapGaokaoEmbed();
       if (hasEmbed()) {
@@ -1014,6 +1154,7 @@
       await ensureSchoolSearchIndex();
       initTargetSchools();
       initFlowNav();
+      renderBatchSummary2026();
     }
 
     function renderMethodologySources() {
@@ -1345,7 +1486,7 @@
       const trackData = getYearTrackData();
       if (!trackData) return;
 
-      state.batches = yearObj.batches || {};
+      state.batches = resolveYearBatches(yearObj, trackEl.value);
       state.maxScore = yearObj.maxScore || 750;
       state.totalCandidates = trackData.totalCandidates || 0;
       state.segments = normalizeChartSegments((trackData.segments || []).map((seg) => ({

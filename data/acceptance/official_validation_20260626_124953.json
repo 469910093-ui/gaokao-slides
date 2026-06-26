@@ -1,0 +1,2188 @@
+{
+  "generatedAt": "2026-06-26 12:39:27",
+  "tolerance": 0,
+  "cases": [
+    {
+      "province": "上海",
+      "year": 2024,
+      "track": "综合类",
+      "officialSchools": 604,
+      "archiveSchools": 604,
+      "matches": 604,
+      "mismatches": 0,
+      "pass": true,
+      "samples": [],
+      "errors": []
+    },
+    {
+      "province": "上海",
+      "year": 2025,
+      "track": "综合类",
+      "officialSchools": 591,
+      "archiveSchools": 591,
+      "matches": 591,
+      "mismatches": 0,
+      "pass": true,
+      "samples": [],
+      "errors": []
+    },
+    {
+      "province": "北京",
+      "year": 2023,
+      "track": "综合类",
+      "officialSchools": 564,
+      "archiveSchools": 564,
+      "matches": 564,
+      "mismatches": 0,
+      "pass": true,
+      "samples": [],
+      "errors": []
+    },
+    {
+      "province": "北京",
+      "year": 2024,
+      "track": "综合类",
+      "officialSchools": 591,
+      "archiveSchools": 591,
+      "matches": 591,
+      "mismatches": 0,
+      "pass": true,
+      "samples": [],
+      "errors": []
+    },
+    {
+      "province": "北京",
+      "year": 2025,
+      "track": "综合类",
+      "officialSchools": 586,
+      "archiveSchools": 586,
+      "matches": 586,
+      "mismatches": 0,
+      "pass": true,
+      "samples": [],
+      "errors": []
+    },
+    {
+      "province": "四川",
+      "year": 2024,
+      "track": "综合类",
+      "officialSchools": 413,
+      "archiveSchools": 0,
+      "matches": 0,
+      "mismatches": 413,
+      "pass": false,
+      "samples": [
+        {
+          "school": "三峡大学",
+          "official": 569,
+          "archive": null,
+          "delta": null,
+          "kind": "MISSING_IN_ARCHIVE"
+        },
+        {
+          "school": "上海中医药大学",
+          "official": 582,
+          "archive": null,
+          "delta": null,
+          "kind": "MISSING_IN_ARCHIVE"
+        },
+        {
+          "school": "上海交通大学",
+          "official": 678,
+          "archive": null,
+          "delta": null,
+          "kind": "MISSING_IN_ARCHIVE"
+        },
+        {
+          "school": "上海交通大学医学院",
+          "official": 675,
+          "archive": null,
+          "delta": null,
+          "kind": "MISSING_IN_ARCHIVE"
+        },
+        {
+          "school": "上海健康医学院",
+          "official": 561,
+          "archive": null,
+          "delta": null,
+          "kind": "MISSING_IN_ARCHIVE"
+        },
+        {
+          "school": "上海外国语大学",
+          "official": 615,
+          "archive": null,
+          "delta": null,
+          "kind": "MISSING_IN_ARCHIVE"
+        },
+        {
+          "school": "上海大学",
+          "official": 623,
+          "archive": null,
+          "delta": null,
+          "kind": "MISSING_IN_ARCHIVE"
+        },
+        {
+          "school": "上海对外经贸大学",
+          "official": 553,
+          "archive": null,
+          "delta": null,
+          "kind": "MISSING_IN_ARCHIVE"
+        },
+        {
+          "school": "上海工程技术大学",
+          "official": 574,
+          "archive": null,
+          "delta": null,
+          "kind": "MISSING_IN_ARCHIVE"
+        },
+        {
+          "school": "上海师范大学",
+          "official": 539,
+          "archive": null,
+          "delta": null,
+          "kind": "MISSING_IN_ARCHIVE"
+        },
+        {
+          "school": "上海应用技术大学",
+          "official": 529,
+          "archive": null,
+          "delta": null,
+          "kind": "MISSING_IN_ARCHIVE"
+        },
+        {
+          "school": "上海戏剧学院",
+          "official": 569,
+          "archive": null,
+          "delta": null,
+          "kind": "MISSING_IN_ARCHIVE"
+        },
+        {
+          "school": "上海政法学院",
+          "official": 539,
+          "archive": null,
+          "delta": null,
+          "kind": "MISSING_IN_ARCHIVE"
+        },
+        {
+          "school": "上海海事大学",
+          "official": 570,
+          "archive": null,
+          "delta": null,
+          "kind": "MISSING_IN_ARCHIVE"
+        },
+        {
+          "school": "上海海洋大学",
+          "official": 558,
+          "archive": null,
+          "delta": null,
+          "kind": "MISSING_IN_ARCHIVE"
+        },
+        {
+          "school": "上海理工大学",
+          "official": 548,
+          "archive": null,
+          "delta": null,
+          "kind": "MISSING_IN_ARCHIVE"
+        },
+        {
+          "school": "上海电力大学",
+          "official": 604,
+          "archive": null,
+          "delta": null,
+          "kind": "MISSING_IN_ARCHIVE"
+        },
+        {
+          "school": "上海电机学院",
+          "official": 549,
+          "archive": null,
+          "delta": null,
+          "kind": "MISSING_IN_ARCHIVE"
+        },
+        {
+          "school": "上海立信会计金融学院",
+          "official": 557,
+          "archive": null,
+          "delta": null,
+          "kind": "MISSING_IN_ARCHIVE"
+        },
+        {
+          "school": "上海第二工业大学",
+          "official": 567,
+          "archive": null,
+          "delta": null,
+          "kind": "MISSING_IN_ARCHIVE"
+        }
+      ],
+      "errors": []
+    },
+    {
+      "province": "山东",
+      "year": 2023,
+      "track": "综合类",
+      "officialSchools": 1052,
+      "archiveSchools": 1052,
+      "matches": 1052,
+      "mismatches": 0,
+      "pass": true,
+      "samples": [],
+      "errors": []
+    },
+    {
+      "province": "山东",
+      "year": 2024,
+      "track": "综合类",
+      "officialSchools": 1090,
+      "archiveSchools": 1090,
+      "matches": 1090,
+      "mismatches": 0,
+      "pass": true,
+      "samples": [],
+      "errors": []
+    },
+    {
+      "province": "山东",
+      "year": 2025,
+      "track": "综合类",
+      "officialSchools": 1118,
+      "archiveSchools": 1118,
+      "matches": 1118,
+      "mismatches": 0,
+      "pass": true,
+      "samples": [],
+      "errors": []
+    },
+    {
+      "province": "广西",
+      "year": 2024,
+      "track": "综合类",
+      "officialSchools": 1078,
+      "archiveSchools": 0,
+      "matches": 0,
+      "mismatches": 1078,
+      "pass": false,
+      "samples": [
+        {
+          "school": "三亚学院",
+          "official": 372,
+          "archive": null,
+          "delta": null,
+          "kind": "MISSING_IN_ARCHIVE"
+        },
+        {
+          "school": "三峡大学",
+          "official": 480,
+          "archive": null,
+          "delta": null,
+          "kind": "MISSING_IN_ARCHIVE"
+        },
+        {
+          "school": "三峡大学科技学院",
+          "official": 394,
+          "archive": null,
+          "delta": null,
+          "kind": "MISSING_IN_ARCHIVE"
+        },
+        {
+          "school": "三明学院",
+          "official": 415,
+          "archive": null,
+          "delta": null,
+          "kind": "MISSING_IN_ARCHIVE"
+        },
+        {
+          "school": "三江学院",
+          "official": 371,
+          "archive": null,
+          "delta": null,
+          "kind": "MISSING_IN_ARCHIVE"
+        },
+        {
+          "school": "上海中侨职业技术大学",
+          "official": 414,
+          "archive": null,
+          "delta": null,
+          "kind": "MISSING_IN_ARCHIVE"
+        },
+        {
+          "school": "上海中医药大学",
+          "official": 542,
+          "archive": null,
+          "delta": null,
+          "kind": "MISSING_IN_ARCHIVE"
+        },
+        {
+          "school": "上海交通大学",
+          "official": 661,
+          "archive": null,
+          "delta": null,
+          "kind": "MISSING_IN_ARCHIVE"
+        },
+        {
+          "school": "上海交通大学医学院",
+          "official": 674,
+          "archive": null,
+          "delta": null,
+          "kind": "MISSING_IN_ARCHIVE"
+        },
+        {
+          "school": "上海体育大学",
+          "official": 505,
+          "archive": null,
+          "delta": null,
+          "kind": "MISSING_IN_ARCHIVE"
+        },
+        {
+          "school": "上海健康医学院",
+          "official": 476,
+          "archive": null,
+          "delta": null,
+          "kind": "MISSING_IN_ARCHIVE"
+        },
+        {
+          "school": "上海商学院",
+          "official": 478,
+          "archive": null,
+          "delta": null,
+          "kind": "MISSING_IN_ARCHIVE"
+        },
+        {
+          "school": "上海外国语大学",
+          "official": 595,
+          "archive": null,
+          "delta": null,
+          "kind": "MISSING_IN_ARCHIVE"
+        },
+        {
+          "school": "上海外国语大学贤达经济人文学院",
+          "official": 403,
+          "archive": null,
+          "delta": null,
+          "kind": "MISSING_IN_ARCHIVE"
+        },
+        {
+          "school": "上海大学",
+          "official": 568,
+          "archive": null,
+          "delta": null,
+          "kind": "MISSING_IN_ARCHIVE"
+        },
+        {
+          "school": "上海对外经贸大学",
+          "official": 550,
+          "archive": null,
+          "delta": null,
+          "kind": "MISSING_IN_ARCHIVE"
+        },
+        {
+          "school": "上海工程技术大学",
+          "official": 499,
+          "archive": null,
+          "delta": null,
+          "kind": "MISSING_IN_ARCHIVE"
+        },
+        {
+          "school": "上海师范大学",
+          "official": 506,
+          "archive": null,
+          "delta": null,
+          "kind": "MISSING_IN_ARCHIVE"
+        },
+        {
+          "school": "上海师范大学天华学院",
+          "official": 372,
+          "archive": null,
+          "delta": null,
+          "kind": "MISSING_IN_ARCHIVE"
+        },
+        {
+          "school": "上海应用技术大学",
+          "official": 469,
+          "archive": null,
+          "delta": null,
+          "kind": "MISSING_IN_ARCHIVE"
+        }
+      ],
+      "errors": []
+    },
+    {
+      "province": "广西",
+      "year": 2025,
+      "track": "综合类",
+      "officialSchools": 1095,
+      "archiveSchools": 0,
+      "matches": 0,
+      "mismatches": 1095,
+      "pass": false,
+      "samples": [
+        {
+          "school": "三亚学院",
+          "official": 374,
+          "archive": null,
+          "delta": null,
+          "kind": "MISSING_IN_ARCHIVE"
+        },
+        {
+          "school": "三峡大学",
+          "official": 542,
+          "archive": null,
+          "delta": null,
+          "kind": "MISSING_IN_ARCHIVE"
+        },
+        {
+          "school": "三峡大学科技学院",
+          "official": 387,
+          "archive": null,
+          "delta": null,
+          "kind": "MISSING_IN_ARCHIVE"
+        },
+        {
+          "school": "三明学院",
+          "official": 435,
+          "archive": null,
+          "delta": null,
+          "kind": "MISSING_IN_ARCHIVE"
+        },
+        {
+          "school": "三江学院",
+          "official": 371,
+          "archive": null,
+          "delta": null,
+          "kind": "MISSING_IN_ARCHIVE"
+        },
+        {
+          "school": "上海中侨职业技术大学",
+          "official": 370,
+          "archive": null,
+          "delta": null,
+          "kind": "MISSING_IN_ARCHIVE"
+        },
+        {
+          "school": "上海中医药大学",
+          "official": 526,
+          "archive": null,
+          "delta": null,
+          "kind": "MISSING_IN_ARCHIVE"
+        },
+        {
+          "school": "上海交通大学",
+          "official": 648,
+          "archive": null,
+          "delta": null,
+          "kind": "MISSING_IN_ARCHIVE"
+        },
+        {
+          "school": "上海交通大学医学院",
+          "official": 659,
+          "archive": null,
+          "delta": null,
+          "kind": "MISSING_IN_ARCHIVE"
+        },
+        {
+          "school": "上海体育大学",
+          "official": 517,
+          "archive": null,
+          "delta": null,
+          "kind": "MISSING_IN_ARCHIVE"
+        },
+        {
+          "school": "上海健康医学院",
+          "official": 544,
+          "archive": null,
+          "delta": null,
+          "kind": "MISSING_IN_ARCHIVE"
+        },
+        {
+          "school": "上海商学院",
+          "official": 485,
+          "archive": null,
+          "delta": null,
+          "kind": "MISSING_IN_ARCHIVE"
+        },
+        {
+          "school": "上海外国语大学",
+          "official": 580,
+          "archive": null,
+          "delta": null,
+          "kind": "MISSING_IN_ARCHIVE"
+        },
+        {
+          "school": "上海外国语大学贤达经济人文学院",
+          "official": 410,
+          "archive": null,
+          "delta": null,
+          "kind": "MISSING_IN_ARCHIVE"
+        },
+        {
+          "school": "上海大学",
+          "official": 584,
+          "archive": null,
+          "delta": null,
+          "kind": "MISSING_IN_ARCHIVE"
+        },
+        {
+          "school": "上海对外经贸大学",
+          "official": 532,
+          "archive": null,
+          "delta": null,
+          "kind": "MISSING_IN_ARCHIVE"
+        },
+        {
+          "school": "上海工程技术大学",
+          "official": 500,
+          "archive": null,
+          "delta": null,
+          "kind": "MISSING_IN_ARCHIVE"
+        },
+        {
+          "school": "上海师范大学",
+          "official": 485,
+          "archive": null,
+          "delta": null,
+          "kind": "MISSING_IN_ARCHIVE"
+        },
+        {
+          "school": "上海师范大学天华学院",
+          "official": 370,
+          "archive": null,
+          "delta": null,
+          "kind": "MISSING_IN_ARCHIVE"
+        },
+        {
+          "school": "上海应用技术大学",
+          "official": 492,
+          "archive": null,
+          "delta": null,
+          "kind": "MISSING_IN_ARCHIVE"
+        }
+      ],
+      "errors": []
+    },
+    {
+      "province": "江苏",
+      "year": 2023,
+      "track": "综合类",
+      "officialSchools": 990,
+      "archiveSchools": 0,
+      "matches": 0,
+      "mismatches": 990,
+      "pass": false,
+      "samples": [
+        {
+          "school": "三亚学院",
+          "official": 453,
+          "archive": null,
+          "delta": null,
+          "kind": "MISSING_IN_ARCHIVE"
+        },
+        {
+          "school": "三峡大学",
+          "official": 532,
+          "archive": null,
+          "delta": null,
+          "kind": "MISSING_IN_ARCHIVE"
+        },
+        {
+          "school": "三峡大学科技学院",
+          "official": 468,
+          "archive": null,
+          "delta": null,
+          "kind": "MISSING_IN_ARCHIVE"
+        },
+        {
+          "school": "三明学院",
+          "official": 495,
+          "archive": null,
+          "delta": null,
+          "kind": "MISSING_IN_ARCHIVE"
+        },
+        {
+          "school": "三江学院",
+          "official": 465,
+          "archive": null,
+          "delta": null,
+          "kind": "MISSING_IN_ARCHIVE"
+        },
+        {
+          "school": "上海中侨职业技术大学",
+          "official": 461,
+          "archive": null,
+          "delta": null,
+          "kind": "MISSING_IN_ARCHIVE"
+        },
+        {
+          "school": "上海中医药大学",
+          "official": 637,
+          "archive": null,
+          "delta": null,
+          "kind": "MISSING_IN_ARCHIVE"
+        },
+        {
+          "school": "上海交通大学",
+          "official": 660,
+          "archive": null,
+          "delta": null,
+          "kind": "MISSING_IN_ARCHIVE"
+        },
+        {
+          "school": "上海交通大学医学院",
+          "official": 665,
+          "archive": null,
+          "delta": null,
+          "kind": "MISSING_IN_ARCHIVE"
+        },
+        {
+          "school": "上海体育大学",
+          "official": 563,
+          "archive": null,
+          "delta": null,
+          "kind": "MISSING_IN_ARCHIVE"
+        },
+        {
+          "school": "上海健康医学院",
+          "official": 524,
+          "archive": null,
+          "delta": null,
+          "kind": "MISSING_IN_ARCHIVE"
+        },
+        {
+          "school": "上海兴伟学院",
+          "official": 474,
+          "archive": null,
+          "delta": null,
+          "kind": "MISSING_IN_ARCHIVE"
+        },
+        {
+          "school": "上海商学院",
+          "official": 541,
+          "archive": null,
+          "delta": null,
+          "kind": "MISSING_IN_ARCHIVE"
+        },
+        {
+          "school": "上海外国语大学",
+          "official": 611,
+          "archive": null,
+          "delta": null,
+          "kind": "MISSING_IN_ARCHIVE"
+        },
+        {
+          "school": "上海外国语大学贤达经济人文学院",
+          "official": 458,
+          "archive": null,
+          "delta": null,
+          "kind": "MISSING_IN_ARCHIVE"
+        },
+        {
+          "school": "上海大学",
+          "official": 632,
+          "archive": null,
+          "delta": null,
+          "kind": "MISSING_IN_ARCHIVE"
+        },
+        {
+          "school": "上海对外经贸大学",
+          "official": 610,
+          "archive": null,
+          "delta": null,
+          "kind": "MISSING_IN_ARCHIVE"
+        },
+        {
+          "school": "上海工程技术大学",
+          "official": 547,
+          "archive": null,
+          "delta": null,
+          "kind": "MISSING_IN_ARCHIVE"
+        },
+        {
+          "school": "上海师范大学",
+          "official": 581,
+          "archive": null,
+          "delta": null,
+          "kind": "MISSING_IN_ARCHIVE"
+        },
+        {
+          "school": "上海师范大学天华学院",
+          "official": 456,
+          "archive": null,
+          "delta": null,
+          "kind": "MISSING_IN_ARCHIVE"
+        }
+      ],
+      "errors": []
+    },
+    {
+      "province": "江苏",
+      "year": 2024,
+      "track": "综合类",
+      "officialSchools": 1017,
+      "archiveSchools": 0,
+      "matches": 0,
+      "mismatches": 1017,
+      "pass": false,
+      "samples": [
+        {
+          "school": "三亚学院",
+          "official": 462,
+          "archive": null,
+          "delta": null,
+          "kind": "MISSING_IN_ARCHIVE"
+        },
+        {
+          "school": "三峡大学",
+          "official": 534,
+          "archive": null,
+          "delta": null,
+          "kind": "MISSING_IN_ARCHIVE"
+        },
+        {
+          "school": "三峡大学科技学院",
+          "official": 465,
+          "archive": null,
+          "delta": null,
+          "kind": "MISSING_IN_ARCHIVE"
+        },
+        {
+          "school": "三明学院",
+          "official": 496,
+          "archive": null,
+          "delta": null,
+          "kind": "MISSING_IN_ARCHIVE"
+        },
+        {
+          "school": "三江学院",
+          "official": 486,
+          "archive": null,
+          "delta": null,
+          "kind": "MISSING_IN_ARCHIVE"
+        },
+        {
+          "school": "上海中侨职业技术大学",
+          "official": 478,
+          "archive": null,
+          "delta": null,
+          "kind": "MISSING_IN_ARCHIVE"
+        },
+        {
+          "school": "上海中医药大学",
+          "official": 627,
+          "archive": null,
+          "delta": null,
+          "kind": "MISSING_IN_ARCHIVE"
+        },
+        {
+          "school": "上海交通大学",
+          "official": 676,
+          "archive": null,
+          "delta": null,
+          "kind": "MISSING_IN_ARCHIVE"
+        },
+        {
+          "school": "上海交通大学医学院",
+          "official": 659,
+          "archive": null,
+          "delta": null,
+          "kind": "MISSING_IN_ARCHIVE"
+        },
+        {
+          "school": "上海体育大学",
+          "official": 564,
+          "archive": null,
+          "delta": null,
+          "kind": "MISSING_IN_ARCHIVE"
+        },
+        {
+          "school": "上海健康医学院",
+          "official": 535,
+          "archive": null,
+          "delta": null,
+          "kind": "MISSING_IN_ARCHIVE"
+        },
+        {
+          "school": "上海兴伟学院",
+          "official": 475,
+          "archive": null,
+          "delta": null,
+          "kind": "MISSING_IN_ARCHIVE"
+        },
+        {
+          "school": "上海商学院",
+          "official": 544,
+          "archive": null,
+          "delta": null,
+          "kind": "MISSING_IN_ARCHIVE"
+        },
+        {
+          "school": "上海外国语大学",
+          "official": 610,
+          "archive": null,
+          "delta": null,
+          "kind": "MISSING_IN_ARCHIVE"
+        },
+        {
+          "school": "上海外国语大学贤达经济人文学院",
+          "official": 478,
+          "archive": null,
+          "delta": null,
+          "kind": "MISSING_IN_ARCHIVE"
+        },
+        {
+          "school": "上海大学",
+          "official": 627,
+          "archive": null,
+          "delta": null,
+          "kind": "MISSING_IN_ARCHIVE"
+        },
+        {
+          "school": "上海对外经贸大学",
+          "official": 586,
+          "archive": null,
+          "delta": null,
+          "kind": "MISSING_IN_ARCHIVE"
+        },
+        {
+          "school": "上海工程技术大学",
+          "official": 552,
+          "archive": null,
+          "delta": null,
+          "kind": "MISSING_IN_ARCHIVE"
+        },
+        {
+          "school": "上海师范大学",
+          "official": 566,
+          "archive": null,
+          "delta": null,
+          "kind": "MISSING_IN_ARCHIVE"
+        },
+        {
+          "school": "上海师范大学天华学院",
+          "official": 462,
+          "archive": null,
+          "delta": null,
+          "kind": "MISSING_IN_ARCHIVE"
+        }
+      ],
+      "errors": []
+    },
+    {
+      "province": "江苏",
+      "year": 2025,
+      "track": "综合类",
+      "officialSchools": 1072,
+      "archiveSchools": 0,
+      "matches": 0,
+      "mismatches": 1072,
+      "pass": false,
+      "samples": [
+        {
+          "school": "三亚学院",
+          "official": 463,
+          "archive": null,
+          "delta": null,
+          "kind": "MISSING_IN_ARCHIVE"
+        },
+        {
+          "school": "三峡大学",
+          "official": 550,
+          "archive": null,
+          "delta": null,
+          "kind": "MISSING_IN_ARCHIVE"
+        },
+        {
+          "school": "三峡大学科技学院",
+          "official": 474,
+          "archive": null,
+          "delta": null,
+          "kind": "MISSING_IN_ARCHIVE"
+        },
+        {
+          "school": "三明学院",
+          "official": 505,
+          "archive": null,
+          "delta": null,
+          "kind": "MISSING_IN_ARCHIVE"
+        },
+        {
+          "school": "三江学院",
+          "official": 469,
+          "archive": null,
+          "delta": null,
+          "kind": "MISSING_IN_ARCHIVE"
+        },
+        {
+          "school": "上海中侨职业技术大学",
+          "official": 472,
+          "archive": null,
+          "delta": null,
+          "kind": "MISSING_IN_ARCHIVE"
+        },
+        {
+          "school": "上海中医药大学",
+          "official": 630,
+          "archive": null,
+          "delta": null,
+          "kind": "MISSING_IN_ARCHIVE"
+        },
+        {
+          "school": "上海交通大学",
+          "official": 659,
+          "archive": null,
+          "delta": null,
+          "kind": "MISSING_IN_ARCHIVE"
+        },
+        {
+          "school": "上海交通大学医学院",
+          "official": 663,
+          "archive": null,
+          "delta": null,
+          "kind": "MISSING_IN_ARCHIVE"
+        },
+        {
+          "school": "上海体育大学",
+          "official": 570,
+          "archive": null,
+          "delta": null,
+          "kind": "MISSING_IN_ARCHIVE"
+        },
+        {
+          "school": "上海健康医学院",
+          "official": 541,
+          "archive": null,
+          "delta": null,
+          "kind": "MISSING_IN_ARCHIVE"
+        },
+        {
+          "school": "上海兴伟学院",
+          "official": 466,
+          "archive": null,
+          "delta": null,
+          "kind": "MISSING_IN_ARCHIVE"
+        },
+        {
+          "school": "上海商学院",
+          "official": 529,
+          "archive": null,
+          "delta": null,
+          "kind": "MISSING_IN_ARCHIVE"
+        },
+        {
+          "school": "上海外国语大学",
+          "official": 615,
+          "archive": null,
+          "delta": null,
+          "kind": "MISSING_IN_ARCHIVE"
+        },
+        {
+          "school": "上海外国语大学贤达经济人文学院",
+          "official": 476,
+          "archive": null,
+          "delta": null,
+          "kind": "MISSING_IN_ARCHIVE"
+        },
+        {
+          "school": "上海外国语大学贤达经济人文省学院",
+          "official": 463,
+          "archive": null,
+          "delta": null,
+          "kind": "MISSING_IN_ARCHIVE"
+        },
+        {
+          "school": "上海大学",
+          "official": 607,
+          "archive": null,
+          "delta": null,
+          "kind": "MISSING_IN_ARCHIVE"
+        },
+        {
+          "school": "上海对外经贸大学",
+          "official": 583,
+          "archive": null,
+          "delta": null,
+          "kind": "MISSING_IN_ARCHIVE"
+        },
+        {
+          "school": "上海工程技术大学",
+          "official": 570,
+          "archive": null,
+          "delta": null,
+          "kind": "MISSING_IN_ARCHIVE"
+        },
+        {
+          "school": "上海师范大学",
+          "official": 575,
+          "archive": null,
+          "delta": null,
+          "kind": "MISSING_IN_ARCHIVE"
+        }
+      ],
+      "errors": []
+    },
+    {
+      "province": "河北",
+      "year": 2023,
+      "track": "综合类",
+      "officialSchools": 1082,
+      "archiveSchools": 0,
+      "matches": 0,
+      "mismatches": 1082,
+      "pass": false,
+      "samples": [
+        {
+          "school": "三亚学院",
+          "official": 430,
+          "archive": null,
+          "delta": null,
+          "kind": "MISSING_IN_ARCHIVE"
+        },
+        {
+          "school": "三峡大学",
+          "official": 524,
+          "archive": null,
+          "delta": null,
+          "kind": "MISSING_IN_ARCHIVE"
+        },
+        {
+          "school": "三峡大学科技学院",
+          "official": 463,
+          "archive": null,
+          "delta": null,
+          "kind": "MISSING_IN_ARCHIVE"
+        },
+        {
+          "school": "三明学院",
+          "official": 466,
+          "archive": null,
+          "delta": null,
+          "kind": "MISSING_IN_ARCHIVE"
+        },
+        {
+          "school": "三江学院",
+          "official": 451,
+          "archive": null,
+          "delta": null,
+          "kind": "MISSING_IN_ARCHIVE"
+        },
+        {
+          "school": "上海中侨职业技术大学",
+          "official": 436,
+          "archive": null,
+          "delta": null,
+          "kind": "MISSING_IN_ARCHIVE"
+        },
+        {
+          "school": "上海交通大学",
+          "official": 659,
+          "archive": null,
+          "delta": null,
+          "kind": "MISSING_IN_ARCHIVE"
+        },
+        {
+          "school": "上海交通大学医学院",
+          "official": 666,
+          "archive": null,
+          "delta": null,
+          "kind": "MISSING_IN_ARCHIVE"
+        },
+        {
+          "school": "上海体育大学",
+          "official": 565,
+          "archive": null,
+          "delta": null,
+          "kind": "MISSING_IN_ARCHIVE"
+        },
+        {
+          "school": "上海健康医学院",
+          "official": 507,
+          "archive": null,
+          "delta": null,
+          "kind": "MISSING_IN_ARCHIVE"
+        },
+        {
+          "school": "上海商学院",
+          "official": 503,
+          "archive": null,
+          "delta": null,
+          "kind": "MISSING_IN_ARCHIVE"
+        },
+        {
+          "school": "上海外国语大学",
+          "official": 602,
+          "archive": null,
+          "delta": null,
+          "kind": "MISSING_IN_ARCHIVE"
+        },
+        {
+          "school": "上海外国语大学贤达经济人文学院",
+          "official": 434,
+          "archive": null,
+          "delta": null,
+          "kind": "MISSING_IN_ARCHIVE"
+        },
+        {
+          "school": "上海大学",
+          "official": 605,
+          "archive": null,
+          "delta": null,
+          "kind": "MISSING_IN_ARCHIVE"
+        },
+        {
+          "school": "上海对外经贸大学",
+          "official": 565,
+          "archive": null,
+          "delta": null,
+          "kind": "MISSING_IN_ARCHIVE"
+        },
+        {
+          "school": "上海工程技术大学",
+          "official": 529,
+          "archive": null,
+          "delta": null,
+          "kind": "MISSING_IN_ARCHIVE"
+        },
+        {
+          "school": "上海师范大学天华学院",
+          "official": 464,
+          "archive": null,
+          "delta": null,
+          "kind": "MISSING_IN_ARCHIVE"
+        },
+        {
+          "school": "上海应用技术大学",
+          "official": 527,
+          "archive": null,
+          "delta": null,
+          "kind": "MISSING_IN_ARCHIVE"
+        },
+        {
+          "school": "上海建桥学院",
+          "official": 440,
+          "archive": null,
+          "delta": null,
+          "kind": "MISSING_IN_ARCHIVE"
+        },
+        {
+          "school": "上海政法学院",
+          "official": 550,
+          "archive": null,
+          "delta": null,
+          "kind": "MISSING_IN_ARCHIVE"
+        }
+      ],
+      "errors": []
+    },
+    {
+      "province": "河北",
+      "year": 2024,
+      "track": "综合类",
+      "officialSchools": 1155,
+      "archiveSchools": 0,
+      "matches": 0,
+      "mismatches": 1155,
+      "pass": false,
+      "samples": [
+        {
+          "school": "三亚学院",
+          "official": 448,
+          "archive": null,
+          "delta": null,
+          "kind": "MISSING_IN_ARCHIVE"
+        },
+        {
+          "school": "三峡大学",
+          "official": 525,
+          "archive": null,
+          "delta": null,
+          "kind": "MISSING_IN_ARCHIVE"
+        },
+        {
+          "school": "三峡大学科技学院",
+          "official": 488,
+          "archive": null,
+          "delta": null,
+          "kind": "MISSING_IN_ARCHIVE"
+        },
+        {
+          "school": "三明学院",
+          "official": 472,
+          "archive": null,
+          "delta": null,
+          "kind": "MISSING_IN_ARCHIVE"
+        },
+        {
+          "school": "三江学院",
+          "official": 460,
+          "archive": null,
+          "delta": null,
+          "kind": "MISSING_IN_ARCHIVE"
+        },
+        {
+          "school": "上海中侨职业技术大学",
+          "official": 448,
+          "archive": null,
+          "delta": null,
+          "kind": "MISSING_IN_ARCHIVE"
+        },
+        {
+          "school": "上海交通大学",
+          "official": 664,
+          "archive": null,
+          "delta": null,
+          "kind": "MISSING_IN_ARCHIVE"
+        },
+        {
+          "school": "上海交通大学医学院",
+          "official": 660,
+          "archive": null,
+          "delta": null,
+          "kind": "MISSING_IN_ARCHIVE"
+        },
+        {
+          "school": "上海体育大学",
+          "official": 559,
+          "archive": null,
+          "delta": null,
+          "kind": "MISSING_IN_ARCHIVE"
+        },
+        {
+          "school": "上海健康医学院",
+          "official": 513,
+          "archive": null,
+          "delta": null,
+          "kind": "MISSING_IN_ARCHIVE"
+        },
+        {
+          "school": "上海商学院",
+          "official": 521,
+          "archive": null,
+          "delta": null,
+          "kind": "MISSING_IN_ARCHIVE"
+        },
+        {
+          "school": "上海外国语大学",
+          "official": 601,
+          "archive": null,
+          "delta": null,
+          "kind": "MISSING_IN_ARCHIVE"
+        },
+        {
+          "school": "上海外国语大学贤达经济人文学院",
+          "official": 451,
+          "archive": null,
+          "delta": null,
+          "kind": "MISSING_IN_ARCHIVE"
+        },
+        {
+          "school": "上海大学",
+          "official": 608,
+          "archive": null,
+          "delta": null,
+          "kind": "MISSING_IN_ARCHIVE"
+        },
+        {
+          "school": "上海对外经贸大学",
+          "official": 563,
+          "archive": null,
+          "delta": null,
+          "kind": "MISSING_IN_ARCHIVE"
+        },
+        {
+          "school": "上海工程技术大学",
+          "official": 528,
+          "archive": null,
+          "delta": null,
+          "kind": "MISSING_IN_ARCHIVE"
+        },
+        {
+          "school": "上海师范大学",
+          "official": 596,
+          "archive": null,
+          "delta": null,
+          "kind": "MISSING_IN_ARCHIVE"
+        },
+        {
+          "school": "上海师范大学天华学院",
+          "official": 454,
+          "archive": null,
+          "delta": null,
+          "kind": "MISSING_IN_ARCHIVE"
+        },
+        {
+          "school": "上海应用技术大学",
+          "official": 516,
+          "archive": null,
+          "delta": null,
+          "kind": "MISSING_IN_ARCHIVE"
+        },
+        {
+          "school": "上海建桥学院",
+          "official": 449,
+          "archive": null,
+          "delta": null,
+          "kind": "MISSING_IN_ARCHIVE"
+        }
+      ],
+      "errors": []
+    },
+    {
+      "province": "浙江",
+      "year": 2024,
+      "track": "综合类",
+      "officialSchools": 1240,
+      "archiveSchools": 1240,
+      "matches": 1237,
+      "mismatches": 3,
+      "pass": false,
+      "samples": [
+        {
+          "school": "南昌职业大学",
+          "official": 492,
+          "archive": 527,
+          "delta": 35,
+          "kind": "SCORE_MISMATCH"
+        },
+        {
+          "school": "四川音乐学院",
+          "official": 566,
+          "archive": 576,
+          "delta": 10,
+          "kind": "SCORE_MISMATCH"
+        },
+        {
+          "school": "西安建筑科技大学",
+          "official": 492,
+          "archive": 537,
+          "delta": 45,
+          "kind": "SCORE_MISMATCH"
+        }
+      ],
+      "errors": []
+    },
+    {
+      "province": "浙江",
+      "year": 2025,
+      "track": "综合类",
+      "officialSchools": 1266,
+      "archiveSchools": 1266,
+      "matches": 1259,
+      "mismatches": 7,
+      "pass": false,
+      "samples": [
+        {
+          "school": "中山大学",
+          "official": 656,
+          "archive": 657,
+          "delta": 1,
+          "kind": "SCORE_MISMATCH"
+        },
+        {
+          "school": "华南农业大学珠江学院",
+          "official": 524,
+          "archive": 538,
+          "delta": 14,
+          "kind": "SCORE_MISMATCH"
+        },
+        {
+          "school": "景德镇艺术职业大学",
+          "official": 490,
+          "archive": 506,
+          "delta": 16,
+          "kind": "SCORE_MISMATCH"
+        },
+        {
+          "school": "桂林理工大学",
+          "official": 494,
+          "archive": 496,
+          "delta": 2,
+          "kind": "SCORE_MISMATCH"
+        },
+        {
+          "school": "西安工程大学",
+          "official": 527,
+          "archive": 531,
+          "delta": 4,
+          "kind": "SCORE_MISMATCH"
+        },
+        {
+          "school": "西安建筑科技大学",
+          "official": 551,
+          "archive": 552,
+          "delta": 1,
+          "kind": "SCORE_MISMATCH"
+        },
+        {
+          "school": "黑龙江大学",
+          "official": 530,
+          "archive": 531,
+          "delta": 1,
+          "kind": "SCORE_MISMATCH"
+        }
+      ],
+      "errors": []
+    },
+    {
+      "province": "湖南",
+      "year": 2024,
+      "track": "综合类",
+      "officialSchools": 1057,
+      "archiveSchools": 0,
+      "matches": 0,
+      "mismatches": 1057,
+      "pass": false,
+      "samples": [
+        {
+          "school": "三亚学院",
+          "official": 422,
+          "archive": null,
+          "delta": null,
+          "kind": "MISSING_IN_ARCHIVE"
+        },
+        {
+          "school": "三峡大学",
+          "official": 507,
+          "archive": null,
+          "delta": null,
+          "kind": "MISSING_IN_ARCHIVE"
+        },
+        {
+          "school": "三峡大学科技学院",
+          "official": 451,
+          "archive": null,
+          "delta": null,
+          "kind": "MISSING_IN_ARCHIVE"
+        },
+        {
+          "school": "三明学院",
+          "official": 458,
+          "archive": null,
+          "delta": null,
+          "kind": "MISSING_IN_ARCHIVE"
+        },
+        {
+          "school": "三江学院",
+          "official": 442,
+          "archive": null,
+          "delta": null,
+          "kind": "MISSING_IN_ARCHIVE"
+        },
+        {
+          "school": "上海中侨职业技术大学",
+          "official": 423,
+          "archive": null,
+          "delta": null,
+          "kind": "MISSING_IN_ARCHIVE"
+        },
+        {
+          "school": "上海交通大学",
+          "official": 675,
+          "archive": null,
+          "delta": null,
+          "kind": "MISSING_IN_ARCHIVE"
+        },
+        {
+          "school": "上海交通大学医学院",
+          "official": 679,
+          "archive": null,
+          "delta": null,
+          "kind": "MISSING_IN_ARCHIVE"
+        },
+        {
+          "school": "上海体育大学",
+          "official": 556,
+          "archive": null,
+          "delta": null,
+          "kind": "MISSING_IN_ARCHIVE"
+        },
+        {
+          "school": "上海健康医学院",
+          "official": 497,
+          "archive": null,
+          "delta": null,
+          "kind": "MISSING_IN_ARCHIVE"
+        },
+        {
+          "school": "上海商学院",
+          "official": 533,
+          "archive": null,
+          "delta": null,
+          "kind": "MISSING_IN_ARCHIVE"
+        },
+        {
+          "school": "上海外国语大学",
+          "official": 599,
+          "archive": null,
+          "delta": null,
+          "kind": "MISSING_IN_ARCHIVE"
+        },
+        {
+          "school": "上海大学",
+          "official": 600,
+          "archive": null,
+          "delta": null,
+          "kind": "MISSING_IN_ARCHIVE"
+        },
+        {
+          "school": "上海对外经贸大学",
+          "official": 571,
+          "archive": null,
+          "delta": null,
+          "kind": "MISSING_IN_ARCHIVE"
+        },
+        {
+          "school": "上海工程技术大学",
+          "official": 526,
+          "archive": null,
+          "delta": null,
+          "kind": "MISSING_IN_ARCHIVE"
+        },
+        {
+          "school": "上海师范大学",
+          "official": 551,
+          "archive": null,
+          "delta": null,
+          "kind": "MISSING_IN_ARCHIVE"
+        },
+        {
+          "school": "上海师范大学天华学院",
+          "official": 446,
+          "archive": null,
+          "delta": null,
+          "kind": "MISSING_IN_ARCHIVE"
+        },
+        {
+          "school": "上海应用技术大学",
+          "official": 525,
+          "archive": null,
+          "delta": null,
+          "kind": "MISSING_IN_ARCHIVE"
+        },
+        {
+          "school": "上海建桥学院",
+          "official": 429,
+          "archive": null,
+          "delta": null,
+          "kind": "MISSING_IN_ARCHIVE"
+        },
+        {
+          "school": "上海政法学院",
+          "official": 568,
+          "archive": null,
+          "delta": null,
+          "kind": "MISSING_IN_ARCHIVE"
+        }
+      ],
+      "errors": []
+    },
+    {
+      "province": "湖南",
+      "year": 2025,
+      "track": "综合类",
+      "officialSchools": 1068,
+      "archiveSchools": 0,
+      "matches": 0,
+      "mismatches": 1068,
+      "pass": false,
+      "samples": [
+        {
+          "school": "三峡大学",
+          "official": 508,
+          "archive": null,
+          "delta": null,
+          "kind": "MISSING_IN_ARCHIVE"
+        },
+        {
+          "school": "三峡大学科技学院",
+          "official": 476,
+          "archive": null,
+          "delta": null,
+          "kind": "MISSING_IN_ARCHIVE"
+        },
+        {
+          "school": "三明学院",
+          "official": 457,
+          "archive": null,
+          "delta": null,
+          "kind": "MISSING_IN_ARCHIVE"
+        },
+        {
+          "school": "三江学院",
+          "official": 427,
+          "archive": null,
+          "delta": null,
+          "kind": "MISSING_IN_ARCHIVE"
+        },
+        {
+          "school": "上海中医药大学",
+          "official": 597,
+          "archive": null,
+          "delta": null,
+          "kind": "MISSING_IN_ARCHIVE"
+        },
+        {
+          "school": "上海交通大学",
+          "official": 657,
+          "archive": null,
+          "delta": null,
+          "kind": "MISSING_IN_ARCHIVE"
+        },
+        {
+          "school": "上海交通大学医学院",
+          "official": 677,
+          "archive": null,
+          "delta": null,
+          "kind": "MISSING_IN_ARCHIVE"
+        },
+        {
+          "school": "上海体育大学",
+          "official": 563,
+          "archive": null,
+          "delta": null,
+          "kind": "MISSING_IN_ARCHIVE"
+        },
+        {
+          "school": "上海健康医学院",
+          "official": 493,
+          "archive": null,
+          "delta": null,
+          "kind": "MISSING_IN_ARCHIVE"
+        },
+        {
+          "school": "上海商学院",
+          "official": 533,
+          "archive": null,
+          "delta": null,
+          "kind": "MISSING_IN_ARCHIVE"
+        },
+        {
+          "school": "上海外国语大学",
+          "official": 607,
+          "archive": null,
+          "delta": null,
+          "kind": "MISSING_IN_ARCHIVE"
+        },
+        {
+          "school": "上海大学",
+          "official": 602,
+          "archive": null,
+          "delta": null,
+          "kind": "MISSING_IN_ARCHIVE"
+        },
+        {
+          "school": "上海对外经贸大学",
+          "official": 571,
+          "archive": null,
+          "delta": null,
+          "kind": "MISSING_IN_ARCHIVE"
+        },
+        {
+          "school": "上海工程技术大学",
+          "official": 526,
+          "archive": null,
+          "delta": null,
+          "kind": "MISSING_IN_ARCHIVE"
+        },
+        {
+          "school": "上海师范大学",
+          "official": 580,
+          "archive": null,
+          "delta": null,
+          "kind": "MISSING_IN_ARCHIVE"
+        },
+        {
+          "school": "上海师范大学天华学院",
+          "official": 422,
+          "archive": null,
+          "delta": null,
+          "kind": "MISSING_IN_ARCHIVE"
+        },
+        {
+          "school": "上海应用技术大学",
+          "official": 528,
+          "archive": null,
+          "delta": null,
+          "kind": "MISSING_IN_ARCHIVE"
+        },
+        {
+          "school": "上海建桥学院",
+          "official": 440,
+          "archive": null,
+          "delta": null,
+          "kind": "MISSING_IN_ARCHIVE"
+        },
+        {
+          "school": "上海政法学院",
+          "official": 563,
+          "archive": null,
+          "delta": null,
+          "kind": "MISSING_IN_ARCHIVE"
+        },
+        {
+          "school": "上海杉达学院",
+          "official": 453,
+          "archive": null,
+          "delta": null,
+          "kind": "MISSING_IN_ARCHIVE"
+        }
+      ],
+      "errors": []
+    },
+    {
+      "province": "贵州",
+      "year": 2025,
+      "track": "综合类",
+      "officialSchools": 954,
+      "archiveSchools": 0,
+      "matches": 0,
+      "mismatches": 954,
+      "pass": false,
+      "samples": [
+        {
+          "school": "三亚学院",
+          "official": 387,
+          "archive": null,
+          "delta": null,
+          "kind": "MISSING_IN_ARCHIVE"
+        },
+        {
+          "school": "三峡大学",
+          "official": 494,
+          "archive": null,
+          "delta": null,
+          "kind": "MISSING_IN_ARCHIVE"
+        },
+        {
+          "school": "三峡大学科技学院",
+          "official": 405,
+          "archive": null,
+          "delta": null,
+          "kind": "MISSING_IN_ARCHIVE"
+        },
+        {
+          "school": "三明学院",
+          "official": 438,
+          "archive": null,
+          "delta": null,
+          "kind": "MISSING_IN_ARCHIVE"
+        },
+        {
+          "school": "三江学院",
+          "official": 387,
+          "archive": null,
+          "delta": null,
+          "kind": "MISSING_IN_ARCHIVE"
+        },
+        {
+          "school": "上海中医药大学",
+          "official": 545,
+          "archive": null,
+          "delta": null,
+          "kind": "MISSING_IN_ARCHIVE"
+        },
+        {
+          "school": "上海交通大学",
+          "official": 673,
+          "archive": null,
+          "delta": null,
+          "kind": "MISSING_IN_ARCHIVE"
+        },
+        {
+          "school": "上海体育大学",
+          "official": 498,
+          "archive": null,
+          "delta": null,
+          "kind": "MISSING_IN_ARCHIVE"
+        },
+        {
+          "school": "上海健康医学院",
+          "official": 464,
+          "archive": null,
+          "delta": null,
+          "kind": "MISSING_IN_ARCHIVE"
+        },
+        {
+          "school": "上海兴伟学院",
+          "official": 399,
+          "archive": null,
+          "delta": null,
+          "kind": "MISSING_IN_ARCHIVE"
+        },
+        {
+          "school": "上海商学院",
+          "official": 475,
+          "archive": null,
+          "delta": null,
+          "kind": "MISSING_IN_ARCHIVE"
+        },
+        {
+          "school": "上海外国语大学",
+          "official": 594,
+          "archive": null,
+          "delta": null,
+          "kind": "MISSING_IN_ARCHIVE"
+        },
+        {
+          "school": "上海大学",
+          "official": 591,
+          "archive": null,
+          "delta": null,
+          "kind": "MISSING_IN_ARCHIVE"
+        },
+        {
+          "school": "上海对外经贸大学",
+          "official": 537,
+          "archive": null,
+          "delta": null,
+          "kind": "MISSING_IN_ARCHIVE"
+        },
+        {
+          "school": "上海工程技术大学",
+          "official": 465,
+          "archive": null,
+          "delta": null,
+          "kind": "MISSING_IN_ARCHIVE"
+        },
+        {
+          "school": "上海师范大学",
+          "official": 472,
+          "archive": null,
+          "delta": null,
+          "kind": "MISSING_IN_ARCHIVE"
+        },
+        {
+          "school": "上海应用技术大学",
+          "official": 461,
+          "archive": null,
+          "delta": null,
+          "kind": "MISSING_IN_ARCHIVE"
+        },
+        {
+          "school": "上海建桥学院",
+          "official": 387,
+          "archive": null,
+          "delta": null,
+          "kind": "MISSING_IN_ARCHIVE"
+        },
+        {
+          "school": "上海戏剧学院",
+          "official": 562,
+          "archive": null,
+          "delta": null,
+          "kind": "MISSING_IN_ARCHIVE"
+        },
+        {
+          "school": "上海政法学院",
+          "official": 518,
+          "archive": null,
+          "delta": null,
+          "kind": "MISSING_IN_ARCHIVE"
+        }
+      ],
+      "errors": []
+    },
+    {
+      "province": "陕西",
+      "year": 2023,
+      "track": "综合类",
+      "officialSchools": 955,
+      "archiveSchools": 0,
+      "matches": 0,
+      "mismatches": 955,
+      "pass": false,
+      "samples": [
+        {
+          "school": "三亚学院",
+          "official": 340,
+          "archive": null,
+          "delta": null,
+          "kind": "MISSING_IN_ARCHIVE"
+        },
+        {
+          "school": "三峡大学",
+          "official": 532,
+          "archive": null,
+          "delta": null,
+          "kind": "MISSING_IN_ARCHIVE"
+        },
+        {
+          "school": "三峡大学科技学院",
+          "official": 399,
+          "archive": null,
+          "delta": null,
+          "kind": "MISSING_IN_ARCHIVE"
+        },
+        {
+          "school": "三明学院",
+          "official": 411,
+          "archive": null,
+          "delta": null,
+          "kind": "MISSING_IN_ARCHIVE"
+        },
+        {
+          "school": "三江学院",
+          "official": 386,
+          "archive": null,
+          "delta": null,
+          "kind": "MISSING_IN_ARCHIVE"
+        },
+        {
+          "school": "上海中侨职业技术大学",
+          "official": 384,
+          "archive": null,
+          "delta": null,
+          "kind": "MISSING_IN_ARCHIVE"
+        },
+        {
+          "school": "上海交通大学",
+          "official": 690,
+          "archive": null,
+          "delta": null,
+          "kind": "MISSING_IN_ARCHIVE"
+        },
+        {
+          "school": "上海交通大学医学院",
+          "official": 670,
+          "archive": null,
+          "delta": null,
+          "kind": "MISSING_IN_ARCHIVE"
+        },
+        {
+          "school": "上海健康医学院",
+          "official": 432,
+          "archive": null,
+          "delta": null,
+          "kind": "MISSING_IN_ARCHIVE"
+        },
+        {
+          "school": "上海商学院",
+          "official": 434,
+          "archive": null,
+          "delta": null,
+          "kind": "MISSING_IN_ARCHIVE"
+        },
+        {
+          "school": "上海外国语大学",
+          "official": 606,
+          "archive": null,
+          "delta": null,
+          "kind": "MISSING_IN_ARCHIVE"
+        },
+        {
+          "school": "上海外国语大学贤达经济人文学院",
+          "official": 338,
+          "archive": null,
+          "delta": null,
+          "kind": "MISSING_IN_ARCHIVE"
+        },
+        {
+          "school": "上海大学",
+          "official": 560,
+          "archive": null,
+          "delta": null,
+          "kind": "MISSING_IN_ARCHIVE"
+        },
+        {
+          "school": "上海对外经贸大学",
+          "official": 521,
+          "archive": null,
+          "delta": null,
+          "kind": "MISSING_IN_ARCHIVE"
+        },
+        {
+          "school": "上海工程技术大学",
+          "official": 436,
+          "archive": null,
+          "delta": null,
+          "kind": "MISSING_IN_ARCHIVE"
+        },
+        {
+          "school": "上海师范大学天华学院",
+          "official": 403,
+          "archive": null,
+          "delta": null,
+          "kind": "MISSING_IN_ARCHIVE"
+        },
+        {
+          "school": "上海应用技术大学",
+          "official": 438,
+          "archive": null,
+          "delta": null,
+          "kind": "MISSING_IN_ARCHIVE"
+        },
+        {
+          "school": "上海建桥学院",
+          "official": 397,
+          "archive": null,
+          "delta": null,
+          "kind": "MISSING_IN_ARCHIVE"
+        },
+        {
+          "school": "上海戏剧学院",
+          "official": 569,
+          "archive": null,
+          "delta": null,
+          "kind": "MISSING_IN_ARCHIVE"
+        },
+        {
+          "school": "上海政法学院",
+          "official": 530,
+          "archive": null,
+          "delta": null,
+          "kind": "MISSING_IN_ARCHIVE"
+        }
+      ],
+      "errors": []
+    },
+    {
+      "province": "陕西",
+      "year": 2024,
+      "track": "综合类",
+      "officialSchools": 990,
+      "archiveSchools": 0,
+      "matches": 0,
+      "mismatches": 990,
+      "pass": false,
+      "samples": [
+        {
+          "school": "三亚学院",
+          "official": 380,
+          "archive": null,
+          "delta": null,
+          "kind": "MISSING_IN_ARCHIVE"
+        },
+        {
+          "school": "三峡大学",
+          "official": 489,
+          "archive": null,
+          "delta": null,
+          "kind": "MISSING_IN_ARCHIVE"
+        },
+        {
+          "school": "三峡大学科技学院",
+          "official": 458,
+          "archive": null,
+          "delta": null,
+          "kind": "MISSING_IN_ARCHIVE"
+        },
+        {
+          "school": "三明学院",
+          "official": 461,
+          "archive": null,
+          "delta": null,
+          "kind": "MISSING_IN_ARCHIVE"
+        },
+        {
+          "school": "三江学院",
+          "official": 446,
+          "archive": null,
+          "delta": null,
+          "kind": "MISSING_IN_ARCHIVE"
+        },
+        {
+          "school": "上海中侨职业技术大学",
+          "official": 392,
+          "archive": null,
+          "delta": null,
+          "kind": "MISSING_IN_ARCHIVE"
+        },
+        {
+          "school": "上海交通大学",
+          "official": 618,
+          "archive": null,
+          "delta": null,
+          "kind": "MISSING_IN_ARCHIVE"
+        },
+        {
+          "school": "上海交通大学医学院",
+          "official": 646,
+          "archive": null,
+          "delta": null,
+          "kind": "MISSING_IN_ARCHIVE"
+        },
+        {
+          "school": "上海健康医学院",
+          "official": 463,
+          "archive": null,
+          "delta": null,
+          "kind": "MISSING_IN_ARCHIVE"
+        },
+        {
+          "school": "上海商学院",
+          "official": 461,
+          "archive": null,
+          "delta": null,
+          "kind": "MISSING_IN_ARCHIVE"
+        },
+        {
+          "school": "上海外国语大学",
+          "official": 564,
+          "archive": null,
+          "delta": null,
+          "kind": "MISSING_IN_ARCHIVE"
+        },
+        {
+          "school": "上海外国语大学贤达经济人文学院",
+          "official": 390,
+          "archive": null,
+          "delta": null,
+          "kind": "MISSING_IN_ARCHIVE"
+        },
+        {
+          "school": "上海大学",
+          "official": 571,
+          "archive": null,
+          "delta": null,
+          "kind": "MISSING_IN_ARCHIVE"
+        },
+        {
+          "school": "上海对外经贸大学",
+          "official": 556,
+          "archive": null,
+          "delta": null,
+          "kind": "MISSING_IN_ARCHIVE"
+        },
+        {
+          "school": "上海工程技术大学",
+          "official": 472,
+          "archive": null,
+          "delta": null,
+          "kind": "MISSING_IN_ARCHIVE"
+        },
+        {
+          "school": "上海师范大学天华学院",
+          "official": 434,
+          "archive": null,
+          "delta": null,
+          "kind": "MISSING_IN_ARCHIVE"
+        },
+        {
+          "school": "上海应用技术大学",
+          "official": 471,
+          "archive": null,
+          "delta": null,
+          "kind": "MISSING_IN_ARCHIVE"
+        },
+        {
+          "school": "上海建桥学院",
+          "official": 433,
+          "archive": null,
+          "delta": null,
+          "kind": "MISSING_IN_ARCHIVE"
+        },
+        {
+          "school": "上海戏剧学院",
+          "official": 575,
+          "archive": null,
+          "delta": null,
+          "kind": "MISSING_IN_ARCHIVE"
+        },
+        {
+          "school": "上海政法学院",
+          "official": 523,
+          "archive": null,
+          "delta": null,
+          "kind": "MISSING_IN_ARCHIVE"
+        }
+      ],
+      "errors": []
+    }
+  ],
+  "totalMismatches": 12936
+}
